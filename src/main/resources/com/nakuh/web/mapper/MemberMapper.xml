@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nakuh.web.mapper.MemberMapper">
+
+<resultMap id="result" type="hashmap">
+  <id property="mid" column="mid" />
+  <result property="password" column="password"/>
+  <result property="name" column="name"/>
+  <result property="birth" column="birth"/>
+  <result property="mail" column="mail"/>
+  <result property="phone" column="phone"/>
+  <result property="profilephoto" column="profilephoto"/>
+<!-- artnum,content,artdate, artphoto, mid, extension; -->
+</resultMap>
+<select id="selectMembers" resultType="com.nakuh.web.domain.Member"
+	parameterType="com.nakuh.web.domain.Member">
+		SELECT mid,
+				name,
+				birth,
+				phone,
+				profilephoto
+		FROM MEMBERS
+		WHERE mid LIKE #{mid}
+</select>
+
+
+
+
+
+
+</mapper>

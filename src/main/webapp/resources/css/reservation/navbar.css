@@ -1,0 +1,15 @@
+@charset "UTF-8";
+.affix {
+    top: 0;
+    width: 80%;
+    z-index: 9999 !important;
+  }
+
+.affix + .container-fluid {
+    padding-top: 70px;
+  }
+.navbar {
+  background: rgba(0, 0, 0, 0);
+  font-size: 10pt;
+  text-transform: uppercase;
+}

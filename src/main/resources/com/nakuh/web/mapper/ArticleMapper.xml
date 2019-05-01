@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nakuh.web.mapper.ArticleMapper">
+
+<resultMap id="result" type="hashmap">
+  <id property="artnum" column="artnum" />
+  <result property="content" column="content"/>
+  <result property="artdate" column="artdate"/>
+  <result property="artphoto" column="artphoto"/>
+  <result property="mid" column="mid"/>
+  <result property="extension" column="extension"/>
+<!-- artnum,content,artdate, artphoto, mid, extension; -->
+</resultMap>
+<select id="selectArticles" resultType="com.nakuh.web.domain.Article"
+	parameterType="com.nakuh.web.domain.Article">
+		SELECT artnum,
+				content,
+				artdate,
+				artphoto,
+				mid,
+				extension
+		FROM ARTICLES
+		WHERE mid LIKE #{mid}
+</select>
+
+
+
+
+
+
+</mapper>
