@@ -20,11 +20,7 @@ public class ProductServiceImpl implements ProductService{
 
 	@Override
 	public List<Product> findAllProduct() {
-		List<Product> list = proMap.selectAllProduct();
-		System.out.println("컴파니 조회결과" +list );
-		for(int i=0;i<list.size();i++) {
-		System.out.println("전체조회결과" + list.get(i).toString());	
-		}
+		
 		
 		return proMap.selectAllProduct();
 	}

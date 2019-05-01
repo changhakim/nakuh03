@@ -27,7 +27,6 @@ public class ProductsController {
 	public List<Product> prolist(){
 		 logger.info("=======  ProductController prolist:상품전체목록  진입 ======");
 		 list = productService.findAllProduct();
-		 System.out.println("ProductController ::: " + list.toString());
 		 return list;
 		 
 	}
