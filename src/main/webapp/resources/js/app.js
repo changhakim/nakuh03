@@ -11,7 +11,6 @@ app=(()=>{
 	};
 	let setContentView=()=>{
 		$.when(
-		$.getScript($.js()+'/admin/jieun.js'),
 		$.getScript($.js()+'/reservation/eunyeong.js'),
 		$.getScript($.js()+'/aquagram/jeonguk.js')
 		).done(()=>{
@@ -67,7 +66,7 @@ app=(()=>{
 				$('.homecss').remove();
 				$('.rescss').remove();
 				$(admincss).appendTo('head')
-				jieun.init();
+				
 			})
 
 		});
