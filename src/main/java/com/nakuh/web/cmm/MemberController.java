@@ -40,10 +40,7 @@ public class MemberController {
 		 * System.out.println(map.get("member").toString());
 		 */
 	
-		  if(memberservice.retrieveMembers(map.get("member").toString())==null) {
-		 System.out.println("널이니깐 create 해야한다. "); 
-		 }else {
-		  System.out.println("널이 아니니 로그인 하자."); }
+
 		 
 		
 		
