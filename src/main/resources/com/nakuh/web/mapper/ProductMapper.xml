@@ -14,9 +14,35 @@
 		ADDRESS address, 
 		CATEGORY category, 
 		PROIMG proimg, 
-		REGIDATE regidate
+		REGIDATE regidate,
+		FISHNAME fishname,
+		PHONE phone,
+		MINIMUM minimum,
+		MAXIMUM maximum
 	FROM PRODUCTS
 									  
+	</select>
+
+<!-- 상품 상세 조회 -->
+	<select id="selectProduct" resultType="com.nakuh.web.domain.Product"
+							   parameterType="com.nakuh.web.domain.Product">
+	
+	SELECT  
+		PRONUM pronum, 
+		PRONAME proname, 
+		PRICE price, 
+		COMPANY company, 
+		ADDRESS address, 
+		CATEGORY category, 
+		PROIMG proimg, 
+		REGIDATE regidate,
+		FISHNAME fishname,
+		PHONE phone,
+		MINIMUM minimum,
+		MAXIMUM maximum
+	FROM PRODUCTS 
+	WHERE PRONUM LIKE #{pronum}
+	
 	</select>
 
 </mapper>

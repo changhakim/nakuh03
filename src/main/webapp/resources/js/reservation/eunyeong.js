@@ -7,7 +7,7 @@ eunyeong = (()=>{
     let homecss,admincss,rescss,instacss;
     
     let init =x=>{
-        _ = $.ctx();
+        _= $.ctx();
     	js = $.js();
         compojs = js + '/component/eycompo.js';
         m_ctt = '#main-container';
@@ -155,11 +155,16 @@ eunyeong = (()=>{
     };
     
     /*정보 : 상품 */
-    let detail =()=>{
+    let detail =x=>{
         $(s_ctt).remove();
         $(m_ctt).empty();
         $(eycompo.item_container()).appendTo(m_ctt);
         $('#info_content').prepend(eycompo.product_info());
+        $('#proname').text(x.proname);
+        $('#company').text(x.company);
+        $('#proaddress').text(x.address);
+        $('#proname').text(x.proname);
+        $('#promin').text(x.minimum);
         $('#select_item').attr('style','cursor:pointer').attr('data-toggle','modal').attr('data-target','#myModal').click(function(e){
         	payment();
         });
@@ -198,10 +203,34 @@ eunyeong = (()=>{
             			.attr('id', j.pronum)
             			.appendTo(m_ctt)
             			.click(function(){
-            				detail();
+            				let proid = $(this).attr('id');
+            				alert('prolist의 id' + proid);
+                				$.ajax({
+                		    		url:_+'/products/'+ proid,
+                		    		type:'POST',
+                		    		data : JSON.stringify(proid),
+                		    		dataType :'json',
+                		    		contentType :'application/json',
+                		    		success : d=>{
+                		    			alert('AJAX성공' + d.product.proname);
+                		    			let aa = {proname:d.product.proname,price:d.product.price,company:d.product.company,
+                		    					  address:d.product.address,category:d.product.category,proimg:d.product.proimg,
+                		    					  regidate:d.product.regidate,fishname:d.product.fishname,phone:d.product.phone,
+                		    					  minimum:d.product.minimum,maximum:d.product.maximum}
+                		    			detail(aa);
+                		    		},
+                		    		error :e=>{
+                		    			alert('AJAX실패');
+                		    		}
+                		    	});
             			})
             })
     	});
+    };
+    
+    /*상품 정보*/ 
+    let proinfo =()=>{
+    	
     };
     
     let navcss = ()=>{
@@ -233,5 +262,5 @@ eunyeong = (()=>{
              
     };
     return {init:init, searchlist:searchlist, ocean:ocean, river:river, hotel:hotel, detail:detail, 
-    		prolist:prolist, datepicker:datepicker, payment:payment};
+    		prolist:prolist, datepicker:datepicker, payment:payment, proinfo:proinfo};
 })();
