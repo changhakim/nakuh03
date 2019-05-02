@@ -89,11 +89,66 @@ arti =(()=>{
 					alert($(this).find('img').attr('src'));
 					let od = { artphoto : $(this).find('img').attr('src')};
 					$('#myModal').attr('style','display: block; z-index:99999;');
-					$('.modal-dialog').attr('style','top:200px;')
+					$('.modal-dialog').attr('style','top:200px;');
+					$('.modal-dialog').attr('class','modal-dialog modal-lg');
 					$('.modal-content').attr('style','margin:auto;');
-					$('.modal-title').empty();
-					$('.modal-body').empty();
-					$('.modal-body').append('<div><img src="'+od.artphoto+'" > </div>');
+					$('.modal-header').remove();
+					$('.modal-body').remove();
+					$('.modal-footer').remove();
+					$('#change_modal_2').html(
+							'        <div class="modal-body">'
+							+'          <div  class="col-sm-8" style="background-color:lavender; height: 600px; display: block;"><img src="img/sea_background.jpg" width="600" height="600"></div>'
+							+'          <div class="col-sm-4" style="background-color:lavenderblush; height: 600px; ">'
+							+'              <div class="row" id="user_info" style="padding-bottom: 7px; border-bottom: 1px solid #ddd;">'
+							+'                    <div class="group-item" style="height: 58px; border: none; margin-top: 15px; margin-left: 18px; display: inline-flex;">'
+							+'                        <img class="img-circle" alt="Cinque Terre" src="'+od.artphoto+'" style="width: 50px; height: 50px; position: center"/>'
+							+'                        <div style="margin-left: 11px;"><h5 style="top:-5px; left: -1px; font-weight:bold; margin-bottom: 0px;" >mpick04</h5><div style="font-size: 5px;">JeongUkBae</div></div>'
+							+'                            <div style="top:-55px; left: 60px; font-size: 5px; display:-webkit-inline-box;"> </div>'
+							+'                              <div style="right: 0"><h5 style="top: 0px; left: -10px; font-weight:bold; margin-left: 115px;" ><i class="glyphicon glyphicon-option-horizontal"></i></h5></div>'
+							+'                        </div> '
+							+'                    </div> '
+							+'           <div class="row">'
+							+'    <ul class="nav bs-docs-sidenav" style="-ms-overflow-style: none; overflow:scroll; width:100%; height:400px; border:1px solid; border-color: #ddd;">'
+							+'         <li>'
+							+'             <div class="group-item" id="comments_my" style="height: 58px; border: none; margin-top: 15px; margin-left: 0px; display: inline-flex;">'
+							+'                    <img class="img-circle" alt="Cinque Terre" src="img/sea_background.jpg" style="width: 40px; height: 40px; position: center"/>'
+							+'                    <div style="margin-left: 11px;"><h5 style="top:-49px; left: 60px; font-weight:bold; margin-bottom: 0px;" >mpick04</h5><div style="font-size: 5px;">JeongUkBae</div></div>'
+							+'                        <div style="top:-55px; left: 60px; font-size: 5px; display:-webkit-inline-box;"> </div>'
+							+'                          <div style="right: 0"><h5 style="top:-49px; left: 60px; font-weight:bold; margin-left: 115px;" ><i class="glyphicon glyphicon-option-horizontal"></i></h5></div>'
+							+'              </div> '
+							+'         </li>'
+							+'         <li>'
+							+'         <div class="comments_list" id="comments_list">'
+							+'            <h5> 최신 목록 </h5>'
+							+'                <div id="item">'
+							+'                  <div class="list-group-item list-group-item-action" style="height: 58px; border: none;"> '
+							+'                <img class="img-circle" alt="Cinque Terre" src="img/sea_background.jpg" style="width: 40px; height: 40px; position: center"/>'
+							+'                 <div ><h5 style="top:-49px; left: 60px">mpick04</h5></div>'
+							+'                    <div style="top:-55px; left: 60px; font-size: 7px;">24시간전</div>'
+							+'                </div> '
+							+'              </div> '
+							+'                <div id="item">'
+							+'                  <div class="list-group-item list-group-item-action" style="height: 58px; border: none;"> '
+							+'                <img class="img-circle" alt="Cinque Terre" src="img/sea_background.jpg" style="width: 40px; height: 40px; position: center"/> '
+							+'                 <div ><h5 style="top:-49px; left: 60px">mpick04</h5></div>'
+							+'                    <div style="top:-55px; left: 60px; font-size: 7px;">24시간전</div>'
+							+'                </div> '
+							+'              </div> '
+							+'                <div id="item">'
+							+'                  <div class="list-group-item list-group-item-action" style="height: 58px; border: none;"> '
+							+'                <img class="img-circle" alt="Cinque Terre" src="img/sea_background.jpg" style="width: 40px; height: 40px; position: center"/>'
+							+'                 <div ><h5 style="top:-49px; left: 60px">mpick04</h5></div>'
+							+'                    <div style="top:-55px; left: 60px; font-size: 7px;">24시간전</div>'
+							+'                </div> '
+							+'              </div> '
+							+'             </div>               '
+							+'        </li>'
+							+'          </ul>'
+							+'            </div>'
+							+'        </div>'
+							+'    </div>'
+							+'  </div>'
+							+'</div>');
 
 				});
 				
@@ -116,7 +171,8 @@ arti =(()=>{
 			$('#myModal').attr('style','display: block; z-index:99999;');
 			$('.modal-dialog').attr('style','top:200px;')
 			$('.modal-content').attr('style','margin:auto;');
-			$('.modal-title').text('게시물 등록');
+			$('#change_modal_2').empty('');
+
 
 		});
 	};
