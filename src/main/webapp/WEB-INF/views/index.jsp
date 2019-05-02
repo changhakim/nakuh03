@@ -46,7 +46,7 @@
 
 <!-- modal-2 -->
 <div id="myModal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
+  <div class="modal-dialog" id="change_modal_2">
 
     <!-- Modal content-->
     <div class="modal-content">
