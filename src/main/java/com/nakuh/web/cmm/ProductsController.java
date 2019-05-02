@@ -38,16 +38,10 @@ public class ProductsController {
 	@PostMapping("/products/{proid}")
 	public Map<String, Object> proinfo(@PathVariable String proid) {
 		logger.info("=======  ProductController proinfo:상품상세조회  진입 ======");
-		System.out.println("that은 찍히는가?? " + proid);
 		product.setPronum(proid);
 		product = productService.findProduct(product);
-		System.out.println("선택한 상품의 정보 : " + product.getAddress());
-		System.out.println("선택한 상품의 정보 : " + product.getCategory());
-		System.out.println("선택한 상품의 정보 : " + product.getCompany());
-		System.out.println("선택한 상품의 정보 : " + product.getFishname());
-		System.out.println("선택한 상품의 정보 : " + product.getPrice());
-		System.out.println("선택한 상품의 정보 : " + product.getProname());
 		map.clear();
+		System.out.println("product의 img" + product.getProimg());
 		map.put("product", product);
 		return map;
 	}

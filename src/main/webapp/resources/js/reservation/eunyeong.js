@@ -158,13 +158,21 @@ eunyeong = (()=>{
     let detail =x=>{
         $(s_ctt).remove();
         $(m_ctt).empty();
+        $('<script async defer '
+          +' src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAY5vEXIghqf7_mEdWcG9kqcEeDOpaLixY&callback=initMap">'
+          +'</script>').appendTo('head');
         $(eycompo.item_container()).appendTo(m_ctt);
         $('#info_content').prepend(eycompo.product_info());
         $('#proname').text(x.proname);
+        $('#price').text(x.price);
         $('#company').text(x.company);
+        $('#proimg').attr('src',$.img() + '/reservation/' + x.proimg);
+        $('#category').text(x.category);
         $('#proaddress').text(x.address);
-        $('#proname').text(x.proname);
-        $('#promin').text(x.minimum);
+        $('#fishname').text(x.fishname);
+        $('#phone').text(x.phone);
+        $('#promin').text(x.minimum); 
+        $('#promax').text(x.maximum);
         $('#select_item').attr('style','cursor:pointer').attr('data-toggle','modal').attr('data-target','#myModal').click(function(e){
         	payment();
         });
@@ -228,10 +236,6 @@ eunyeong = (()=>{
     	});
     };
     
-    /*상품 정보*/ 
-    let proinfo =()=>{
-    	
-    };
     
     let navcss = ()=>{
         $(document).ready(function() {
@@ -262,5 +266,5 @@ eunyeong = (()=>{
              
     };
     return {init:init, searchlist:searchlist, ocean:ocean, river:river, hotel:hotel, detail:detail, 
-    		prolist:prolist, datepicker:datepicker, payment:payment, proinfo:proinfo};
+    		prolist:prolist, datepicker:datepicker, payment:payment};
 })();
