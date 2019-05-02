@@ -37,6 +37,7 @@ auth =(()=>{
 		$(jwcompo.left_content()).appendTo('#leftbar_content');
 		$(jwcompo.right_nav()).appendTo('#right_nav_cont');
 		$(jwcompo.my_navbar()).appendTo('#my_navbar');
+		//중앙 네비 따라오는 옵션
 		$(document).ready(function() {
 			  $('.navbar').affix({
 			    offset: {
@@ -44,6 +45,7 @@ auth =(()=>{
 			    }
 			  });
 			});
+		//우측 네비 따라오는 옵션
 		$(document).ready(function() {
 			  $('#right_nav_cont').affix({
 			    offset: {
@@ -51,10 +53,16 @@ auth =(()=>{
 			    }
 			  });
 			});
+		
 		$('#my_fv').attr('style','cursor:pointer').click(()=>{
 			arti.init();
 		});
-
+		
+		
+		
+		
+		
+		
 	};
 	
 	

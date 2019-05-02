@@ -29,7 +29,8 @@ arti =(()=>{
 	};
 	let feed_my=()=>{
 		$('#donw_content').html(jwcompo.insta_base());
-
+		let box = '';
+		let dl = {};
 		let mid ='ahah123';
 		let url = _+'/myfeed/'+mid;
 		$.ajax({
@@ -40,7 +41,14 @@ arti =(()=>{
 			contentType: 'application/json; charset=UTF-8;',
 			success: d=>{
 				alert('성공!');
-				
+/*				dl = {
+					 mid : d.myList.mid.val(),
+					 artnum : d.myList.artnum,
+					 content : d.myList.content,
+					 artdate : d.myList.artdate,
+					 artphoto : d.myList.artphoto,
+					 ext : d.myList.extension
+						};*/
 				$.each(d.myList,(i,j)=>{
 					box += '<div id="feeds">'
 						+'			<div id="myfeed_'+j.artnum+'" class="col-xs-12 col-sm-6 col-md-4 col-lg-3">'
@@ -57,7 +65,9 @@ arti =(()=>{
 					+'			</a>'
 					+'			</div>'
 					+'			</div>'
-				
+					
+					
+					
 
 
 				});
@@ -65,7 +75,27 @@ arti =(()=>{
 				$('.photo-box').attr('style','margin:-26px 0px 30px -29px');
 				$('head').after(jwcompo.photo_feed_css_hover());
 				
-				
+	/*			$(this).click(function(){
+					$(this).children('a').attr('src','resources/img/aquagram/test_img.jpg');
+					$(this).children('img').attr('src','resources/img/aquagram/test_img.jpg');
+					 console.log($(this).children('a'));
+					alert('클릭??::');
+				});*/
+				$('#instafeed').children('#feeds').attr('data-toggle','modal').attr('data-target','#myModal').click(function(e){
+					e.preventDefault();
+					alert('???'+this);
+					console.log(this);
+					console.log($(this)[0]);
+					alert($(this).find('img').attr('src'));
+					let od = { artphoto : $(this).find('img').attr('src')};
+					$('#myModal').attr('style','display: block; z-index:99999;');
+					$('.modal-dialog').attr('style','top:200px;')
+					$('.modal-content').attr('style','margin:auto;');
+					$('.modal-title').empty();
+					$('.modal-body').empty();
+					$('.modal-body').append('<div><img src="'+od.artphoto+'" > </div>');
+
+				});
 				
 			},
 			error: e=>{
@@ -73,46 +103,12 @@ arti =(()=>{
 			}
 				
 		});
-		/*$.getJSON(url, d=>{
-			alert('getJSON 시작'+url);
-			
-			
-		});*/
-
-			
-			
-		let a = [1,2,3,4,5,6,7,8,9,10,11,12,13,14]
-		let box = '';
-		
-//		$('.navbar').attr('style','font-size:9pt');		
-		
-		/*		$('#instafeed').attr('id','instafeed-gallery-feed').addClass('gallery row no-gutter');
-		$('#instafeed').appendTo('<button id="btn-instafeed-load" class="btn">Load more</button>');
-		let galleryFeed = new Instafeed({
-			  get: "user",
-			  userId: 4622774,
-			  accessToken: "4622774.7cbaeb5.ec8c5041b92b44ada03e4a4a9153bc54",
-			  resolution: "standard_resolution",
-			  useHttp: "true",
-			  limit: 6,
-			  template: '<div class="col-xs-12 col-sm-6 col-md-4"><a href="{{image}}"><div class="img-featured-container"><div class="img-backdrop"></div><div class="description-container"><p class="caption">{{caption}}</p><span class="likes"><i class="icon ion-heart"></i> {{likes}}</span><span class="comments"><i class="icon ion-chatbubble"></i> {{comments}}</span></div><img src="{{image}}" class="img-responsive"></div></a></div>',
-			  target: "instafeed-gallery-feed",
-			  after: function() {
-			    // disable button if no more results to load
-			    if (!this.hasNext()) {
-			      btnInstafeedLoad.setAttribute('disabled', 'disabled');
-			    }
-			  },
-			});
-			galleryFeed.run();
-
-			var btnInstafeedLoad = document.getElementById("btn-instafeed-load");
-			btnInstafeedLoad.addEventListener("click", function() {
-			  galleryFeed.next()
-			});
-			*/
 		
 
+		
+		
+		
+		
 	};
 	let arti_upload =()=>{
 		$('#art_upload').attr('style','cursor:pointer').attr('data-toggle','modal').attr('data-target','#myModal').click(function(e){
