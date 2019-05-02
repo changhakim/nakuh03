@@ -369,7 +369,7 @@
 <script type="text/javascript" src="/web/resources/js/aquagram/vendor/instanav.js"></script>
 <script type="text/javascript" src="/web/resources/js/aquagram/vendor/instafeed.js"></script> <!-- instafeed.js 추후 미사용시 삭제. -->
 <!-- instajs -->
-<!-- Stickyjs --->
+<!-- Stickyjs ---->
 <script type="text/javascript" src="/web/resources/js/aquagram/vendor/Sticky-kit.js"></script>
 <!-- commonjs -->
 <script src="<%=application.getContextPath()%>/resources/js/app.js"></script>
