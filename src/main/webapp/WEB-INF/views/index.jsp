@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -374,16 +373,15 @@
 <!-- commonjs -->
 <script src="<%=application.getContextPath()%>/resources/js/app.js"></script>
 <script src="<%=application.getContextPath()%>/resources/js/router.js"></script>
-<!-- jieunjs -->
-<script src="<%=application.getContextPath()%>/resources/js/component/jecompo.js"></script>
-<script src="<%=application.getContextPath()%>/resources/js/admin/jieun.js"></script>
+<!-- changhajs -->
+
 <!-- eunyeongjs -->
 <script src="<%=application.getContextPath()%>/resources/js/component/eycompo.js"></script>
 <script src="<%=application.getContextPath()%>/resources/js/reservation/eunyeong.js"></script>  
 <!-- jeongukjs -->
 <script src="<%=application.getContextPath()%>/resources/js/component/jwcompo.js"></script>
 <script src="<%=application.getContextPath()%>/resources/js/aquagram/jeonguk.js"></script>  
-<!-- 낚어안녕 -->
+<!-- 낚어안녕하세요 -->
 </body>
 
 <script>
