@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.nakuh.web.mapper.ProductMapper">
+
+<!-- 전체 상품 조회  -->
+	<select id="selectAllProduct" resultType="com.nakuh.web.domain.Product">
+	
+	SELECT 
+		PRONUM pronum, 
+		PRONAME proname, 
+		PRICE price, 
+		COMPANY company, 
+		ADDRESS address, 
+		CATEGORY category, 
+		PROIMG proimg, 
+		REGIDATE regidate
+	FROM PRODUCTS
+									  
+	</select>
+
+</mapper>
