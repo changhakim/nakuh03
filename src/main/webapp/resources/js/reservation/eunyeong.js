@@ -80,8 +80,8 @@ eunyeong = (()=>{
     };
   
     let ocean =()=>{
-        alert('바다 1');
         $(m_ctt).empty();
+        $(s_ctt).css('style="background:#242c36 url(/web/resources/img/reservation/ocean.jpg) no-repeat"');
         $(document).ready(
         		 $("<input type='text' class='form-control border-right hasDatepicker' id='date_search' placeholder='로드 테스트 중 ...'>")
         	        .appendTo('#load-target')
@@ -107,15 +107,13 @@ eunyeong = (()=>{
     };
     
     let river =()=>{
-        $.when($.getScript(compojs))
-        .done(()=>{
+    	alert('river진입');
             $(m_ctt).empty();
             $(eycompo.main_container()).appendTo(m_ctt);
             $('input.btn[type=submit]').click(e=>{
                 e.preventDefault();
                 alert('민물화면이다');
             });
-        });
     };
     
     let hotel =()=>{
@@ -158,9 +156,12 @@ eunyeong = (()=>{
     let detail =x=>{
         $(s_ctt).remove();
         $(m_ctt).empty();
-        $('<script async defer '
-          +' src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAY5vEXIghqf7_mEdWcG9kqcEeDOpaLixY&callback=initMap">'
-          +'</script>').appendTo('head');
+        $(document).ready(function() {
+        	initMap();
+        });
+        $(m_ctt).attr('class','')
+        $(m_ctt).attr('class','container')
+        $('#feat').css('padding-top','0')
         $(eycompo.item_container()).appendTo(m_ctt);
         $('#info_content').prepend(eycompo.product_info());
         $('#proname').text(x.proname);
@@ -191,15 +192,14 @@ eunyeong = (()=>{
       
     /*상품 전체보기 */
     let prolist =()=>{
-    	
     	$.getJSON(_+'/products', d=>{
     		$(m_ctt).empty();
     		
             $.each(d, (i,j)=>{
             	$('<div class="col-sm-4">'
             			+'	<div class="left-widget-sidebar">'
-            			+'		<div class="card-widget bg-white user-card">'
-            			+'			<div class="u-img img-cover" style="background-image: url(/web/resources/img/reservation/joy.jpg);background-size:cover;"></div>'
+            			+'		<div class="card-widget bg-white user-card" style="height:400px">'              
+            			+'			<div id="proimg" class="u-img img-cover" style="background-image: url(/web/resources/img/reservation/'+ j.proimg + ');background-size:cover; height: 300px;"></div>'
             			+'					<div class="u-content"></br></br>'
             			+'					<h5>' + j.company + '</h5>'
             			+'					<p class="text-muted">' + j.price +'</p>'
@@ -246,6 +246,17 @@ eunyeong = (()=>{
              });
          });
     };
+    function initMap() {
+  	  // The location of Uluru
+  	  var uluru = {lat: 37.552623, lng: 126.937716};
+  	  // The map, centered at Uluru
+  	  var map = new google.maps.Map(
+  	      document.getElementById('map'), {zoom: 15, center: uluru});
+  	  // The marker, positioned at Uluru
+  	  var marker = new google.maps.Marker({position: uluru, map: map});
+  	  
+  	
+  }
     
     let css = ()=>{
          homecss ='<link class="homecss" rel="stylesheet" type="text/css" href="/web/resources/css/home/homemain.css">'

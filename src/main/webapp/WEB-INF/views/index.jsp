@@ -10,6 +10,7 @@
  <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
  <link rel="shortcut icon" href="/web/resources/favicon/favicon.ico">
+ <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAY5vEXIghqf7_mEdWcG9kqcEeDOpaLixY&callback=initMap"></script>
 
 </head>
 <body>
@@ -385,16 +386,5 @@
 <script>
 app.init('<%= application.getContextPath() %>');
 app.kakao();
-function initMap() {
-	  // The location of Uluru
-	  var uluru = {lat: -25.344, lng: 131.036};
-	  // The map, centered at Uluru
-	  var map = new google.maps.Map(
-	      document.getElementById('map'), {zoom: 4, center: uluru});
-	  // The marker, positioned at Uluru
-	  var marker = new google.maps.Marker({position: uluru, map: map});
-	  
-	
-}
 </script>
 </html>

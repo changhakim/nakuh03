@@ -38,7 +38,7 @@ eycompo ={
 		main_search:()=>{
 			return '<!-- 검색창 -->'
 		    +'<div>'
-		    +'<section id="search_content" class="main-banner" style="background:#242c36 url(/web/resources/img/reservation/ocean.jpg) no-repeat">'
+		    +'<section id="search_content" class="main-banner">'
 		      +'<div class="container">'
 		        +'<div class="caption">'
 		          +'<h2>PLAN YOUR NEXT FISHING</h2>'
@@ -71,10 +71,8 @@ eycompo ={
 		    +'<!-- 검색창  끝-->'
 		    +''
 		    +'<!-- 메인 화면  -->'
-		    +'</br>'
-		    +'</br>'
-		    +'<div class="features">'
-		    +'<div id="main-container" class="container">'
+		    +'<div class="features" id="feat" style="padding-top: 20px;">'
+		    +'<div id="main-container" class="container-fluid">'
 		    +'</div>'
 		    +'</div></br></br>'
 		},
