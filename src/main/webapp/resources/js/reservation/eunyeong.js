@@ -7,7 +7,7 @@ eunyeong = (()=>{
     let homecss,admincss,rescss,instacss;
     
     let init =x=>{
-        _ = $.ctx();
+        _= $.ctx();
     	js = $.js();
         compojs = js + '/component/eycompo.js';
         m_ctt = '#main-container';
@@ -155,11 +155,24 @@ eunyeong = (()=>{
     };
     
     /*정보 : 상품 */
-    let detail =()=>{
+    let detail =x=>{
         $(s_ctt).remove();
         $(m_ctt).empty();
+        $('<script async defer '
+          +' src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAY5vEXIghqf7_mEdWcG9kqcEeDOpaLixY&callback=initMap">'
+          +'</script>').appendTo('head');
         $(eycompo.item_container()).appendTo(m_ctt);
         $('#info_content').prepend(eycompo.product_info());
+        $('#proname').text(x.proname);
+        $('#price').text(x.price);
+        $('#company').text(x.company);
+        $('#proimg').attr('src',$.img() + '/reservation/' + x.proimg);
+        $('#category').text(x.category);
+        $('#proaddress').text(x.address);
+        $('#fishname').text(x.fishname);
+        $('#phone').text(x.phone);
+        $('#promin').text(x.minimum); 
+        $('#promax').text(x.maximum);
         $('#select_item').attr('style','cursor:pointer').attr('data-toggle','modal').attr('data-target','#myModal').click(function(e){
         	payment();
         });
@@ -198,11 +211,31 @@ eunyeong = (()=>{
             			.attr('id', j.pronum)
             			.appendTo(m_ctt)
             			.click(function(){
-            				detail();
+            				let proid = $(this).attr('id');
+            				alert('prolist의 id' + proid);
+                				$.ajax({
+                		    		url:_+'/products/'+ proid,
+                		    		type:'POST',
+                		    		data : JSON.stringify(proid),
+                		    		dataType :'json',
+                		    		contentType :'application/json',
+                		    		success : d=>{
+                		    			alert('AJAX성공' + d.product.proname);
+                		    			let aa = {proname:d.product.proname,price:d.product.price,company:d.product.company,
+                		    					  address:d.product.address,category:d.product.category,proimg:d.product.proimg,
+                		    					  regidate:d.product.regidate,fishname:d.product.fishname,phone:d.product.phone,
+                		    					  minimum:d.product.minimum,maximum:d.product.maximum}
+                		    			detail(aa);
+                		    		},
+                		    		error :e=>{
+                		    			alert('AJAX실패');
+                		    		}
+                		    	});
             			})
             })
     	});
     };
+    
     
     let navcss = ()=>{
         $(document).ready(function() {

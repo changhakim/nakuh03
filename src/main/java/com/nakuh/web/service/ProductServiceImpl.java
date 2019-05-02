@@ -20,8 +20,6 @@ public class ProductServiceImpl implements ProductService{
 
 	@Override
 	public List<Product> findAllProduct() {
-		
-		
 		return proMap.selectAllProduct();
 	}
 
@@ -32,6 +30,7 @@ public class ProductServiceImpl implements ProductService{
 
 	@Override
 	public Product findProduct(Product param) {
+		Product product = proMap.selectProduct(param);
 		return proMap.selectProduct(param);
 	}
 

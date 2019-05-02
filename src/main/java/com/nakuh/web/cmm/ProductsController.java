@@ -2,12 +2,16 @@ package com.nakuh.web.cmm;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.nakuh.web.domain.Product;
@@ -28,8 +32,21 @@ public class ProductsController {
 		 logger.info("=======  ProductController prolist:상품전체목록  진입 ======");
 		 list = productService.findAllProduct();
 		 return list;
-		 
 	}
+	
+	//상품 상세 조회
+	@PostMapping("/products/{proid}")
+	public Map<String, Object> proinfo(@PathVariable String proid) {
+		logger.info("=======  ProductController proinfo:상품상세조회  진입 ======");
+		product.setPronum(proid);
+		product = productService.findProduct(product);
+		map.clear();
+		System.out.println("product의 img" + product.getProimg());
+		map.put("product", product);
+		return map;
+	}
+	
+	//예약 메인의 datepicker
 	@GetMapping("/load")
 	public HashMap<String,Object> load(ModelMap model){
 		 logger.info("=======  ProductController 로드  진입 =====");
