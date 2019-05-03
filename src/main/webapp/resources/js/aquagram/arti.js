@@ -189,6 +189,7 @@ arti =(()=>{
 			$('.modal-dialog').attr('class','modal-dialog');
 			$('.modal-dialog').attr('style','top:200px;')
 			$('.modal-content').attr('style','margin:auto;');
+			/*sidsidsidsid*/
 		
 
 
