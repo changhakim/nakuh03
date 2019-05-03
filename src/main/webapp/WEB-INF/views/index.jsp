@@ -373,6 +373,7 @@
 <script src="<%=application.getContextPath()%>/resources/js/app.js"></script>
 <script src="<%=application.getContextPath()%>/resources/js/router.js"></script>
 <!-- changhajs -->
+<script src="<%=application.getContextPath()%>/resources/js/admin/changha.js"></script>  
 <!-- eunyeongjs -->
 <script src="<%=application.getContextPath()%>/resources/js/component/eycompo.js"></script>
 <script src="<%=application.getContextPath()%>/resources/js/reservation/eunyeong.js"></script>  
