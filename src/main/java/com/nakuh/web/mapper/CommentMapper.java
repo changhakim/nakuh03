@@ -12,8 +12,8 @@ public interface CommentMapper {
 	
 	public List<Comment> selectAllCommentsList();
 	public List<Comment> selectComments();
-	public Comment selectComment(String searchWord);
-	public int countComments();
+	public List<Comment> selectComment(String titleseq);
+	public int countComments(String ci);
 	public boolean existsComment(String searchWord);
 	
 	public void updateComment(Comment com);

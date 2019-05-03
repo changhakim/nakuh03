@@ -13,6 +13,7 @@ public interface ArticleMapper {
 	public List<Article> selectAllArticlesList();
 	public List<Article> selectArticles();
 	public List<Article> selectArticles(String mid);
+	public Article selectArticlesDetail(String artnum);
 	public int countArticles();
 	public boolean existsArticle(String searchWord);
 	
