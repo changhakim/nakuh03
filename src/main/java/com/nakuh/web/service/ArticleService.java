@@ -13,6 +13,7 @@ public interface ArticleService {
 	public List<Article> bringAllArticlesList();
 	public List<Article> retrieveArticles();
 	public List<Article> retrieveArticles(String mid);
+	public Article retrieveArticleDetail(String artnum);
 	public int countArticles();
 	public boolean existsArticle(String searchWord);
 	

@@ -64,4 +64,10 @@ public class ArticleServiceImpl implements ArticleService{
 		
 	}
 
+	@Override
+	public Article retrieveArticleDetail(String artnum) {
+		
+		return artmap.selectArticlesDetail(artnum);
+	}
+
 }

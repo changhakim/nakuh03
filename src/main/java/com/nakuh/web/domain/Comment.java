@@ -6,5 +6,5 @@ import lombok.Data;
 
 @Data@Component
 public class Comment {
-	private String comm;
+	private String commseq, titleseq, comm, comid, cmname, comprophoto;
 }

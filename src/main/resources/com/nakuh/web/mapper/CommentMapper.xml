@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nakuh.web.mapper.CommentMapper">
+
+<resultMap id="result" type="hashmap">
+  <id property="commseq" column="commseq" />
+  <result property="titleseq" column="titleseq"/>
+  <result property="comm" column="comm"/>
+<!-- commseq,titleseq,comm; -->
+</resultMap>
+<!-- <select id="selectArticles" resultType="com.nakuh.web.domain.Article"
+	parameterType="com.nakuh.web.domain.Article">
+		SELECT artnum,
+				content,
+				artdate,
+				artphoto,
+				mid,
+				extension
+		FROM ARTICLES
+		WHERE mid LIKE #{mid}
+</select> -->
+<select id="countComments" parameterType="com.nakuh.web.domain.Comment">
+		SELECT COUNT(*)
+		FROM COMMENTS
+		WHERE titleseq LIKE #{titleseq};
+</select>
+<select id="selectComment" resultType="com.nakuh.web.domain.Comment"
+						parameterType="com.nakuh.web.domain.Comment">
+		
+		SELECT C.commseq comseq,
+				C.titleseq titleseq,
+				C.comm comm,
+				C.comid comid,
+				M.name cmname,
+				M.profilephoto comprophoto 
+		FROM COMMENTS C
+			JOIN (SELECT M.mid, M.name, M.profilephoto FROM MEMBERS M ) M
+			ON C.comid LIKE M.mid 
+		WHERE titleseq LIKE #{titleseq}
+		ORDER BY comseq
+<!-- 	commseq, titleseq, comm, comid, cmname, comprophoto; -->
+
+</select>
+
+
+
+
+
+</mapper>
