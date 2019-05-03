@@ -11,7 +11,7 @@ import com.nakuh.web.domain.Product;
 public interface ProductService {
 	public void createProduct(Product param);
 	public List<Product> findAllProduct();
-	public List<Product> findSomeProducts(HashMap<String, String> paramMap);
+	public List<Product> findSomeProducts(Product param);
 	public Product findProduct(Product param);
 	public int countProduct();
 	public void modifyProduct(Product param);

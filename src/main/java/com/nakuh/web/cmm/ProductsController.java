@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.binding.MapperMethod.ParamMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,21 +35,34 @@ public class ProductsController {
 		 return list;
 	}
 	
+	//상품 일부 조회
+	@GetMapping("/prosearch/{search}")
+	public Map<?, ?> prosomelist(@PathVariable String search){
+		logger.info("=======  ProductController prosomelist:상품일부조회  진입 ======");
+		System.out.println(search+"============");
+		product.setProname(search);
+		list = productService.findSomeProducts(product);
+		map.clear();
+		map.put("list", list);
+		
+		return map;
+	} 
+	
 	//상품 상세 조회
 	@PostMapping("/products/{proid}")
-	public Map<String, Object> proinfo(@PathVariable String proid) {
+	public Map<?, ?> proinfo(@PathVariable String proid) {
 		logger.info("=======  ProductController proinfo:상품상세조회  진입 ======");
+		
 		product.setPronum(proid);
 		product = productService.findProduct(product);
 		map.clear();
-		System.out.println("product의 img" + product.getProimg());
 		map.put("product", product);
 		return map;
 	}
 	
 	//예약 메인의 datepicker
 	@GetMapping("/load")
-	public HashMap<String,Object> load(ModelMap model){
+	public HashMap<?, ?> load(ModelMap model){
 		 logger.info("=======  ProductController 로드  진입 =====");
 		HashMap<String,Object> map = new HashMap<>();
 		map.put("t", "<input type='text' class='form-control border-right hasDatepicker' id='date_search' placeholder='로드 테스트 중 ...'>");

@@ -6,5 +6,6 @@ import lombok.Data;
 
 @Data@Component
 public class Product {
-	private String pronum,proimg,proname,price,company,address,category,regidate, fishname, phone, minimum, maximum ;
+	private String pronum,proimg,proname,price,company,address,category,regidate, fishname, phone; 
+	private double lat, lng;
 }
