@@ -377,7 +377,6 @@ jwcompo = {
 			+'              <div class="row">'
 			+'                  <div class="col-xs-12" style="margin: inherit;">'
 			+'                      <div class="instagram-content">'
-			+'                          <h5>Latest Photos</h5>'
 			+'                          <div class="row photos-wrap">'
 			+'                          <!-- Instafeed target div -->'
 			+'                          <div id="instafeed">'

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nakuh.web.mapper.PostTagMapper">
+
+<resultMap id="result" type="hashmap">
+  <id property="ptseq" column="ptseq" />
+  <result property="tagname" column="tagname"/>
+  <result property="artseq" column="artseq"/>
+<!-- ptseq,tagname,artseq; -->
+</resultMap>
+<select id="selectPostTags" resultType="com.nakuh.web.domain.PostTag"
+							parameterType="com.nakuh.web.domain.PostTag">
+		SELECT ptseq,
+				artseq,
+			 	concat('#',tagname) tagname
+		FROM POSTTAG
+		WHERE artseq LIKE #{artseq}
+</select>
+
+
+
+
+
+
+
+</mapper>
