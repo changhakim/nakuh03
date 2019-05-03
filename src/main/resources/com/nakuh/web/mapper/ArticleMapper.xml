@@ -14,15 +14,28 @@
 <!-- artnum,content,artdate, artphoto, mid, extension; -->
 </resultMap>
 <select id="selectArticles" resultType="com.nakuh.web.domain.Article"
-	parameterType="com.nakuh.web.domain.Article">
+							parameterType="com.nakuh.web.domain.Article">
 		SELECT artnum,
 				content,
 				artdate,
 				artphoto,
 				mid,
-				extension
+				extension,
+				(select count(*) from COMMENTS where titleseq like artnum) comcount,
+				(select profilephoto from MEMBERS M WHERE M.MID LIKE ARTICLES.MID) profilephoto
+
 		FROM ARTICLES
 		WHERE mid LIKE #{mid}
+</select>
+
+<select id="selectArticlesDetail" resultType="com.nakuh.web.domain.Article" 
+								parameterType="com.nakuh.web.domain.Article"> 
+			SELECT artnum, content, artdate, artphoto, mid, extension, 
+			(select profilephoto from MEMBERS M WHERE M.MID LIKE ARTICLES.MID) profilephoto,
+			(select name from MEMBERS M2 WHERE M2.MID LIKE ARTICLES.MID) mname
+			FROM ARTICLES
+			WHERE artnum LIKE #{artnum};						
+		
 </select>
 
 

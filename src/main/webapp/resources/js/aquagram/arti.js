@@ -58,9 +58,9 @@ arti =(()=>{
 					+'			<div class="description-container">'
 					+'			<p class="caption">'+j.content+'</p>'
 					+'			<span class="likes"><i class="glyphicon glyphicon-heart"></i></span>'
-					+'			<span class="comments"><i class="glyphicon glyphicon-comment"></i></span>'
+					+'			<span class="comments"><i class="glyphicon glyphicon-comment">'+j.comcount+'</i></span>'
 					+'			</div>'
-					+'			<img src="resources/img/aquagram/articles/'+j.artphoto+'.'+j.extension+'" class="img-responsive">'
+					+'			<img src="resources/img/aquagram/articles/'+j.artphoto+'.'+j.extension+'" id="'+j.artnum+'" class="img-responsive">'
 					+'			</div>'
 					+'			</a>'
 					+'			</div>'
@@ -83,72 +83,13 @@ arti =(()=>{
 				});*/
 				$('#instafeed').children('#feeds').attr('data-toggle','modal').attr('data-target','#myModal').click(function(e){
 					e.preventDefault();
-					alert('???'+this);
-					console.log(this);
-					console.log($(this)[0]);
-					alert($(this).find('img').attr('src'));
-					let od = { artphoto : $(this).find('img').attr('src')};
-					$('#myModal').attr('style','display: block; z-index:99999;');
-					$('.modal-dialog').attr('style','top:200px;');
-					$('.modal-dialog').attr('class','modal-dialog modal-lg');
-					$('.modal-content').attr('style','margin:auto;');
-					$('.modal-header').remove();
-					$('.modal-body').remove();
-					$('.modal-footer').remove();
-					$('#change_modal_2').html(
-							'        <div class="modal-body">'
-							+'          <div  class="col-sm-8" style="background-color:lavender; height: 600px; display: block;"><img src="img/sea_background.jpg" width="600" height="600"></div>'
-							+'          <div class="col-sm-4" style="background-color:lavenderblush; height: 600px; ">'
-							+'              <div class="row" id="user_info" style="padding-bottom: 7px; border-bottom: 1px solid #ddd;">'
-							+'                    <div class="group-item" style="height: 58px; border: none; margin-top: 15px; margin-left: 18px; display: inline-flex;">'
-							+'                        <img class="img-circle" alt="Cinque Terre" src="'+od.artphoto+'" style="width: 50px; height: 50px; position: center"/>'
-							+'                        <div style="margin-left: 11px;"><h5 style="top:-5px; left: -1px; font-weight:bold; margin-bottom: 0px;" >mpick04</h5><div style="font-size: 5px;">JeongUkBae</div></div>'
-							+'                            <div style="top:-55px; left: 60px; font-size: 5px; display:-webkit-inline-box;"> </div>'
-							+'                              <div style="right: 0"><h5 style="top: 0px; left: -10px; font-weight:bold; margin-left: 115px;" ><i class="glyphicon glyphicon-option-horizontal"></i></h5></div>'
-							+'                        </div> '
-							+'                    </div> '
-							+'           <div class="row">'
-							+'    <ul class="nav bs-docs-sidenav" style="-ms-overflow-style: none; overflow:scroll; width:100%; height:400px; border:1px solid; border-color: #ddd;">'
-							+'         <li>'
-							+'             <div class="group-item" id="comments_my" style="height: 58px; border: none; margin-top: 15px; margin-left: 0px; display: inline-flex;">'
-							+'                    <img class="img-circle" alt="Cinque Terre" src="img/sea_background.jpg" style="width: 40px; height: 40px; position: center"/>'
-							+'                    <div style="margin-left: 11px;"><h5 style="top:-49px; left: 60px; font-weight:bold; margin-bottom: 0px;" >mpick04</h5><div style="font-size: 5px;">JeongUkBae</div></div>'
-							+'                        <div style="top:-55px; left: 60px; font-size: 5px; display:-webkit-inline-box;"> </div>'
-							+'                          <div style="right: 0"><h5 style="top:-49px; left: 60px; font-weight:bold; margin-left: 115px;" ><i class="glyphicon glyphicon-option-horizontal"></i></h5></div>'
-							+'              </div> '
-							+'         </li>'
-							+'         <li>'
-							+'         <div class="comments_list" id="comments_list">'
-							+'            <h5> 최신 목록 </h5>'
-							+'                <div id="item">'
-							+'                  <div class="list-group-item list-group-item-action" style="height: 58px; border: none;"> '
-							+'                <img class="img-circle" alt="Cinque Terre" src="img/sea_background.jpg" style="width: 40px; height: 40px; position: center"/>'
-							+'                 <div ><h5 style="top:-49px; left: 60px">mpick04</h5></div>'
-							+'                    <div style="top:-55px; left: 60px; font-size: 7px;">24시간전</div>'
-							+'                </div> '
-							+'              </div> '
-							+'                <div id="item">'
-							+'                  <div class="list-group-item list-group-item-action" style="height: 58px; border: none;"> '
-							+'                <img class="img-circle" alt="Cinque Terre" src="img/sea_background.jpg" style="width: 40px; height: 40px; position: center"/> '
-							+'                 <div ><h5 style="top:-49px; left: 60px">mpick04</h5></div>'
-							+'                    <div style="top:-55px; left: 60px; font-size: 7px;">24시간전</div>'
-							+'                </div> '
-							+'              </div> '
-							+'                <div id="item">'
-							+'                  <div class="list-group-item list-group-item-action" style="height: 58px; border: none;"> '
-							+'                <img class="img-circle" alt="Cinque Terre" src="img/sea_background.jpg" style="width: 40px; height: 40px; position: center"/>'
-							+'                 <div ><h5 style="top:-49px; left: 60px">mpick04</h5></div>'
-							+'                    <div style="top:-55px; left: 60px; font-size: 7px;">24시간전</div>'
-							+'                </div> '
-							+'              </div> '
-							+'             </div>               '
-							+'        </li>'
-							+'          </ul>'
-							+'            </div>'
-							+'        </div>'
-							+'    </div>'
-							+'  </div>'
-							+'</div>');
+				//	alert('???'+this);
+				//	console.log(this);
+				//	console.log($(this)[0]);
+				//	alert($(this).find('img').attr('src'));
+					let od = { artphoto : $(this).find('img').attr('src'),
+								artnum : $(this).find('img').attr('id')};
+					arti_detail(od);
 
 				});
 				
@@ -162,6 +103,79 @@ arti =(()=>{
 
 		
 		
+		
+		
+	};
+	let arti_detail =(x)=>{
+		$('#change_modal_2').empty();
+		//alert('xx'+x.artnum);
+		let artnum = x.artnum;
+		//alert('xx'+artnum);
+		let comlist='';
+		$.ajax({
+			url: _+'/arti/detail/'+artnum,
+			type: 'get',
+			data: JSON.stringify(artnum),
+			dataType: 'json',
+			contentType: 'application/json; charset=UTF-8;',
+			success: d=>{
+				$('#myModal').attr('style','display: block; z-index:99999;');
+				$('.modal-dialog').attr('style','top:200px;');
+				$('.modal-dialog').attr('class','modal-dialog modal-lg');
+				$('.modal-content').attr('style','margin:auto;');
+				$('.modal-header').remove();
+				$('.modal-body').remove();
+				$('.modal-footer').remove();
+				$('#change_modal_2').html(
+						'        <div class="modal-body">'
+						+'          <div  class="col-sm-8" style="height: 600px; display: block;"><img src="resources/img/aquagram/articles/'+d.als.artphoto+'.'+d.als.extension+'" width="600" height="600"></div>'
+						+'          <div class="col-sm-4" style="background-color:#fff; height: 600px; ">'
+						+'              <div class="row" id="user_info" style="padding-bottom: 7px; border-bottom: 1px solid #ddd;">'
+						+'                    <div class="group-item" style="height: 58px; border: none; margin-top: 15px; margin-left: 0px; display: inline-flex;">'
+						+'                        <img class="img-circle" alt="Cinque Terre" src="resources/img/aquagram/profilephoto/'+d.als.profilephoto+'" style="width: 50px; height: 50px; position: center"/>'
+						+'                        <div style="margin-left: 11px;"><h5 style="top:-5px; left: -1px; font-weight:bold; margin-bottom: 0px;" >'+d.als.mid+'</h5><div style="font-size: 5px;">'+d.als.mname+'</div></div>'
+						+'                            <div style="top:-55px; left: 60px; font-size: 5px; display:-webkit-inline-box;"> </div>'
+						+'                              <div style="right: 0"><h5 style="top: 0px; left: -10px; font-weight:bold; margin-left: 135px;" ><i class="glyphicon glyphicon-option-horizontal"></i></h5></div>'
+						+'                        </div> '
+						+'                    </div> '
+						+'           <div class="row">'
+						+'    <ul class="nav bs-docs-sidenav" style="-ms-overflow-style: none; overflow:scroll; width:100%; height:335px; border:1px solid #ddd; border-top: none;">'
+						+'     		<div id="item" style="top: 5px;">'
+						+'                  <div class="list-group-item list-group-item-action" id="comments_my" style="height: 58px; border: none; display: -webkit-box;"> '
+						+'                <img class="img-circle" alt="Cinque Terre" src="resources/img/aquagram/profilephoto/'+d.als.profilephoto+'" style="width: 40px; height: 40px; position: center"/>'
+						+'                 <div style="display: -webkit-box;"><h5 style="top:0px; left: 7px; font-weight:bold;">'+d.als.mid+'</h5><div><h6 style="left: 15px;">'+d.als.content+'</h6></div></div>'
+						+'                   <div style="font-size: 5px; left: 105px; top: 8px;">'+d.als.artdate+'</div>'
+						+'                </div> '
+						+'              </div> '
+						+'         <li>'
+						+'         <div class="comments_list" id="comments_list">'
+						+'             </div>               '
+						+'        </li>'
+						+'          </ul>'
+						+'            </div>'
+						+'        </div>'
+						+'    </div>'
+						+'  </div>'
+						+'</div>');
+				$.each(d.cls,(i,j)=>{
+					comlist +=	'     <div id="item">'
+					+'                  <div class="list-group-item list-group-item-action" style="height: 58px; border: none; display: -webkit-box;"> '
+					+'                <img class="img-circle" alt="Cinque Terre" src="resources/img/aquagram/profilephoto/'+j.comprophoto+'" style="width: 40px; height: 40px; position: center"/>'
+					+'                 <div style="display: -webkit-box;"><h5 style="top:0px; left: 7px; font-weight:bold;">'+j.comid+'</h5><div><h6 style="left: 15px;">'+j.comm+'</h6></div></div>'
+					+'                    <div style="top:0px; left: 60px; font-size: 7px;"></div>'
+					+'                </div> '
+					+'              </div> '
+					
+				});
+				$(comlist).appendTo('#comments_list');
+				
+			},
+			error:e=>{
+				alert('에러!');
+			}
+			
+			
+		});
 		
 		
 	};

@@ -6,5 +6,5 @@ import lombok.Data;
 
 @Data@Component
 public class Article {
-	private String artnum,content,artdate, artphoto, mid, extension;
+	private String artnum,content,artdate, artphoto, mid, extension, comcount, profilephoto, mname ;
 }

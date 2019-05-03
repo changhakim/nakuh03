@@ -32,14 +32,14 @@ public class CommentServiceImpl implements CommentService{
 	}
 
 	@Override
-	public Comment retrieveComment(String searchWord) {
+	public List<Comment> retrieveComment(String titleseq) {
 		
-		return comMap.selectComment(searchWord);
+		return comMap.selectComment(titleseq);
 	}
 
 	@Override
-	public int countComments() {
-		int i = comMap.countComments();
+	public int countComments(String ci) {
+		int i = comMap.countComments(ci);
 		return i;
 	}
 
