@@ -2302,6 +2302,7 @@ fieldset[disabled] .btn-neutral.active {
     padding: 0;
     background-color: transparent;
     line-height: 30px;
+    text-align:center;
 }
 
 .card .footer .legend {

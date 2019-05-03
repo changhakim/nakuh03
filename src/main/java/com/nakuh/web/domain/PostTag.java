@@ -6,5 +6,5 @@ import lombok.Data;
 
 @Data@Component
 public class PostTag {
-	private String tagname,artseq;
+	private String ptseq,tagname,artseq;
 }
