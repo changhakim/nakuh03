@@ -89,9 +89,7 @@ app=(()=>{
 			 +'<link class="rescss" rel="stylesheet" type="text/css" href="/web/resources/css/reservation/modal.css"> '
 		 	 +'<link class="rescss" rel="stylesheet" href="/web/resources/css/reservation/main.css">'
              +'<link class="rescss" rel="stylesheet" href="/web/resources/css/reservation/navbar.css">'
-             +'<link class="rescss" rel="stylesheet" href="/web/resources/css/reservation/resdetail.css">'
-             +'<link class="rescss" rel="stylesheet" href="/web/resources/css/reservation/swiper.min.css">';
-             
+             +'<link class="rescss" rel="stylesheet" href="/web/resources/css/reservation/resdetail.css">';             
 	 
 		 instacss ='  <link rel="stylesheet" type="text/css" href="/web/resources/css/aquagram/style.css">'
 			 +'  <link class="instacss" rel="stylesheet" type="text/css" href="/web/resources/css/aquagram/animate.css">'
