@@ -39,7 +39,6 @@ public class ProductsController {
 	@GetMapping("/prosearch/{search}")
 	public Map<?, ?> prosomelist(@PathVariable String search){
 		logger.info("=======  ProductController prosomelist:상품일부조회  진입 ======");
-		System.out.println(search+"============");
 		product.setProname(search);
 		list = productService.findSomeProducts(product);
 		map.clear();

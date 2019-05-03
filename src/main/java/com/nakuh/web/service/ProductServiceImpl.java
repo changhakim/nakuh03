@@ -26,13 +26,8 @@ public class ProductServiceImpl implements ProductService{
 
 	@Override
 	public List<Product> findSomeProducts(Product param) {
-		System.out.println("서비스들어옴");
-		List<Product> ls = new ArrayList<Product>();
-		ls = proMap.selectSomeProducts(param);
-		for(int i = 0;i<ls.size();i++) {
-			System.out.println(ls.get(i));
-		}
-		return ls;
+		
+		return proMap.selectSomeProducts(param);
 	}
 
 	@Override

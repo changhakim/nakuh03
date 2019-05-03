@@ -31,12 +31,9 @@ public class ArticlesController {
 	public Map<?,?> ArticleList(String mid
 								, Article param) {
 		logger.info("=========ArticleList 진입======");
-
-		System.out.println("????::"+param);
 		map.clear();
 		
 		List<?> ls = (List<?>) artservice.retrieveArticles(param.getMid());
-		System.out.println("ls??:: "+ls);
 		map.put("myList", ls);
 //		map.put("myfeedList", ls);
 //		System.out.println("map??::"+map.get("myfeedList"));
@@ -47,13 +44,9 @@ public class ArticlesController {
 	public Map<?,?> ArticleDetail(String artnum, Article art, Comment com){
 		logger.info("=========ArticleDetail 진입======");
 		map.clear();
-		System.out.println("artnum??::"+artnum);
-		System.out.println("art"+art);
 		Article als = artservice.retrieveArticleDetail(art.getArtnum());
-		System.out.println("als"+als);
 		map.put("als", als);
 		List<?> cls = (List<?>) comservice.retrieveComment(als.getArtnum());
-		System.out.println("cls"+cls);
 		map.put("cls", cls);
 		
 		
