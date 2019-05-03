@@ -44,7 +44,6 @@ public class ProductsController {
 		list = productService.findSomeProducts(product);
 		map.clear();
 		map.put("list", list);
-		
 		return map;
 	} 
 	
@@ -69,3 +68,4 @@ public class ProductsController {
 		 return map;
 	}
 }
+

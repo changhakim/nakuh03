@@ -62,7 +62,6 @@
 		LNG lng
 	FROM PRODUCTS 
 	WHERE PRONUM LIKE #{pronum}
-	
 	</select>
 
 </mapper>
