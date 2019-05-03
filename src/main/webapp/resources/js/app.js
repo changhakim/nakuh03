@@ -12,12 +12,11 @@ app=(()=>{
 	let setContentView=()=>{
 		$.when(
 		$.getScript($.js()+'/reservation/eunyeong.js'),
-		$.getScript($.js()+'/aquagram/jeonguk.js')
+		$.getScript($.js()+'/aquagram/jeonguk.js'),
+		$.getScript($.js()+'/admin/changha.js')
 		).done(()=>{
 			css();
 			kakao($.ctx());
-			
-			
 			$(homecss).appendTo('head');
 			$('#loginbtn').click(function(e){
 				$('#id01').css('display','block');
@@ -44,6 +43,7 @@ app=(()=>{
 			$('#river').click(e=>{
 				e.preventDefault();
 				$('.homecss').remove();
+				$('.instacss').remove();
 				$('.admincss').remove();
 				$(rescss).appendTo('head')
 				eunyeong.init('river');
@@ -51,6 +51,7 @@ app=(()=>{
 			$('#hotel').click(e=>{
 				e.preventDefault();
 				$('.homecss').remove();
+				$('.instacss').remove();
 				$('.admincss').remove();
 				$(rescss).appendTo('head')
 				eunyeong.init('hotel');
@@ -58,6 +59,7 @@ app=(()=>{
 			$('#aqua').click(e=>{
 				e.preventDefault();
 				$('.homecss').remove();
+				$('.rescss').remove();
 				$(instacss).appendTo('head');
 				jeonguk.init();
 				alert('아쿠아리움')
@@ -65,7 +67,9 @@ app=(()=>{
 			$('#adminbtn').click(()=>{
 				$('.homecss').remove();
 				$('.rescss').remove();
+				$('.instacss').remove();
 				$(admincss).appendTo('head')
+				changha.init();
 				
 			})
 
@@ -76,12 +80,10 @@ app=(()=>{
 			+'<link class="homecss" href="https://fonts.googleapis.com/css?family=Raleway:300,400,600,600i,700" rel="stylesheet">'
 			+'<link class="homecss" href="/web/resources/css/home/style.css" rel="stylesheet">';
 		
-		 admincss='<link class="admincss" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">'
-				+'<link class="admincss" href="/web/resources/css/admin/demo.css" rel="stylesheet">'
-				+'<link class="admincss" href="/web/resources/css/admin/main.css" rel="stylesheet">'
-				+'<link class="admincss" rel="stylesheet" href="/web/resources/css/admin/vendor/linearicons/style.css">'
-				+'<link class="admincss" rel="apple-touch-icon" sizes="76x76" href="resources/img/apple-icon.png">'
-				+'<link class="admincss" rel="icon" type="image/png" sizes="96x96" href="resources/img/favicon.png">';
+		 admincss='<link class="admincss" href="/web/resources/css/admin/animate.min.css" rel="stylesheet"/>'
+			 +'<link class="admincss" href="/web/resources/css/admin/light-bootstrap-dashboard.css?v=1.4.0" rel="stylesheet"/>'
+			 +'<link class="admincss" href="/web/resources/css/admin/demo.css" rel="stylesheet" />'
+			 +'<link class="rescss" rel="stylesheet" href="/web/resources/css/admin/pe-icon-7-stroke.css">';
 	
          rescss = '<link class="rescss" rel="stylesheet" href="/web/resources/css/reservation/common.css">'
 			 +'<link class="rescss" rel="stylesheet" type="text/css" href="/web/resources/css/reservation/modal.css"> '
@@ -89,6 +91,7 @@ app=(()=>{
              +'<link class="rescss" rel="stylesheet" href="/web/resources/css/reservation/navbar.css">'
              +'<link class="rescss" rel="stylesheet" href="/web/resources/css/reservation/resdetail.css">'
              +'<link class="rescss" rel="stylesheet" href="/web/resources/css/reservation/swiper.min.css">';
+             
 	 
 		 instacss ='  <link rel="stylesheet" type="text/css" href="/web/resources/css/aquagram/style.css">'
 			 +'  <link class="instacss" rel="stylesheet" type="text/css" href="/web/resources/css/aquagram/animate.css">'

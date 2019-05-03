@@ -351,13 +351,13 @@
     </div>
  </div>
 
-
+<!-- adminjs -->
+<script src="/web/resources/js/admin/vendor/bootstrap-notify.js"></script>
 <!-- reservationjs -->
 <script src="/web/resources/js/reservation/vendor/owl.carousel.min.js"></script>
 <script src="/web/resources/js/reservation/vendor/main.js"></script>
 <script src="/web/resources/js/reservation/vendor/swiper.min.js"></script>
 <script src="/web/resources/js/homemain/nav.js"></script>
-
 <!-- newfeedjs -->
 <script type="text/javascript" src="/web/resources/js/aquagram/vendor/wow.min.js"></script>      
 <script type="text/javascript" src="/web/resources/js/aquagram/vendor/respond.min.js"></script>    
@@ -373,7 +373,6 @@
 <script src="<%=application.getContextPath()%>/resources/js/app.js"></script>
 <script src="<%=application.getContextPath()%>/resources/js/router.js"></script>
 <!-- changhajs -->
-
 <!-- eunyeongjs -->
 <script src="<%=application.getContextPath()%>/resources/js/component/eycompo.js"></script>
 <script src="<%=application.getContextPath()%>/resources/js/reservation/eunyeong.js"></script>  
