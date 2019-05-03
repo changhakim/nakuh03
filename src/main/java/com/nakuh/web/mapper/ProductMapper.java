@@ -11,7 +11,7 @@ import com.nakuh.web.domain.Product;
 public interface ProductMapper {
 	public void insertProduct(Product param);
 	public List<Product> selectAllProduct();
-	public List<Product> selectSomeProducts(HashMap<String, String> paramMap);
+	public List<Product> selectSomeProducts(Product param);
 	public Product selectProduct(Product param);
 	public int countProduct();
 	public void updateProduct(Product param);
