@@ -11,8 +11,8 @@ public interface PostTagMapper {
 	public void insertPostTag(PostTag pos);
 	
 	public List<PostTag> selectAllPostTagsList();
-	public List<PostTag> selectPostTags();
-	public PostTag selectPostTag(String searchWord);
+	public List<PostTag> selectPostTags(PostTag pt);
+	public PostTag selectPostTag(String artseq);
 	public int countPostTags();
 	public boolean existsPostTag(String searchWord);
 	
