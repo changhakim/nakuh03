@@ -31,7 +31,8 @@ app=(()=>{
 				$('#userid').val();
 				$('#password').val();
 				alert('로그인')
-			})
+			});
+
 			$('#ocean').click(e=>{
 				e.preventDefault();
 				$('.homecss').remove();
@@ -159,8 +160,15 @@ app=(()=>{
                                    data: JSON.stringify(resdata, authObj),
                                    dataType:'json',
                                    contentType : "application/json; charset=UTF-8",
-                                   success:function(res){
-                                       alert('성공');
+                                   success: d=>{
+                                       alert(d.msg);
+                                       $('#id01').attr('style','display:none');//닫기 
+                                       $('#loginbtn').text('LOGOUT');
+                                       $('#loginbtn').attr('id','logout');
+                                       $.each(d.m,(i,j)=>{
+                                    	   alert('??::'+j.mid);
+                                       });
+                                       
                                        //location.assign(x+"/ngh");
                                       
                                    },

@@ -14,17 +14,29 @@
   <result property="profilephoto" column="profilephoto"/>
 <!-- artnum,content,artdate, artphoto, mid, extension; -->
 </resultMap>
+
+<insert id="insertMember" parameterType="com.nakuh.web.domain.Member">
+	INSERT INTO MEMBERS(mid, name, mail, profilephoto) 
+	VALUE(#{mid}, #{name}, #{mail}, #{profilephoto})
+</insert>
+
 <select id="selectMembers" resultType="com.nakuh.web.domain.Member"
 	parameterType="com.nakuh.web.domain.Member">
 		SELECT mid,
 				name,
 				birth,
 				phone,
+				mail,
 				profilephoto
 		FROM MEMBERS
 		WHERE mid LIKE #{mid}
 </select>
-
+<select id="existsMember" resultType="boolean" 
+			parameterType="com.nakuh.web.domain.Member">
+	SELECT if(COUNT(*) > 0, 'false','true') 
+    FROM MEMBERS
+    WHERE mid LIKE #{mid}
+</select>
 
 
 

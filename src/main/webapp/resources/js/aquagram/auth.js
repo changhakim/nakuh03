@@ -37,6 +37,13 @@ auth =(()=>{
 		$(jwcompo.left_content()).appendTo('#leftbar_content');
 		$(jwcompo.right_nav()).appendTo('#right_nav_cont');
 		$(jwcompo.my_navbar()).appendTo('#my_navbar');
+		let url = 
+		$.getJSON(url,d=>{
+			
+			
+		});
+		
+		
 		//중앙 네비 따라오는 옵션
 		$(document).ready(function() {
 			  $('.navbar').affix({
