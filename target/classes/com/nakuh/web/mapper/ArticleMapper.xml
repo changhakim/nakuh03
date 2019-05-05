@@ -38,6 +38,13 @@
 		
 </select>
 
+<select id="selectAllArticlesList" resultType="com.nakuh.web.domain.Article"
+								parameterType="com.nakuh.web.domain.Article">
+		
+
+
+</select>
+
 
 
 

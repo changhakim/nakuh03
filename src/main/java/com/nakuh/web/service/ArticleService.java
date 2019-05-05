@@ -10,7 +10,7 @@ import com.nakuh.web.domain.Article;
 public interface ArticleService {
 	public void registArticle(Article art);
 	
-	public List<Article> bringAllArticlesList();
+	public List<Article> bringAllArticlesList(Article art);
 	public List<Article> retrieveArticles();
 	public List<Article> retrieveArticles(String mid);
 	public Article retrieveArticleDetail(String artnum);

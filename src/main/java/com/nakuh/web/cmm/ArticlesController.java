@@ -6,16 +6,19 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.nakuh.web.domain.Article;
 import com.nakuh.web.domain.Comment;
 import com.nakuh.web.domain.PostTag;
+import com.nakuh.web.mapper.ArticleMapper;
 import com.nakuh.web.service.ArticleServiceImpl;
 import com.nakuh.web.service.CommentServiceImpl;
 import com.nakuh.web.service.PostTagServiceImpl;
 
+@Transactional
 @RestController
 public class ArticlesController {
 	private static final Logger logger = LoggerFactory.getLogger(ArticlesController.class);
@@ -26,6 +29,7 @@ public class ArticlesController {
 	@Autowired CommentServiceImpl comservice;
 	@Autowired PostTag pt;
 	@Autowired PostTagServiceImpl postservice;
+	@Autowired ArticleMapper artMap;
 	
 	@Autowired Map<String, Object> map;
 	@GetMapping("/myfeed/{mid}")
@@ -59,5 +63,15 @@ public class ArticlesController {
 		
 		return map;
 	};
+	@GetMapping("/arti/feed/{mid}")
+	public Map<?,?> ArticleFeed(String mid, Article art){
+		logger.info("=========ArticleFeed 진입======");
+		IFunction f = (Object o) -> artMap.selectAllArticlesList(art);
+		System.out.println("art??:::::"+f.apply(art));
+		
+		
+		return map;
+	};
+	
 
 }

@@ -2,12 +2,7 @@
 var auth = auth || {};
 auth =(()=>{
 	let homecss,admincss,rescss,instacss;
-	let setPath=(x)=>{
-		 _= $.ctx();
-		 js = $.js();
-	};
 	let init =()=>{
-//		setPath(x);
 		onCreate();
 	};
 	let onCreate =()=>{
@@ -34,15 +29,26 @@ auth =(()=>{
 		
 	};
 	let feed_main =()=>{
+		let mid = 'ahah123';
+		$.ajax({
+			url: $.ctx()+'/arti/feed/'+mid,
+			type: 'get',
+			data: JSON.stringify(mid),
+			dataType: 'json',
+			contentType: 'application/json; charset=UTF-8;',
+			success: d=>{
+				
+			},
+			error: e=>{
+				alert('에러!');
+			}
+	
+			
+		});
+
 		$(jwcompo.left_content()).appendTo('#leftbar_content');
 		$(jwcompo.right_nav()).appendTo('#right_nav_cont');
 		$(jwcompo.my_navbar()).appendTo('#my_navbar');
-		let url = 
-		$.getJSON(url,d=>{
-			
-			
-		});
-		
 		
 		//중앙 네비 따라오는 옵션
 		$(document).ready(function() {

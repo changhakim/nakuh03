@@ -20,9 +20,9 @@ public class ArticleServiceImpl implements ArticleService{
 	}
 
 	@Override
-	public List<Article> bringAllArticlesList() {
+	public List<Article> bringAllArticlesList(Article art) {
 		// TODO Auto-generated method stub
-		return artmap.selectAllArticlesList();
+		return artmap.selectAllArticlesList(art);
 	}
 
 	@Override
