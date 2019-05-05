@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.nakuh.web.domain.Member;
+import com.nakuh.web.domain.Visitor;
 import com.nakuh.web.mapper.MemberMapper;
 import com.nakuh.web.service.MemberServiceImpl;
+import com.nakuh.web.service.VisitorServiceImpl;
 
 @RestController
 @Transactional
@@ -23,7 +25,8 @@ public class MemberController {
 	@Autowired Member member;
 	@Autowired MemberServiceImpl memberservice; 
 	@Autowired MemberMapper memberMap;
-	
+	@Autowired VisitorServiceImpl visiservice;
+	@Autowired Visitor vis;
 	
 	@PostMapping("/login/kakao/{kaid}")
 	public Map<?,?> login(@RequestBody Map<?,?> res) {
@@ -54,6 +57,8 @@ public class MemberController {
 			System.out.println("이미 아이디가 있음. ");
 			IFunction f = (Object o) -> memberMap.selectMembers(member.getMid());
 			f.apply(member);
+			vis.setVisitid(member.getMid());
+			visiservice.registVisitor(vis);
 			map.put("msg", "LOGIN SUCCESS");
 			map.put("m", f.apply(member));
 			System.out.println("f.apply???"+f.apply(member));

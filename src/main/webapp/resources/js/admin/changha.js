@@ -13,6 +13,12 @@ changha = (()=>{
 		$.getScript($.js()+'/component/chcompo.js')	
 		).done(()=>{
 		$('#wrapper').html(chcompo.member())
+		let a = 'vis'
+		alert('안녕')	
+		$.getJSON($.ctx()+'/admin/visitor',d=>{
+			$('#total').text(d.total)
+			$('#today').text(d.today)
+		})
 		google.charts.load('current', {'packages':['line','controls']});
 			  chartDrowFun.chartDrow(); //chartDrow() 실행
 		})
@@ -46,12 +52,12 @@ var chartDrowFun = {
 	          //그래프에 표시할 데이터
 	          var dataRow = [];
 	 
-	          for(var i = 0; i <= 29; i++){ //랜덤 데이터 생성
+	          for(var i = 1; i <= 31; i++){ //랜덤 데이터 생성
 	            var total   = Math.floor(Math.random() * 300) + 1;
 	            var man     = Math.floor(Math.random() * total) + 1;
 	            var woman   = total - man;
 	 
-	            dataRow = [new Date('2017', '09', i , '10'), man, woman , total];
+	            dataRow = [new Date('2019', '05', i , '10'), man, woman , total];
 	            data.addRow(dataRow);
 	          }
 	 
@@ -96,7 +102,7 @@ var chartDrowFun = {
 	                  ui:{
 	                        chartType: 'LineChart',
 	                        chartOptions: {
-	                        chartArea: {'width': '60%','height' : 80},
+	                        chartArea: {'width': '40%','height' : 80},
 	                          hAxis: {'baselineColor': 'none', format: chartDateformat, textStyle: {fontSize:12},
 	                            gridlines:{count:controlLineCount,units: {
 	                                  years : {format: ['yyyy년']},
@@ -123,4 +129,3 @@ var chartDrowFun = {
 	 
 	      }
 	    }
-	 

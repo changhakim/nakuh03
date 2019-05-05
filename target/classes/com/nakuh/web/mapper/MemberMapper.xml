@@ -38,7 +38,10 @@
     WHERE mid LIKE #{mid}
 </select>
 
-
+<select id="countMembers" resultType="Integer">
+        SELECT COUNT(*)
+        FROM MEMBERS
+</select>
 
 
 

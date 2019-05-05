@@ -40,8 +40,7 @@ public class ArticlesController {
 		
 		List<?> ls = (List<?>) artservice.retrieveArticles(param.getMid());
 		map.put("myList", ls);
-
-//		map.put("myfeedList", ls);
+//		mapput("myfeedList", ls);
 //		System.out.println("map??::"+map.get("myfeedList"));
 		
 		return map;
