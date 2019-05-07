@@ -11,7 +11,14 @@
   <result property="artphoto" column="artphoto"/>
   <result property="mid" column="mid"/>
   <result property="extension" column="extension"/>
-<!-- artnum,content,artdate, artphoto, mid, extension; -->
+  <result property="comcount" column="comcount"/>
+  <result property="profilephoto" column="profilephoto"/>
+  <result property="mname" column="mname"/>
+  <result property="artCount" column="artCount"/>
+  <result property="followerCount" column="followerCount"/>
+  <result property="folloingCount" column="folloingCount"/>
+<!-- artnum, content, artdate, artphoto, mid, extension
+					, comcount, profilephoto, mname, artCount, followerCount, folloingCount; -->
 </resultMap>
 <select id="selectArticles" resultType="com.nakuh.web.domain.Article"
 							parameterType="com.nakuh.web.domain.Article">
@@ -23,9 +30,10 @@
 				extension,
 				(select count(*) from COMMENTS where titleseq like artnum) comcount,
 				(select profilephoto from MEMBERS M WHERE M.MID LIKE ARTICLES.MID) profilephoto
-
 		FROM ARTICLES
 		WHERE mid LIKE #{mid}
+		ORDER BY artnum DESC
+		LIMIT #{startRow},#{pageSize}
 </select>
 
 <select id="selectArticlesDetail" resultType="com.nakuh.web.domain.Article" 
@@ -40,11 +48,34 @@
 
 <select id="selectAllArticlesList" resultType="com.nakuh.web.domain.Article"
 								parameterType="com.nakuh.web.domain.Article">
-		
-
-
+		SELECT DISTINCT artnum, content, artdate, 
+				concat(artphoto,'.',extension) as artphoto,
+				F.folloid as mname,
+				(SELECT profilephoto FROM MEMBERS WHERE MID LIKE mname) profilephoto
+		FROM ARTICLES A
+		JOIN (
+			SELECT * 
+			FROM FOLLOWERS
+			WHERE mid LIKE #{mid}) F
+		ON A.mid LIKE F.folloid;
 </select>
 
+<select id="countnavArticle" resultType="com.nakuh.web.domain.Article"
+								parameterType="com.nakuh.web.domain.Article">
+SELECT mid, profilephoto,
+	(SELECT COUNT(*) FROM ARTICLES WHERE MID LIKE #{mid}) artcount,
+    (SELECT COUNT(*) FROM FOLLOWERS WHERE MID LIKE #{mid}) followerCount,
+    (SELECT COUNT(*) FROM FOLLOWERS WHERE folloid LIKE #{mid}) folloingCount
+FROM MEMBERS 
+WHERE MID LIKE #{mid}
+</select>
+
+<select id="countArticles" resultType="int"
+								parameterType="com.nakuh.web.domain.Article">
+SELECT COUNT(*)
+FROM ARTICLES
+WHERE MID LIKE #{mid}
+</select>
 
 
 

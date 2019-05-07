@@ -14,6 +14,7 @@ import com.nakuh.web.domain.Article;
 import com.nakuh.web.domain.Comment;
 import com.nakuh.web.domain.PostTag;
 import com.nakuh.web.mapper.ArticleMapper;
+import com.nakuh.web.mapper.CommentMapper;
 import com.nakuh.web.service.ArticleServiceImpl;
 import com.nakuh.web.service.CommentServiceImpl;
 import com.nakuh.web.service.PostTagServiceImpl;
@@ -30,16 +31,30 @@ public class ArticlesController {
 	@Autowired PostTag pt;
 	@Autowired PostTagServiceImpl postservice;
 	@Autowired ArticleMapper artMap;
+	@Autowired CommentMapper comMap;
+	@Autowired Proxy pxy;
 	
 	@Autowired Map<String, Object> map;
-	@GetMapping("/myfeed/{mid}")
-	public Map<?,?> ArticleList(String mid
+	@GetMapping("/myfeed/{mid}/{page}")
+	public Map<?,?> ArticleList(String mid, String page
 								, Article param) {
 		logger.info("=========ArticleList 진입======");
 		map.clear();
-		
-		List<?> ls = (List<?>) artservice.retrieveArticles(param.getMid());
+		map.put("page_num", page);
+		map.put("mid", param.getMid());
+		map.put("page_size", "12");
+		IFunction f = (Object o) -> artMap.countArticles(param.getMid());
+		map.put("total_count", f.apply(param.getMid()));
+		pxy.carryOut(map);
+		System.out.println("??pxy??"+pxy);
+		map.put("pxy", pxy);
+		art.setMid(param.getMid());
+		art.setStartRow(pxy.getStartRow());
+		art.setPageSize(pxy.getPageSize());
+		System.out.println(art);
+		List<?> ls = (List<?>) artservice.retrieveArticles(art);
 		map.put("myList", ls);
+		System.out.println("ls?"+ls);
 //		mapput("myfeedList", ls);
 //		System.out.println("map??::"+map.get("myfeedList"));
 		
@@ -63,11 +78,20 @@ public class ArticlesController {
 		return map;
 	};
 	@GetMapping("/arti/feed/{mid}")
-	public Map<?,?> ArticleFeed(String mid, Article art){
+	public Map<?,?> ArticleFeed(String mid, Article arts){
 		logger.info("=========ArticleFeed 진입======");
-		IFunction f = (Object o) -> artMap.selectAllArticlesList(art);
-		System.out.println("art??:::::"+f.apply(art));
-		
+		map.clear();
+		System.out.println("art??"+arts);
+		art.setMid(arts.getMid());
+		System.out.println(art);
+		IFunction f1 = (Object o)-> artMap.countnavArticle(art); 
+		System.out.println("artcount"+f1.apply(art));
+		map.put("nav", f1.apply(art));
+		IFunction f2 = (Object o) -> artMap.selectAllArticlesList(art);
+		System.out.println("art??:::::"+f2.apply(art));
+		List<?> ffeed = (List<?>) f2.apply(art);
+		map.put("ffeed", ffeed);
+
 		
 		return map;
 	};

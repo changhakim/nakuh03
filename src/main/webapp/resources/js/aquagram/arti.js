@@ -18,6 +18,7 @@ arti =(()=>{
 				$.getScript($.js()+'/aquagram/auth.js'),
 				$.getScript($.js()+'/reservation/eunyeong.js')
 			).done(()=>{
+				$('#donw_content').html(jwcompo.insta_base());
 				feed_my();
 				arti_upload();
 				
@@ -27,28 +28,19 @@ arti =(()=>{
 		
 		
 	};
-	let feed_my=()=>{
-		$('#donw_content').html(jwcompo.insta_base());
+	let feed_my=(x)=>{
 		let box = '';
 		let dl = {};
-		let mid ='ahah123';
-		let url = _+'/myfeed/'+mid;
+		let mid ='gigi123';
+		let page = x;
+		let url = _+'/myfeed/'+mid+'/'+page;
 		$.ajax({
 			url: url+'',
 			type: 'get',
-			data: JSON.stringify(mid),
+			data: JSON.stringify(mid,page),
 			dataType: 'json',
 			contentType: 'application/json; charset=UTF-8;',
 			success: d=>{
-				alert('성공!');
-/*				dl = {
-					 mid : d.myList.mid.val(),
-					 artnum : d.myList.artnum,
-					 content : d.myList.content,
-					 artdate : d.myList.artdate,
-					 artphoto : d.myList.artphoto,
-					 ext : d.myList.extension
-						};*/
 				$.each(d.myList,(i,j)=>{
 					box += '<div id="feeds">'
 						+'			<div id="myfeed_'+j.artnum+'" class="col-xs-12 col-sm-6 col-md-4 col-lg-3">'
@@ -65,11 +57,6 @@ arti =(()=>{
 					+'			</a>'
 					+'			</div>'
 					+'			</div>'
-				
-					
-					
-
-
 				});
 				$(box).appendTo('#instafeed');
 				$('.photo-box').attr('style','margin:-26px 0px 30px -29px');
@@ -81,6 +68,9 @@ arti =(()=>{
 					arti_detail(od);
 
 				});
+
+				
+				
 				
 			},
 			error: e=>{
@@ -88,7 +78,25 @@ arti =(()=>{
 			}
 				
 		});
-		
+		$(function(){
+			$(window).scroll(function(){
+				let $window = $(this);
+				let scrollTop = $window.scrollTop();
+				let windowHeight = $window.height();
+				let documentHeight = $(document).height();
+				
+				console.log("documentHeight:" + documentHeight + " | scrollTop:" +
+                        scrollTop + " | windowHeight: " + windowHeight );
+				 if( scrollTop + windowHeight + 30 > documentHeight ){
+					 page += 1; 
+					 alert('바닥도착!');
+					// feed_my();
+
+             }
+				
+			})
+			//feed_my();
+		});
 
 		
 		
