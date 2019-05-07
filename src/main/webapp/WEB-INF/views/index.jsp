@@ -12,6 +12,7 @@
  <link rel="shortcut icon" href="/web/resources/favicon/favicon.ico">
  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAY5vEXIghqf7_mEdWcG9kqcEeDOpaLixY&callback=initMap"></script>
  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
 </head>
 <body>
 <!-- datepicker -->
@@ -353,6 +354,7 @@
 
 <!-- adminjs -->
 <script src="/web/resources/js/admin/vendor/bootstrap-notify.js"></script>
+<script src="/web/resources/js/admin/vendor/jquery.counterup.js"></script>
 <!-- reservationjs -->
 <script src="/web/resources/js/reservation/vendor/owl.carousel.min.js"></script>
 <script src="/web/resources/js/reservation/vendor/main.js"></script>
@@ -374,7 +376,8 @@
 <script src="<%=application.getContextPath()%>/resources/js/app.js"></script>
 <script src="<%=application.getContextPath()%>/resources/js/router.js"></script>
 <!-- changhajs -->
-<script src="<%=application.getContextPath()%>/resources/js/admin/changha.js"></script>  
+<script src="<%=application.getContextPath()%>/resources/js/admin/changha.js"></script>
+<script src="<%=application.getContextPath()%>/resources/js/admin/adminres.js"></script>   
 <!-- eunyeongjs -->
 <script src="<%=application.getContextPath()%>/resources/js/component/eycompo.js"></script>
 <script src="<%=application.getContextPath()%>/resources/js/reservation/eunyeong.js"></script>  
