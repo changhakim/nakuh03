@@ -16,10 +16,15 @@ changha = (()=>{
 		let a = 'vis'
 		alert('안녕')	
 		$.getJSON($.ctx()+'/admin/visitor',d=>{
-
-			$('#total').text(d.total+'명')
-			$('#today').text(d.today+'명')
-			$('#yesterday').text(d.yesterday+'명')
+	        jQuery(document).ready(function($) {
+	            $('.counter').counterUp({
+	                delay: 10,
+	                time: 1000
+	            });
+	        });
+			$('#total').text(d.total)
+			$('#today').text(d.today)
+			$('#yesterday').text(d.yesterday)
 			let visitcount = [];
 			let visittime = [];
 			let agecount=[d.agegroup.tengroup,

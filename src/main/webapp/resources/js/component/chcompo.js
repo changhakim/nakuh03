@@ -55,7 +55,7 @@ chcompo={
 	            +'</ul>'
 	    	+'</div>'
 	    +'</div>'
-	    +'<div class="main-panel">'
+	    +'<div class="main-panel" style="padding-right: 120px;padding-left: 120px ;height: 650px;">'
 	        +'<div class="content" style="padding-top: 0px;">'
 	            +'<div class="container-fluid">'
 	                +'<div class="row" style="margin-bottom: 50px;">'
@@ -91,7 +91,7 @@ chcompo={
 	                    +'<div class="col-md-12" >'
 	                        +'<div class="card ">'
 	                            +'<div class="chart-container" >'
-	                            +'<canvas id="myChart"style="position: relative; height:28vh; width:80vw"></canvas>'
+	                            +'<canvas id="myChart"style="position: relative; height:40vh; width:80vw"></canvas>'
 	                            +'</div>'
 	                           /* +'<div id="chart_div" style="padding:0px 0px 0px 0px;"></div>'*/
 	                           /* +'<div id="controlsArea" style="padding:0px 0px 0px 0px;"></div>'*/
@@ -102,7 +102,7 @@ chcompo={
 	                    +'<div class="col-md-12" >'
 	                        +'<div class="card ">'
 	                            +'<div class="chart-container" >'
-	                            +'<canvas id="age"style="position: relative; height:38vh; width:80vw"></canvas>'
+	                            +'<canvas id="age"style="position: relative; height:45vh; width:80vw"></canvas>'
 	                            +'</div>'
 	                           /* +'<div id="chart_div" style="padding:0px 0px 0px 0px;"></div>'*/
 	                           /* +'<div id="controlsArea" style="padding:0px 0px 0px 0px;"></div>'*/
