@@ -50,7 +50,6 @@ public class ProductsController {
 	@PostMapping("/products/{proid}")
 	public Map<?, ?> proinfo(@PathVariable String proid) {
 		logger.info("=======  ProductController proinfo:상품상세조회  진입 ======");
-		
 		product.setPronum(proid);
 		product = productService.findProduct(product);
 		map.clear();
