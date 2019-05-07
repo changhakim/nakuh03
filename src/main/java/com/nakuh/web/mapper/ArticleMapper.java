@@ -10,7 +10,7 @@ import com.nakuh.web.domain.Article;
 public interface ArticleMapper {
 	public void insertArticle(Article art);
 	
-	public List<Article> selectAllArticlesList();
+	public List<Article> selectAllArticlesList(Article art);
 	public List<Article> selectArticles();
 	public List<Article> selectArticles(String mid);
 	public Article selectArticlesDetail(String artnum);

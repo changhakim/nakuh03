@@ -74,19 +74,8 @@ arti =(()=>{
 				$(box).appendTo('#instafeed');
 				$('.photo-box').attr('style','margin:-26px 0px 30px -29px');
 				$('head').after(jwcompo.photo_feed_css_hover());
-				
-	/*			$(this).click(function(){
-					$(this).children('a').attr('src','resources/img/aquagram/test_img.jpg');
-					$(this).children('img').attr('src','resources/img/aquagram/test_img.jpg');
-					 console.log($(this).children('a'));
-					alert('클릭??::');
-				});*/
 				$('#instafeed').children('#feeds').attr('data-toggle','modal').attr('data-target','#myModal').click(function(e){
 					e.preventDefault();
-				//	alert('???'+this);
-				//	console.log(this);
-				//	console.log($(this)[0]);
-				//	alert($(this).find('img').attr('src'));
 					let od = { artphoto : $(this).find('img').attr('src'),
 								artnum : $(this).find('img').attr('id')};
 					arti_detail(od);
@@ -108,9 +97,7 @@ arti =(()=>{
 	};
 	let arti_detail =(x)=>{
 		$('#change_modal_2').empty();
-		//alert('xx'+x.artnum);
 		let artnum = x.artnum;
-		//alert('xx'+artnum);
 		let comlist='';
 		$.ajax({
 			url: _+'/arti/detail/'+artnum,
@@ -189,8 +176,6 @@ arti =(()=>{
 			$('.modal-dialog').attr('class','modal-dialog');
 			$('.modal-dialog').attr('style','top:200px;')
 			$('.modal-content').attr('style','margin:auto;');
-			/*sidsidsidsid*/
-		
 
 
 		});
