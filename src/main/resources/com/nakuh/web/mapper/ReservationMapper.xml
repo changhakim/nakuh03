@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.nakuh.web.mapper.ReservationMapper">
+
+<!-- 상품 예약하기 -->
+	<select id="insertReservation" parameterType="com.nakuh.web.domain.Reservation">
+	
+	INSERT INTO RESERVATION (
+	RESNUM, RESNAME, DEPARTDATE, MID, PHONE, 
+	DEPODATE, RESCOUNT, DEPOSIT, MESSAGE) VALUES(
+	#{resnum},#{resname},#{departdate},#{mid},#{phone},#{depodate},#{rescount},#{deposit},#{message});
+	
+	</select>
+
+</mapper>

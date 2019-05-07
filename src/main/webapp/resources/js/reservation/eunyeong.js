@@ -208,6 +208,40 @@ eunyeong = (()=>{
     		  });
     };
     
+    /*상품예약 : 입력*/
+    let prdres =x=>{
+    	alert('상품예약 진입 ! ');
+    	$(m_ctt).empty();
+			$(eycompo.product_res()).appendTo(m_ctt);
+			$('#deposit').text(x.price);
+			$('a[id="inputbtn"]').click(e=>{
+				e.preventDefault();
+				let data ={
+						resname: $('input[id="resname"]').val(),
+						phone: $('input[id="phone"]').val(),
+						rescount: $('input[id="rescount"]').val(),
+						departdate:$('input[id="departdate"]').val(),
+						message: $('input[id="message"]').val()};
+				$('#handleCounter').handleCounter({
+					  minimum: 1,
+					  maximize: null});
+				$('#deposit').text(x.price);
+				$.ajax({
+					url :_+'/reservation',
+					type : 'POST',
+					data :JSON.stringify(data),
+					dataType :'json',
+					contentType :'application/json',
+					success : d=>{
+						alert('AJAX 성공 : ' + d.msg);
+						
+					},
+					error : e=>{
+						alert('AJAX실패');
+					}
+				});	
+			});
+    };
     /*상세정보 : 상품 */
     let detail =x=>{
         $(s_ctt).remove();
@@ -232,18 +266,13 @@ eunyeong = (()=>{
         	$('#myModal').attr('style','display: block; z-index:99999;').appendTo('#myModal');
   			$('.modal-dialog').attr('style','top:200px;');
   			$('.modal-content').attr('style','margin:auto;');
-  			$('.modal-title').text('상품선택하기');
+  			$('.modal-title').empty();
   			$('.modal-body').empty();
   			$('.modal-footer').empty();
+  			$(' <h4 class="modal-title">'+ x.company +'</h4>').appendTo('.modal-title');
   			$('<div class="checkbox"><label><input type="checkbox" value=""> 상품명 : '+ x.proname + '[가격 : ' +x.price+ '원]</label></div>').appendTo('.modal-body');
   			$('<button id="paybtn" type="button" class="btn btn-default" data-dismiss="modal">결제하기</button>').prependTo('.modal-footer').click(e=>{
-  				alert('결제하러간다');
-  				/*$('#paybtn').click(e=>{
-  					$('#myModal').attr('style','display:none');
-  					alert('결제22');
-  				});*/
-  				$(m_ctt).empty();
-  				$(eycompo.product_pay()).appendTo(m_ctt);
+  				prdres();
   			});
   			$('<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>').appendTo('.modal-footer');
         });
@@ -324,7 +353,8 @@ eunyeong = (()=>{
 			 +'<link class="rescss" rel="stylesheet" type="text/css" href="/web/resources/css/reservation/modal.css"> '
 		 	 +'<link class="rescss" rel="stylesheet" href="/web/resources/css/reservation/main.css">'
              +'<link class="rescss" rel="stylesheet" href="/web/resources/css/reservation/navbar.css">'
-             +'<link class="rescss" rel="stylesheet" href="/web/resources/css/reservation/resdetail.css">';
+             +'<link class="rescss" rel="stylesheet" href="/web/resources/css/reservation/resdetail.css">'
+             +'<link class="rescss" rel="stylesheet" href="/web/resources/css/reservation/prdpay.css">';
          
          instacss =' <link class="instacss" rel="stylesheet" type="text/css" href="/web/resources/css/aquagram/style.css">'
              +' <link class="instacss" rel="stylesheet" type="text/css" href="/web/resources/css/aquagram/animate.css">'
@@ -334,5 +364,5 @@ eunyeong = (()=>{
              
     };
     return {init:init, searchlist:searchlist, ocean:ocean, river:river, hotel:hotel, detail:detail, 
-    		prolist:prolist, datepicker:datepicker, search:search};
+    		prolist:prolist, datepicker:datepicker, search:search, prdres:prdres};
 })();
