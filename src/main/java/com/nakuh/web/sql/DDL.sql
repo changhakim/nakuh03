@@ -45,10 +45,17 @@ REFERENCES Fish (fishseq) ON DELETE RESTRICT ON UPDATE RESTRICT;
 CREATE TABLE RESERVATION
 (
 `resnum`   INT AUTO_INCREMENT PRIMARY KEY COMMENT '예약번호',
+`mid`      VARCHAR(50)    NOT NULL    COMMENT '아이디',
 `resname`  VARCHAR(50)    NOT NULL    COMMENT '예약자명',
-`depodate` VARCHAR(90)    NOT NULL    COMMENT '결제날짜',
-`deposit`  VARCHAR(70)    NOT NULL    COMMENT '입금액',
-`mid`      VARCHAR(50)    NOT NULL    COMMENT '아이디'
+`startdate` VARCHAR(50)    NOT NULL    COMMENT '출발일자',
+`ampm`      VARCHAR(100)    NOT NULL    COMMENT 'AM/PM',
+`phone`     VARCHAR(50)    NOT NULL    COMMENT '연락처',
+`mid`      VARCHAR(50)    NOT NULL    COMMENT '예약일자',
+`mid`      VARCHAR(50)    NOT NULL    COMMENT '예약인원',
+`deposit`  VARCHAR(70)    NOT NULL    COMMENT '결제금액',
+`message`  VARCHAR(200)   NOT NULL    COMMENT '업체전달사항',
+`proname`  VARCHAR(50)    NOT NULL    COMMENT '상품이름',
+`pronum`   INT            NOT NULL    COMMENT '상품번호'
 );
 CREATE TABLE PRODUCTS
 (
@@ -69,24 +76,6 @@ CREATE TABLE PRODUCTS
 ALTER TABLE Reservation
 ADD CONSTRAINT FK_Reservation_mid_Member_mid FOREIGN KEY (mid)
 REFERENCES Member (mid) ON DELETE RESTRICT ON UPDATE RESTRICT;
-*/
-CREATE TABLE PRORES
-(
-`proseq`     INT AUTO_INCREMENT PRIMARY KEY COMMENT '예약상품번호',
-`resdate`    DATE           NOT NULL    COMMENT '예약날짜',
-`startdate`  VARCHAR(50)       NOT NULL    COMMENT '출발날짜',
-`ampm`       VARCHAR(25)    NOT NULL    COMMENT 'AM/PM',
-`resamount`  VARCHAR(70)    NOT NULL    COMMENT '예약금액',
-`resnum`     INT            NOT NULL    COMMENT '예약번호',
-`proname`    INT            NOT NULL    COMMENT '상품번호'
-);
-/*
-ALTER TABLE Prores
-ADD CONSTRAINT FK_Prores_proname_Product_pronum FOREIGN KEY (proname)
-REFERENCES Product (pronum) ON DELETE RESTRICT ON UPDATE RESTRICT;
-ALTER TABLE Prores
-ADD CONSTRAINT FK_Prores_resnum_Reservation_resnum FOREIGN KEY (resnum)
-REFERENCES Reservation (resnum) ON DELETE RESTRICT ON UPDATE RESTRICT;
 */
 CREATE TABLE FOLLOWERS
 (
