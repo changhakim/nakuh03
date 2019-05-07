@@ -358,6 +358,7 @@
 <script src="/web/resources/js/reservation/vendor/main.js"></script>
 <script src="/web/resources/js/reservation/vendor/swiper.min.js"></script>
 <script src="/web/resources/js/homemain/nav.js"></script>
+<script src="/web/resources/js/reservation/vendor/handleCounter.js"></script>
 <!-- newfeedjs -->
 <script type="text/javascript" src="/web/resources/js/aquagram/vendor/wow.min.js"></script>      
 <script type="text/javascript" src="/web/resources/js/aquagram/vendor/respond.min.js"></script>    
