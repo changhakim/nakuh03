@@ -10,7 +10,8 @@ changha = (()=>{
 	}
 	let setContentView=()=>{
 		$.when(
-		$.getScript($.js()+'/component/chcompo.js')	
+		$.getScript($.js()+'/component/chcompo.js'),
+		$.getScript($.js()+'/admin/adminres.js')
 		).done(()=>{
 		$('#wrapper').html(chcompo.member())
 		let a = 'vis'
@@ -37,8 +38,12 @@ changha = (()=>{
 			visitor(visit);
 			age(agecount);
 		})
-		
+		$('#resnav').click(e=>{
+			e.preventDefault();
+			adminres.init();
+		})
 
+		
 		})
 	}
 	return {init:init}

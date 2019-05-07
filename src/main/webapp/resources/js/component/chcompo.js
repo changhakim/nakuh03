@@ -20,7 +20,7 @@ chcompo={
 	                    +'</a>'
 	                +'</li>'
 	                +'<li>'
-	                    +'<a href="#">'
+	                    +'<a id="resnav"href="#">'
 	                        +'<i class="reservation"></i>'
 	                        +'<img src="/web/resources/img/admin/reservation.png"'
 	                        +'<p>예약관리</p>'
@@ -114,5 +114,11 @@ chcompo={
 	        +'</div>'
 	    +'</div>'
 	+'</div>'
-	}
+	},
+	admin:()=>{
+		return '<div class="col-md-12">'
+		+'	<div class="card">'
+		+'	</div>'
+		+'</div>'
+	}	
 }
