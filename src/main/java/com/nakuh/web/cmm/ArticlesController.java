@@ -8,6 +8,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.nakuh.web.domain.Article;
@@ -35,23 +38,27 @@ public class ArticlesController {
 	@Autowired Proxy pxy;
 	
 	@Autowired Map<String, Object> map;
-	@GetMapping("/myfeed/{mid}/{page}")
-	public Map<?,?> ArticleList(String mid, String page
-								, Article param) {
+	
+	@PostMapping("/myfeed/{mid}")
+	public Map<?,?> ArticleList(
+			@PathVariable String mid,
+			@RequestBody Article param) {
 		logger.info("=========ArticleList 진입======");
+		System.out.println("page???????????"+param);
 		map.clear();
-		map.put("page_num", page);
-		map.put("mid", param.getMid());
-		map.put("page_size", "12");
-		IFunction f = (Object o) -> artMap.countArticles(param.getMid());
-		map.put("total_count", f.apply(param.getMid()));
-		pxy.carryOut(map);
-		System.out.println("??pxy??"+pxy);
-		map.put("pxy", pxy);
+		/*
+		 * map.put("page_num", page); map.put("mid", param.getMid());
+		 * map.put("page_size", "12"); IFunction f = (Object o) ->
+		 * artMap.countArticles(param.getMid()); map.put("total_count",
+		 * f.apply(param.getMid())); pxy.carryOut(map);
+		 * System.out.println("??pxy??"+pxy); map.put("pxy", pxy);
+		 */
+		/*
+		 * art.setMid(param.getMid()); art.setStartRow(param.getStartRow());
+		 */
 		art.setMid(param.getMid());
-		art.setStartRow(pxy.getStartRow());
-		art.setPageSize(pxy.getPageSize());
-		System.out.println(art);
+		art.setStartRow(param.getStartRow());
+		art.setPageSize(param.getPageSize());
 		List<?> ls = (List<?>) artservice.retrieveArticles(art);
 		map.put("myList", ls);
 		System.out.println("ls?"+ls);
