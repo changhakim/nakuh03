@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.nakuh.web.domain.Article;
 import com.nakuh.web.domain.Comment;
-import com.nakuh.web.mapper.ArticleMapper;
-import com.nakuh.web.mapper.CommentMapper;
+import com.nakuh.web.domain.PostTag;
 import com.nakuh.web.service.ArticleServiceImpl;
 import com.nakuh.web.service.CommentServiceImpl;
+import com.nakuh.web.service.PostTagServiceImpl;
 
 @RestController
 public class ArticlesController {
@@ -22,10 +22,11 @@ public class ArticlesController {
 	
 	@Autowired Article art;
 	@Autowired ArticleServiceImpl artservice;
-	@Autowired ArticleMapper artMap;
 	@Autowired Comment com;
 	@Autowired CommentServiceImpl comservice;
-	@Autowired CommentMapper comMap;
+	@Autowired PostTag pt;
+	@Autowired PostTagServiceImpl postservice;
+	
 	@Autowired Map<String, Object> map;
 	@GetMapping("/myfeed/{mid}")
 	public Map<?,?> ArticleList(String mid
@@ -35,6 +36,7 @@ public class ArticlesController {
 		
 		List<?> ls = (List<?>) artservice.retrieveArticles(param.getMid());
 		map.put("myList", ls);
+
 //		map.put("myfeedList", ls);
 //		System.out.println("map??::"+map.get("myfeedList"));
 		
@@ -48,6 +50,11 @@ public class ArticlesController {
 		map.put("als", als);
 		List<?> cls = (List<?>) comservice.retrieveComment(als.getArtnum());
 		map.put("cls", cls);
+		pt.setArtseq(als.getArtnum());
+		System.out.println("pt"+pt);
+		List<?> tls = postservice.selectPostTags(pt);
+		System.out.println("tls::"+tls);
+		map.put("tls", tls);
 		
 		
 		return map;

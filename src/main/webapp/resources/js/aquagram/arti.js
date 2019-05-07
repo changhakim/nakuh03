@@ -58,14 +58,14 @@ arti =(()=>{
 					+'			<div class="description-container">'
 					+'			<p class="caption">'+j.content+'</p>'
 					+'			<span class="likes"><i class="glyphicon glyphicon-heart"></i></span>'
-					+'			<span class="comments"><i class="glyphicon glyphicon-comment">'+j.comcount+'</i></span>'
+					+'			<span id="comtag" class="comments"><i class="glyphicon glyphicon-comment">'+j.comcount+'</i></span>'
 					+'			</div>'
 					+'			<img src="resources/img/aquagram/articles/'+j.artphoto+'.'+j.extension+'" id="'+j.artnum+'" class="img-responsive">'
 					+'			</div>'
 					+'			</a>'
 					+'			</div>'
 					+'			</div>'
-					
+				
 					
 					
 
@@ -143,7 +143,7 @@ arti =(()=>{
 						+'     		<div id="item" style="top: 5px;">'
 						+'                  <div class="list-group-item list-group-item-action" id="comments_my" style="height: 58px; border: none; display: -webkit-box;"> '
 						+'                <img class="img-circle" alt="Cinque Terre" src="resources/img/aquagram/profilephoto/'+d.als.profilephoto+'" style="width: 40px; height: 40px; position: center"/>'
-						+'                 <div style="display: -webkit-box;"><h5 style="top:0px; left: 7px; font-weight:bold;">'+d.als.mid+'</h5><div><h6 style="left: 15px;">'+d.als.content+'</h6></div></div>'
+						+'                 <div style="display: -webkit-box;"><h5 style="top:0px; left: 7px; font-weight:bold;">'+d.als.mid+'</h5><div><h6 id="contag" style="left: 15px; width: 90%;">'+d.als.content+'</h6></div></div>'
 						+'                   <div style="font-size: 5px; left: 105px; top: 8px;">'+d.als.artdate+'</div>'
 						+'                </div> '
 						+'              </div> '
@@ -157,11 +157,14 @@ arti =(()=>{
 						+'    </div>'
 						+'  </div>'
 						+'</div>');
+				$.each(d.tls,(i,j)=>{
+					$('#contag').append('&nbsp;<a>'+j.tagname+'</a>');
+				});
 				$.each(d.cls,(i,j)=>{
 					comlist +=	'     <div id="item">'
 					+'                  <div class="list-group-item list-group-item-action" style="height: 58px; border: none; display: -webkit-box;"> '
 					+'                <img class="img-circle" alt="Cinque Terre" src="resources/img/aquagram/profilephoto/'+j.comprophoto+'" style="width: 40px; height: 40px; position: center"/>'
-					+'                 <div style="display: -webkit-box;"><h5 style="top:0px; left: 7px; font-weight:bold;">'+j.comid+'</h5><div><h6 style="left: 15px;">'+j.comm+'</h6></div></div>'
+					+'                 <div style="display: -webkit-box;"><h5 style="top:0px; left: 7px; font-weight:bold;">'+j.comid+'</h5><div style="width: 100%;"><h6 style="left: 15px;">'+j.comm+'</h6></div></div>'
 					+'                    <div style="top:0px; left: 60px; font-size: 7px;"></div>'
 					+'                </div> '
 					+'              </div> '
@@ -183,9 +186,11 @@ arti =(()=>{
 		$('#art_upload').attr('style','cursor:pointer').attr('data-toggle','modal').attr('data-target','#myModal').click(function(e){
 			e.preventDefault();
 			$('#myModal').attr('style','display: block; z-index:99999;');
+			$('.modal-dialog').attr('class','modal-dialog');
 			$('.modal-dialog').attr('style','top:200px;')
 			$('.modal-content').attr('style','margin:auto;');
-			$('#change_modal_2').empty('');
+			/*sidsidsidsid*/
+		
 
 
 		});

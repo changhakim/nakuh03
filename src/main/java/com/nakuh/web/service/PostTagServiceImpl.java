@@ -26,9 +26,9 @@ public class PostTagServiceImpl implements PostTagMapper{
 	}
 
 	@Override
-	public List<PostTag> selectPostTags() {
+	public List<PostTag> selectPostTags(PostTag pt) {
 		
-		return posMap.selectPostTags();
+		return posMap.selectPostTags(pt);
 	}
 
 	@Override
