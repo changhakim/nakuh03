@@ -3,7 +3,7 @@ var eunyeong = eunyeong || {};
 eunyeong = (()=>{
     const WHEN_ERR = '호출하는 JS파일을 찾지 못지 못했습니다.'
     let _,compojs, js,
-        m_ctt, s_ctt, f_ctt;
+        m_ctt, s_ctt, f_ctt, start_date;
     let homecss,admincss,rescss,instacss;
     
     let init =x=>{
@@ -207,21 +207,43 @@ eunyeong = (()=>{
     		    $("#datepicker").datepicker();
     		  });
     };
+
+    
     
     /*상품예약 : 입력*/
     let prdres =x=>{
-    	alert('상품예약 진입 ! ');
+    	alert('상품예약 진입 !');
+    	alert('상풍예약에 들어온 가격' + x.price);
     	$(m_ctt).empty();
 			$(eycompo.product_res()).appendTo(m_ctt);
 			$('#deposit').text(x.price);
+			$('#price').text(x.price);
+			$('#prdprice').text(x.price);
+			$('#couponprice').text(x.price);
+			$('#totalprice').text(x.price);
+			$('#totalprice').text(x.price);
+			$('#totalpay').text(x.price); 
+			$('#totalprice').text(x.price);//x.price * x.rescount
+			$('#proname').text(x.proname);
+			
+			let totalprice = x.price * $('input[id="rescount"]').val();
+			$('#proname').text(x.proname);
 			$('a[id="inputbtn"]').click(e=>{
 				e.preventDefault();
+				let date =x.date;
+				alert(x.date);
 				let data ={
+						resnum:'1',
+						mid:'test',
 						resname: $('input[id="resname"]').val(),
+						startdate:date,
 						phone: $('input[id="phone"]').val(),
 						rescount: $('input[id="rescount"]').val(),
-						departdate:$('input[id="departdate"]').val(),
-						message: $('input[id="message"]').val()};
+						deposit: totalprice, /*여기서 인원과 금액 곱하고넘어가자 */ 
+						message: $('input[id="message"]').val(),
+						pronum: x.pronum,
+						proname: x.proname
+						};
 				$('#handleCounter').handleCounter({
 					  minimum: 1,
 					  maximize: null});
@@ -234,7 +256,6 @@ eunyeong = (()=>{
 					contentType :'application/json',
 					success : d=>{
 						alert('AJAX 성공 : ' + d.msg);
-						
 					},
 					error : e=>{
 						alert('AJAX실패');
@@ -242,6 +263,7 @@ eunyeong = (()=>{
 				});	
 			});
     };
+    
     /*상세정보 : 상품 */
     let detail =x=>{
         $(s_ctt).remove();
@@ -262,6 +284,23 @@ eunyeong = (()=>{
         $('#proaddress').text(x.address);
         $('#fishname').text(x.fishname);
         $('#phone').text(x.phone);
+       
+        /*$('.cal_cell_date')*/
+        
+        $('.cal_cell_date').click(function(e){
+        	alert('출발날짜 1 >>> '+$('#view_reserve').attr('name'));
+        	$(this).removeClass('on');
+        	alert($(this).attr('data-date'))
+        	start_date = $(this).attr('data-date')
+        	$(this).addClass('on');
+        	
+        	$('#view_reserve').attr('name', date);
+        	
+            
+        });
+       
+        
+        let resinfo = {proname:x.proname,price:x.price,pronum:x.pronum}
         $('#select_item').attr('style','cursor:pointer').attr('data-toggle','modal').attr('data-target','#myModal').click(function(e){
         	$('#myModal').attr('style','display: block; z-index:99999;').appendTo('#myModal');
   			$('.modal-dialog').attr('style','top:200px;');
@@ -272,7 +311,7 @@ eunyeong = (()=>{
   			$(' <h4 class="modal-title">'+ x.company +'</h4>').appendTo('.modal-title');
   			$('<div class="checkbox"><label><input type="checkbox" value=""> 상품명 : '+ x.proname + '[가격 : ' +x.price+ '원]</label></div>').appendTo('.modal-body');
   			$('<button id="paybtn" type="button" class="btn btn-default" data-dismiss="modal">결제하기</button>').prependTo('.modal-footer').click(e=>{
-  				prdres();
+  				prdres(resinfo);
   			});
   			$('<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>').appendTo('.modal-footer');
         });
@@ -333,6 +372,8 @@ eunyeong = (()=>{
              });
          });
     };
+    
+  
     
     function initMap(x) {
   	  // The location of Uluru

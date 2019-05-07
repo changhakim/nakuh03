@@ -6,5 +6,5 @@ import lombok.Data;
 
 @Data@Component
 public class Reservation {
-	private String resnum,resname,departdate,mid, phone, depodate, rescount, deposit, message;
+	private String resnum, startdate, resname, mid, phone, resdate, rescount, deposit, message, pronum, proname, ampm;
 }
