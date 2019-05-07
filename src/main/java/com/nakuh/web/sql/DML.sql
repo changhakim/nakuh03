@@ -1,10 +1,10 @@
-INSERT INTO MEMBERS VALUES  ('haha','123','김창하','950117','chcna@naver.com','01076794338');
-INSERT INTO MEMBERS VALUES  ('hoho123','n123123','배정욱','970421','c2hcna@naver.com','01076794338');
-INSERT INTO MEMBERS VALUES  ('hehe123','a123123','김은영','990511','ch1cna@naver.com','01012312311');
-INSERT INTO MEMBERS VALUES  ('hihi123','y123123','이지은','920127','ch3cna@naver.com','01042412132');
-INSERT INTO MEMBERS VALUES  ('gaga123','d123123','황빛찬','930317','ch3cna@naver.com','01023132111');
-INSERT INTO MEMBERS VALUES  ('gigi123','df12345','이규진','940418','ch2cna@naver.com','01032121567');
-INSERT INTO MEMBERS VALUES  ('gugu123','fd12353','서범석','960117','ch1cna@naver.com','01073562543');
+INSERT INTO MEMBERS VALUES  ('haha','123','김창하','950117','chcna@naver.com','01076794338','profil001.jpg');
+INSERT INTO MEMBERS VALUES  ('hoho123','n123123','배정욱','970421','c2hcna@naver.com','01076794338','dldlwo.jpg');
+INSERT INTO MEMBERS VALUES  ('hehe123','a123123','김은영','990511','ch1cna@naver.com','01012312311','30855339_974901576006061_40691675508506624_n.jpg');
+INSERT INTO MEMBERS VALUES  ('hihi123','y123123','이지은','920127','ch3cna@naver.com','01042412132','changha.jpg');
+INSERT INTO MEMBERS VALUES  ('gaga123','d123123','황빛찬','930317','ch3cna@naver.com','01023132111','restmb_jhidxmake.jpg');
+INSERT INTO MEMBERS VALUES  ('gigi123','df12345','이규진','940418','ch2cna@naver.com','01032121567','mug_obj_15217789561157558.jpg');
+INSERT INTO MEMBERS VALUES  ('gugu123','fd12353','서범석','960117','ch1cna@naver.com','01073562543','wjdtmddn.jpg');
 INSERT INTO MEMBERS VALUES  ('guegue123','adf2311','강세일','980111','chcna@naver.com','01075343233');
 INSERT INTO MEMBERS VALUES  ('lele123','adf5488','이민규','920511','chc1na@naver.com','01076524545');
 INSERT INTO MEMBERS VALUES  ('rere123','few9722','성희재','920417','chc32na@naver.com','01048374637');
@@ -321,3 +321,40 @@ INSERT INTO VISITOR(VISITID,VISITTIME) VALUES ('cas33','2019-04-30');
 INSERT INTO VISITOR(VISITID,VISITTIME) VALUES ('vasd33','2019-04-30');
 INSERT INTO VISITOR(VISITID,VISITTIME) VALUES ('sdas','2019-04-30');
 INSERT INTO VISITOR(VISITID,VISITTIME) VALUES ('dsad33','2019-04-30');
+INSERT INTO FOLLOWERS(folloid, mid) VALUES('hoho123','ahah123');
+INSERT INTO FOLLOWERS(folloid, mid) VALUES('ahah123','hoho123');
+INSERT INTO COMMENTS(titleseq, comm, comid) VALUES('12','야경잘보고가요~','ahah123');
+INSERT INTO COMMENTS(titleseq, comm, comid) VALUES('12','너무좋네요 자주 뵈요~','hehe123');
+INSERT INTO COMMENTS(titleseq, comm, comid) VALUES('12','너무이쁘다!~','haha');
+INSERT INTO COMMENTS(titleseq, comm, comid) VALUES('16','인친해요~','haha');
+INSERT INTO COMMENTS( titleseq, comm, comid) VALUES('1','첫번째 댓글입니다.','elel123');
+INSERT INTO COMMENTS( titleseq, comm, comid) VALUES('1','두번째 댓글입니다.','hehe123');
+INSERT INTO COMMENTS( titleseq, comm, comid) VALUES('1','세번째 댓글입니다.','haha');
+INSERT INTO COMMENTS( titleseq, comm, comid) VALUES('1','네번째 댓글입니다.','lele123');
+INSERT INTO COMMENTS( titleseq, comm, comid) VALUES('1','다섯째 댓글입니다.','tksk123');
+INSERT INTO COMMENTS( titleseq, comm, comid) VALUES('1','여섯번째 댓글입니다.','elel123');
+INSERT INTO POSTTAG(artseq, tagname) VALUES('1','해돋이');
+INSERT INTO POSTTAG(artseq, tagname) VALUES('1','태양을피하고싶어서');
+INSERT INTO POSTTAG(artseq, tagname) VALUES('2','야경!!');
+INSERT INTO PRODUCTS (PRONUM, PRONAME, PRICE, COMPANY, ADDRESS, CATEGORY, PROIMG, REGIDATE, FISHNAME, PHONE, LAT, LNG)
+VALUES(1000,'테스트용','50000','낚어호','서울시 마포구 신촌대로   비트캠프','바다낚시','joy.jpg', '2019-04-30',  '광어/우럭','010-1111-1111','37.552657','126.937770');
+INSERT INTO PRODUCTS (PRONUM, PRONAME, PRICE, COMPANY, ADDRESS, CATEGORY, PROIMG, REGIDATE, FISHNAME, PHONE, LAT, LNG)
+VALUES(1001,'체험낚시(3시간 3부)','70000','현대로얄호','제주특별자치도 서귀포시  칠십리로 72번길 14','바다낚시','joy.jpg',  '2019-04-30','광어/우럭','010-7757-4254','33.239466','126.565472');
+INSERT INTO PRODUCTS (PRONUM, PRONAME, PRICE, COMPANY, ADDRESS, CATEGORY, PROIMG, REGIDATE, FISHNAME, PHONE, LAT, LNG)
+VALUES(1002,'체험낚시(3시간 3부)','15000','천일호','제주특별자치도 서귀포시  칠십리로 72번길 14','바다낚시','joy.jpg',  '2019-04-30','우럭/노래미/쥐치','010-5488-4211','33.239466','126.565472');
+INSERT INTO PRODUCTS (PRONUM, PRONAME, PRICE, COMPANY, ADDRESS, CATEGORY, PROIMG, REGIDATE, FISHNAME, PHONE, LAT, LNG)
+VALUES(1003,'체험낚시(5부)','20000','이호털보뉴마린호','제주특별자치도 제주시  태우해안로 146','바다낚시','joy.jpg',  '2019-04-30','우럭/노래미/쥐치','010-6588-4522','33.239466','126.565472');
+INSERT INTO PRODUCTS (PRONUM, PRONAME, PRICE, COMPANY, ADDRESS, CATEGORY, PROIMG, REGIDATE, FISHNAME, PHONE, LAT, LNG)
+VALUES(1004,'체험낚시 (5부)','12000','원일2호','제주특별자치도 제주시    468.5KM','바다낚시','joy.jpg',  '2019-04-30','고등어/우럭/볼락','010-5111-7484','33.239466','126.565472');
+INSERT INTO PRODUCTS (PRONUM, PRONAME, PRICE, COMPANY, ADDRESS,CATEGORY, PROIMG, REGIDATE, FISHNAME, PHONE, LAT, LNG)
+VALUES(1005,'1박2일 추자도권','150000','반도낚시호','제주특별자치도 제주시 추자로    46','바다낚시','joy.jpg',  '2019-04-30','참돔/감성돔/농어','010-5845-6548','33.239466','126.565472');
+INSERT INTO PRODUCTS (PRONUM, PRONAME, PRICE, COMPANY, ADDRESS,CATEGORY, PROIMG, REGIDATE, FISHNAME, PHONE, LAT, LNG)
+VALUES(1006,'일반투어60분','40000','DONPAPA','제주특별자치도 제주시    443.6KM','바다낚시','joy.jpg',  '2019-04-30','참돔/감성돔','010-5842-3512','33.239466','126.565472');
+INSERT INTO PRODUCTS (PRONUM, PRONAME, PRICE, COMPANY, ADDRESS,CATEGORY, PROIMG, REGIDATE, FISHNAME, PHONE, LAT, LNG)
+VALUES(1007,'프라이빗 투어(70분)','300000','샹그릴라요트0호','제주특별자치도  서귀포시 중문관광로 154-17','바다낚시','joy.jpg',  '2019-04-30','참돔/감성돔','010-6515-3251','33.239466','126.565472');
+INSERT INTO PRODUCTS (PRONUM, PRONAME, PRICE, COMPANY, ADDRESS,CATEGORY, PROIMG, REGIDATE, FISHNAME, PHONE, LAT, LNG)
+VALUES(1008,'제트보트','18000','제주제트','제주특별자치도 서귀포시 대포로   172-5','바다낚시','joy.jpg',  '2019-04-30','오징어','010-2585-6512','33.239466','126.565472');
+INSERT INTO PRODUCTS (PRONUM, PRONAME, PRICE, COMPANY, ADDRESS,CATEGORY, PROIMG, REGIDATE, FISHNAME, PHONE, LAT, LNG)
+VALUES(1009,'체험낚시(독배)','300000','추자피싱랜드호','제주특별자치도  제주시 추자로 445','바다낚시','joy.jpg', '2019-04-30','볼락/열기/돌돔','010-6515-7545','33.239466','126.565472');
+INSERT INTO PRODUCTS (PRONUM, PRONAME, PRICE, COMPANY, ADDRESS,CATEGORY, PROIMG, REGIDATE, FISHNAME, PHONE, LAT, LNG)
+VALUES(1010,'참돔/옥돔 타이라바','100000','블랙터틀호','제주특별자치도 제주시  애월읍 애월해안로 65','바다낚시','joy.jpg',  '2019-04-30','참돔','010-6575-9485','33.239466','126.565472');
