@@ -31,7 +31,8 @@ app=(()=>{
 				$('#userid').val();
 				$('#password').val();
 				alert('로그인')
-			})
+			});
+
 			$('#ocean').click(e=>{
 				e.preventDefault();
 				$('.homecss').remove();
@@ -90,7 +91,11 @@ app=(()=>{
 		 	 +'<link class="rescss" rel="stylesheet" href="/web/resources/css/reservation/main.css">'
              +'<link class="rescss" rel="stylesheet" href="/web/resources/css/reservation/navbar.css">'
              +'<link class="rescss" rel="stylesheet" href="/web/resources/css/reservation/resdetail.css">'
+<<<<<<< HEAD
              +'<link class="rescss" rel="stylesheet" href="/web/resources/css/reservation/prdpay.css">';       
+=======
+             +'<link class="rescss" rel="stylesheet" href="/web/resources/css/reservation/prdpay.css">';            
+>>>>>>> b1b5374cf6c96ec080a519dc4861bb1e97a33cb0
 	 
 		 instacss ='  <link rel="stylesheet" type="text/css" href="/web/resources/css/aquagram/style.css">'
 			 +'  <link class="instacss" rel="stylesheet" type="text/css" href="/web/resources/css/aquagram/animate.css">'
@@ -160,8 +165,15 @@ app=(()=>{
                                    data: JSON.stringify(resdata, authObj),
                                    dataType:'json',
                                    contentType : "application/json; charset=UTF-8",
-                                   success:function(res){
-                                       alert('성공');
+                                   success: d=>{
+                                       alert(d.msg);
+                                       $('#id01').attr('style','display:none');//닫기 
+                                       $('#loginbtn').text('LOGOUT');
+                                       $('#loginbtn').attr('id','logout');
+                                       $.each(d.m,(i,j)=>{
+                                    	   alert('??::'+j.mid);
+                                       });
+                                       
                                        //location.assign(x+"/ngh");
                                       
                                    },

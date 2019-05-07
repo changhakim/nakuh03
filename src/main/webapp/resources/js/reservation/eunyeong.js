@@ -3,7 +3,7 @@ var eunyeong = eunyeong || {};
 eunyeong = (()=>{
     const WHEN_ERR = '호출하는 JS파일을 찾지 못지 못했습니다.'
     let _,compojs, js,
-        m_ctt, s_ctt, f_ctt;
+        m_ctt, s_ctt, f_ctt, start_date;
     let homecss,admincss,rescss,instacss;
     
     let init =x=>{
@@ -207,7 +207,94 @@ eunyeong = (()=>{
     		    $("#datepicker").datepicker();
     		  });
     };
+
+    /*상품예약 : 입력*/
+    let prdres =x=>{
+    	alert('상품예약 진입 !');
+    	alert('상풍예약에 들어온 가격' + x.price);
+    	$(m_ctt).empty();
+			$(eycompo.product_res()).appendTo(m_ctt);
+			$('#deposit').text(x.price);
+			$('#price').text(x.price);
+			$('#prdprice').text(x.price);
+			$('#couponprice').text(x.price);
+			$('#totalprice').text(x.price);
+			$('#totalprice').text(x.price);
+			$('#totalpay').text(x.price); 
+			$('#totalprice').text(x.price);//x.price * x.rescount
+			$('#proname').text(x.proname);
+			
+			let totalprice = x.price * $('input[id="rescount"]').val();
+			$('#proname').text(x.proname);
+			$('a[id="inputbtn"]').click(e=>{
+				e.preventDefault();
+				let date =x.date;
+				alert(x.date);
+				let data ={
+						resnum:'1',
+						mid:'test',
+						resname: $('input[id="resname"]').val(),
+						startdate:date,
+						phone: $('input[id="phone"]').val(),
+						rescount: $('input[id="rescount"]').val(),
+						deposit: totalprice, /*여기서 인원과 금액 곱하고넘어가자 */ 
+						message: $('input[id="message"]').val(),
+						pronum: x.pronum,
+						proname: x.proname
+						};
+				$('#handleCounter').handleCounter({
+					  minimum: 1,
+					  maximize: null});
+				$('#deposit').text(x.price);
+				$.ajax({
+					url :_+'/reservation',
+					type : 'POST',
+					data :JSON.stringify(data),
+					dataType :'json',
+					contentType :'application/json',
+					success : d=>{
+						alert('AJAX 성공 : ' + d.msg);
+					},
+					error : e=>{
+						alert('AJAX실패');
+					}
+				});	
+			});
+    };
     
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*상품정보 : 달력 */
+   /*
+    let today = null;
+    let date = new Date();
+    let date = today.getDay();
+    
+    month += 1;
+    
+    function dayy(year, month){ //월의 일수를 구함
+    	switch(month){
+    	  case 1: case 3: case 5: case 7: case 8: case 10: case 12:
+              return 31;
+              
+    	  case 4: case 6: case 9: case 11:
+              return 30;
+              
+    	  case 2:
+    		  if(((year%400)==0||(year%4)==0&&(year%100)!=0)){
+                  return 29;
+              }
+              else{
+                  return 28;  
+              }
+    	}
+    }    
+
+    function prevmonth(){ //이전 월로 가는 함수 
+    
+    	
+    	
+    }*/
+    
+<<<<<<< HEAD
     /*상품예약 : 입력*/
     let prdres =x=>{
     	alert('상품예약 진입 ! ');
@@ -243,6 +330,11 @@ eunyeong = (()=>{
 			});
     };
     /*상세정보 : 상품 */
+=======
+    
+    
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*상품정보 : 상세 */
+>>>>>>> b1b5374cf6c96ec080a519dc4861bb1e97a33cb0
     let detail =x=>{
         $(s_ctt).remove();
         $(m_ctt).empty();
@@ -252,7 +344,25 @@ eunyeong = (()=>{
         $(m_ctt).attr('class','');
         $(m_ctt).attr('class','container');
         $('#feat').css('padding-top','0');
-        $(eycompo.item_container()).appendTo(m_ctt);
+        
+        /*은영*/
+        
+        $(eycompo.calender()).appendTo(m_ctt);
+        $.each(['1','2','3','4','5'], (i,j)=>{
+        	$( '<tr>'
+                    +'<td style="color: #666;"><a class="off"><strong>28</strong></a></td>'
+                    +'<td style="color: #666;"><a class="off"><strong>29</strong></a></td>'
+                    +'<td style="color: #666;"><a class="off"><strong>30</strong></a></td>'
+                    +'<td><a class="cal_cell_date" data-date="2019-05-01"><strong>1</strong><img src="https://img.moolban.com/unsafe/asset/www/responsive/img/weather/weather-30.png" alt=""><span class="mul">3물</span></a></td>'
+                    +'<td><a class="cal_cell_date on" data-date="2019-05-02"><strong>2</strong><img src="https://img.moolban.com/unsafe/asset/www/responsive/img/weather/weather-10.png" alt=""><span class="mul">4물</span></a></td>'
+                    +'<td><a class="cal_cell_date" data-date="2019-05-03"><strong>3</strong><img src="https://img.moolban.com/unsafe/asset/www/responsive/img/weather/weather-10.png" alt=""><span class="mul">5물</span></a></td>'
+                    +'<td><a class="cal_cell_date" data-date="2019-05-04"><strong>4</strong><img src="https://img.moolban.com/unsafe/asset/www/responsive/img/weather/weather-10.png" alt=""><span class="mul">6물</span></a></td>'
+                +'</tr>').appendTo('.calendar');
+        });
+        
+        
+        
+/* 은영       $(eycompo.item_container()).appendTo(m_ctt);*/
         $('#info_content').prepend(eycompo.product_info());
         $('#proname').text(x.proname);
         $('#price').text(x.price);
@@ -262,6 +372,23 @@ eunyeong = (()=>{
         $('#proaddress').text(x.address);
         $('#fishname').text(x.fishname);
         $('#phone').text(x.phone);
+       
+        /*$('.cal_cell_date')*/
+        
+        $('.cal_cell_date').click(function(e){
+        	alert('출발날짜 1 >>> '+$('#view_reserve').attr('name'));
+        	$(this).removeClass('on');
+        	alert($(this).attr('data-date'))
+        	start_date = $(this).attr('data-date')
+        	$(this).addClass('on');
+        	
+        	$('#view_reserve').attr('name', date);
+        	
+            
+        });
+       
+        
+        let resinfo = {proname:x.proname,price:x.price,pronum:x.pronum}
         $('#select_item').attr('style','cursor:pointer').attr('data-toggle','modal').attr('data-target','#myModal').click(function(e){
         	$('#myModal').attr('style','display: block; z-index:99999;').appendTo('#myModal');
   			$('.modal-dialog').attr('style','top:200px;');
@@ -272,7 +399,11 @@ eunyeong = (()=>{
   			$(' <h4 class="modal-title">'+ x.company +'</h4>').appendTo('.modal-title');
   			$('<div class="checkbox"><label><input type="checkbox" value=""> 상품명 : '+ x.proname + '[가격 : ' +x.price+ '원]</label></div>').appendTo('.modal-body');
   			$('<button id="paybtn" type="button" class="btn btn-default" data-dismiss="modal">결제하기</button>').prependTo('.modal-footer').click(e=>{
+<<<<<<< HEAD
   				prdres();
+=======
+  				prdres(resinfo);
+>>>>>>> b1b5374cf6c96ec080a519dc4861bb1e97a33cb0
   			});
   			$('<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>').appendTo('.modal-footer');
         });
@@ -333,6 +464,8 @@ eunyeong = (()=>{
              });
          });
     };
+    
+  
     
     function initMap(x) {
   	  // The location of Uluru

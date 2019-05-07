@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.nakuh.web.cmm.Proxy;
 import com.nakuh.web.domain.Article;
 import com.nakuh.web.mapper.ArticleMapper;
 
@@ -20,26 +21,21 @@ public class ArticleServiceImpl implements ArticleService{
 	}
 
 	@Override
-	public List<Article> bringAllArticlesList() {
+	public List<Article> bringAllArticlesList(Article art) {
 		// TODO Auto-generated method stub
-		return artmap.selectAllArticlesList();
+		return artmap.selectAllArticlesList(art);
+	}
+
+
+	@Override
+	public List<Article> retrieveArticles(Article art) {
+		// TODO Auto-generated method stub
+		return artmap.selectArticles(art);
 	}
 
 	@Override
-	public List<Article> retrieveArticles() {
-		// TODO Auto-generated method stub
-		return artmap.selectArticles();
-	}
-
-	@Override
-	public List<Article> retrieveArticles(String mid) {
-		// TODO Auto-generated method stub
-		return artmap.selectArticles(mid);
-	}
-
-	@Override
-	public int countArticles() {
-		int i = artmap.countArticles();
+	public int countArticles(String mid) {
+		int i = artmap.countArticles(mid);
 		
 		return i;
 	}
@@ -68,6 +64,12 @@ public class ArticleServiceImpl implements ArticleService{
 	public Article retrieveArticleDetail(String artnum) {
 		
 		return artmap.selectArticlesDetail(artnum);
+	}
+
+	@Override
+	public Article countnavArticles(Article art) {
+		// TODO Auto-generated method stub
+		return artmap.countnavArticle(art);
 	}
 
 }

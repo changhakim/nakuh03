@@ -2,12 +2,7 @@
 var auth = auth || {};
 auth =(()=>{
 	let homecss,admincss,rescss,instacss;
-	let setPath=(x)=>{
-		 _= $.ctx();
-		 js = $.js();
-	};
 	let init =()=>{
-//		setPath(x);
 		onCreate();
 	};
 	let onCreate =()=>{
@@ -34,9 +29,84 @@ auth =(()=>{
 		
 	};
 	let feed_main =()=>{
+
 		$(jwcompo.left_content()).appendTo('#leftbar_content');
 		$(jwcompo.right_nav()).appendTo('#right_nav_cont');
 		$(jwcompo.my_navbar()).appendTo('#my_navbar');
+		$('#leftbar_content').empty();
+		let feeditem ='';
+		let mid = 'gigi123';
+		$.ajax({
+			url: $.ctx()+'/arti/feed/'+mid,
+			type: 'get',
+			data: JSON.stringify(mid),
+			dataType: 'json',
+			contentType: 'application/json; charset=UTF-8;',
+			success: d=>{
+				$('#my_fv').text(d.nav.artCount);
+				$('#followerid').text(d.nav.followerCount);
+				$('#folloingid').text(d.nav.folloingCount);
+				//$('#userimg').attr('src','resources/img/aquagram/profilephoto/'+d.nav.profilephoto);
+				$('#navmypage').html('<img id="userimg" class="img-circle" alt="Cinque Terre" src="resources/img/aquagram/profilephoto/'+d.nav.profilephoto+'" '
+						+'style="width: 50px; height: 50px; position: center;"/>'+d.nav.mid+'</div></li>');
+				$.each(d.ffeed,(i,j)=>{
+					feeditem += '<div class="wow fadeInDown" style="border-radius: 6px; ">'
+					+'					    <div class="panel panel-default">'
+					+'						        <div class="heading">'
+					+' 			<div class="item" id="'+j.artnum+'" style="height: 58px; border: none; margin: 8px;"> ' 
+					+'  	<img class="img-circle" alt="Cinque Terre" src="resources/img/aquagram/profilephoto/'+j.profilephoto+'" style="width: 50px; height: 50px; position: center"><div><h5 style="top:-49px; left: 60px">'+j.mname+'</h5></div>	'							  							
+					+' 			</div>'
+					+'						        <div class="body">'
+					+'						         <img src="resources/img/aquagram/articles/'+j.artphoto+'" style="display: block; margin: 0px auto; width: 100%;">'
+					+'						        </div>'
+					+'						        <div class="footer">'
+					+'						         <div id="comments_1">'
+					+'						         	<!-- Right-aligned -->'
+					+'									<div class="media">'
+					+'									  <div class="media-body" style="text-align: left; padding-top: 15px; padding-bottom: 15px;">'
+					+'									   	<div> <h4 class="media-heading" style="margin-left: 5px">'+j.content+'</h4></div>'
+					+'									   	<div> <h6 class="media-heading" style="margin-left: 5px">53 like</h6></div>'
+					+'									  </div>'
+					+'									</div>'
+					+'						         </div>'
+					+'						          <div id="feedcomments_nav">'
+					+'    <ul class="nav bs-docs-sidenav" id="feedcomments" style="-ms-overflow-style: none; overflow:scroll; width:100%; height:130px; border-top: none;">'
+					+'						<li>'
+					+'						</li> '
+					+'          </ul>'						
+					+'							    	</div>'
+					+'							    	<div class="input-group" >'
+					+'									     <input style="border: none; background:transparent;" id="upcomment" type="text" class="form-control" name="upcomment" placeholder="댓글입력">'
+					+'									      <span style="border: none; background: transparent;"class="input-group-addon"><p>게시</p></span>   '
+					+'									    </div>'
+					+'									</div>'
+					+'									</div>'
+					+'									</div>'
+					+'						        </div>';
+					
+				});
+				$(feeditem).appendTo('#leftbar_content');
+
+	/*			
+
+				+'     		<div id="item" style="top: 5px;">'
+				+'                  <div class="list-group-item list-group-item-action" id="comments_my" style="height: 58px; border: none; display: -webkit-box;"> '
+				+'                <img class="img-circle" alt="Cinque Terre" src="resources/img/aquagram/profilephoto/'+d.als.profilephoto+'" style="width: 40px; height: 40px; position: center"/>'
+				+'                 <div style="display: -webkit-box;"><h5 style="top:0px; left: 7px; font-weight:bold;">'+d.als.mid+'</h5><div><h6 id="contag" style="left: 15px; width: 90%;">'+d.als.content+'</h6></div></div>'
+				+'                   <div style="font-size: 5px; left: 105px; top: 8px;">'+d.als.artdate+'</div>'
+				+'                </div> '
+				+'              </div> '
+*/
+				
+			},
+			error: e=>{
+				alert('에러!');
+			}
+	
+			
+		});
+
+		
 		//중앙 네비 따라오는 옵션
 		$(document).ready(function() {
 			  $('.navbar').affix({
@@ -64,7 +134,10 @@ auth =(()=>{
 		
 		
 	};
-	
+	let feed_coms =()=>{
+		
+		
+	};
 	
 	let navcss = ()=>{
 		$(document).ready(function() {

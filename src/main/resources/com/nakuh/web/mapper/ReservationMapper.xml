@@ -7,9 +7,15 @@
 	<select id="insertReservation" parameterType="com.nakuh.web.domain.Reservation">
 	
 	INSERT INTO RESERVATION (
+<<<<<<< HEAD
 	RESNUM, RESNAME, DEPARTDATE, MID, PHONE, 
 	DEPODATE, RESCOUNT, DEPOSIT, MESSAGE) VALUES(
 	#{resnum},#{resname},#{departdate},#{mid},#{phone},#{depodate},#{rescount},#{deposit},#{message});
+=======
+	RESNUM, STARTDATE, RESNAME, MID, PHONE, 
+	RESDATE, RESCOUNT, DEPOSIT, MESSAGE, PRONUM, PRONAME, AMPM) VALUES(
+	#{resnum},#{startdate},#{resname},#{mid},#{phone},#{resdate},#{rescount},#{deposit},#{message}, #{pronum}, #{proname}, #{ampm});
+>>>>>>> b1b5374cf6c96ec080a519dc4861bb1e97a33cb0
 	
 	</select>
 

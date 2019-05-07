@@ -11,7 +11,8 @@
  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
  <link rel="shortcut icon" href="/web/resources/favicon/favicon.ico">
  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAY5vEXIghqf7_mEdWcG9kqcEeDOpaLixY&callback=initMap"></script>
- <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+ <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
 </head>
 <body>
 <!-- datepicker -->
@@ -105,7 +106,7 @@
                         <!-- service block -->
                         <div class="service-img ">
                             <!-- service img -->
-                            <a id="ocean" href="#"><img src="/web/resources/img/homeimg/main/oceanimg.JPG" class="img-responsive moveimg"> </a>
+                            <a id="ocean" href="#"><img style="height: 350px;width: 300px;"src="/web/resources/img/homeimg/main/oceanimg.JPG" class="img-responsive moveimg"> </a>
                         </div>
                         <!-- service img -->
                         <div class="service-content">
@@ -121,7 +122,7 @@
                         <!-- service block -->
                         <div class="service-img">
                             <!-- service img -->
-                            <a id="river" href="#"><img src="/web/resources/img/homeimg/main/freshwaterimg.JPG" class="img-responsive moveimg"> </a>
+                            <a id="river" href="#"><img style="height: 350px;width: 300px;"src="/web/resources/img/homeimg/main/freshwaterimg.JPG" class="img-responsive moveimg"> </a>
                         </div>
                         <!-- service img -->
                         <div class="service-content">
@@ -137,7 +138,7 @@
                         <!-- service block -->
                         <div class="service-img">
                             <!-- service img -->
-                            <a id="hotel" href="#"><img src="/web/resources/img/homeimg/main/hotelimg.JPG" class="img-responsive moveimg"> </a>
+                            <a id="hotel" href="#"><img style="height: 350px;width: 300px;"src="/web/resources/img/homeimg/main/hotelimg.JPG" class="img-responsive moveimg"> </a>
                         </div>
                         <!-- service img -->
                         <div class="service-content">
@@ -353,6 +354,7 @@
 
 <!-- adminjs -->
 <script src="/web/resources/js/admin/vendor/bootstrap-notify.js"></script>
+<script src="/web/resources/js/admin/vendor/jquery.counterup.js"></script>
 <!-- reservationjs -->
 <script src="/web/resources/js/reservation/vendor/owl.carousel.min.js"></script>
 <script src="/web/resources/js/reservation/vendor/main.js"></script>
@@ -374,7 +376,8 @@
 <script src="<%=application.getContextPath()%>/resources/js/app.js"></script>
 <script src="<%=application.getContextPath()%>/resources/js/router.js"></script>
 <!-- changhajs -->
-<script src="<%=application.getContextPath()%>/resources/js/admin/changha.js"></script>  
+<script src="<%=application.getContextPath()%>/resources/js/admin/changha.js"></script>
+<script src="<%=application.getContextPath()%>/resources/js/admin/adminres.js"></script>   
 <!-- eunyeongjs -->
 <script src="<%=application.getContextPath()%>/resources/js/component/eycompo.js"></script>
 <script src="<%=application.getContextPath()%>/resources/js/reservation/eunyeong.js"></script>  
