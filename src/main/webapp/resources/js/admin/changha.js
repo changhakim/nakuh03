@@ -15,11 +15,10 @@ changha = (()=>{
 		).done(()=>{
 		$('#wrapper').html(chcompo.member())
 		let a = 'vis'
-		alert('안녕')	
 		$.getJSON($.ctx()+'/admin/visitor',d=>{
 	        jQuery(document).ready(function($) {
 	            $('.counter').counterUp({
-	                delay: 10,
+	                delay: 11,
 	                time: 1000
 	            });
 	        });

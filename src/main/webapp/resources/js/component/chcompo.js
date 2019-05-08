@@ -117,7 +117,7 @@ chcompo={
 	},
 	admin:()=>{
 		return '<div class="col-md-12">'
-		+'	<div class="card">'
+		+'	<div class="card" id="protable">'
 		+'	</div>'
 		+'</div>'
 	}	

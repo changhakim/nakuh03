@@ -20,6 +20,8 @@ arti =(()=>{
 			).done(()=>{
 				$('#donw_content').html(jwcompo.insta_base());
 				feed_my();
+				infinitemove();
+				
 				arti_upload();
 				
 				
@@ -28,56 +30,10 @@ arti =(()=>{
 		
 		
 	};
-	let feed_my=(x)=>{
-		let box = '';
-		let dl = {};
-		let mid ='gigi123';
-		let page = x;
-		let url = _+'/myfeed/'+mid+'/'+page;
-		$.ajax({
-			url: url+'',
-			type: 'get',
-			data: JSON.stringify(mid,page),
-			dataType: 'json',
-			contentType: 'application/json; charset=UTF-8;',
-			success: d=>{
-				$.each(d.myList,(i,j)=>{
-					box += '<div id="feeds">'
-						+'			<div id="myfeed_'+j.artnum+'" class="col-xs-12 col-sm-6 col-md-4 col-lg-3">'
-					+'			<a src="resources/img/aquagram/articles/'+j.artphoto+'.'+j.extension+'">'
-					+'			<div class="img-featured-container">'
-					+'			<div class="img-backdrop"></div>'
-					+'			<div class="description-container">'
-					+'			<p class="caption">'+j.content+'</p>'
-					+'			<span class="likes"><i class="glyphicon glyphicon-heart"></i></span>'
-					+'			<span id="comtag" class="comments"><i class="glyphicon glyphicon-comment">'+j.comcount+'</i></span>'
-					+'			</div>'
-					+'			<img src="resources/img/aquagram/articles/'+j.artphoto+'.'+j.extension+'" id="'+j.artnum+'" class="img-responsive">'
-					+'			</div>'
-					+'			</a>'
-					+'			</div>'
-					+'			</div>'
-				});
-				$(box).appendTo('#instafeed');
-				$('.photo-box').attr('style','margin:-26px 0px 30px -29px');
-				$('head').after(jwcompo.photo_feed_css_hover());
-				$('#instafeed').children('#feeds').attr('data-toggle','modal').attr('data-target','#myModal').click(function(e){
-					e.preventDefault();
-					let od = { artphoto : $(this).find('img').attr('src'),
-								artnum : $(this).find('img').attr('id')};
-					arti_detail(od);
-
-				});
-
-				
-				
-				
-			},
-			error: e=>{
-				alert('에러!');
-			}
-				
-		});
+	
+	let infinitemove =()=>{
+		let isEnd = false;
+		
 		$(function(){
 			$(window).scroll(function(){
 				let $window = $(this);
@@ -87,22 +43,92 @@ arti =(()=>{
 				
 				console.log("documentHeight:" + documentHeight + " | scrollTop:" +
                         scrollTop + " | windowHeight: " + windowHeight );
-				 if( scrollTop + windowHeight + 30 > documentHeight ){
-					 page += 1; 
-					 alert('바닥도착!');
-					// feed_my();
+				 if( scrollTop + windowHeight + 5 > documentHeight ){
 
-             }
-				
+					 fetchList(isEnd);
+				 }
+				 
 			})
-			//feed_my();
+			fetchList(isEnd);
+	
 		});
-
-		
-		
-		
 		
 	};
+	let fetchList=(x)=>{
+		alert(x.isEnd);
+        if(x.isEnd == true){return;}
+        let startNo = $("#feeds").last().data("no") || 0;
+		let mid ='gigi123';
+		let page = 0;
+		let url = _+'/myfeed/'+mid;
+		let data = { mid:mid,
+				startRow:startNo,
+				pageSize:12};
+		$.ajax({
+			url: url,
+			type: 'post',
+			data: JSON.stringify(data),
+			dataType: 'JSON',
+			contentType: 'application/json; charset=UTF-8;',
+			success: d=>{
+				  let length = d.myList.length;
+                  if( length < 12 ){
+                           isEnd = true;
+                  }
+                  $.each(d.myList,(i, j)=>{
+                	  renderList(false, j);
+                	  
+                  	});
+
+			},
+			error: e=>{
+				alert('에러!');
+			}
+				
+		});
+		
+	};
+	
+	let feed_my=()=>{
+		$('.photo-box').attr('style','margin:-26px 0px 30px -29px');
+		$('head').after(jwcompo.photo_feed_css_hover());
+		$('#instafeed').children('#feeds').attr('data-toggle','modal').attr('data-target','#myModal').click(function(e){
+			e.preventDefault();
+			let od = { artphoto : $(this).find('img').attr('src'),
+						artnum : $(this).find('img').attr('id')};
+			arti_detail(od);
+
+		});
+		
+
+	};
+	
+	let renderList =(mode,x)=>{
+		let box = '<div id="feeds" data-no="'+x.rownum+'" >'
+				+'			<div id="myfeed_'+x.artnum+'" class="col-xs-12 col-sm-6 col-md-4 col-lg-3">'
+			+'			<a src="resources/img/aquagram/articles/'+x.artphoto+'.'+x.extension+'">'
+			+'			<div class="img-featured-container">'
+			+'			<div class="img-backdrop"></div>'
+			+'			<div class="description-container">'
+			+'			<p class="caption">'+x.content+'</p>'
+			+'			<span class="likes"><i class="glyphicon glyphicon-heart"></i></span>'
+			+'			<span id="comtag" class="comments"><i class="glyphicon glyphicon-comment">'+x.comcount+'</i></span>'
+			+'			</div>'
+			+'			<img src="resources/img/aquagram/articles/'+x.artphoto+'.'+x.extension+'" id="'+x.artnum+'" class="img-responsive">'
+			+'			</div>'
+			+'			</a>'
+			+'			</div>'
+			+'			</div>';
+		   if( mode ){
+               $("#instafeed").prepend(box);         
+		   }
+		   else{
+               $("#instafeed").append(box);
+		   }
+		//$(box).appendTo('#instafeed');
+		
+	};
+	
 	let arti_detail =(x)=>{
 		$('#change_modal_2').empty();
 		let artnum = x.artnum;

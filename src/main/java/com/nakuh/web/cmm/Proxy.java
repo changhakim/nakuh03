@@ -44,29 +44,19 @@ public class Proxy {
 	
 	    endRow = (totalCount > pageNum * pageSize) ? pageNum * pageSize : totalCount;
 	    System.out.println("END로우:" + endRow);
-	
-	    int blockNum = (pageNum-1)/blockSize;
-		if(existPrev) {
-			startPage = blockNum*blockSize+1;
-			
-		}else {
-			startPage = 1;
-		}
-		endPage = startPage+(blockSize-1);
-		startPage = pageNum -((pageNum-1)%blockSize);
-		endPage = startPage+(blockSize-1);
-		// 위 세조건 모두 공통
-		if(endPage>pageCount) {
-			endPage = pageCount;
-		}
-	
-	    existPrev = (startPage - pageSize) > 0;
-	    existNext = (startPage + pageSize) <= pageCount;
-	    prevBlock = startPage - pageSize;
-	    nextBlock = startPage + pageSize;
-	    System.out.println("스타트페이지: " + startPage);
-	    System.out.println("엔드페이지: " + endPage);
-	    System.out.println("프리브블록: " + prevBlock);
-	    System.out.println("넥스트블록: " + nextBlock);
+		/*
+		 * int blockNum = (pageNum-1)/blockSize; if(existPrev) { startPage =
+		 * blockNum*blockSize+1;
+		 * 
+		 * }else { startPage = 1; } endPage = startPage+(blockSize-1); startPage =
+		 * pageNum -((pageNum-1)%blockSize); endPage = startPage+(blockSize-1); // 위 세조건
+		 * 모두 공통 if(endPage>pageCount) { endPage = pageCount; }
+		 * 
+		 * existPrev = (startPage - pageSize) > 0; existNext = (startPage + pageSize) <=
+		 * pageCount; prevBlock = startPage - pageSize; nextBlock = startPage +
+		 * pageSize; System.out.println("스타트페이지: " + startPage);
+		 * System.out.println("엔드페이지: " + endPage); System.out.println("프리브블록: " +
+		 * prevBlock); System.out.println("넥스트블록: " + nextBlock);
+		 */
 	}
 }
