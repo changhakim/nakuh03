@@ -11,6 +11,7 @@ public interface ReservationMapper {
 	public void insertReservation(Reservation param);
 	public List<Reservation> selectAllReservation();
 	public List<Reservation> selectSomeReservations(Reservation param);
+	public List<Reservation> selectpageReservations(Object o);
 	public Reservation selectReservation(Reservation param);
 	public int countReservation();
 	public void updateReservation(Reservation param);

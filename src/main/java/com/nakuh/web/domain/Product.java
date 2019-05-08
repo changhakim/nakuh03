@@ -6,6 +6,7 @@ import lombok.Data;
 
 @Data@Component
 public class Product {
-	private String pronum,proname, price, company, address, category, proimg, regidate, fishname, phone; 
+	private String rownum, pronum,proname, price, company, address, category, proimg, regidate, fishname, phone; 
 	private double lat, lng;
+	private int startRow, pageSize;
 }

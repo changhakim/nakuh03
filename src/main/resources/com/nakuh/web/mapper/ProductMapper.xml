@@ -4,7 +4,8 @@
 <mapper namespace="com.nakuh.web.mapper.ProductMapper">
 
 <!-- 전체 상품 조회  -->
-	<select id="selectAllProduct" resultType="com.nakuh.web.domain.Product">
+	<select id="selectAllProduct" resultType="com.nakuh.web.domain.Product"
+								  parameterType="com.nakuh.web.domain.Product">
 	
 	SELECT 
 		PRONUM pronum, 
@@ -22,6 +23,51 @@
 	FROM PRODUCTS
 									  
 	</select>
+	
+<!--  카테고리별 상품 조회 -->
+	<select id="selectCateProducts" resultType="com.nakuh.web.domain.Product"
+									parameterType="com.nakuh.web.domain.Product">
+
+
+	SELECT  @ROWNUM:=@ROWNUM+1 AS rownum, P.*
+	FROM	(SELECT 
+			PRONUM pronum, 
+			PRONAME proname, 
+			PRICE price, 
+			COMPANY company, 
+			ADDRESS address, 
+			CATEGORY category, 
+			PROIMG proimg, 
+			REGIDATE regidate,
+			FISHNAME fishname,
+			PHONE phone,
+			LAT lat,
+			LNG lng
+		FROM PRODUCTS 
+		WHERE CATEGORY LIKE #{category}
+		ORDER BY pronum DESC) P , (SELECT @ROWNUM:=0) TMP
+		ORDER BY rownum  
+		LIMIT #{startRow},#{pageSize}
+		
+		
+<!-- 		SELECT 
+			PRONUM pronum, 
+			PRONAME proname, 
+			PRICE price, 
+			COMPANY company, 
+			ADDRESS address, 
+			CATEGORY category, 
+			PROIMG proimg, 
+			REGIDATE regidate,
+			FISHNAME fishname,
+			PHONE phone,
+			LAT lat,
+			LNG lng
+		FROM PRODUCTS 
+		WHERE CATEGORY LIKE #{category}	 -->					
+	
+	</select>
+	
 	
 <!-- 일부 상품 조회 --> 
 	<select id="selectSomeProducts" resultType="com.nakuh.web.domain.Product"
@@ -62,6 +108,7 @@
 		LNG lng
 	FROM PRODUCTS 
 	WHERE PRONUM LIKE #{pronum}
+	
 	</select>
 
 </mapper>
