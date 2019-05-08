@@ -33,10 +33,22 @@ public class ReservationController {
 	@PostMapping("/reservation")
 	public HashMap<?, ?> reserve(@RequestBody Reservation param) {
 		logger.info("=======  ReservationController reserve:상품예약 진입 ======");
+<<<<<<< HEAD
 
+=======
+		Date date = new Date(); 
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd"); 
+<<<<<<< HEAD
+		param.setDepodate(sdf.format(date));
+=======
+		param.setResdate(sdf.format(date));
+		System.out.println("예약컨트롤러 날짜가 잘 들어왓는가" + param.getResdate());
+		System.out.println("예약컨트롤러에 들어온 출발일자" + param.getStartdate());
+>>>>>>> 428b9bea320018ac3b6135be42fedc6b5ec4b132
 		int deposit1 = Integer.parseInt(param.getRescount()) * 50000;
 		param.setDeposit(String.valueOf(deposit1));
 		System.out.println("예약컨트롤러에 들어온 결제금액" + param.getDeposit());
+>>>>>>> b1b5374cf6c96ec080a519dc4861bb1e97a33cb0
 		resService.createReservation(param);
 		map.clear();
 		map.put("msg", "reserve success");
