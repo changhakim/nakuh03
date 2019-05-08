@@ -19,6 +19,7 @@ eunyeong = (()=>{
     let onCreate =(x)=>{
         setContentView(x);
     }
+    
     let setContentView =(x)=>{
         $.when(
                 $.getScript($.js()+'/component/eycompo.js'),
@@ -52,16 +53,17 @@ eunyeong = (()=>{
             app.init();
             });
             $('#ocean').click(()=>{
-                ocean();
+            	ocean();
             });
             
             $('#river').click(()=>{
-                river();
+            	river();
             });
             
             $('#hotel').click(()=>{
-                hotel();
+            	hotel();
             });
+            
             $('#aquagram').click(e=>{
                 e.preventDefault();
                 $('.rescss').remove();
@@ -77,6 +79,7 @@ eunyeong = (()=>{
         })
     };
   
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////*바다 메인화면 */    
     let ocean =()=>{
         $(m_ctt).empty();
         $(s_ctt).attr('style','background:#242c36 url(/web/resources/img/reservation/ocean.jpg)');
@@ -89,6 +92,8 @@ eunyeong = (()=>{
         	        })
     	);
        
+        ////////////////////////////////////////////////////////////////////////datepicker
+
         $('#datepicker2').on('click',function(){
         	alert('7777777')
         	 $("#datepicker2").datepicker();
@@ -102,33 +107,203 @@ eunyeong = (()=>{
         	alert('키워드검색');
         	search();
         });
-        prolist();
+        
+        let cate = 'ocean';
+
+        pro_infinitemove(cate);
+        /*prolist('ocean');*/
     };
     
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////*민물 메인화면 */        
     let river =()=>{
     	alert('river진입');
-            $(m_ctt).empty();
-            $(eycompo.main_container()).appendTo(m_ctt);
-            $('input.btn[type=submit]').click(e=>{
-                e.preventDefault();
-                alert('민물화면이다');
-            });
+        $(m_ctt).empty();
+        $(s_ctt).attr('style','background:#242c36 url(/web/resources/img/reservation/river.jpg)');
+        $('input.btn[type=submit]').click(e=>{
+        	e.preventDefault();
+        	alert('키워드검색');
+        	search();
+        });
+        let cate = 'river';
+
+        pro_infinitemove(cate);
+        
     };
     
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////*숙박 메인화면 */            
     let hotel =()=>{
-        $.when($.getScript(compojs))
-        .done(()=>{
-            $(m_ctt).empty();
-            $(eycompo.main_container()).appendTo(m_ctt);
-            $('input.btn[type=submit]').click(e=>{
-                e.preventDefault();
-                alert('숙박화면이다');
-            });
+    	alert('hotel진입');
+        $(m_ctt).empty();
+        $(s_ctt).attr('style','background:#242c36 url(/web/resources/img/reservation/lodge.jpg)');
+        $('input.btn[type=submit]').click(e=>{
+        	e.preventDefault();
+        	alert('키워드검색');
+        	search();
         });
-    };
+        
+        let cate = 'hotel';
 
-    /*일부 검색창 : 키워드 */
-    let search =()=>{
+        pro_infinitemove(cate);
+        
+    };
+    
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*상품 카테고리별로 보기 */
+  /*  
+    let prolist =x=>{
+   	alert('prolist진입 x값은 무엇일까여' + x);
+   	$.getJSON(_+'/catesearch/'+ x, d=>{
+   		alert('d값은 들어왔나여??' + d);
+   		$(m_ctt).empty();
+           $.each(d.list, (i,j)=>{
+        	   alert('prolist에서 업체명' + j.pronum);
+           	$('<div class="col-sm-4">'
+       			+'	<div class="left-widget-sidebar">'
+       			+'		<div class="card-widget bg-white user-card" style="height:400px">'              
+       			+'			<div id="proimg" class="u-img img-cover" style="background-image: url(/web/resources/img/reservation/'+ j.proimg + ');background-size:cover; height: 300px;"></div>'
+	   			+'				<div class="u-content"></br></br>'
+	   			+'				<h5>' + j.company + '</h5>'
+	   			+'				<p class="text-muted">' + j.price +'</p>'
+	   			+'				</div>'
+       			+'			</div>'
+       			+'		</div>'
+       			+'	</div>'
+       			+'</div>')
+           			.attr('id', j.pronum)
+           			.appendTo(m_ctt);
+           			.click(function(){
+           				let proid = $(this).attr('id');
+           				alert('prolist의 id' + proid);
+               				$.ajax({
+               		    		url:_+'/products/'+ proid,
+               		    		type:'POST',
+               		    		data : JSON.stringify(proid),
+               		    		dataType :'json',
+               		    		contentType :'application/json',
+               		    		success : d=>{
+               		    			alert('AJAX성공' + d.list.regidate);
+               		    			let aa = {proname:d.list.proname,price:d.list.price,company:d.list.company,
+               		    					  address:d.list.address,category:d.list.category,proimg:d.list.proimg,
+               		    					  regidate:d.list.regidate,lastday:d.list.lastday,
+               		    					  fishname:d.list.fishname,phone:d.list.phone,lat:d.list.lat,lng:d.list.lng}
+               		    			detail(aa);
+               		    		},
+               		    		error :e=>{
+               		    			alert('AJAX실패');
+               		    		}
+               				});
+           			})
+           	})
+   		});
+   };
+   */
+   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////*페이지네이션 : 1*/
+
+    let pro_infinitemove =(x)=>{
+
+		let isEnd = false;
+
+		$(function(){
+			$(document).ready(function(){
+				$(window).data('ajaxready',true).scroll(function(){
+					if($(window).data('ajaxready')==false) return;
+					if($(window).scrollTop() + 650 >=$(document).height()-$(window).height()){
+						$(document).ready(function(){
+							//로딩될 때 충돌막아줌 
+							$('div#loadmoreajaxloader').show();
+							$(window).data('ajaxready',false);
+							pro_fetchList(x);
+						});
+					}		
+				})
+			});
+			pro_fetchList(x); 
+		});
+		
+		let pro_fetchList=x=>{
+			alert(x);
+	        if(isEnd == true){
+	        	alert('if들어옴');
+	        	return;
+	        }
+	        let startNo = $("#main-container").children('.col-sm-4').last().data("no") || 0;
+	        alert('No::'+startNo);
+			let cate =x;
+			let page = 0;
+			let url = _+'/catesearch/'+ cate;
+			let data = { cate:cate,
+					startRow:startNo,
+					pageSize:6};
+			$.ajax({
+				url: url,
+				type: 'post',
+				data: JSON.stringify(data),
+				dataType: 'json',
+				contentType: 'application/json; charset=UTF-8;',
+				success: d=>{
+					
+					  let length = d.list.length;
+					  //alert(length);
+					  //db에 있는 값이 5 이하길 경우 멈춤
+	                  if( length < 5 ){
+	                	  isEnd = true;
+	                	  alert(isEnd+'success')
+	                  }
+	                  if(d){
+	           
+	                	  $('div#loadmoreajaxloader').hide();
+	                	  $.each(d.list,(i, j)=>{
+	                		  pro_renderList(j); 
+		                	 
+		                  	});
+	                  }else{
+	                	  $('div#loadmoreajaxloader').html();
+	                  }
+	                  $(window).data('ajaxready', true);
+				},
+				error: e=>{
+					alert('에러!');
+				}
+					
+			});
+			
+		};
+		
+	};
+	
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////*페이지네이션 : 그리기 */	
+	
+	
+	let pro_renderList =(j)=>{
+	   	$('<div class="col-sm-4" data-no="'+j.rownum+'">'
+	   			+'	<div class="left-widget-sidebar">'
+	   			+'		<div class="card-widget bg-white user-card" style="height:400px">'              
+	   			+'			<div id="proimg" class="u-img img-cover" style="background-image: url(/web/resources/img/reservation/'+ j.proimg + ');background-size:cover; height: 300px;"></div>'
+	   			+'				<div class="u-content"></br></br>'
+	   			+'				<h5>' + j.company + '</h5>'
+	   			+'				<p class="text-muted">' + j.price +'</p>'
+	   			+'				</div>'
+	   			+'			</div>'
+	   			+'		</div>'
+	   			+'	</div>'
+	   			+'</div>')
+	       			.attr('id', j.pronum)
+	       			.appendTo(m_ctt);
+
+/*			
+
+		+'     		<div id="item" style="top: 5px;">'
+		+'                  <div class="list-group-item list-group-item-action" id="comments_my" style="height: 58px; border: none; display: -webkit-box;"> '
+		+'                <img class="img-circle" alt="Cinque Terre" src="resources/img/aquagram/profilephoto/'+d.als.profilephoto+'" style="width: 40px; height: 40px; position: center"/>'
+		+'                 <div style="display: -webkit-box;"><h5 style="top:0px; left: 7px; font-weight:bold;">'+d.als.mid+'</h5><div><h6 id="contag" style="left: 15px; width: 90%;">'+d.als.content+'</h6></div></div>'
+		+'                   <div style="font-size: 5px; left: 105px; top: 8px;">'+d.als.artdate+'</div>'
+		+'                </div> '
+		+'              </div> '
+*/
+};
+    
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////*일부 검색창 : 키워드 */
+
+   let search =()=>{
     	let keyword ={
     			proword:$('#search_keyword').val()};
     	alert('keyword에 들어온 값' + keyword.proword);
@@ -142,7 +317,7 @@ eunyeong = (()=>{
     				alert('search 다시한번진입');
     				search();
     			   });
-
+    			
 				$.each(d.list, (x,y)=>{
 	            	$('<div class="col-sm-4">'
 	            			+'	<div class="left-widget-sidebar">'
@@ -168,11 +343,11 @@ eunyeong = (()=>{
 	                		    		dataType :'json',
 	                		    		contentType :'application/json',
 	                		    		success : d=>{
-	                		    			alert('AJAX성공' + d.product.proname);
-	                		    			let aa = {proname:d.product.proname,price:d.product.price,company:d.product.company,
-	                		    					  address:d.product.address,category:d.product.category,proimg:d.product.proimg,
-	                		    					  regidate:d.product.regidate,fishname:d.product.fishname,phone:d.product.phone,
-	                		    					  lat:d.product.lat,lng:d.product.lng}
+	                		    			alert('AJAX성공' + d.proname);
+	                		    			let aa = {proname:d.proname,price:d.price,company:d.company,
+	                		    					  address:d.address,category:d.category,proimg:d.proimg,
+	                		    					  regidate:d.today,lastday:d.lastday,
+	                		    					  fishname:d.fishname,phone:d.phone,lat:d.lat,lng:d.lng}
 	                		    			detail(aa);
 	                		    		},
 	                		    		error :e=>{
@@ -201,17 +376,18 @@ eunyeong = (()=>{
         });
     };
     
-    /*datepicker*/
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*datepicker*/
+
     let datepicker =()=>{
     	  $(function() {
     		    $("#datepicker").datepicker();
     		  });
     };
 
-    /*상품예약 : 입력*/
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*상품예약 : 입력*/
+ 
     let prdres =x=>{
-    	alert('상품예약 진입 !');
-    	alert('상풍예약에 들어온 가격' + x.price);
+    	alert('상풍예약 진입!! 해당 상품 가격' + x.price);
     	$(m_ctt).empty();
 			$(eycompo.product_res()).appendTo(m_ctt);
 			$('#deposit').text(x.price);
@@ -232,7 +408,7 @@ eunyeong = (()=>{
 				alert(x.date);
 				let data ={
 						resnum:'1',
-						mid:'test',
+						cate:'test',
 						resname: $('input[id="resname"]').val(),
 						startdate:date,
 						phone: $('input[id="phone"]').val(),
@@ -242,6 +418,7 @@ eunyeong = (()=>{
 						pronum: x.pronum,
 						proname: x.proname
 						};
+				
 				$('#handleCounter').handleCounter({
 					  minimum: 1,
 					  maximize: null});
@@ -295,9 +472,9 @@ eunyeong = (()=>{
     }*/
     
     
-    
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*상품정보 : 상세 */
     let detail =x=>{
+    	alert('상세 진입');
         $(s_ctt).remove();
         $(m_ctt).empty();
         $(document).ready(function() {
@@ -307,22 +484,21 @@ eunyeong = (()=>{
         $(m_ctt).attr('class','container');
         $('#feat').css('padding-top','0');
         
-        /*은영*/
-        
+
+        /*전체보기에서 가져온 date값으로 캘린더를 그져보자 */
         $(eycompo.calender()).appendTo(m_ctt);
-        $.each(['1','2','3','4','5'], (i,j)=>{
-        	$( '<tr>'
-                    +'<td style="color: #666;"><a class="off"><strong>28</strong></a></td>'
-                    +'<td style="color: #666;"><a class="off"><strong>29</strong></a></td>'
-                    +'<td style="color: #666;"><a class="off"><strong>30</strong></a></td>'
-                    +'<td><a class="cal_cell_date" data-date="2019-05-01"><strong>1</strong><img src="https://img.moolban.com/unsafe/asset/www/responsive/img/weather/weather-30.png" alt=""><span class="mul">3물</span></a></td>'
-                    +'<td><a class="cal_cell_date on" data-date="2019-05-02"><strong>2</strong><img src="https://img.moolban.com/unsafe/asset/www/responsive/img/weather/weather-10.png" alt=""><span class="mul">4물</span></a></td>'
-                    +'<td><a class="cal_cell_date" data-date="2019-05-03"><strong>3</strong><img src="https://img.moolban.com/unsafe/asset/www/responsive/img/weather/weather-10.png" alt=""><span class="mul">5물</span></a></td>'
-                    +'<td><a class="cal_cell_date" data-date="2019-05-04"><strong>4</strong><img src="https://img.moolban.com/unsafe/asset/www/responsive/img/weather/weather-10.png" alt=""><span class="mul">6물</span></a></td>'
-                +'</tr>').appendTo('.calendar');
+            $.each(['1','2','3','4','5'], (i,j)=>{
+            	$( '<tr>'
+                        +'<td style="color: #666;"><a class="off"><strong>'+ j.day +'</strong></a></td>'
+                        +'<td style="color: #666;"><a class="off"><strong>29</strong></a></td>'
+                        +'<td style="color: #666;"><a class="off"><strong>30</strong></a></td>'
+                        +'<td><a class="cal_cell_date" data-date="2019-05-01"><strong>1</strong><img src="https://img.moolban.com/unsafe/asset/www/responsive/img/weather/weather-30.png" alt=""><span class="mul">3물</span></a></td>'
+                        +'<td><a class="cal_cell_date on" data-date="2019-05-02"><strong>2</strong><img src="https://img.moolban.com/unsafe/asset/www/responsive/img/weather/weather-10.png" alt=""><span class="mul">4물</span></a></td>'
+                        +'<td><a class="cal_cell_date" data-date="2019-05-03"><strong>3</strong><img src="https://img.moolban.com/unsafe/asset/www/responsive/img/weather/weather-10.png" alt=""><span class="mul">5물</span></a></td>'
+                        +'<td><a class="cal_cell_date" data-date="2019-05-04"><strong>4</strong><img src="https://img.moolban.com/unsafe/asset/www/responsive/img/weather/weather-10.png" alt=""><span class="mul">6물</span></a></td>'
+                    +'</tr>').appendTo('.calendar');
+        	
         });
-        
-        
         
 /* 은영       $(eycompo.item_container()).appendTo(m_ctt);*/
         $('#info_content').prepend(eycompo.product_info());
@@ -334,10 +510,11 @@ eunyeong = (()=>{
         $('#proaddress').text(x.address);
         $('#fishname').text(x.fishname);
         $('#phone').text(x.phone);
-       
+
+        
         /*$('.cal_cell_date')*/
         
-        $('.cal_cell_date').click(function(e){
+        /*$('.cal_cell_date').click(function(e){
         	alert('출발날짜 1 >>> '+$('#view_reserve').attr('name'));
         	$(this).removeClass('on');
         	alert($(this).attr('data-date'))
@@ -345,10 +522,8 @@ eunyeong = (()=>{
         	$(this).addClass('on');
         	
         	$('#view_reserve').attr('name', date);
-        	
             
-        });
-       
+        });*/
         
         let resinfo = {proname:x.proname,price:x.price,pronum:x.pronum}
         $('#select_item').attr('style','cursor:pointer').attr('data-toggle','modal').attr('data-target','#myModal').click(function(e){
@@ -367,51 +542,6 @@ eunyeong = (()=>{
         });
      };
       
-    /*상품 전체보기 */
-    let prolist =()=>{
-    	$.getJSON(_+'/products', d=>{
-    		$(m_ctt).empty();
-    		
-            $.each(d, (i,j)=>{
-            	$('<div class="col-sm-4">'
-            			+'	<div class="left-widget-sidebar">'
-            			+'		<div class="card-widget bg-white user-card" style="height:400px">'              
-            			+'			<div id="proimg" class="u-img img-cover" style="background-image: url(/web/resources/img/reservation/'+ j.proimg + ');background-size:cover; height: 300px;"></div>'
-            			+'					<div class="u-content"></br></br>'
-            			+'					<h5>' + j.company + '</h5>'
-            			+'					<p class="text-muted">' + j.price +'</p>'
-            			+'					</div>'
-            			+'					</div>'
-            			+'				</div>'
-            			+'			</div>'
-            			+'		</div>')
-            			.attr('id', j.pronum)
-            			.appendTo(m_ctt)
-            			.click(function(){
-            				let proid = $(this).attr('id');
-            				alert('prolist의 id' + proid);
-                				$.ajax({
-                		    		url:_+'/products/'+ proid,
-                		    		type:'POST',
-                		    		data : JSON.stringify(proid),
-                		    		dataType :'json',
-                		    		contentType :'application/json',
-                		    		success : d=>{
-                		    			alert('AJAX성공' + d.product.proname);
-                		    			let aa = {proname:d.product.proname,price:d.product.price,company:d.product.company,
-                		    					  address:d.product.address,category:d.product.category,proimg:d.product.proimg,
-                		    					  regidate:d.product.regidate,fishname:d.product.fishname,phone:d.product.phone,
-                		    					  lat:d.product.lat,lng:d.product.lng}
-                		    			detail(aa);
-                		    		},
-                		    		error :e=>{
-                		    			alert('AJAX실패');
-                		    		}
-                		    	});
-            			})
-            })
-    	});
-    };
     
     let navcss = ()=>{
         $(document).ready(function() {
@@ -422,8 +552,6 @@ eunyeong = (()=>{
              });
          });
     };
-    
-  
     
     function initMap(x) {
   	  // The location of Uluru
@@ -455,5 +583,5 @@ eunyeong = (()=>{
              
     };
     return {init:init, searchlist:searchlist, ocean:ocean, river:river, hotel:hotel, detail:detail, 
-    		prolist:prolist, datepicker:datepicker, search:search, prdres:prdres};
+    		/*prolist:prolist,*/ datepicker:datepicker, search:search, prdres:prdres};
 })();

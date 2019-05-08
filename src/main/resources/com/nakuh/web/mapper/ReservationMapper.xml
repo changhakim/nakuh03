@@ -3,14 +3,17 @@
 
 <mapper namespace="com.nakuh.web.mapper.ReservationMapper">
 
+
 <!-- 상품 예약하기 -->
-	<select id="insertReservation" parameterType="com.nakuh.web.domain.Reservation">
+	<insert id="insertReservation" parameterType="com.nakuh.web.domain.Reservation">
+	
+	
 	
 	INSERT INTO RESERVATION (
 	RESNUM, STARTDATE, RESNAME, MID, PHONE, 
 	RESDATE, RESCOUNT, DEPOSIT, MESSAGE, PRONUM, PRONAME, AMPM) VALUES(
 	#{resnum},#{startdate},#{resname},#{mid},#{phone},#{resdate},#{rescount},#{deposit},#{message}, #{pronum}, #{proname}, #{ampm});
 	
-	</select>
+	</insert>
 
 </mapper>
