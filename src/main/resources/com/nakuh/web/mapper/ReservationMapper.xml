@@ -13,9 +13,7 @@
 	RESNUM, STARTDATE, RESNAME, MID, PHONE, 
 	RESDATE, RESCOUNT, DEPOSIT, MESSAGE, PRONUM, PRONAME, AMPM) VALUES(
 	#{resnum},#{startdate},#{resname},#{mid},#{phone},#{resdate},#{rescount},#{deposit},#{message}, #{pronum}, #{proname}, #{ampm});
-	
-<<<<<<< HEAD
-	</select>
+	</insert>
 	<select id="selectpageReservations" resultType="com.nakuh.web.domain.Reservation" 
 	parameterType="com.nakuh.web.cmm.Proxy">
 	SELECT @ROWNUM:=@ROWNUM+1 AS rownum,A.*
@@ -34,8 +32,8 @@
 	
 	
 	
-=======
-	</insert>
->>>>>>> eunyeong
+
+	
+
 
 </mapper>
