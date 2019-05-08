@@ -18,7 +18,7 @@
 <!-- datepicker -->
 <input type="text" id="datepicker2">
  <!--  modal --->
-<div id="id01" class="modal">
+<div id="id01" class="gkwlakmodal">
   <div class="modal-content animate" action="#">
     <div class="imgcontainer raw">
       <span class="close1" title="Close Modal">&times;</span>
