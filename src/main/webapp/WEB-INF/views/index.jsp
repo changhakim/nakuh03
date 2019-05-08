@@ -8,11 +8,11 @@
  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
  <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
  <link rel="shortcut icon" href="/web/resources/favicon/favicon.ico">
  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAY5vEXIghqf7_mEdWcG9kqcEeDOpaLixY&callback=initMap"></script>
  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
  <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
+ 
 </head>
 <body>
 <!-- datepicker -->
@@ -23,7 +23,7 @@
     <div class="imgcontainer raw">
       <span class="close1" title="Close Modal">&times;</span>
     </div>
-
+	
     <div class="container-fluid">
       <div id="change_login_form">
       <label for="uname"><b>Username</b></label>
@@ -67,9 +67,7 @@
 <!-- modal-2 end-->
 
 
- <div id="wrapper" class="container-fluid">
-
- 
+ <div id="wrapper" class="container-fluid"> 
 <div class="container-fluid">
  <!-- login -->	
  <div id="loginbar"><button id="loginbtn">Login</button></div>
@@ -355,6 +353,7 @@
 <!-- adminjs -->
 <script src="/web/resources/js/admin/vendor/bootstrap-notify.js"></script>
 <script src="/web/resources/js/admin/vendor/jquery.counterup.js"></script>
+<script src="/web/resources/js/admin/vendor/jquery-ui.js"></script>
 <!-- reservationjs -->
 <script src="/web/resources/js/reservation/vendor/owl.carousel.min.js"></script>
 <script src="/web/resources/js/reservation/vendor/main.js"></script>

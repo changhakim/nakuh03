@@ -18,94 +18,121 @@ arti =(()=>{
 				$.getScript($.js()+'/aquagram/auth.js'),
 				$.getScript($.js()+'/reservation/eunyeong.js')
 			).done(()=>{
-				$('#donw_content').html(jwcompo.insta_base());
-				feed_my();
-				infinitemove();
-				
-				arti_upload();
-				
+				arti_default_loader();
 				
 				
 			});  
 		
 		
 	};
-	
-	let infinitemove =()=>{
-		let isEnd = false;
+	let arti_default_loader=()=>{
+		$('#donw_content').html(jwcompo.insta_base());
+		$('head').after(jwcompo.photo_feed_css_hover());
+		feed_my();
+		move();
+		infinitemove();
+		arti_upload();
 		
-		$(function(){
-			$(window).scroll(function(){
-				let $window = $(this);
-				let scrollTop = $window.scrollTop();
-				let windowHeight = $window.height();
-				let documentHeight = $(document).height();
-				
-				console.log("documentHeight:" + documentHeight + " | scrollTop:" +
-                        scrollTop + " | windowHeight: " + windowHeight );
-				 if( scrollTop + windowHeight + 5 > documentHeight ){
-
-					 fetchList(isEnd);
-				 }
-				 
-			})
-			fetchList(isEnd);
-	
-		});
 		
 	};
-	let fetchList=(x)=>{
-		alert(x.isEnd);
-        if(x.isEnd == true){return;}
-        let startNo = $("#feeds").last().data("no") || 0;
-		let mid ='gigi123';
-		let page = 0;
-		let url = _+'/myfeed/'+mid;
-		let data = { mid:mid,
-				startRow:startNo,
-				pageSize:12};
-		$.ajax({
-			url: url,
-			type: 'post',
-			data: JSON.stringify(data),
-			dataType: 'JSON',
-			contentType: 'application/json; charset=UTF-8;',
-			success: d=>{
-				  let length = d.myList.length;
-                  if( length < 12 ){
-                           isEnd = true;
-                  }
-                  $.each(d.myList,(i, j)=>{
-                	  renderList(false, j);
-                	  
-                  	});
-
-			},
-			error: e=>{
-				alert('에러!');
-			}
-				
+	let move =()=>{
+		$('#feed_fv').attr('style','cursor:pointer').click(function(e){
+			e.preventDefault();
+			$('.instagram-wrap').empty();
+			$('#donw_content').append('<div id="leftbar_content" class="col-md-8"></div>');
+			$('<div id="right_nav" class="col-md-4" role="complementary"><nav id="right_nav_cont" class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix-top" data-spy="affix"></div></div>').appendTo('#donw_content');
+			$(jwcompo.left_content()).appendTo('#leftbar_content');
+			$(jwcompo.right_nav()).appendTo('#right_nav_cont');
+/*			$('#leftbar_content').empty();
+			$('#right_nav').empty();*/
+			auth.init();
 		});
 		
 	};
 	
 	let feed_my=()=>{
-		$('.photo-box').attr('style','margin:-26px 0px 30px -29px');
-		$('head').after(jwcompo.photo_feed_css_hover());
-		$('#instafeed').children('#feeds').attr('data-toggle','modal').attr('data-target','#myModal').click(function(e){
-			e.preventDefault();
-			let od = { artphoto : $(this).find('img').attr('src'),
-						artnum : $(this).find('img').attr('id')};
-			arti_detail(od);
+		$('head').children('style').empty();
 
-		});
-		
+
 
 	};
 	
+	let infinitemove =()=>{
+		
+		let isEnd = false;
+
+		$(function(){
+			$(document).ready(function(){
+				$(window).data('ajaxready',true).scroll(function(){
+					if($(window).data('ajaxready')==false) return;
+					if($(window).scrollTop() + 300>=$(document).height()-$(window).height()){
+						$(document).ready(function(){
+							$('div#loadmoreajaxloader').show();
+							$(window).data('ajaxready',false);
+							fetchList();
+						});
+							
+						
+					}		
+				})
+				
+			});
+			fetchList(); 
+		});
+		
+		let fetchList=()=>{
+	        if(isEnd == true){
+	        	alert('if들어옴')
+	        	return;
+	        }
+	        let startNo = $("#instafeed").children('.feeds').last().data("no") || 0;
+			let mid ='gigi123';
+			let page = 0;
+			let url = _+'/myfeed/'+mid;
+			let data = { mid:mid,
+					startRow:startNo,
+					pageSize:6};
+
+			
+			$.ajax({
+				url: url,
+				type: 'post',
+				data: JSON.stringify(data),
+				dataType: 'JSON',
+				contentType: 'application/json; charset=UTF-8;',
+				success: d=>{
+					  let length = d.myList.length;
+					  //alert(length);
+	                  if( length < 3 ){
+	                	  isEnd = true;
+	                	  alert(isEnd+'success')
+	                  }
+	                  if(d){
+	           
+	                	  $('div#loadmoreajaxloader').hide();
+	                	  $.each(d.myList,(i, j)=>{
+		                	  renderList(false, j); 
+		                	 
+		                  	});
+	                  }else{
+	                	  $('div#loadmoreajaxloader').html();
+	                  }
+	                  $(window).data('ajaxready', true);
+				},
+				error: e=>{
+					alert('에러!');
+				}
+					
+			});
+			
+		};
+	};
+
+
+	
 	let renderList =(mode,x)=>{
-		let box = '<div id="feeds" data-no="'+x.rownum+'" >'
-				+'			<div id="myfeed_'+x.artnum+'" class="col-xs-12 col-sm-6 col-md-4 col-lg-3">'
+		let box = '<div class="feeds" data-no="'+x.rownum+'" >'
+				+'			<div id="'+x.artnum+'" class="col-xs-12 col-sm-6 col-md-4 col-lg-3">'
 			+'			<a src="resources/img/aquagram/articles/'+x.artphoto+'.'+x.extension+'">'
 			+'			<div class="img-featured-container">'
 			+'			<div class="img-backdrop"></div>'
@@ -119,27 +146,30 @@ arti =(()=>{
 			+'			</a>'
 			+'			</div>'
 			+'			</div>';
-		   if( mode ){
-               $("#instafeed").prepend(box);         
-		   }
-		   else{
-               $("#instafeed").append(box);
-		   }
-		//$(box).appendTo('#instafeed');
+	
+		   
+           $("#instafeed").append(box); 
+           $('#'+x.artnum).click(function(){
+       		   $('.photo-box').attr('style','margin:-26px 0px 30px -29px');
+        	   $('#instafeed').children('.feeds').attr('data-toggle','modal').attr('data-target','#myModal');
+        	   arti_detail(x.artnum);
+
+           });
 		
 	};
 	
 	let arti_detail =(x)=>{
+		alert('두번~?'+x);
 		$('#change_modal_2').empty();
-		let artnum = x.artnum;
 		let comlist='';
 		$.ajax({
-			url: _+'/arti/detail/'+artnum,
-			type: 'get',
-			data: JSON.stringify(artnum),
+			url: _+'/arti/detail/'+x,
+			type: 'post',
+			data: JSON.stringify(x),
 			dataType: 'json',
 			contentType: 'application/json; charset=UTF-8;',
 			success: d=>{
+				$(window).data('ajaxready', false);
 				$('#myModal').attr('style','display: block; z-index:99999;');
 				$('.modal-dialog').attr('style','top:200px;');
 				$('.modal-dialog').attr('class','modal-dialog modal-lg');

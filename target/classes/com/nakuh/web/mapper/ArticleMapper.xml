@@ -22,8 +22,10 @@
 </resultMap>
 <select id="selectArticles" resultType="com.nakuh.web.domain.Article"
 							parameterType="com.nakuh.web.domain.Article">
-		SELECT @ROWNUM:=@ROWNUM+1 AS rownum,
-				artnum,
+			
+		SELECT  @ROWNUM:=@ROWNUM+1 AS rownum, A.*
+		FROM (SELECT 
+				 artnum,
 				content,
 				artdate,
 				artphoto,
@@ -31,10 +33,12 @@
 				extension,
 				(select count(*) from COMMENTS where titleseq like artnum) comcount,
 				(select profilephoto from MEMBERS M WHERE M.MID LIKE ARTICLES.MID) profilephoto
-		FROM ARTICLES, (SELECT @ROWNUM:=0) TMP
-		WHERE mid LIKE #{mid}
-		ORDER BY artnum DESC
-		LIMIT #{startRow},#{pageSize}
+		FROM ARTICLES
+		WHERE mid LIKE  #{mid}
+		ORDER BY artnum DESC ) A,(SELECT @ROWNUM:=0) TMP  
+		ORDER BY rownum
+		limit #{startRow},#{pageSize}
+
 </select>
 
 <select id="selectArticlesDetail" resultType="com.nakuh.web.domain.Article" 
@@ -43,22 +47,26 @@
 			(select profilephoto from MEMBERS M WHERE M.MID LIKE ARTICLES.MID) profilephoto,
 			(select name from MEMBERS M2 WHERE M2.MID LIKE ARTICLES.MID) mname
 			FROM ARTICLES
-			WHERE artnum LIKE #{artnum};						
+			WHERE artnum LIKE #{artnum}						
 		
 </select>
 
 <select id="selectAllArticlesList" resultType="com.nakuh.web.domain.Article"
 								parameterType="com.nakuh.web.domain.Article">
-		SELECT DISTINCT artnum, content, artdate, 
+		SELECT  @ROWNUM:=@ROWNUM+1 AS rownum, R.*
+		FROM 	(SELECT DISTINCT artnum, content, artdate, 
 				concat(artphoto,'.',extension) as artphoto,
 				F.folloid as mname,
 				(SELECT profilephoto FROM MEMBERS WHERE MID LIKE mname) profilephoto
-		FROM ARTICLES A
-		JOIN (
-			SELECT * 
-			FROM FOLLOWERS
-			WHERE mid LIKE #{mid}) F
-		ON A.mid LIKE F.folloid;
+						FROM ARTICLES A
+						JOIN (
+							SELECT * 
+							FROM FOLLOWERS
+							WHERE mid LIKE #{mid}) F
+						ON A.mid LIKE F.folloid 
+		ORDER BY artnum DESC) R , (SELECT @ROWNUM:=0) TMP 
+		ORDER BY rownum  
+		LIMIT #{startRow},#{pageSize}
 </select>
 
 <select id="countnavArticle" resultType="com.nakuh.web.domain.Article"
