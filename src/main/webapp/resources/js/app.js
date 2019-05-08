@@ -91,11 +91,8 @@ app=(()=>{
 		 	 +'<link class="rescss" rel="stylesheet" href="/web/resources/css/reservation/main.css">'
              +'<link class="rescss" rel="stylesheet" href="/web/resources/css/reservation/navbar.css">'
              +'<link class="rescss" rel="stylesheet" href="/web/resources/css/reservation/resdetail.css">'
-<<<<<<< HEAD
              +'<link class="rescss" rel="stylesheet" href="/web/resources/css/reservation/prdpay.css">';       
-=======
              +'<link class="rescss" rel="stylesheet" href="/web/resources/css/reservation/prdpay.css">';            
->>>>>>> b1b5374cf6c96ec080a519dc4861bb1e97a33cb0
 	 
 		 instacss ='  <link rel="stylesheet" type="text/css" href="/web/resources/css/aquagram/style.css">'
 			 +'  <link class="instacss" rel="stylesheet" type="text/css" href="/web/resources/css/aquagram/animate.css">'
