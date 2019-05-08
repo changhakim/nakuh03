@@ -65,7 +65,7 @@ arti =(()=>{
 			$(document).ready(function(){
 				$(window).data('ajaxready',true).scroll(function(){
 					if($(window).data('ajaxready')==false) return;
-					if($(window).scrollTop() + 450>=$(document).height()-$(window).height()){
+					if($(window).scrollTop() + 300>=$(document).height()-$(window).height()){
 						$(document).ready(function(){
 							$('div#loadmoreajaxloader').show();
 							$(window).data('ajaxready',false);
