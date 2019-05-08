@@ -67,11 +67,12 @@ public class ArticlesController {
 		
 		return map;
 	};
-	@GetMapping("/arti/detail/{artnum}")
-	public Map<?,?> ArticleDetail(String artnum, Article art, Comment com){
+	@PostMapping("/arti/detail/{artnum}")
+	public Map<?,?> ArticleDetail(@PathVariable String artnum){
 		logger.info("=========ArticleDetail 진입======");
 		map.clear();
-		Article als = artservice.retrieveArticleDetail(art.getArtnum());
+		System.out.println("??"+artnum);
+		Article als = artservice.retrieveArticleDetail(artnum);
 		map.put("als", als);
 		List<?> cls = (List<?>) comservice.retrieveComment(als.getArtnum());
 		map.put("cls", cls);
@@ -84,13 +85,15 @@ public class ArticlesController {
 		
 		return map;
 	};
-	@GetMapping("/arti/feed/{mid}")
-	public Map<?,?> ArticleFeed(String mid, Article arts){
+	@PostMapping("/arti/feed/{mid}")
+	public Map<?,?> ArticleFeed(String mid, @RequestBody Article arts){
 		logger.info("=========ArticleFeed 진입======");
 		map.clear();
 		System.out.println("art??"+arts);
 		art.setMid(arts.getMid());
 		System.out.println(art);
+		art.setStartRow(arts.getStartRow());
+		art.setPageSize(arts.getPageSize());
 		IFunction f1 = (Object o)-> artMap.countnavArticle(art); 
 		System.out.println("artcount"+f1.apply(art));
 		map.put("nav", f1.apply(art));
