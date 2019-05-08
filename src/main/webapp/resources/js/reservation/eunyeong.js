@@ -208,8 +208,6 @@ eunyeong = (()=>{
     		  });
     };
 
-    
-    
     /*상품예약 : 입력*/
     let prdres =x=>{
     	alert('상품예약 진입 !');
@@ -264,7 +262,41 @@ eunyeong = (()=>{
 			});
     };
     
-    /*상세정보 : 상품 */
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*상품정보 : 달력 */
+   /*
+    let today = null;
+    let date = new Date();
+    let date = today.getDay();
+    
+    month += 1;
+    
+    function dayy(year, month){ //월의 일수를 구함
+    	switch(month){
+    	  case 1: case 3: case 5: case 7: case 8: case 10: case 12:
+              return 31;
+              
+    	  case 4: case 6: case 9: case 11:
+              return 30;
+              
+    	  case 2:
+    		  if(((year%400)==0||(year%4)==0&&(year%100)!=0)){
+                  return 29;
+              }
+              else{
+                  return 28;  
+              }
+    	}
+    }    
+
+    function prevmonth(){ //이전 월로 가는 함수 
+    
+    	
+    	
+    }*/
+    
+    
+    
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*상품정보 : 상세 */
     let detail =x=>{
         $(s_ctt).remove();
         $(m_ctt).empty();
@@ -274,7 +306,25 @@ eunyeong = (()=>{
         $(m_ctt).attr('class','');
         $(m_ctt).attr('class','container');
         $('#feat').css('padding-top','0');
-        $(eycompo.item_container()).appendTo(m_ctt);
+        
+        /*은영*/
+        
+        $(eycompo.calender()).appendTo(m_ctt);
+        $.each(['1','2','3','4','5'], (i,j)=>{
+        	$( '<tr>'
+                    +'<td style="color: #666;"><a class="off"><strong>28</strong></a></td>'
+                    +'<td style="color: #666;"><a class="off"><strong>29</strong></a></td>'
+                    +'<td style="color: #666;"><a class="off"><strong>30</strong></a></td>'
+                    +'<td><a class="cal_cell_date" data-date="2019-05-01"><strong>1</strong><img src="https://img.moolban.com/unsafe/asset/www/responsive/img/weather/weather-30.png" alt=""><span class="mul">3물</span></a></td>'
+                    +'<td><a class="cal_cell_date on" data-date="2019-05-02"><strong>2</strong><img src="https://img.moolban.com/unsafe/asset/www/responsive/img/weather/weather-10.png" alt=""><span class="mul">4물</span></a></td>'
+                    +'<td><a class="cal_cell_date" data-date="2019-05-03"><strong>3</strong><img src="https://img.moolban.com/unsafe/asset/www/responsive/img/weather/weather-10.png" alt=""><span class="mul">5물</span></a></td>'
+                    +'<td><a class="cal_cell_date" data-date="2019-05-04"><strong>4</strong><img src="https://img.moolban.com/unsafe/asset/www/responsive/img/weather/weather-10.png" alt=""><span class="mul">6물</span></a></td>'
+                +'</tr>').appendTo('.calendar');
+        });
+        
+        
+        
+/* 은영       $(eycompo.item_container()).appendTo(m_ctt);*/
         $('#info_content').prepend(eycompo.product_info());
         $('#proname').text(x.proname);
         $('#price').text(x.price);

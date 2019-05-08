@@ -22,7 +22,8 @@
 </resultMap>
 <select id="selectArticles" resultType="com.nakuh.web.domain.Article"
 							parameterType="com.nakuh.web.domain.Article">
-		SELECT artnum,
+		SELECT @ROWNUM:=@ROWNUM+1 AS rownum,
+				artnum,
 				content,
 				artdate,
 				artphoto,
@@ -30,7 +31,7 @@
 				extension,
 				(select count(*) from COMMENTS where titleseq like artnum) comcount,
 				(select profilephoto from MEMBERS M WHERE M.MID LIKE ARTICLES.MID) profilephoto
-		FROM ARTICLES
+		FROM ARTICLES, (SELECT @ROWNUM:=0) TMP
 		WHERE mid LIKE #{mid}
 		ORDER BY artnum DESC
 		LIMIT #{startRow},#{pageSize}
