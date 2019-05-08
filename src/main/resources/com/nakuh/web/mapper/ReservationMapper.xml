@@ -3,14 +3,18 @@
 
 <mapper namespace="com.nakuh.web.mapper.ReservationMapper">
 
+
 <!-- 상품 예약하기 -->
-	<select id="insertReservation" parameterType="com.nakuh.web.domain.Reservation">
+	<insert id="insertReservation" parameterType="com.nakuh.web.domain.Reservation">
+	
+	
 	
 	INSERT INTO RESERVATION (
 	RESNUM, STARTDATE, RESNAME, MID, PHONE, 
 	RESDATE, RESCOUNT, DEPOSIT, MESSAGE, PRONUM, PRONAME, AMPM) VALUES(
 	#{resnum},#{startdate},#{resname},#{mid},#{phone},#{resdate},#{rescount},#{deposit},#{message}, #{pronum}, #{proname}, #{ampm});
 	
+<<<<<<< HEAD
 	</select>
 	<select id="selectpageReservations" resultType="com.nakuh.web.domain.Reservation" 
 	parameterType="com.nakuh.web.cmm.Proxy">
@@ -30,5 +34,8 @@
 	
 	
 	
+=======
+	</insert>
+>>>>>>> eunyeong
 
 </mapper>
