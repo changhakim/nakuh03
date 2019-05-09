@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
-import com.nakuh.web.cmm.Proxy;
 import com.nakuh.web.domain.Article;
 
 @Component
