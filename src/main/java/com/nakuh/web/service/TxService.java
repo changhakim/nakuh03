@@ -56,5 +56,27 @@ public class TxService {
 		
 		return map;
 	}
+	public Map<String, Object> reservChart(){
+		map.clear();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Date date1 = new Date();
+		Calendar c = new GregorianCalendar();
+		c.add(Calendar.DATE, -9);
+		vis.setBeforevisit(sdf.format(c.getTime()));
+		vis.setTodayvisit(sdf.format(date1));
+		vis.setCate("ocean");
+		map.put("ocean", resmapper.resCateTerm(vis));
+		vis.setCate("river");
+		map.put("river", resmapper.resCateTerm(vis));
+		vis.setCate("hotel");
+		map.put("hotel", resmapper.resCateTerm(vis));
+		map.put("catecount", resmapper.resCateCount());
+		
+		
+		
+		
+		
+		return map;
+	}
 
 }

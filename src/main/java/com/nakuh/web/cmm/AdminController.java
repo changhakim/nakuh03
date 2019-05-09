@@ -43,11 +43,17 @@ public class AdminController {
 		
 		return map;
 	}
-	@PostMapping("/admin/search")
-	public Map<?, ?> searchreservation(@RequestBody Reservation param){
+	@GetMapping("/admin/reschart")
+	public Map<String, Object> reschart(){
 		map.clear();
-		System.out.println(param.toString());
-		map = resservice.adminSearchReservation(param);
+		map = tx.reservChart();
+		return map;
+	}
+	@PostMapping("/admin/search")
+	public Map<?, ?> searchreservation(@RequestBody Proxy pxy){
+		map.clear();
+		
+		map = resservice.adminSearchReservation(pxy);
 		return map;
 	}
 }
