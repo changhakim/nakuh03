@@ -13,20 +13,15 @@ let setContentView=()=>{
 	$.getScript($.js()+'/component/chcompo.js')	
 	).done(()=>{
 		$('.main-panel').html(chcompo.admin)
-		$(document).ready(function() {
-			$( "#datepicker" ).datepicker({
-				dateFormat: 'yy-mm-dd',
-			    inline: true,
-			    disabled: false,
-			    showOtherMonths: true,
-			    showMonthAfterYear: true,
-			    monthNames: [ '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12' ],
-			    dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
-			    
-			});			
-		});
-		
+		dateficker();
 		reslist(1);
+		$('#searchgo').click(()=>{
+			alert($('#datepicker').val())
+			alert($('#resselect option:selected').val())
+			alert($('#proselect option:selected').val())
+			alert($('#searchbar').val())
+			searchres();
+		})
 	})
 
 }
@@ -104,6 +99,63 @@ let reslist=x=>{
 		})
 		})/*getJSON*/
 	
+}
+let searchres = ()=>{
+	if($('#datepicker').val()!='' && $('#resselect option:selected').val()==='출발/예약'){
+		alert('출발/예약 날짜 설정을 해주세요')
+		return
+	}
+	if($('#datepicker').val()==='' && $('#resselect option:selected').val()!='출발/예약'){
+		alert('날짜를 입력해주세요')
+		return
+	}
+	if($('#resselect option:selected').val()==='출발/예약' 
+	  && $('#proselect option:selected').val()==='상품종류'
+	  && $('#searchbar').val()===''
+	  && $('#datepicker').val()===''){
+		alert('값을 입력해주세요')
+		return
+	}
+	
+	let proselect = '';
+	if($('#proselect option:selected').val()==='바다낚시'){
+		proselect = 'ocean';
+	}else{
+		proselect = 'river';
+	}
+	let data = {searchdate:$('#datepicker').val(),
+				resselect:$('#resselect option:selected').val(),
+				proselect:proselect,
+				searchword:$('#searchbar').val()}
+	$.ajax({
+		url:$.ctx()+'/admin/search/',
+		type:'post',
+		data:JSON.stringify(data),
+		dataType:'JSON',
+		contentType:'application/json',
+		success:d=>{
+			alert('성공')
+		},
+		error:e=>{
+			alert('실패')
+		}
+		
+		
+	})
+}
+let dateficker=()=>{
+	$(document).ready(function() {
+		$( "#datepicker" ).datepicker({
+			dateFormat: 'yy-mm-dd',
+		    inline: true,
+		    disabled: false,
+		    showOtherMonths: true,
+		    showMonthAfterYear: true,
+		    monthNames: [ '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12' ],
+		    dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
+		    
+		});			
+	});
 }
 return {init:init}
 })();

@@ -1,6 +1,7 @@
 package com.nakuh.web.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Component;
 
@@ -16,5 +17,16 @@ public interface ReservationService {
 	public int countReservation();
 	public void modifyReservation(Reservation param);
 	public void removeReservation(Reservation param);
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> b1b5374cf6c96ec080a519dc4861bb1e97a33cb0
+=======
+	public Map<String, Object> adminSearchReservation(Reservation param);
+>>>>>>> 1aefe57bc1c18c2ee5d11aee9d21af5c0aa05919
+=======
+
+>>>>>>> 83a9cda29f208c664a349fdc656e87106ac00fa0
 }

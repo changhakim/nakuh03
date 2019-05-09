@@ -482,7 +482,15 @@ eunyeong = (()=>{
     	
     }*/
     
+<<<<<<< HEAD
 /*    상품예약 : 입력
+=======
+
+    /*상품예약 : 입력*/
+
+/*    상품예약 : 입력
+>>>>>>> 1aefe57bc1c18c2ee5d11aee9d21af5c0aa05919
+>>>>>>> 19a0bb56eb027bafc4f1e37dfe6f949d28f7cc9f
     let prdres =x=>{
     	alert('상품예약 진입 ! ');
     	$(m_ctt).empty();
@@ -515,8 +523,17 @@ eunyeong = (()=>{
 					}
 				});	
 			});
+<<<<<<< HEAD
     };*/
+=======
+
+    }
     /*상세정보 : 상품 */
+
+    };
+>>>>>>> 19a0bb56eb027bafc4f1e37dfe6f949d28f7cc9f
+    /*상세정보 : 상품 */
+
     
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*상품정보 : 상세 */
     let detail =x=>{
@@ -583,6 +600,11 @@ eunyeong = (()=>{
   			$('<div class="checkbox"><label><input type="checkbox" value=""> 상품명 : '+ x.proname + '[가격 : ' +x.price+ '원]</label></div>').appendTo('.modal-body');
   			$('<button id="paybtn" type="button" class="btn btn-default" data-dismiss="modal">결제하기</button>').prependTo('.modal-footer').click(e=>{
   				prdres();
+
+  				prdres();
+
+  				prdres();
+
   				prdres(resinfo);
   			});
   			$('<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>').appendTo('.modal-footer');
