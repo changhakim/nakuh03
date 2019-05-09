@@ -13,10 +13,7 @@
 	RESNUM, STARTDATE, RESNAME, MID, PHONE, 
 	RESDATE, RESCOUNT, DEPOSIT, MESSAGE, PRONUM, PRONAME, AMPM) VALUES(
 	#{resnum},#{startdate},#{resname},#{mid},#{phone},#{resdate},#{rescount},#{deposit},#{message}, #{pronum}, #{proname}, #{ampm});
-<<<<<<< HEAD
 
-=======
-<<<<<<< HEAD
 	</insert>
 	<select id="selectpageReservations" resultType="com.nakuh.web.domain.Reservation" 
 	parameterType="com.nakuh.web.cmm.Proxy">
@@ -31,18 +28,6 @@
 	<select id="countReservation" resultType="Integer">
 	  SELECT COUNT(*)
   	  FROM RESERVATION	
-=======
->>>>>>> b1b5374cf6c96ec080a519dc4861bb1e97a33cb0
-	
->>>>>>> 428b9bea320018ac3b6135be42fedc6b5ec4b132
->>>>>>> 7f3b3b2b2060df0e390461a72ba39795e81e5448
 	</select>
-	
-	
-	
-	
-
-	
-
 
 </mapper>
