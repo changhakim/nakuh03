@@ -7,13 +7,12 @@
 <!-- 상품 예약하기 -->
 	<insert id="insertReservation" parameterType="com.nakuh.web.domain.Reservation">
 	
-	
-	
 	INSERT INTO RESERVATION (
 	RESNUM, STARTDATE, RESNAME, MID, PHONE, 
 	RESDATE, RESCOUNT, DEPOSIT, MESSAGE, PRONUM, PRONAME, AMPM) VALUES(
 	#{resnum},#{startdate},#{resname},#{mid},#{phone},#{resdate},#{rescount},#{deposit},#{message}, #{pronum}, #{proname}, #{ampm});
 	</insert>
+	
 	<select id="selectpageReservations" resultType="com.nakuh.web.domain.Reservation" 
 	parameterType="com.nakuh.web.cmm.Proxy">
 	SELECT @ROWNUM:=@ROWNUM+1 AS rownum,A.*
@@ -24,16 +23,10 @@
 	ORDER BY rownum
 	limit #{startRow},#{pageSize};
 	</select>
+	
 	<select id="countReservation" resultType="Integer">
 	  SELECT COUNT(*)
   	  FROM RESERVATION	
 	</select>
 	
-	
-	
-	
-
-	
-
-
 </mapper>
