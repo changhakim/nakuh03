@@ -85,6 +85,7 @@ app=(()=>{
 			 +'<link class="admincss" href="/web/resources/css/admin/light-bootstrap-dashboard.css?v=1.4.0" rel="stylesheet"/>'
 			 +'<link class="admincss" href="/web/resources/css/admin/demo.css" rel="stylesheet" />'
 			 +'<link class="rescss" rel="stylesheet" href="/web/resources/css/admin/pe-icon-7-stroke.css">';
+			 
 	
          rescss = '<link class="rescss" rel="stylesheet" href="/web/resources/css/reservation/common.css">'
 			 +'<link class="rescss" rel="stylesheet" type="text/css" href="/web/resources/css/reservation/modal.css"> '

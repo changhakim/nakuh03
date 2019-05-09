@@ -13,7 +13,27 @@
 	RESNUM, STARTDATE, RESNAME, MID, PHONE, 
 	RESDATE, RESCOUNT, DEPOSIT, MESSAGE, PRONUM, PRONAME, AMPM) VALUES(
 	#{resnum},#{startdate},#{resname},#{mid},#{phone},#{resdate},#{rescount},#{deposit},#{message}, #{pronum}, #{proname}, #{ampm});
-	
 	</insert>
+	<select id="selectpageReservations" resultType="com.nakuh.web.domain.Reservation" 
+	parameterType="com.nakuh.web.cmm.Proxy">
+	SELECT @ROWNUM:=@ROWNUM+1 AS rownum,A.*
+	FROM (SELECT R.resnum,R.mid,R.resname,P.company,P.proname,R.startdate,R.ampm,R.phone,R.resdate,R.deposit,P.category
+			FROM RESERVATION R JOIN PRODUCTS P ON
+			R.pronum = P.pronum
+	   		ORDER BY resnum DESC) A,(SELECT @ROWNUM:=0) TMP
+	ORDER BY rownum
+	limit #{startRow},#{pageSize};
+	</select>
+	<select id="countReservation" resultType="Integer">
+	  SELECT COUNT(*)
+  	  FROM RESERVATION	
+	</select>
+	
+	
+	
+	
+
+	
+
 
 </mapper>
