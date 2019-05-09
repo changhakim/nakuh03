@@ -54,6 +54,50 @@
 <select id="selectAllArticlesList" resultType="com.nakuh.web.domain.Article"
 								parameterType="com.nakuh.web.domain.Article">
 		SELECT  @ROWNUM:=@ROWNUM+1 AS rownum, R.*
+		FROM 	(SELECT DISTINCT artnum,content, artdate, 
+				concat(artphoto,'.',extension) as artphoto,
+				F.folloid as mname, F.mid,
+				(SELECT profilephoto FROM MEMBERS WHERE MID LIKE mname) profilephoto,
+				(SELECT COUNT(*) FROM ARTICLES WHERE MID LIKE #{mid}) artcount,
+			   (SELECT COUNT(*) FROM FOLLOWERS WHERE MID LIKE #{mid}) followerCount,
+			   (SELECT COUNT(*) FROM FOLLOWERS WHERE folloid LIKE #{mid}) folloingCount,
+			   (SELECT profilephoto FROM MEMBERS WHERE MID LIKE #{mid}) userpo,
+			   (SELECT GROUP_CONCAT(DISTINCT '#',P.tagname SEPARATOR '.') AS tag
+					FROM POSTTAG P
+					WHERE artseq LIKE artnum) as tag
+						FROM ARTICLES A 
+						JOIN (
+							SELECT * 
+							FROM FOLLOWERS
+							WHERE mid LIKE #{mid}) F
+						ON A.mid LIKE F.folloid 
+		ORDER BY artnum DESC) R , (SELECT @ROWNUM:=0) TMP 
+		ORDER BY rownum  
+		LIMIT #{startRow},#{pageSize}
+		
+		
+<!-- 		
+		SELECT  @ROWNUM:=@ROWNUM+1 AS rownum, R.*
+		FROM 	(SELECT DISTINCT artnum,content, artdate, 
+				concat(artphoto,'.',extension) as artphoto,
+				F.folloid as mname, F.mid,
+				(SELECT profilephoto FROM MEMBERS WHERE MID LIKE mname) profilephoto,
+				(SELECT COUNT(*) FROM ARTICLES WHERE MID LIKE #{mid}) artcount,
+			   (SELECT COUNT(*) FROM FOLLOWERS WHERE MID LIKE #{mid}) followerCount,
+			   (SELECT COUNT(*) FROM FOLLOWERS WHERE folloid LIKE #{mid}) folloingCount,
+			   (SELECT profilephoto FROM MEMBERS WHERE MID LIKE #{mid}) userpo
+						FROM ARTICLES A
+						JOIN (
+							SELECT * 
+							FROM FOLLOWERS
+							WHERE mid LIKE #{mid}) F
+						ON A.mid LIKE F.folloid 
+		ORDER BY artnum DESC) R , (SELECT @ROWNUM:=0) TMP 
+		ORDER BY rownum  
+		LIMIT #{startRow},#{pageSize} -->
+		
+		<!-- 
+		SELECT  @ROWNUM:=@ROWNUM+1 AS rownum, R.*
 		FROM 	(SELECT DISTINCT artnum, content, artdate, 
 				concat(artphoto,'.',extension) as artphoto,
 				F.folloid as mname,
@@ -66,7 +110,7 @@
 						ON A.mid LIKE F.folloid 
 		ORDER BY artnum DESC) R , (SELECT @ROWNUM:=0) TMP 
 		ORDER BY rownum  
-		LIMIT #{startRow},#{pageSize}
+		LIMIT #{startRow},#{pageSize} -->
 </select>
 
 <select id="countnavArticle" resultType="com.nakuh.web.domain.Article"
