@@ -5,9 +5,11 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.nakuh.web.service.ReservationService;
+import com.nakuh.web.domain.Reservation;
 import com.nakuh.web.service.ReservationServiceImpl;
 import com.nakuh.web.service.TxService;
 
@@ -15,6 +17,7 @@ import com.nakuh.web.service.TxService;
 public class AdminController {
 	@Autowired Map<String, Object> map;
 	@Autowired TxService tx;
+	@Autowired Reservation rs;
 	@Autowired ReservationServiceImpl resservice;
 	@Autowired Proxy pxy;
 	
@@ -39,5 +42,12 @@ public class AdminController {
 		
 		
 		return map;
-	}	
+	}
+	@PostMapping("/admin/search")
+	public Map<?, ?> searchreservation(@RequestBody Reservation param){
+		map.clear();
+		System.out.println(param.toString());
+		map = resservice.adminSearchReservation(param);
+		return map;
+	}
 }

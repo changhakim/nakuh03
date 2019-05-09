@@ -82,6 +82,9 @@ eunyeong = (()=>{
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////*바다 메인화면 */    
     let ocean =()=>{
         $(m_ctt).empty();
+        $('#datepicker2').remove();
+        $('#date_search').remove();
+        
         $(s_ctt).attr('style','background:#242c36 url(/web/resources/img/reservation/ocean.jpg)');
         $(document).ready(
         		 $("<input type='text' class='form-control border-right hasDatepicker' id='date_search' placeholder='로드 테스트 중 ...'>")
@@ -124,8 +127,8 @@ eunyeong = (()=>{
         	alert('키워드검색');
         	search();
         });
-        let cate = 'river';
 
+        let cate = 'river';
         pro_infinitemove(cate);
         
     };
@@ -142,12 +145,11 @@ eunyeong = (()=>{
         });
         
         let cate = 'hotel';
-
         pro_infinitemove(cate);
         
     };
     
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*상품 카테고리별로 보기 */
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////*상품 카테고리별로 보기 */
   /*  
     let prolist =x=>{
    	alert('prolist진입 x값은 무엇일까여' + x);
@@ -220,13 +222,12 @@ eunyeong = (()=>{
 		});
 		
 		let pro_fetchList=x=>{
-			alert(x);
 	        if(isEnd == true){
 	        	alert('if들어옴');
 	        	return;
 	        }
 	        let startNo = $("#main-container").children('.col-sm-4').last().data("no") || 0;
-	        alert('No::'+startNo);
+	        /*alert('No::'+startNo);*/
 			let cate =x;
 			let page = 0;
 			let url = _+'/catesearch/'+ cate;
@@ -276,30 +277,40 @@ eunyeong = (()=>{
 	let pro_renderList =(j)=>{
 	   	$('<div class="col-sm-4" data-no="'+j.rownum+'">'
 	   			+'	<div class="left-widget-sidebar">'
-	   			+'		<div class="card-widget bg-white user-card" style="height:400px">'              
+	   			+'		<div class="card-widget bg-white user-card" style="height:360px">'              
 	   			+'			<div id="proimg" class="u-img img-cover" style="background-image: url(/web/resources/img/reservation/'+ j.proimg + ');background-size:cover; height: 300px;"></div>'
 	   			+'				<div class="u-content"></br></br>'
-	   			+'				<h5>' + j.company + '</h5>'
-	   			+'				<p class="text-muted">' + j.price +'</p>'
+	   			+'				<h5 style="text-align:left">' + j.company + '</h5>'
+	   			+'				<p class="text-muted" style="text-align:right">' + j.price +'</p>'
 	   			+'				</div>'
 	   			+'			</div>'
 	   			+'		</div>'
 	   			+'	</div>'
 	   			+'</div>')
-	       			.attr('id', j.pronum)
-	       			.appendTo(m_ctt);
-
-/*			
-
-		+'     		<div id="item" style="top: 5px;">'
-		+'                  <div class="list-group-item list-group-item-action" id="comments_my" style="height: 58px; border: none; display: -webkit-box;"> '
-		+'                <img class="img-circle" alt="Cinque Terre" src="resources/img/aquagram/profilephoto/'+d.als.profilephoto+'" style="width: 40px; height: 40px; position: center"/>'
-		+'                 <div style="display: -webkit-box;"><h5 style="top:0px; left: 7px; font-weight:bold;">'+d.als.mid+'</h5><div><h6 id="contag" style="left: 15px; width: 90%;">'+d.als.content+'</h6></div></div>'
-		+'                   <div style="font-size: 5px; left: 105px; top: 8px;">'+d.als.artdate+'</div>'
-		+'                </div> '
-		+'              </div> '
-*/
-};
+	       		.attr('id', j.pronum)
+	       		.appendTo(m_ctt)
+	       		.click(function(){
+       				let proid = $(this).attr('id');
+           				$.ajax({
+           		    		url:_+'/products/'+ proid,
+           		    		type:'POST',
+           		    		data : JSON.stringify(proid),
+           		    		dataType :'json',
+           		    		contentType :'application/json',
+           		    		success : d=>{
+           		    			alert('AJAX성공' + d.regidate);
+           		    			let aa = {proname:d.proname,price:d.price,company:d.company,
+           		    					  address:d.address,category:d.category,proimg:d.proimg,
+           		    					  regidate:d.regidate,lastday:d.lastday,
+           		    					  fishname:d.fishname,phone:d.phone,lat:d.lat,lng:d.lng}
+           		    			detail(aa);
+           		    		},
+           		    		error :e=>{
+           		    			alert('AJAX실패');
+           		    		}
+           			});
+	       		})
+	};
     
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////*일부 검색창 : 키워드 */
 
@@ -472,7 +483,11 @@ eunyeong = (()=>{
     }*/
     
 <<<<<<< HEAD
+<<<<<<< HEAD
     /*상품예약 : 입력*/
+=======
+/*    상품예약 : 입력
+>>>>>>> 1aefe57bc1c18c2ee5d11aee9d21af5c0aa05919
     let prdres =x=>{
     	alert('상품예약 진입 ! ');
     	$(m_ctt).empty();
@@ -505,9 +520,14 @@ eunyeong = (()=>{
 					}
 				});	
 			});
+<<<<<<< HEAD
     };
     /*상세정보 : 상품 */
 =======
+=======
+    };*/
+    /*상세정보 : 상품 */
+>>>>>>> 1aefe57bc1c18c2ee5d11aee9d21af5c0aa05919
     
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*상품정보 : 상세 */
 >>>>>>> b1b5374cf6c96ec080a519dc4861bb1e97a33cb0
@@ -575,8 +595,12 @@ eunyeong = (()=>{
   			$('<div class="checkbox"><label><input type="checkbox" value=""> 상품명 : '+ x.proname + '[가격 : ' +x.price+ '원]</label></div>').appendTo('.modal-body');
   			$('<button id="paybtn" type="button" class="btn btn-default" data-dismiss="modal">결제하기</button>').prependTo('.modal-footer').click(e=>{
 <<<<<<< HEAD
+<<<<<<< HEAD
   				prdres();
 =======
+=======
+  				prdres();
+>>>>>>> 1aefe57bc1c18c2ee5d11aee9d21af5c0aa05919
   				prdres(resinfo);
 >>>>>>> b1b5374cf6c96ec080a519dc4861bb1e97a33cb0
   			});
