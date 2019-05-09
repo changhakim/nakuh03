@@ -15,67 +15,127 @@ app=(()=>{
 		$.getScript($.js()+'/aquagram/jeonguk.js'),
 		$.getScript($.js()+'/admin/changha.js')
 		).done(()=>{
-			css();
-			kakao($.ctx());
-			$(homecss).appendTo('head');
-			$('#loginbtn').click(function(e){
-				$('#id01').css('display','block');
-				if(e.target === $('#id01')){
-				$('#id01').css('display','none');
-				}
-				$('.close1').click(()=>{
-					$('#id01').css('display','none');
-				})
-			})
-			$('#login').click(()=>{
-				$('#userid').val();
-				$('#password').val();
-				alert('로그인')
-			});
-
-			$('#ocean').click(e=>{
-				e.preventDefault();
-				$('.homecss').remove();
-				$('.instacss').remove();
-				$('.admincss').remove();
-				$(rescss).appendTo('head')
-				eunyeong.init('ocean');
-			})
-			$('#river').click(e=>{
-				e.preventDefault();
-				$('.homecss').remove();
-				$('.instacss').remove();
-				$('.admincss').remove();
-				$(rescss).appendTo('head')
-				eunyeong.init('river');
-			})
-			$('#hotel').click(e=>{
-				e.preventDefault();
-				$('.homecss').remove();
-				$('.instacss').remove();
-				$('.admincss').remove();
-				$(rescss).appendTo('head')
-				eunyeong.init('hotel');
-			})
-			$('#aqua').click(e=>{
-				e.preventDefault();
-				$('.homecss').remove();
-				$('.rescss').remove();
-				$(instacss).appendTo('head');
-				jeonguk.init();
-				alert('아쿠아리움')
-			})
-			$('#adminbtn').click(()=>{
-				$('.homecss').remove();
-				$('.rescss').remove();
-				$('.instacss').remove();
-				$(admincss).appendTo('head')
-				changha.init();
-				
-			})
-
+			app_defualt_loader();
+	        alert('userid::::'+sessionStorage.getItem('userid'));
+	        alert('photo::::'+sessionStorage.getItem('userpo'));
+	       
+			
+			
+			
 		});
-	}
+	};
+	let app_defualt_loader =()=>{
+		css();
+		logManager();
+		$(homecss).appendTo('head');
+	
+/*		$('#loginbtn').click(function(e){
+			$('#id01').css('display','block');
+			if(e.target === $('#id01')){
+			$('#id01').css('display','none');
+			}
+			$('.close1').click(()=>{
+				$('#id01').css('display','none');
+			})
+		})*/
+		$('#login').click(()=>{
+			$('#userid').val();
+			$('#password').val();
+			alert('로그인')
+		});
+
+		$('#ocean').click(e=>{
+			e.preventDefault();
+			$('.homecss').remove();
+			$('.instacss').remove();
+			$('.admincss').remove();
+			$(rescss).appendTo('head')
+			eunyeong.init('ocean');
+		})
+		$('#river').click(e=>{
+			e.preventDefault();
+			$('.homecss').remove();
+			$('.instacss').remove();
+			$('.admincss').remove();
+			$(rescss).appendTo('head')
+			eunyeong.init('river');
+		})
+		$('#hotel').click(e=>{
+			e.preventDefault();
+			$('.homecss').remove();
+			$('.instacss').remove();
+			$('.admincss').remove();
+			$(rescss).appendTo('head')
+			eunyeong.init('hotel');
+		})
+		$('#aqua').click(e=>{
+			e.preventDefault();
+			$('.homecss').remove();
+			$('.rescss').remove();
+			$(instacss).appendTo('head');
+			jeonguk.init();
+			alert('아쿠아리움')
+		})
+		$('#adminbtn').click(()=>{
+			$('.homecss').remove();
+			$('.rescss').remove();
+			$('.instacss').remove();
+			$(admincss).appendTo('head')
+			changha.init();
+			
+		})
+			
+		
+	
+
+		
+		
+		
+	};
+	
+	let logManager =()=>{
+
+		if(sessionStorage.getItem('userid') != null){
+			alert('널이 아니다.');
+			 $('#loginbtn').text('LOGOUT');
+            $('#loginbtn').attr('id','logoutbtn');
+            $('#logoutbtn').click(function(e){
+           	 e.preventDefault();
+           	 logout();
+            	});
+            } 
+		if(sessionStorage.getItem('userid') === null){
+			alert('널이다.');
+			login();
+			
+		}
+
+			$('kakao_login_btn').click(function(e){
+				kakao();
+			});
+	};
+	let login =()=>{
+		$('#loginbtn').click(function(e){
+			$('#id01').css('display','block');
+			if(e.target === $('#id01')){
+			$('#id01').css('display','none');
+			}
+			$('.close1').click(()=>{
+				$('#id01').css('display','none');
+			})
+		});
+	};
+	
+	let logout =()=>{
+        	 $('#id01').css('display','none');
+        	 sessionStorage.removeItem('userid');
+        	 sessionStorage.removeItem('userpo');
+             alert('userid::::'+sessionStorage.getItem('userid'));
+             alert('photo::::'+sessionStorage.getItem('userpo'));
+             $('#logoutbtn').attr('id','loginbtn').text('LOGIN');
+             login();
+	};
+	
 	let css = ()=>{
 		 homecss = '<link class="homecss" rel="stylesheet" type="text/css" href="/web/resources/css/home/homemain.css" />'
 			+'<link class="homecss" href="https://fonts.googleapis.com/css?family=Raleway:300,400,600,600i,700" rel="stylesheet">'
@@ -121,8 +181,7 @@ app=(()=>{
 	};
 			
 	
-	let kakao=(x)=>{
-		
+	let kakao=()=>{
         $('#kakao_login_btn').attr('style','cursor:pointer').click(function loginWithKakao() {
         	Kakao.init('f7d32ac01021f4eb79136a2e7d1c5523');
         	Kakao.Auth.login({
@@ -132,30 +191,20 @@ app=(()=>{
                          url: '/v1/user/me',
                          success: function(res) {
                        	  alert('카카오 개인정보 제공 동의?=====2');
-                        	 alert('??'+$.ctx());
-                               alert(JSON.stringify(res));
+                       	  		/* alert(JSON.stringify(res));
                                alert(JSON.stringify(authObj));
                                console.log(res.id);
                                console.log(res.kaccount_email);
                                console.log(res.properties['nickname']);
-                               console.log(authObj.access_token);
+                               console.log(authObj.access_token);*/
                                Kakao.Auth.setAccessToken(authObj.access_token, true);
-                               sessionStorage.setItem('session', Kakao.Auth.getAccessToken());
+                               sessionStorage.setItem('kakaosession', Kakao.Auth.getAccessToken());
                                let resdata = { 
                             	  id:res.id,
                             	  email:res.kaccount_email,
                             	  profileimg:res.properties['profile_image'],
                             	  name:res.properties['nickname']
                                };
-                               /* 새로 가입할 경우 이름, 휴대폰, 생년월일 받을지 안받을지 고민. 
-                                * $('#change_login_form').html('<label for="uname"><b>이름</b></label>'
-									+'<input type="text" placeholder="성함입력" name="mname" id="mname" required>'
-									+'<label for="mphone"><b>휴대폰번호</b></label>'
-									+'<input type="mphone" placeholder="mphone" name="mphone" id="mphone" required>'
-									+'<label for="psw"><b>생년월일</b></label>'
-									+'<input type="birth" placeholder="YYMMDD" name="birth" id="birth" required>'
-									+'<button id="add_info" type="submit"> 입력 </button>');
-                               */
                                $.ajax({
                                    url: $.ctx()+'/login/kakao/'+res.id,
                                    type: 'POST',
@@ -164,29 +213,40 @@ app=(()=>{
                                    contentType : "application/json; charset=UTF-8",
                                    success: d=>{
                                        alert(d.msg);
+
+ 
                                        $('#id01').attr('style','display:none');//닫기 
                                        $('#loginbtn').text('LOGOUT');
-                                       $('#loginbtn').attr('id','logout');
+                                       $('#loginbtn').attr('id','logoutbtn');
                                        $.each(d.m,(i,j)=>{
                                     	   alert('??::'+j.mid);
+                                           sessionStorage.setItem('userid',j.mid);
+                                           sessionStorage.setItem('userpo',j.profilephoto);
                                        });
-                                       
+                                       alert('userid::::'+sessionStorage.getItem('userid'));
+                                       alert('photo::::'+sessionStorage.getItem('userpo'));
                                        //location.assign(x+"/ngh");
                                       
+                                       logManager();
                                    },
                                    error:function(err){
                                        alert('실패');
-                                       kakao(x);
+                                       //kakao();
                                    }
                                });
+                               
                              }
                            });
+              	
               },
               fail: function(err) {
                 alert(JSON.stringify(err));
               }
+              
             });
+        	
           });
+       
 	};
 	
 	
