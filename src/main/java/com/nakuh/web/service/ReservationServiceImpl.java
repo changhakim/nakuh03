@@ -1,6 +1,7 @@
 package com.nakuh.web.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +13,7 @@ import com.nakuh.web.mapper.ReservationMapper;
 public class ReservationServiceImpl implements ReservationService {
 
 	@Autowired ReservationMapper resMap;
+	@Autowired Reservation res;
 	@Override
 	public void createReservation(Reservation param) {
 		resMap.insertReservation(param);
@@ -49,6 +51,45 @@ public class ReservationServiceImpl implements ReservationService {
 	@Override
 	public void removeReservation(Reservation param) {
 		resMap.deleteReservation(param);
+	}
+
+	@Override
+	public Map<String, Object> adminSearchReservation(Reservation param) {
+		param.getSearchword();
+		param.getSearchdate();
+		param.getResselect();
+		param.getProselect();
+		if(param.getResselect()=="출발날짜"&&param.getSearchword()==""&&param.getProselect()=="상품종류") {
+			
+		}
+		if(param.getResselect()=="예약날짜"&&param.getSearchword()==""&&param.getProselect()=="상품종류") {
+			
+		}
+		if(param.getResselect()=="출발날짜"&&param.getSearchword()==""&&param.getProselect()!="상품종류") {
+			
+		}
+		if(param.getResselect()=="예약날짜"&&param.getSearchword()==""&&param.getProselect()!="상품종류") {
+			
+		}
+		if(param.getResselect()=="출발/예약"&&param.getSearchword()==""&&param.getProselect()!="상품종류") {
+			
+		}
+		if(param.getResselect()=="출발날짜"&&param.getSearchword()!=""&&param.getProselect()=="상품종류") {
+			
+		}
+		if(param.getResselect()=="예약날짜"&&param.getSearchword()!=""&&param.getProselect()=="상품종류") {
+			
+		}
+		if(param.getResselect()=="출발/예약"&&param.getSearchword()!=""&&param.getProselect()!="상품종류") {
+			
+		}
+		if(param.getResselect()=="출발날짜"&&param.getSearchword()!=""&&param.getProselect()!="상품종류") {
+			
+		}
+		if(param.getResselect()=="예약날짜"&&param.getSearchword()!=""&&param.getProselect()!="상품종류") {
+			
+		}
+		return null;
 	}
 
 }
