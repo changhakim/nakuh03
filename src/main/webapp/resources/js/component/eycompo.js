@@ -440,9 +440,6 @@ eycompo ={
 			+'								  <input id="rescount" type="text" value="1" style="width: 420px; text-align: center;">'
 			+'								  <button class="counter-plus btn btn-primary" style="height: 43px; padding: 6px 12px; background-color: #ff724c; border-color: #ff724c;">+</button>'
 			+'								  </div>'
-			+'								  <p>출발일</p> <input id="departdate" type="text" placeholder="출발일이 정해지셨나요? yyyy-mm-dd 형식으로 입력해주세요" style="width: 500px;">'
-<<<<<<< HEAD
-=======
 			+'							  </div>'
 			+'                            <div class="auth_box input_btn">'
 			+'								 <p>전달사항</p> <input id="message" type="text" placeholder="업체에 전달사항이 있으면 입력 없으면 패스" style="width: 500px; height: 100px;">' 
@@ -459,7 +456,6 @@ eycompo ={
 			+'								  <input id="rescount" type="text" value="1" style="width: 420px; text-align: center;">'
 			+'								  <button class="counter-plus btn btn-primary" style="height: 43px; padding: 6px 12px; background-color: #ff724c; border-color: #ff724c;">+</button>'
 			+'								  </div>'
->>>>>>> 1aefe57bc1c18c2ee5d11aee9d21af5c0aa05919
 			+'							  </div>'
 			+'                            <div class="auth_box input_btn">'
 			+'								 <p>전달사항</p> <input id="message" type="text" placeholder="업체에 전달사항이 있으면 입력 없으면 패스" style="width: 500px; height: 100px;">' 
@@ -599,17 +595,10 @@ eycompo ={
 			+'                                <p class="ico_goods">주문 목록</p>'
 			+'                            </div>'
 			+'                            <div class="inner">'
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 			+'                                <p><span>상품</span>광어/우럭(오전)'
-=======
-=======
 			+'                                <p><span>상품</span>광어/우럭(오전)'
->>>>>>> 1aefe57bc1c18c2ee5d11aee9d21af5c0aa05919
-=======
 			+'                                <p><span>상품</span>광어/우럭(오전)'
->>>>>>> 83a9cda29f208c664a349fdc656e87106ac00fa0
+
 			+'                                <p><span>상품</span> <p id="proname">광어/우럭(오전)</p>'
 			+'                                </p>'
 			+'                            </div>'
@@ -620,13 +609,6 @@ eycompo ={
 			+'                            </div>'
 			+'                            <div class="inner">'
 			+'                                <p>총 상품금액<span id="totalpay">40,000원</span></p>'
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 1aefe57bc1c18c2ee5d11aee9d21af5c0aa05919
-=======
->>>>>>> 83a9cda29f208c664a349fdc656e87106ac00fa0
 			+'                                <p style="display: none;">상품 할인<span><span style="display: inline;">- 0원</span></span>'
 			+'                                </p>'
 			+'                                <p style="display: none;">장바구니 할인<span><span style="display: inline;">- 0원</span></span>'
@@ -636,13 +618,6 @@ eycompo ={
 			+'                            <div class="price_box">'
 			+'                                <dl class="clearfix"><dt>결제금액</dt>'
 			+'                                    <dd><span style="display: inline;">40,000</span><span>원</span></dd>'
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 1aefe57bc1c18c2ee5d11aee9d21af5c0aa05919
-=======
->>>>>>> 83a9cda29f208c664a349fdc656e87106ac00fa0
 			+'                            </div>'
 			+'                            <div class="price_box">'
 			+'                                <dl class="clearfix"><dt>결제금액</dt>'

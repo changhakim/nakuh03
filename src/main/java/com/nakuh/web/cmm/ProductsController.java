@@ -74,7 +74,7 @@ public class ProductsController {
 	@PostMapping("/products/{proid}")
 	public Map<?, ?> proinfo(@PathVariable String proid) {
 		logger.info("=======  ProductController proinfo:상품상세조회  진입 ======");
-<<<<<<< HEAD
+
 		/* 예약상세용 : 캘린더 화면 */
 		 
 		/* 기준 : 오늘의 날짜 구하기 */
@@ -98,8 +98,6 @@ public class ProductsController {
 		 System.out.println("연도 : " + year + " 월 : " + month + " 일 : " + lastday ); 
 		
 		product.setRegidate(today);
-=======
->>>>>>> 428b9bea320018ac3b6135be42fedc6b5ec4b132
 		product.setPronum(proid);
 		product = productService.findProduct(product);
 		map.clear();
