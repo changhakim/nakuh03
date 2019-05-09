@@ -484,6 +484,9 @@ eunyeong = (()=>{
     
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 83a9cda29f208c664a349fdc656e87106ac00fa0
     /*상품예약 : 입력*/
 =======
 /*    상품예약 : 입력
@@ -523,14 +526,16 @@ eunyeong = (()=>{
 <<<<<<< HEAD
     };
     /*상세정보 : 상품 */
+<<<<<<< HEAD
 =======
 =======
     };*/
     /*상세정보 : 상품 */
 >>>>>>> 1aefe57bc1c18c2ee5d11aee9d21af5c0aa05919
+=======
+>>>>>>> 83a9cda29f208c664a349fdc656e87106ac00fa0
     
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*상품정보 : 상세 */
->>>>>>> b1b5374cf6c96ec080a519dc4861bb1e97a33cb0
     let detail =x=>{
     	alert('상세 진입');
         $(s_ctt).remove();
@@ -596,13 +601,16 @@ eunyeong = (()=>{
   			$('<button id="paybtn" type="button" class="btn btn-default" data-dismiss="modal">결제하기</button>').prependTo('.modal-footer').click(e=>{
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   				prdres();
 =======
 =======
   				prdres();
 >>>>>>> 1aefe57bc1c18c2ee5d11aee9d21af5c0aa05919
+=======
+  				prdres();
+>>>>>>> 83a9cda29f208c664a349fdc656e87106ac00fa0
   				prdres(resinfo);
->>>>>>> b1b5374cf6c96ec080a519dc4861bb1e97a33cb0
   			});
   			$('<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>').appendTo('.modal-footer');
         });

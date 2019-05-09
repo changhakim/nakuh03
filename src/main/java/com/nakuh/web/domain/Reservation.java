@@ -8,6 +8,13 @@ import lombok.Data;
 public class Reservation {
 <<<<<<< HEAD
 <<<<<<< HEAD
+=======
+
+	private String resnum, startdate, resname, mid, phone, resdate, rescount, deposit, message, pronum, proname, ampm;
+
+=======
+>>>>>>> 83a9cda29f208c664a349fdc656e87106ac00fa0
+<<<<<<< HEAD
 	private String resnum, startdate, resname, mid, phone, resdate, rescount, deposit, message, pronum, proname, ampm,company,category;
 =======
 <<<<<<< HEAD
@@ -16,8 +23,12 @@ public class Reservation {
 	private String resnum, startdate, resname, mid, phone, resdate, rescount, deposit, message, pronum, proname, ampm;
 >>>>>>> b1b5374cf6c96ec080a519dc4861bb1e97a33cb0
 >>>>>>> 428b9bea320018ac3b6135be42fedc6b5ec4b132
+<<<<<<< HEAD
 =======
 	private String resnum, startdate, resname, mid, phone, resdate, rescount, deposit, message, pronum, proname, ampm,company,category
 	,searchdate,resselect,proselect,searchword;
 >>>>>>> 1aefe57bc1c18c2ee5d11aee9d21af5c0aa05919
+=======
+>>>>>>> 7f3b3b2b2060df0e390461a72ba39795e81e5448
+>>>>>>> 83a9cda29f208c664a349fdc656e87106ac00fa0
 }

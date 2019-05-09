@@ -430,7 +430,6 @@ eycompo ={
 			+'                    <div class="auth_area reserve_area">'
 			+'                        <div class="box_title clearfix">'
 			+'                            <p class="ico_auth">예약자 정보</p>'
-<<<<<<< HEAD
 			+'                        </div>'
 			+'                        <div class="inner clearfix">'
 			+'                            <div class="auth_box">'
@@ -467,7 +466,6 @@ eycompo ={
 			+'								 </br></br><a id="inputbtn" class="active">입력</a>'
 			+'							  </div>'
 			+'                        </div>'
-=======
 			+'                        </div>'
 			+'                        <div class="inner clearfix">'
 			+'                            <div class="auth_box">'
@@ -484,13 +482,11 @@ eycompo ={
 			+'								 </br></br><a id="inputbtn" class="active">입력</a>'
 			+'							  </div>'
 			+'                        </div>'
->>>>>>> b1b5374cf6c96ec080a519dc4861bb1e97a33cb0
 			+'                    </div>'
 			+'                    <div>'
 			+'                        <div class="reserve_area secInner result_area">'
 			+'                            <div class="box_title clearfix">'
 			+'                                <p class="ico_goods">예약 상품 정보</p>'
-<<<<<<< HEAD
 			+'                            </div>'
 			+'                            <div class="inner reserve_tb">'
 			+'                                <div class="reserve_td_tit clearfix">'
@@ -519,7 +515,6 @@ eycompo ={
 			+'                                    </dl>'
 			+'                                </div>'
 			+'                            </div>'
-=======
 			+'                            </div>'
 			+'                            <div class="inner reserve_tb">'
 			+'                                <div class="reserve_td_tit clearfix">'
@@ -576,7 +571,6 @@ eycompo ={
 			+'                                    </dl>'
 			+'                                </div>'
 			+'                            </div>'
->>>>>>> b1b5374cf6c96ec080a519dc4861bb1e97a33cb0
 			+'                            <!---->'
 			+'                            <!---->'
 			+'                        </div>'
@@ -607,13 +601,16 @@ eycompo ={
 			+'                            <div class="inner">'
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 			+'                                <p><span>상품</span>광어/우럭(오전)'
 =======
 =======
 			+'                                <p><span>상품</span>광어/우럭(오전)'
 >>>>>>> 1aefe57bc1c18c2ee5d11aee9d21af5c0aa05919
+=======
+			+'                                <p><span>상품</span>광어/우럭(오전)'
+>>>>>>> 83a9cda29f208c664a349fdc656e87106ac00fa0
 			+'                                <p><span>상품</span> <p id="proname">광어/우럭(오전)</p>'
->>>>>>> b1b5374cf6c96ec080a519dc4861bb1e97a33cb0
 			+'                                </p>'
 			+'                            </div>'
 			+'                        </div>'
@@ -625,8 +622,11 @@ eycompo ={
 			+'                                <p>총 상품금액<span id="totalpay">40,000원</span></p>'
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> 1aefe57bc1c18c2ee5d11aee9d21af5c0aa05919
+=======
+>>>>>>> 83a9cda29f208c664a349fdc656e87106ac00fa0
 			+'                                <p style="display: none;">상품 할인<span><span style="display: inline;">- 0원</span></span>'
 			+'                                </p>'
 			+'                                <p style="display: none;">장바구니 할인<span><span style="display: inline;">- 0원</span></span>'
@@ -637,14 +637,16 @@ eycompo ={
 			+'                                <dl class="clearfix"><dt>결제금액</dt>'
 			+'                                    <dd><span style="display: inline;">40,000</span><span>원</span></dd>'
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 =======
 >>>>>>> 1aefe57bc1c18c2ee5d11aee9d21af5c0aa05919
+=======
+>>>>>>> 83a9cda29f208c664a349fdc656e87106ac00fa0
 			+'                            </div>'
 			+'                            <div class="price_box">'
 			+'                                <dl class="clearfix"><dt>결제금액</dt>'
 			+'                                    <dd><span id="totalprice" style="display: inline;">40,000</span><span>원</span></dd>'
->>>>>>> b1b5374cf6c96ec080a519dc4861bb1e97a33cb0
 			+'                                </dl>'
 			+'                            </div>'
 			+'                        </div>'
@@ -659,13 +661,11 @@ eycompo ={
 			+'                                </div>'
 			+'                            </div>'
 			+'                        </div>'
-<<<<<<< HEAD
 			+'                    </div>'
 			+'                    <div>'
 			+'                        <div><a class="reserve_btn gray mulbanf_btn">결제하기</a></div>'
 			+'                    </div>'
 			+'                </div>'
-=======
 			+'                    </div>'
 			+'                    <div>'
 			+'                        <div><a class="reserve_btn gray mulbanf_btn">결제하기</a></div>'
@@ -686,7 +686,6 @@ eycompo ={
 			+'        <div class="popupsm_opacity" style="display: none;">'
 			+'            <div class="sign_popup">'
 			                +'<div class="sign_inner"><a class="close_btn"><img src="data:image/png;base64,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" alt=""></a>                    <a class="sign_box"><img src="/vue/reserve_payment_dt/pub/static/img/signpop_01.ff95da0.png" alt=""></a></div>'
->>>>>>> b1b5374cf6c96ec080a519dc4861bb1e97a33cb0
 			+'            </div>'
 			+'        </section>'
 			+'        <div class="popupsm_opacity" style="display: none;">'
