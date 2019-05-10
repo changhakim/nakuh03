@@ -21,7 +21,6 @@ details,
 figcaption,
 figure,
 footer,
-header,
 hgroup,
 main,
 nav,
@@ -6797,110 +6796,6 @@ button.close {
 body {
   color: #585c65;
   font-size: 16px;
-}
-
-header {
-  max-height: 600px;
-  height: 600px;
-  overflow: hidden;
-}
-header img {
-  position: fixed;
-  top: 0px;
-  left: 50%;
-  margin-left: -600px;
-  width: 1200px;
-}
-@media screen and (min-width: 1200px) {
-  header img {
-    top: auto;
-    left: auto;
-    margin: 0;
-    width: 100%;
-  }
-}
-header .name {
-  font-size: 21px;
-  position: absolute;
-  top: 50px;
-  left: 50px;
-  color: white;
-}
-header .titles {
-  position: absolute;
-  bottom: 40%;
-  width: 100%;
-  text-align: center;
-}
-@media screen and (min-width: 1200px) {
-  header .titles {
-    bottom: 50%;
-  }
-}
-header h1, header h2 {
-  width: 100%;
-  color: white;
-  margin: 0;
-}
-header h1 {
-  text-transform: uppercase;
-  font-weight: 700;
-  font-size: 36px;
-  letter-spacing: 0.06em;
-  margin-bottom: 10px;
-}
-header h1 span {
-  display: block;
-}
-@media screen and (min-width: 992px) {
-  header h1 span {
-    display: inline;
-  }
-}
-header h2 {
-  font-size: 16px;
-  width: 70%;
-  margin: 0 auto;
-}
-@media screen and (min-width: 1200px) {
-  header h2 {
-    width: 100%;
-    margin: 0;
-  }
-}
-header .social {
-  position: absolute;
-  top: 55px;
-  right: 50px;
-  overflow: hidden;
-}
-header .social a {
-  float: left;
-  width: 26px;
-  height: 26px;
-  margin: 0 5px;
-  text-indent: -9999px;
-  background: url(../images/social-sprite.png) no-repeat;
-  opacity: 0.8;
-}
-header .social a:hover {
-  opacity: 1.0;
-}
-@media screen and (-webkit-min-device-pixel-ratio: 2), screen and (-min-device-pixel-ratio: 2) {
-  header .social a {
-    background: url(../images/social-sprite@2x.png) no-repeat;
-    -webkit-background-size: 76px 26px;
-    background-size: 76px 26px;
-  }
-}
-header .social a.facebook {
-  background-position: 0px 0px;
-}
-header .social a.twitter {
-  background-position: -25px 0px;
-}
-header .social a.instagram {
-  background-position: -50px 0px;
 }
 
 .instagram-wrap {

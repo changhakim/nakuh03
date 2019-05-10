@@ -16,7 +16,7 @@ public interface ArticleService {
 	public Article retrieveArticleDetail(String artnum);
 	public Article countnavArticles(Article art);
 	public int countArticles(String mid);
-	public boolean existsArticle(String searchWord);
+	public boolean existsArticle(Article art);
 	
 	public void modifyArticle(Article art);
 	public void removeArticle(Article art);
