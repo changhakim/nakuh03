@@ -9,7 +9,7 @@ import lombok.Data;
 
 @Component @Data @Lazy
 public class Proxy{
-	private String searchWord;
+	private String searchdate,resselect,proselect,searchword,number;
 	private int pageNum,pageSize,blockSize,
 				   startRow,endRow,startpage,endpage,
 				   prevBlock,nextBlock,totalCount;
@@ -17,7 +17,7 @@ public class Proxy{
 	 
 	public void carryOut(Map<?,?> paramMap) {
 		//page_num,page_size,blocksize,totalCount
-		searchWord = (String) paramMap.get("searchWord");
+		
 		this.pageNum =(paramMap.get("page_num")==null)?1:Integer.parseInt((String) paramMap.get("page_num"));
 		this.pageSize =(paramMap.get("page_size")==null)?5:Integer.parseInt((String) paramMap.get("page_size"));
 		
