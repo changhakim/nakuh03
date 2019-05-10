@@ -69,7 +69,10 @@ public class ProductsController {
 	@PostMapping("/products/{proid}")
 	public Map<?, ?> proinfo(@PathVariable String proid) {
 		logger.info("=======  ProductController proinfo:상품상세조회  진입 ======");
+<<<<<<< HEAD
+=======
 
+>>>>>>> 19a0bb56eb027bafc4f1e37dfe6f949d28f7cc9f
 		/* 예약상세용 : 캘린더 화면 */
 		 
 		/* 기준 : 오늘의 날짜 구하기 */
@@ -88,6 +91,10 @@ public class ProductsController {
 			 lastday = MAX_DAYS[month]; 
 		 }	
 		
+<<<<<<< HEAD
+=======
+		 System.out.println("연도 : " + year + " 월 : " + month + " 일 : " + lastday ); 
+>>>>>>> bf0a489c393347ca42b20b6af2cb5fc8bf352834
 		product.setRegidate(today);
 		product.setPronum(proid);
 		product = productService.findProduct(product);

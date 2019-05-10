@@ -36,6 +36,11 @@ public class ProductServiceImpl implements ProductService{
 
 	@Override
 	public Product findProduct(Product param) {
+<<<<<<< HEAD
+=======
+		Product product = proMap.selectProduct(param);
+		System.out.println("findProduct임플에서 값 " + product.getCategory());
+>>>>>>> bf0a489c393347ca42b20b6af2cb5fc8bf352834
 		return proMap.selectProduct(param);
 	}
 
