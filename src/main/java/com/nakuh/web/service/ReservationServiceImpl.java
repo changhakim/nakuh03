@@ -21,10 +21,6 @@ public class ReservationServiceImpl implements ReservationService {
 	@Override
 	public void createReservation(Reservation param) {
 		resMap.insertReservation(param);
-		System.out.println("serviceImpl 오늘날짜내나!!!!!!! " + param.getResdate());
-		System.out.println("가격 찍힌줄 알았는데.. 안찍혀?? " + String.valueOf(param.getDeposit()));
-		
-		resMap.insertReservation(param);
 	}
 
 	@Override
