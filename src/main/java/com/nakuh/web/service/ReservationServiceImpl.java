@@ -15,19 +15,8 @@ public class ReservationServiceImpl implements ReservationService{
 	@Autowired Reservation res;
 	@Override
 	public void createReservation(Reservation param) {
-		/*
-		 * resMap.insertReservation(param);
-		 * System.out.println("serviceImpl 오늘날짜내나!!!!!!! " + param.getDepodate());
-		 * System.out.println("날짜 안 나오니?" + param.getDepartdate());
-		 * System.out.println("가격 찍힌줄 알았는데.. 안찍혀?? " +
-		 * String.valueOf(param.getDeposit())); =======
-		 * System.out.println("serviceImpl 오늘날짜내나!!!!!!! " + param.getResdate());
-		 * System.out.println("가격 찍힌줄 알았는데.. 안찍혀?? " +
-		 * String.valueOf(param.getDeposit()));
-		 * 
-		 * >>>>>>> b1b5374cf6c96ec080a519dc4861bb1e97a33cb0
-		 * resMap.insertReservation(param);
-		 */	}
+		  resMap.insertReservation(param);
+		 	}
 
 	@Override
 	public List<Reservation> findAllReservation() {
@@ -61,7 +50,7 @@ public class ReservationServiceImpl implements ReservationService{
 
 	@Override
 	public Map<String, Object> adminSearchReservation(Reservation param) {
-		param.getSearchword();
+	/*	param.getSearchword();
 		param.getSearchdate();
 		param.getResselect();
 		param.getProselect();
@@ -94,8 +83,8 @@ public class ReservationServiceImpl implements ReservationService{
 		}
 		if(param.getResselect()=="예약날짜"&&param.getSearchword()!=""&&param.getProselect()!="상품종류") {
 			
-		}
-		return null;
+		}*/
+		return null;		
 	}
 
 }
