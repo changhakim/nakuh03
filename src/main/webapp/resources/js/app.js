@@ -16,12 +16,6 @@ app=(()=>{
 		$.getScript($.js()+'/admin/changha.js')
 		).done(()=>{
 			app_defualt_loader();
-<<<<<<< HEAD
-=======
-
-			
-			
->>>>>>> jeonguk
 		});
 	};
 	
