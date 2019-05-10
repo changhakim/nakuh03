@@ -16,7 +16,10 @@ app=(()=>{
 		$.getScript($.js()+'/admin/changha.js')
 		).done(()=>{
 			app_defualt_loader();
+<<<<<<< HEAD
 
+=======
+>>>>>>> 139e62e238d4dbe28a4662bf35ce813f478f2e1c
 	       
 			
 			
@@ -67,6 +70,7 @@ app=(()=>{
 			alert('아쿠아리움')
 		})
 		$('#adminbtn').click(()=>{
+			alert('들어옴')
 			$('.homecss').remove();
 			$('.rescss').remove();
 			$('.instacss').remove();
@@ -128,19 +132,21 @@ app=(()=>{
 		 homecss = '<link class="homecss" rel="stylesheet" type="text/css" href="/web/resources/css/home/homemain.css" />'
 			+'<link class="homecss" href="https://fonts.googleapis.com/css?family=Raleway:300,400,600,600i,700" rel="stylesheet">'
 			+'<link class="homecss" href="/web/resources/css/home/style.css" rel="stylesheet">';
-		
+		 
+		 
 		 admincss='<link class="admincss" href="/web/resources/css/admin/animate.min.css" rel="stylesheet"/>'
 			 +'<link class="admincss" href="/web/resources/css/admin/light-bootstrap-dashboard.css?v=1.4.0" rel="stylesheet"/>'
 			 +'<link class="admincss" href="/web/resources/css/admin/demo.css" rel="stylesheet" />'
-			 +'<link class="rescss" rel="stylesheet" href="/web/resources/css/admin/pe-icon-7-stroke.css">';
+			 +'<link class="admincss" rel="stylesheet" href="/web/resources/css/admin/pe-icon-7-stroke.css">';
 			 
 	
-         rescss = '<link class="rescss" rel="stylesheet" href="/web/resources/css/reservation/common.css">'
+		 rescss = '<link class="rescss" rel="stylesheet" href="/web/resources/css/reservation/common.css">'
 			 +'<link class="rescss" rel="stylesheet" type="text/css" href="/web/resources/css/reservation/modal.css"> '
 		 	 +'<link class="rescss" rel="stylesheet" href="/web/resources/css/reservation/main.css">'
              +'<link class="rescss" rel="stylesheet" href="/web/resources/css/reservation/navbar.css">'
              +'<link class="rescss" rel="stylesheet" href="/web/resources/css/reservation/resdetail.css">'
-             +'<link class="rescss" rel="stylesheet" href="/web/resources/css/reservation/prdpay.css">';            
+             +'<link class="rescss" rel="stylesheet" href="/web/resources/css/reservation/responsive_basic.css">'
+             +'<link class="rescss" rel="stylesheet" href="/web/resources/css/reservation/prdpay.css">';      
 	 
 		 instacss ='  <link rel="stylesheet" type="text/css" href="/web/resources/css/aquagram/style.css">'
 			 +'  <link class="instacss" rel="stylesheet" type="text/css" href="/web/resources/css/aquagram/animate.css">'
