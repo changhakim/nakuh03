@@ -585,7 +585,7 @@ jwcompo = {
 	            +		'<input type="file" id="photo"  name="photo" class="form-control" id="photo" placeholder=""  required="">'
 	            +	'<div class="invalid-feedback">'
 	            +			'</div>'
-	            +			'<input type="submit"  id="img_upload_btn">'
+/*	            +			'<input type="submit"  id="img_upload_btn">'*/
 	            +		'</form>'
 	            +	'</div>'
 	            +	'<div class="col-md-5 mb-5">'
@@ -594,7 +594,7 @@ jwcompo = {
 	            +		'<input type="file" class="form-control"  id="cc-cvv" placeholder="" required="">'
 	            +	'<div class="invalid-feedback">'
 	            +		'</div>'
-	            +		'<input type="submit" id="img_drag_btn">'
+/*	            +		'<input type="submit" id="img_drag_btn">'*/
 	            +		'</form>'
 	            +		'</div>'
 	            +	'</div>'

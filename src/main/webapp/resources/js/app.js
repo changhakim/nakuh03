@@ -16,16 +16,16 @@ app=(()=>{
 		$.getScript($.js()+'/admin/changha.js')
 		).done(()=>{
 			app_defualt_loader();
-<<<<<<< HEAD
 
-=======
->>>>>>> 139e62e238d4dbe28a4662bf35ce813f478f2e1c
-	       
-			
 			
 			
 		});
 	};
+	
+	//미사용시 삭제. 다른 js 에서 세션 안먹음.
+	let session_u ={userid:sessionStorage.getItem('userid'),
+					userpo:sessionStorage.getItem('userpo')};
+	
 	let app_defualt_loader =()=>{
 		css();
 		logManager();

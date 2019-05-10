@@ -375,6 +375,7 @@
 <!-- commonjs -->
 <script src="<%=application.getContextPath()%>/resources/js/app.js"></script>
 <script src="<%=application.getContextPath()%>/resources/js/router.js"></script>
+<script src="<%=application.getContextPath()%>/resources/js/common/fileupload.js"></script>
 <!-- changhajs -->
 <script src="<%=application.getContextPath()%>/resources/js/admin/changha.js"></script>
 <script src="<%=application.getContextPath()%>/resources/js/admin/adminres.js"></script>   
@@ -390,5 +391,6 @@
 <script>
 app.init('<%= application.getContextPath() %>');
 app.kakao();
+
 </script>
 </html>
