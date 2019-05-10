@@ -253,7 +253,7 @@ arti =(()=>{
 					+'						                    </div> '
 					+'						           <div class="row">'
 					+'						    <ul class="nav bs-docs-sidenav" style="-ms-overflow-style: none; overflow:scroll; width:100%; height:400px; border:1px solid #ddd; border-top: none;">'
-					+'						     		<div id="item" style="top: 5px;">'
+					+'						     		<div style="top: 5px;">'
 					+'										    <div class="form-group">'
 					+'										      <label for="focusedInput">tag</label>'
 					+'										      <input class="form-control" id="focusedInput" type="text">'
@@ -276,10 +276,10 @@ arti =(()=>{
 					+'						        </div>'
 					+'						  </div>'
 					
-			
+					
 			
 			);
-
+			$(jwcompo.img_upload_from()).appendTo('#but_items');
 		});
 	};
 	
