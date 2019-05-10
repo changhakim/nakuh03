@@ -16,7 +16,8 @@ auth =(()=>{
 				$.getScript($.js()+'/reservation/eunyeong.js')
 			).done(()=>{
 				defualt_loader();
-
+                alert('userid::::'+sessionStorage.getItem('userid'));
+                alert('photo::::'+sessionStorage.getItem('userpo'));
 				
 				
 
@@ -33,7 +34,7 @@ auth =(()=>{
 		$('#leftbar_content').empty();
 		css();
 		nav();
-		arti.arti_upload();
+		arti.arti_img_upload();
 		feed_infinitemove();
 		//중앙 네비 따라오는 옵션
 		$(document).ready(function() {

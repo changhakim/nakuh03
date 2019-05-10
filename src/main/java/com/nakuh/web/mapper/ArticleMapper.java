@@ -16,7 +16,7 @@ public interface ArticleMapper {
 	public Article selectArticlesDetail(String artnum);
 	public Article countnavArticle(Article art);
 	public int countArticles(String mid);
-	public boolean existsArticle(String searchWord);
+	public boolean existsArticle(Article art);
 	
 	public void updateArticle(Article art);
 	public void deleteArticle(Article art);

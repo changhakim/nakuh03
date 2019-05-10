@@ -16,22 +16,24 @@ app=(()=>{
 		$.getScript($.js()+'/admin/changha.js')
 		).done(()=>{
 			app_defualt_loader();
+<<<<<<< HEAD
+=======
+
+			
+			
+>>>>>>> jeonguk
 		});
 	};
+	
+	//미사용시 삭제. 다른 js 에서 세션 안먹음.
+	let session_u ={userid:sessionStorage.getItem('userid'),
+					userpo:sessionStorage.getItem('userpo')};
+	
 	let app_defualt_loader =()=>{
 		css();
 		logManager();
 		$(homecss).appendTo('head');
-	
-/*		$('#loginbtn').click(function(e){
-			$('#id01').css('display','block');
-			if(e.target === $('#id01')){
-			$('#id01').css('display','none');
-			}
-			$('.close1').click(()=>{
-				$('#id01').css('display','none');
-			})
-		})*/
+
 		$('#login').click(()=>{
 			$('#userid').val();
 			$('#password').val();
@@ -85,7 +87,6 @@ app=(()=>{
 	let logManager =()=>{
 
 		if(sessionStorage.getItem('userid') != null){
-			alert('널이 아니다.');
 			 $('#loginbtn').text('LOGOUT');
             $('#loginbtn').attr('id','logoutbtn');
             $('#logoutbtn').click(function(e){
@@ -94,7 +95,6 @@ app=(()=>{
             	});
             } 
 		if(sessionStorage.getItem('userid') === null){
-			alert('널이다.');
 			login();
 			
 		}
