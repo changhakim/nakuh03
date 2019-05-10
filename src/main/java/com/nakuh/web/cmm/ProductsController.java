@@ -45,16 +45,11 @@ public class ProductsController {
 	public Map<?, ?> cateAlllist(@PathVariable String cate,
 								@RequestBody Product param){
 		logger.info("=======  ProductController prosomelist:상품카테고리별 전체조회  진입 ======");
-		
 		map.clear();
 		product.setCategory(cate);
 		product.setPageSize(param.getPageSize());
 		product.setStartRow(param.getStartRow());
-		System.out.println("카테고리컨트롤러" + cate);
 		list = productService.findCateProducts(product);
-		System.out.println("들어온  카테고리 이름 : " + cate);
-		System.out.println("list를 찍어보자 " + list.toString());
-		
 		map.put("list", list);
 		return map;
 	}
@@ -80,12 +75,10 @@ public class ProductsController {
 		int year = 0, month = 0, day = 0, lastday = 0; 
 		String today = "";
 		Calendar cal = Calendar.getInstance();
-		System.out.println("오늘의 날짜  :" + cal);
 		year = cal.get(Calendar.YEAR);
 		month = cal.get(Calendar.MONTH) + 1;
-		day = cal.get(Calendar.DAY_OF_MONTH);
+		day = cal.get(Calendar.DATE);
 		today = year + "-" + month + "-" + day;
-		System.out.println("오늘의 날짜 : " + today);
 
 		/* 윤년에 따른 월의 마지막날을 계산 일자를 그린다.   */
 		 if(year % 4 ==0 && year % 100 != 0 || year % 400 ==0) {
@@ -93,8 +86,6 @@ public class ProductsController {
 		 }else { 
 			 lastday = MAX_DAYS[month]; 
 		 }	
-		
-		 System.out.println("연도 : " + year + " 월 : " + month + " 일 : " + lastday ); 
 		
 		product.setRegidate(today);
 		product.setPronum(proid);

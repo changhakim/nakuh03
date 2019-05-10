@@ -7,6 +7,6 @@ import lombok.Data;
 @Data @Component
 public class Article {
 	private String  artnum, content, artdate, artphoto, mid, extension
-					, comcount, profilephoto, mname, artCount, followerCount, folloingCount;
+					, comcount, profilephoto, userpo ,mname, artCount, followerCount, folloingCount, tag;
 	private int rownum,startRow, pageSize;
 }

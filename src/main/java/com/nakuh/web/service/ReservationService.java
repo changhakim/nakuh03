@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.stereotype.Component;
 
+import com.nakuh.web.cmm.Proxy;
 import com.nakuh.web.domain.Reservation;
 
 @Component
@@ -16,5 +17,5 @@ public interface ReservationService {
 	public int countReservation();
 	public void modifyReservation(Reservation param);
 	public void removeReservation(Reservation param);
-	public Map<String, Object> adminSearchReservation(Reservation param);
+	public Map<String, Object> adminSearchReservation(Proxy pxy1);
 }
