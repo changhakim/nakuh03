@@ -19,6 +19,7 @@ public class ReservationServiceImpl implements ReservationService{
 	@Autowired Map<String, Object> map;
 	@Override
 	public void createReservation(Reservation param) {
+<<<<<<< HEAD
 		/*
 		 * resMap.insertReservation(param);
 		 * System.out.println("serviceImpl 오늘날짜내나!!!!!!! " + param.getDepodate());
@@ -32,6 +33,10 @@ public class ReservationServiceImpl implements ReservationService{
 		 * >>>>>>> b1b5374cf6c96ec080a519dc4861bb1e97a33cb0
 		 * resMap.insertReservation(param);
 		 */	}
+=======
+		resMap.insertReservation(param);
+	}
+>>>>>>> 3087dcfe3cffaa4d2bc465ff845da52000a598b5
 
 	@Override
 	public List<Reservation> findAllReservation() {

@@ -13,12 +13,25 @@
 
 =======
 	INSERT INTO RESERVATION (
+<<<<<<< HEAD
 >>>>>>> b246bade3d506c2db4e0d67ad84d1fbce3b7ce1a
 	RESNUM, STARTDATE, RESNAME, MID, PHONE, 
 	RESDATE, RESCOUNT, DEPOSIT, MESSAGE, PRONUM, PRONAME, AMPM) VALUES(
 	#{resnum},#{startdate},#{resname},#{mid},#{phone},#{resdate},#{rescount},#{deposit},#{message}, #{pronum}, #{proname}, #{ampm});
 
+=======
+	STARTDATE, RESNAME, MID, PHONE, RESDATE, RESCOUNT, DEPOSIT, MESSAGE, PRONUM, PRONAME) VALUES(
+	#{startdate},#{resname},#{mid},#{phone},#{resdate},#{rescount},#{deposit},#{message}, #{pronum}, #{proname})
+	
+>>>>>>> 3087dcfe3cffaa4d2bc465ff845da52000a598b5
 	</insert>
+	
+<!-- 	방금 전 예약한 상품 조회하기  -->
+	<select id="selectReservation" resultType="com.nakuh.web.domain.Reservation"
+								   parameterType="com.nakuh.web.domain.Reservation">
+	
+	
+	</select>
 	
 	<select id="selectpageReservations" resultType="com.nakuh.web.domain.Reservation" 
 	parameterType="com.nakuh.web.cmm.Proxy">

@@ -16,7 +16,8 @@ auth =(()=>{
 				$.getScript($.js()+'/reservation/eunyeong.js')
 			).done(()=>{
 				defualt_loader();
-
+                alert('userid::::'+sessionStorage.getItem('userid'));
+                alert('photo::::'+sessionStorage.getItem('userpo'));
 				
 				
 
@@ -31,10 +32,9 @@ auth =(()=>{
 		$(jwcompo.right_nav()).appendTo('#right_nav_cont');
 		$(jwcompo.my_navbar()).appendTo('#my_navbar');
 		$('#leftbar_content').empty();
-		navcss();
 		css();
 		nav();
-		arti.arti_upload();
+		arti.arti_img_upload();
 		feed_infinitemove();
 		//중앙 네비 따라오는 옵션
 		$(document).ready(function() {
@@ -226,15 +226,7 @@ auth =(()=>{
 */
 };
 	
-	let navcss = ()=>{
-		$(document).ready(function() {
-			 $('#comnav').affix({
-			  offset: {
-			  top: 1
-			  }
-			 });
-		});
-	};
+
 	
 	
 	
@@ -251,21 +243,21 @@ auth =(()=>{
 		app.init();
 	    
 		});
-		$('#ocean').click(e=>{
+		$('.ocean').click(e=>{
 		e.preventDefault();
 		$('.instacss').remove();
 		$(rescss).appendTo('head');
 		eunyeong.init('ocean')
 		});
 		
-		$('#river').click(()=>{
+		$('.river').click(()=>{
 		
 		});
 		
-		$('#hotel').click(()=>{
+		$('.hotel').click(()=>{
 		
 		});
-		$('#aquagram').click(e=>{
+		$('.aquagram').click(e=>{
 		e.preventDefault();
 		$('.rescss').remove();
 		$(instacss).appendTo('head');
