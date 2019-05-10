@@ -3,7 +3,7 @@ var eunyeong = eunyeong || {};
 eunyeong = (()=>{
     const WHEN_ERR = '호출하는 JS파일을 찾지 못지 못했습니다.'
     let _,compojs, js,
-        m_ctt, s_ctt, f_ctt, start_date;
+        m_ctt, s_ctt, f_ctt, p_ctt;
     let homecss,admincss,rescss,instacss;
     
     let init =x=>{
@@ -13,6 +13,7 @@ eunyeong = (()=>{
         m_ctt = '#main-container';
         s_ctt = '#search_content';
         f_ctt = '#features-content';
+        p_ctt = 'product_container';
         onCreate(x);
     }
     
@@ -48,7 +49,6 @@ eunyeong = (()=>{
             e.preventDefault();
             $('.rescss').remove();
             $('.instacss').remove();
-            $(homecss).appendTo('head');
             location.assign('/web');
             app.init();
             });
@@ -194,7 +194,6 @@ eunyeong = (()=>{
 				dataType: 'json',
 				contentType: 'application/json; charset=UTF-8;',
 				success: d=>{
-					
 					  let length = d.list.length;
 					  //alert(length);
 					  //db에 있는 값이 5 이하길 경우 멈춤
@@ -224,7 +223,7 @@ eunyeong = (()=>{
 		
 	};
 	
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////*페이지네이션 : 그리기 */	
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////*전체목록 :페이지네이션 */	
 	
 	let pro_renderList =(j)=>{
 	   	$('<div class="col-sm-4" data-no="'+j.rownum+'">'
@@ -250,12 +249,10 @@ eunyeong = (()=>{
            		    		dataType :'json',
            		    		contentType :'application/json',
            		    		success : d=>{
-           		    			alert('AJAX성공' + d.product.address);
-           		    			let aa = {proname:d.product.proname,price:d.product.price,company:d.product.company,
-           		    					  address:d.product.address,category:d.product.category,proimg:d.product.proimg,
-           		    					  regidate:d.product.regidate,lastday:d.product.lastday,
-           		    					  fishname:d.product.fishname,phone:d.product.phone,lat:d.product.lat,lng:d.product.lng}
-           		    			detail(aa);
+           		    			alert('AJAX성공' + d.today);
+           		    			let pro ={pronum:d.product.pronum,proname:d.product.proname,price:d.product.price,company:d.product.company,address:d.product.address,category:d.product.category,
+           		    					proimg:d.product.proimg,fishname:d.product.fishname,phone:d.product.phone,lat:d.product.lat,lng:d.product.lng, today:d.today, lastday:d.lastday};
+           		    			detail(pro);
            		    		},
            		    		error :e=>{
            		    			alert('AJAX실패');
@@ -306,11 +303,10 @@ eunyeong = (()=>{
 	                		    		contentType :'application/json',
 	                		    		success : d=>{
 	                		    			alert('AJAX성공' + d.proname);
-	                		    			let aa = {proname:d.proname,price:d.price,company:d.company,
-	                		    					  address:d.address,category:d.category,proimg:d.proimg,
-	                		    					  regidate:d.today,lastday:d.lastday,
-	                		    					  fishname:d.fishname,phone:d.phone,lat:d.lat,lng:d.lng}
-	                		    			detail(aa);
+	                		    			alert('d.today' + d.today);
+	                		    			let de ={pronum:d.pronum,proname:d.proname,price:d.price,company:d.company,address:d.address,category:d.category,proimg:d.proimg,
+	                		  					  	  fishname:d.fishname,phone:d.phone,lat:d.lat,lng:d.lng, today:d.today, lastday:d.lastday};
+	                		    			detail(de);
 	                		    		},
 	                		    		error :e=>{
 	                		    			alert('AJAX실패');
@@ -321,7 +317,8 @@ eunyeong = (()=>{
     		})
     };
 
-    /*검색창 : 도시명*/
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*검색창2 : 도시명*/
+   
     let searchlist =()=>{
         $(s_ctt).remove();
         $(m_ctt).remove();
@@ -332,7 +329,8 @@ eunyeong = (()=>{
             $(m_ctt).empty();
             pro_infinitemove(cate);
             $(i_ctt).click(function(){
-                item();
+                alert('여기 뭐지?? 수정하기~ ');
+            	item();
             });
         });
     };
@@ -346,6 +344,7 @@ eunyeong = (()=>{
     };
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*상품정보 : 상세 */
+ 
     let detail =x=>{
         $(s_ctt).remove();
         $(m_ctt).remove();
@@ -354,9 +353,10 @@ eunyeong = (()=>{
         });
         $(f_ctt).attr('class','container');
 
-        //전체보기에서 가져온 date값으로 캘린더를 그려보자 
+        //캘린더 : 물반고기반 
         $(eycompo.calender()).appendTo(f_ctt);
-
+        
+        //날짜를 동적으로 그리기 
         /*$.each(['1','2','3','4','5'], (i,j)=>{
             	$( '<tr>'
                         +'<td style="color: #666;"><a class="off"><strong>'+ j.day +'</strong></a></td>'
@@ -369,18 +369,12 @@ eunyeong = (()=>{
                     +'</tr>').appendTo('.calendar');
         });*/
 
-        $('.login_tel').click(e=>{
-        	alert('예약을 완료하시면 연락처가 제공됩니다.');
-        });
-        
-        $('.cal_cell_date').click(e=>{
-        	alert('서비스를 준비중입니다. 다음 페이지에서 선택하세요');
-        });
-        
-        $('.personnel_choice').click(e=>{
-        	alert('서비스를 준비중입니다. 다음 페이지에서 선택하세요');
-        });
-        $('#info_content').prepend(eycompo.product_info());
+        $('.login_tel').click(e=>{       	alert('예약을 완료하시면 업체 연락처가 제공됩니다.');        });
+        $('.calendar_next').click(e=>{        	alert('출발일 선택은 다음 페이지에서 제공됩니다.');        });
+        $('.cal_cell_date').click(e=>{        	alert('출발일 선택은 다음 페이지에서 제공됩니다.');        });
+        $('.personnel_choice').click(e=>{        	alert('인원 선택은 다음 페이지에서 선택하세요');        });
+
+        $(eycompo.product_info()).prependTo('#info_content');
         $('#proname').text(x.proname);
         $('#price').text(x.price);
         $('#company').text(x.company);
@@ -389,10 +383,10 @@ eunyeong = (()=>{
         $('#proaddress').text(x.address);
         $('#fishname').text(x.fishname);
         $('#phone').text(x.phone);
-        $('#resdate').text(x.regidate);
+        $('#resdate').text(x.today);
         
-        let resinfo = {proname:x.proname,price:x.price,pronum:x.pronum, proimg:x.proimg, 
-        		fishname:x.fishname, company:x.company}
+		let pro ={pronum:x.pronum,proname:x.proname,price:x.price,company:x.company,address:x.address,category:x.category,proimg:x.proimg,
+				  regidate:x.today,lastday:x.lastday,fishname:x.fishname,phone:x.phone,lat:x.lat,lng:x.lng, today:x.today, lastday:x.lastday};
 
         $('#select_item').attr('style','cursor:pointer').attr('data-toggle','modal').attr('data-target','#myModal').click(function(e){
         	$('#myModal').attr('style','display: block; z-index:99999;').appendTo('#myModal');
@@ -402,9 +396,9 @@ eunyeong = (()=>{
   			$('.modal-body').empty();
   			$('.modal-footer').empty();
   			$(' <h4 class="modal-title">'+ x.company +'</h4>').appendTo('.modal-title');
-  			$('<div class="checkbox"><label><input type="checkbox" value=""> 상품명 : '+ x.proname + '[가격 : ' +x.price+ '원]</label></div>').appendTo('.modal-body');
+  			$('<div class="checkbox"><label><input class="checkbox" type="checkbox" value=""> 상품명 : '+ x.proname + '[가격 : ' +x.price+ '원]</label></div>').appendTo('.modal-body');
   			$('<button id="paybtn" type="button" class="btn btn-default" data-dismiss="modal">결제하기</button>').prependTo('.modal-footer').click(e=>{
-  				prdres(resinfo);
+  				prdres(pro);
   			});
   			$('<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>').appendTo('.modal-footer');
         });
@@ -438,24 +432,10 @@ eunyeong = (()=>{
  	    
  		$('.reserve_btn').click(e=>{
 			e.preventDefault();
-			alert('버튼클릭' );
-			$(f_ctt).empty();
-			$(eycompo.complete_pay()).appendTo(f_ctt);
-			let data ={resdate:x.today, rescount:x.count, deposit:x.price, proname:x.proname, pronum:x.pronum};
- 			respay(data);
+			let pro ={pronum:x.pronum,proname:x.proname,price:x.price,company:x.company,address:x.address,category:x.category,proimg:x.proimg,
+					  regidate:x.today,lastday:x.lastday,fishname:x.fishname,phone:x.phone,lat:x.lat,lng:x.lng, today:x.today, lastday:x.lastday};
+			reserve_pro(pro);
  			
- 				$('#check_res').click(e=>{
- 					alert('버튼클릭222 ' + count);
- 	 				$(f_ctt).empty();
- 	 				$(eycompo.list_res()).appendTo(f_ctt);
- 	 				$('.cancel_btn').click(e=>{
- 	 					alert('버튼클릭333 일단 마이페이지로 이동');
- 	 					$('.homecss').remove();
- 	 	 				$(f_ctt).empty();
- 	 	 				$(eycompo.mypage()).appendTo(f_ctt); 	 				
- 	 	 				})
- 				});
- 				
 /* 				$('#handleCounter').handleCounter({
  					  minimum: 1,
  					  maximize: null});*/
@@ -475,7 +455,73 @@ eunyeong = (()=>{
  				});	*/
  			});
      };
-      
+     
+     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*상품결제 : 결제값입력*/
+     let reserve_pro =x=>{
+			$(f_ctt).empty();
+			$(eycompo.reserve_pro()).appendTo(f_ctt);
+			$('#proname').text(x.proname);
+			$('.tb1').text(x.proname);
+			$('.tb3').text(x.price);
+			$('div.price_box dd').text(x.price);
+			$('#to_price').text(x.price);
+			$('.reserve_btn').click(e=>{
+				e.preventDefault();
+		    	 let res = {
+		    		/*mid : 세션에서 들어온 값
+	   				deposit : 자바에서 계산*/ 
+	     			 mid : 'test',
+	     			 resname : $('#resname').val(),
+	     			 startdate : $('#startdate').val(),
+	     			 phone : $('#phone').val(),
+	     			 resdate : x.today,
+	     			 rescount : $('#rescount').val(),
+	     			 message :  $('#message').val(),
+	     			 pronum :  x.pronum,
+	     			 proname : x.proname,
+	     			 company : x.company,
+	     			 deposit : x.price};
+	     	 
+	     	 $.ajax({
+	     		 url : _+'/reservation',
+	     		 type : 'POST',
+	     		 data : JSON.stringify(res),
+	     		 dataType : 'json',
+	     		 contentType : 'application/json',
+	     		 success : d=>{
+	     			 alert('AJAX 성공'+ d.msg);
+	     			 respay();
+	     		 },
+	     		 error : e=>{
+	     			 alert('AJAX 실패');
+	     		 }
+	     	 });
+			});
+     };
+     
+     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*상품결제 : 완료*/
+     
+    let respay =()=>{
+    	alert('결제완료 진입');
+    	$(f_ctt).empty();
+		$(eycompo.complete_pay()).appendTo(f_ctt);
+		$('.call_btn').click(e=>{
+			alert('업체통화는 앱에서만 이용가능합니다.');
+		});
+    	$('#check_res').click(e=>{
+    		
+    		$.ajax({});
+    		
+				$(f_ctt).empty();
+				$(eycompo.list_res()).appendTo(f_ctt);
+				$('.cancel_btn').click(e=>{
+					alert('마이페이지로 이동');
+	 				$(f_ctt).empty();
+	 				$(eycompo.mypage()).appendTo(f_ctt); 	 				
+	 				})
+			});
+    }; 
+     
     let navcss = ()=>{
         $(document).ready(function() {
              $('#comnav').affix({
@@ -503,9 +549,7 @@ eunyeong = (()=>{
             +'<link class="homecss" href="https://fonts.googleapis.com/css?family=Raleway:300,400,600,600i,700" rel="stylesheet">'
             +'<link class="homecss" href="/web/resources/css/home/style.css" rel="stylesheet">';
          
-         rescss = '<link class="rescss" rel="stylesheet" href="/web/resources/css/reservation/common.css">'
-			 +'<link class="rescss" rel="stylesheet" type="text/css" href="/web/resources/css/reservation/modal.css"> '
-		 	 +'<link class="rescss" rel="stylesheet" href="/web/resources/css/reservation/main.css">'
+         rescss = '<link class="rescss" rel="stylesheet" type="text/css" href="/web/resources/css/reservation/modal.css"> '
              +'<link class="rescss" rel="stylesheet" href="/web/resources/css/reservation/navbar.css">'
              +'<link class="rescss" rel="stylesheet" href="/web/resources/css/reservation/resdetail.css">'
              +'<link class="rescss" rel="stylesheet" href="/web/resources/css/reservation/responsive_basic.css">'
