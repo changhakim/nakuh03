@@ -65,7 +65,6 @@ public class ReservationServiceImpl implements ReservationService {
 		map.put("blocksize", "5");
 		map.put("totalCount", (int)resMap.countSearchReservation(pxy1));
 		pxy1.carryOut(map);
-		
 		if(pxy1.getResselect()=="전체날짜") {
 			pxy1.setResselect("");
 		}

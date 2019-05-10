@@ -44,6 +44,12 @@
       <when test="resselect =='예약날짜' and proselect !='' ">
      WHERE  RESDATE LIKE #{searchdate} AND CATEGORY LIKE #{proselect} 
      </when>
+     <when test="resselect =='출발날짜' and proselect =='' ">
+     WHERE  STARTDATE LIKE #{searchdate} 
+     </when>
+     <when test="resselect =='예약날짜' and proselect =='' ">
+     WHERE  RESDATE LIKE #{searchdate}
+     </when>
  	</choose>	 
 	</select>
 	<select id="adminSearchReservation" resultType="com.nakuh.web.domain.Reservation" 
@@ -62,17 +68,26 @@
       <when test="resselect =='예약날짜' and proselect !='' ">
      WHERE  RESDATE LIKE #{searchdate} AND CATEGORY LIKE #{proselect} 
      </when>
+     <when test="resselect =='출발날짜' and proselect =='' ">
+     WHERE  STARTDATE LIKE #{searchdate} 
+     </when>
+     <when test="resselect =='예약날짜' and proselect =='' ">
+     WHERE  RESDATE LIKE #{searchdate}
+      </when>
  	</choose>
  	ORDER BY rownum
 	LIMIT #{startRow},#{pageSize}	 
 	</select>
 	<select id="resCateTerm" resultType="com.nakuh.web.domain.Reservation"
 	parameterType="com.nakuh.web.domain.Visitor">
-		SELECT COUNT(*) rescount,RESDATE
-		FROM RESSEARCH
-		WHERE CATEGORY LIKE #{cate}
-		GROUP BY RESDATE
-		HAVING RESDATE BETWEEN #{beforevisit} AND #{todayvisit}	
+	SELECT R.RESDATE,
+		SUM(CASE WHEN R.CATEGORY='ocean' THEN 1 ELSE 0 END) AS ocean,
+		SUM(CASE WHEN R.CATEGORY='river' THEN 1 ELSE 0 END) AS river,
+		SUM(CASE WHEN R.CATEGORY='hotel' THEN 1 ELSE 0 END) AS hotel
+	FROM (SELECT RESDATE,CATEGORY
+			FROM RESSEARCH
+			WHERE RESDATE BETWEEN #{beforevisit} AND #{todayvisit}) R
+	GROUP BY RESDATE;
 	</select>
 	<select id="resCateCount" resultType="com.nakuh.web.domain.Reservation">
 		SELECT category,COUNT(category) rescount

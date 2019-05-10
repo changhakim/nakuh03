@@ -10,15 +10,21 @@ let onCreate=()=>{
 }
 let setContentView=()=>{
 	$.when(
-	$.getScript($.js()+'/component/chcompo.js')	
+	$.getScript($.js()+'/component/chcompo.js'),
+	$.getScript($.js()+'/admin/changha.js')	
 	).done(()=>{
 		$('.main-panel').html(chcompo.admin)
 		dateficker();
-		$.getJSON($.ctx()+'/admin/reschart',d=>{
-			/*reschart(d);*/
-			rescharttwo();
+		$('#memnav').click(e=>{
+			e.preventDefault();
+			changha.init();
 		})
-		reslist(1);
+		$.getJSON($.ctx()+'/admin/reschart',d=>{
+			reschart(d);
+			rescharttwo(d);
+			reslist(1);
+		})
+		
 		$('#searchgo').click(()=>{
 			searchres();
 		})
@@ -45,13 +51,16 @@ let reslist=x=>{
 					+'<tbody id="restable">'
 					+' </tbody>')
 		$('#adresnav').html('<ul class="pagination justify-content-center respage"style="cursor: pointer;">'
-						 +'</ul>')			
+						 +'</ul>')
 		$.each(d.reslist,(x,y)=>{
 			if(y.category==='river'){
 				cate='민물낚시'
-			}else{
+			}else if(y.category==='ocean'){
 				cate='바다낚시'
+			}else{
+				cate='숙박'
 			}
+			
 		$('<tr>' 
 		  +'<th scope="row">'+y.resnum+'</th>'
 		  +'<td>'+y.mid+'</td>'
@@ -116,19 +125,28 @@ let searchres = ()=>{
 		alert('값을 입력해주세요')
 		return
 	}
+	if($('#searchbar').val()===''){
+		alert('검색어를 입력해주세요')
+		return
+	}
 	
 	let proselect = '';
 	let searchword = $('#searchbar').val();
 	if($('#proselect option:selected').val()==='바다낚시'){
 		proselect = 'ocean';
-	}else{
+	}else if($('#proselect option:selected').val()==='민물낚시'){
 		proselect = 'river';
+	}else if($('#proselect option:selected').val()==='숙박'){
+		proselect = 'hotel';
 	}
 	if($('#searchbar').val()==='민물'){
 		searchword = 'river';
 	}
 	if($('#searchbar').val()==='바다'){
 		searchword = 'ocean';
+	}
+	if($('#searchbar').val()==='숙박'){
+		searchword = 'hotel';
 	}
 	let word = {searchdate:$('#datepicker').val(),
 				resselect:$('#resselect option:selected').val(),
@@ -173,8 +191,10 @@ let searchpage=x=>{
 		$.each(d.reslist,(x,y)=>{
 			if(y.category==='river'){
 				cate='민물낚시'
-			}else{
+			}else if(y.category==='ocean'){
 				cate='바다낚시'
+			}else{
+				cate='숙박'
 			}
 		$('<tr>' 
 		  +'<th scope="row">'+y.resnum+'</th>'
@@ -264,8 +284,12 @@ let dateficker=()=>{
 }
 function reschart(x){
 	var rr = document.getElementById('resChart');
+	let respie=[];
+	$.each(x.catecount,(x,y)=>{
+		respie.push(y.rescount)
+	})
 	var resdata = {
-		    labels: [x.catecount.category[0].val(),x.catecount.category[1].val()],
+		    labels: ['호텔','바다낚시','민물낚시'],
 		      datasets: [
 		        {
 		            fill: true,
@@ -273,7 +297,7 @@ function reschart(x){
 		                '#15607a',
 		                '#18a1cd',
 		                '#39f3bb'],
-		            data: [x.catecount.rescount[0].val(), x.catecount.rescount[1].val()]
+		            data: respie
 		// Notice the borderColor 
 		        }
 		    ]
@@ -294,35 +318,46 @@ function reschart(x){
 	    options: options
 	});
 }
-function rescharttwo(){
-	new Chart(document.getElementById("resCharttwo"), {
+function rescharttwo(x){
+	let chartdate = [];
+	let chartocean=[];
+	let chartriver=[];
+	let charthotel=[];
+	$.each(x.chartlist,(x,y)=>{
+		chartdate.push(y.resdate)
+		chartocean.push(y.ocean)
+		chartriver.push(y.river)
+		charthotel.push(y.hotel)
+		
+	})
+	
+var ctx = document.getElementById('resCharttwo');	
+var reslinechart = new Chart(ctx, {
 		  type: 'line',
 		  data: {
-		    labels: [1500,1600,1700,1750,1800,1850,1900,1950,1999,2050],
+		    labels: chartdate,
 		    datasets: [{ 
-		        data: [86,114,106,106,107,111,133,221,783,2478],
-		        label: "바다",
-		        borderColor: "#3e95cd",
+		        data: chartocean,
+		        label: "바다낚시",
+		        borderColor: "#226fc1",
 		        fill: false
 		      }, { 
-		        data: [282,350,411,502,635,809,947,1402,3700,5267],
-		        label: "민물",
-		        borderColor: "#8e5ea2",
+		        data: chartriver,
+		        label: "민물낚시",
+		        borderColor: "#f4a250",
 		        fill: false
 		      }, { 
-		        data: [168,170,178,190,203,276,408,547,675,734],
+		        data:charthotel,
 		        label: "숙박",
-		        borderColor: "#3cba9f",
+		        borderColor: "#e56e70",
 		        fill: false
-		      }
-		    ]
+		      }]
 		  },
 		  options: {
 		    title: {
 		      display: true,
 		      text: '기간별 예약변동 현황'
-		    },
-		   rotation: -0.7 * Math.PI,  
+		    },  
 		  responsive: true
 		  }
 		});

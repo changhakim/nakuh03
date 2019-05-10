@@ -61,21 +61,11 @@ public class TxService {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Date date1 = new Date();
 		Calendar c = new GregorianCalendar();
-		c.add(Calendar.DATE, -9);
+		c.add(Calendar.DATE, -10);
 		vis.setBeforevisit(sdf.format(c.getTime()));
 		vis.setTodayvisit(sdf.format(date1));
-		vis.setCate("ocean");
-		map.put("ocean", resmapper.resCateTerm(vis));
-		vis.setCate("river");
-		map.put("river", resmapper.resCateTerm(vis));
-		vis.setCate("hotel");
-		map.put("hotel", resmapper.resCateTerm(vis));
+		map.put("chartlist", resmapper.resCateTerm(vis));
 		map.put("catecount", resmapper.resCateCount());
-		
-		
-		
-		
-		
 		return map;
 	}
 

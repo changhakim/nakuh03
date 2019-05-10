@@ -52,7 +52,6 @@ public class AdminController {
 	@PostMapping("/admin/search")
 	public Map<?, ?> searchreservation(@RequestBody Proxy pxy){
 		map.clear();
-		
 		map = resservice.adminSearchReservation(pxy);
 		return map;
 	}

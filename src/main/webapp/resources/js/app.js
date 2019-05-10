@@ -75,6 +75,7 @@ app=(()=>{
 			alert('아쿠아리움')
 		})
 		$('#adminbtn').click(()=>{
+			alert('들어옴')
 			$('.homecss').remove();
 			$('.rescss').remove();
 			$('.instacss').remove();
