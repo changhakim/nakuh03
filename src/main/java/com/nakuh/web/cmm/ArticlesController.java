@@ -94,9 +94,10 @@ public class ArticlesController {
 		System.out.println(art);
 		art.setStartRow(arts.getStartRow());
 		art.setPageSize(arts.getPageSize());
-		IFunction f1 = (Object o)-> artMap.countnavArticle(art); 
-		System.out.println("artcount"+f1.apply(art));
-		map.put("nav", f1.apply(art));
+		/*
+		 * IFunction f1 = (Object o)-> artMap.countnavArticle(art);
+		 * System.out.println("artcount"+f1.apply(art)); map.put("nav", f1.apply(art));
+		 */
 		IFunction f2 = (Object o) -> artMap.selectAllArticlesList(art);
 		System.out.println("art??:::::"+f2.apply(art));
 		List<?> ffeed = (List<?>) f2.apply(art);
