@@ -224,14 +224,9 @@
 <!-- Stickyjs ---->
 <script src="${js}/aquagram/vendor/Sticky-kit.js"></script>
 <!-- commonjs -->
-<<<<<<< HEAD
 <script src="${js}/app.js"></script>
 <script src="${js}/router.js"></script>
-=======
-<script src="<%=application.getContextPath()%>/resources/js/app.js"></script>
-<script src="<%=application.getContextPath()%>/resources/js/router.js"></script>
-<script src="<%=application.getContextPath()%>/resources/js/common/fileupload.js"></script>
->>>>>>> jeonguk
+<script src="${js}/common/fileupload.js"></script>
 <!-- changhajs -->
 <script src="${js}/admin/changha.js"></script>
 <script src="${js}/admin/adminres.js"></script>   

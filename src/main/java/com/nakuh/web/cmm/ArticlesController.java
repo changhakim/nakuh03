@@ -31,6 +31,10 @@ import com.nakuh.web.service.PostTagServiceImpl;
 public class ArticlesController {
 	private static final Logger logger = LoggerFactory.getLogger(ArticlesController.class);
 	public static final String SAVED_FILES = "C:\\Users\\1027\\nakuh_Project\\nakuh03_workspace\\nakuh03\\src\\main\\webapp\\resources\\img\\aquagram\\articles\\";
+	/*
+	 * C:\Users\1027\nakuh3\nakuh03\src\main\webapp\resources\img\aquagram\articles\//창하꺼
+	 * C:\Users\1027\nakuh_Project\nakuh03_workspace\nakuh03\src\main\webapp\resources\img\aquagram\articles\//형꺼
+	 */	
 	@Autowired Article art;
 	@Autowired ArticleServiceImpl artservice;
 	@Autowired Comment com;
@@ -137,10 +141,10 @@ public class ArticlesController {
               art.setExtension(filename.substring(filename.lastIndexOf(".")+1));
               System.out.println("photo?::"+art);
               
-              //int rs = 1;//artservice.registArticle(art); 
-              IPredicate p =(Object o)-> artMap.existsArticle(art);
+              int rs = 1;//artservice.registArticle(art); 
+			/* IPredicate p =(Object o)-> artMap.existsArticle(art); */
               // DB 에 파일 저장하는 서비스 메소드 연결. 여기서는 무조건 성공인 1로 처리
-              if(p.test(art)==true){
+              if(rs==1){
                   logger.info("file upload insert: {}",  "success");
                   File dest = new File(SAVED_FILES +  art.getArtphoto() + art.getExtension());
                   file.transferTo(dest);
