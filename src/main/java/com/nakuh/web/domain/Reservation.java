@@ -8,6 +8,7 @@ import lombok.Data;
 public class Reservation {
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 	private String resnum, startdate, resname, mid, phone, resdate, rescount, deposit, message, pronum, proname, ampm;
@@ -31,4 +32,8 @@ public class Reservation {
 =======
 >>>>>>> 7f3b3b2b2060df0e390461a72ba39795e81e5448
 >>>>>>> 83a9cda29f208c664a349fdc656e87106ac00fa0
+=======
+	private String resnum, startdate, resname, mid, phone, resdate, rescount, 
+	deposit, message, pronum, proname, ampm,company,category,ocean,river,hotel;
+>>>>>>> b246bade3d506c2db4e0d67ad84d1fbce3b7ce1a
 }

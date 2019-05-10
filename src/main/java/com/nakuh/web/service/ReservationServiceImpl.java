@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.nakuh.web.cmm.Proxy;
 import com.nakuh.web.domain.Reservation;
 import com.nakuh.web.mapper.ReservationMapper;
 
@@ -13,6 +14,9 @@ import com.nakuh.web.mapper.ReservationMapper;
 public class ReservationServiceImpl implements ReservationService{
 	@Autowired ReservationMapper resMap;
 	@Autowired Reservation res;
+	@Autowired Proxy pxy;
+	@Autowired List<Reservation> reslist;
+	@Autowired Map<String, Object> map;
 	@Override
 	public void createReservation(Reservation param) {
 		/*
@@ -60,42 +64,23 @@ public class ReservationServiceImpl implements ReservationService{
 	}
 
 	@Override
-	public Map<String, Object> adminSearchReservation(Reservation param) {
-		param.getSearchword();
-		param.getSearchdate();
-		param.getResselect();
-		param.getProselect();
-		if(param.getResselect()=="출발날짜"&&param.getSearchword()==""&&param.getProselect()=="상품종류") {
-			
+	public Map<String, Object> adminSearchReservation(Proxy pxy1) {
+		map.clear();
+		map.put("page_num", pxy1.getNumber());
+		map.put("page_size", "10");
+		map.put("blocksize", "5");
+		map.put("totalCount", (int)resMap.countSearchReservation(pxy1));
+		pxy1.carryOut(map);
+		if(pxy1.getResselect()=="전체날짜") {
+			pxy1.setResselect("");
 		}
-		if(param.getResselect()=="예약날짜"&&param.getSearchword()==""&&param.getProselect()=="상품종류") {
-			
+		if(pxy1.getProselect()=="전체상품") {
+			pxy1.setProselect("");
 		}
-		if(param.getResselect()=="출발날짜"&&param.getSearchword()==""&&param.getProselect()!="상품종류") {
-			
-		}
-		if(param.getResselect()=="예약날짜"&&param.getSearchword()==""&&param.getProselect()!="상품종류") {
-			
-		}
-		if(param.getResselect()=="출발/예약"&&param.getSearchword()==""&&param.getProselect()!="상품종류") {
-			
-		}
-		if(param.getResselect()=="출발날짜"&&param.getSearchword()!=""&&param.getProselect()=="상품종류") {
-			
-		}
-		if(param.getResselect()=="예약날짜"&&param.getSearchword()!=""&&param.getProselect()=="상품종류") {
-			
-		}
-		if(param.getResselect()=="출발/예약"&&param.getSearchword()!=""&&param.getProselect()!="상품종류") {
-			
-		}
-		if(param.getResselect()=="출발날짜"&&param.getSearchword()!=""&&param.getProselect()!="상품종류") {
-			
-		}
-		if(param.getResselect()=="예약날짜"&&param.getSearchword()!=""&&param.getProselect()!="상품종류") {
-			
-		}
-		return null;
+		reslist = resMap.adminSearchReservation(pxy1);
+		map.put("reslist", reslist);
+		map.put("pxy", pxy1);
+		return map;
 	}
 
 }

@@ -49,4 +49,7 @@
 		<constructor-arg ref="sqlSessionFactoryBean"/>
 	</bean>
 	<mybatis-spring:scan base-package="com.nakuh.web"/>
+	<bean id="multipartResolver"  class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+           <property name="maxUploadSize" value="50000000"/>
+    </bean>
 </beans>

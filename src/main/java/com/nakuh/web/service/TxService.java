@@ -56,5 +56,17 @@ public class TxService {
 		
 		return map;
 	}
+	public Map<String, Object> reservChart(){
+		map.clear();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Date date1 = new Date();
+		Calendar c = new GregorianCalendar();
+		c.add(Calendar.DATE, -10);
+		vis.setBeforevisit(sdf.format(c.getTime()));
+		vis.setTodayvisit(sdf.format(date1));
+		map.put("chartlist", resmapper.resCateTerm(vis));
+		map.put("catecount", resmapper.resCateCount());
+		return map;
+	}
 
 }

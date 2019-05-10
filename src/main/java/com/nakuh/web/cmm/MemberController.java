@@ -31,7 +31,7 @@ public class MemberController {
 	@PostMapping("/login/kakao/{kaid}")
 	public Map<?,?> login(@RequestBody Map<?,?> res) {
 		logger.info("=========login 진입======");
-		map.clear();
+		
 		System.out.println("res??"+res);
 
 		System.out.println(res.get("id").toString());
@@ -47,6 +47,7 @@ public class MemberController {
 		
 		IPredicate p = (Object o) -> memberMap.existsMember(member.getMid());
 		if(p.test(member.getMid())) {
+			map.clear();
 			System.out.println("가입 시켜야함 .");
 			System.out.println("Member::"+member);
 			IConsumer c = (Object o) -> memberMap.insertMember(member);
@@ -54,6 +55,7 @@ public class MemberController {
 			map.put("msg", "JOIN SUCCESS");
 			
 		} else {
+			map.clear();
 			System.out.println("이미 아이디가 있음. ");
 			IFunction f = (Object o) -> memberMap.selectMembers(member.getMid());
 			f.apply(member);
@@ -61,6 +63,7 @@ public class MemberController {
 			visiservice.registVisitor(vis);
 			map.put("msg", "LOGIN SUCCESS");
 			map.put("m", f.apply(member));
+			System.out.println("mmmmm:::"+map.get("m"));
 			System.out.println("f.apply???"+f.apply(member));
 		}
 		
