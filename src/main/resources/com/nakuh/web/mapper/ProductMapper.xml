@@ -90,7 +90,7 @@
 
 	</select>
 
-<!-- 상품 상세 조회 -->
+<!-- 선택한 상품 상세 조회 -->
 	<select id="selectProduct" resultType="com.nakuh.web.domain.Product"
 							   parameterType="com.nakuh.web.domain.Product">
 	SELECT  
