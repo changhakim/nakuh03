@@ -16,10 +16,6 @@ app=(()=>{
 		$.getScript($.js()+'/admin/changha.js')
 		).done(()=>{
 			app_defualt_loader();
-	       
-			
-			
-			
 		});
 	};
 	let app_defualt_loader =()=>{
@@ -82,15 +78,8 @@ app=(()=>{
 			$('.instacss').remove();
 			$(admincss).appendTo('head')
 			changha.init();
-			
 		})
 			
-		
-	
-
-		
-		
-		
 	};
 	
 	let logManager =()=>{
@@ -149,12 +138,11 @@ app=(()=>{
 			 +'<link class="admincss" rel="stylesheet" href="/web/resources/css/admin/pe-icon-7-stroke.css">';
 			 
 	
-		 rescss = '<link class="rescss" rel="stylesheet" href="/web/resources/css/reservation/common.css">'
-			 +'<link class="rescss" rel="stylesheet" type="text/css" href="/web/resources/css/reservation/modal.css"> '
-		 	 +'<link class="rescss" rel="stylesheet" href="/web/resources/css/reservation/main.css">'
+         rescss = '<link class="rescss" rel="stylesheet" type="text/css" href="/web/resources/css/reservation/modal.css"> '
              +'<link class="rescss" rel="stylesheet" href="/web/resources/css/reservation/navbar.css">'
              +'<link class="rescss" rel="stylesheet" href="/web/resources/css/reservation/resdetail.css">'
-             +'<link class="rescss" rel="stylesheet" href="/web/resources/css/reservation/prdpay.css">';      
+             +'<link class="rescss" rel="stylesheet" href="/web/resources/css/reservation/prdpay.css">'; 
+
 	 
 		 instacss ='  <link rel="stylesheet" type="text/css" href="/web/resources/css/aquagram/style.css">'
 			 +'  <link class="instacss" rel="stylesheet" type="text/css" href="/web/resources/css/aquagram/animate.css">'

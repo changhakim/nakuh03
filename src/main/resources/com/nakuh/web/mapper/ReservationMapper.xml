@@ -8,10 +8,17 @@
 	<insert id="insertReservation" parameterType="com.nakuh.web.domain.Reservation">
 	
 	INSERT INTO RESERVATION (
-	RESNUM, STARTDATE, RESNAME, MID, PHONE, 
-	RESDATE, RESCOUNT, DEPOSIT, MESSAGE, PRONUM, PRONAME, AMPM) VALUES(
-	#{resnum},#{startdate},#{resname},#{mid},#{phone},#{resdate},#{rescount},#{deposit},#{message}, #{pronum}, #{proname}, #{ampm});
+	STARTDATE, RESNAME, MID, PHONE, RESDATE, RESCOUNT, DEPOSIT, MESSAGE, PRONUM, PRONAME) VALUES(
+	#{startdate},#{resname},#{mid},#{phone},#{resdate},#{rescount},#{deposit},#{message}, #{pronum}, #{proname})
+	
 	</insert>
+	
+<!-- 	방금 전 예약한 상품 조회하기  -->
+	<select id="selectReservation" resultType="com.nakuh.web.domain.Reservation"
+								   parameterType="com.nakuh.web.domain.Reservation">
+	
+	
+	</select>
 	
 	<select id="selectpageReservations" resultType="com.nakuh.web.domain.Reservation" 
 	parameterType="com.nakuh.web.cmm.Proxy">
