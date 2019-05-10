@@ -354,9 +354,10 @@ eunyeong = (()=>{
         });
         $(f_ctt).attr('class','container');
 
-        //전체보기에서 가져온 date값으로 캘린더를 그져보자 
+        //전체보기에서 가져온 date값으로 캘린더를 그려보자 
         $(eycompo.calender()).appendTo(f_ctt);
-            $.each(['1','2','3','4','5'], (i,j)=>{
+
+        /*$.each(['1','2','3','4','5'], (i,j)=>{
             	$( '<tr>'
                         +'<td style="color: #666;"><a class="off"><strong>'+ j.day +'</strong></a></td>'
                         +'<td style="color: #666;"><a class="off"><strong>29</strong></a></td>'
@@ -366,8 +367,19 @@ eunyeong = (()=>{
                         +'<td><a class="cal_cell_date" data-date="2019-05-03"><strong>3</strong><img src="https://img.moolban.com/unsafe/asset/www/responsive/img/weather/weather-10.png" alt=""><span class="mul">5물</span></a></td>'
                         +'<td><a class="cal_cell_date" data-date="2019-05-04"><strong>4</strong><img src="https://img.moolban.com/unsafe/asset/www/responsive/img/weather/weather-10.png" alt=""><span class="mul">6물</span></a></td>'
                     +'</tr>').appendTo('.calendar');
+        });*/
+
+        $('.login_tel').click(e=>{
+        	alert('예약을 완료하시면 연락처가 제공됩니다.');
         });
         
+        $('.cal_cell_date').click(e=>{
+        	alert('서비스를 준비중입니다. 다음 페이지에서 선택하세요');
+        });
+        
+        $('.personnel_choice').click(e=>{
+        	alert('서비스를 준비중입니다. 다음 페이지에서 선택하세요');
+        });
         $('#info_content').prepend(eycompo.product_info());
         $('#proname').text(x.proname);
         $('#price').text(x.price);
@@ -406,22 +418,39 @@ eunyeong = (()=>{
  		$('#proname').text(x.proname);
  		$('#company').text(x.company);
  		$('#startdate').text(x.startdate);
- 	    $('#price').text(x.price);
  	    $('#proname1').text(x.proname);
- 			
- 			$('.reserve_btn').click(e=>{
- 				e.preventDefault();
- 				alert('버튼클릭');
- 				$(f_ctt).empty();
- 				$(eycompo.complete_pay()).appendTo(f_ctt);
- 				let data ={resdate:x.today, /*rescount:x.count, */deposit:x.price, proname:x.proname, pronum:x.pronum};
+ 	    $('#price').text(x.price);
+ 	    $('.count_plus').click(function(){
+ 	    	let count = Number($('.count').val()) + 1;
+ 	    	$('.count').val(count);
+ 	    });
+ 	    
+ 	    $('.count_minus').click(function(){
+ 	    	if(Number($('.count').val()) < 1){
+ 	    		let count = 0;
+ 	    		$('.count').val(count);
+ 	    		prdres(count);
+ 	    	}else{
+ 	    		let count = Number($('.count').val()) - 1;
+ 	 	    	let totalprice = price * count;
+ 	    	}
+ 	    });
+ 	    
+ 		$('.reserve_btn').click(e=>{
+			e.preventDefault();
+			alert('버튼클릭' );
+			$(f_ctt).empty();
+			$(eycompo.complete_pay()).appendTo(f_ctt);
+			let data ={resdate:x.today, rescount:x.count, deposit:x.price, proname:x.proname, pronum:x.pronum};
+ 			respay(data);
  			
  				$('#check_res').click(e=>{
- 					alert('버튼클릭222');
+ 					alert('버튼클릭222 ' + count);
  	 				$(f_ctt).empty();
  	 				$(eycompo.list_res()).appendTo(f_ctt);
  	 				$('.cancel_btn').click(e=>{
  	 					alert('버튼클릭333 일단 마이페이지로 이동');
+ 	 					$('.homecss').remove();
  	 	 				$(f_ctt).empty();
  	 	 				$(eycompo.mypage()).appendTo(f_ctt); 	 				
  	 	 				})
@@ -467,16 +496,6 @@ eunyeong = (()=>{
   	  // The marker, positioned at Uluru
   	  var marker = new google.maps.Marker({position: uluru, map: map});
     };
-
-/*    인원 카운트*/
-	    function plus(x){
- 	        count++;
- 	    }
- 	    function minus(x){
- 	      if (count > 1) {
- 	        count--;
- 	      }  
- 	    };
 
     
     let css = ()=>{

@@ -77,7 +77,7 @@ eycompo ={
 		},
 		
 		/*캘린더*/
-		calender :()=>{
+/*		calender :()=>{
 				return '<div class="col-md-12">'
 				+'					<div class="row">'
 				+'						<div class="basic-information">'
@@ -108,7 +108,7 @@ eycompo ={
 			                                    +'<td>금</td>'
 			                                    +'<td>토</td>'
 			                                +'</tr>'
-			                               /* +'<tr>'
+			                                +'<tr>'
 			                                    +'<td style="color: #666;"><a class="off"><strong>28</strong></a></td>'
 			                                    +'<td style="color: #666;"><a class="off"><strong>29</strong></a></td>'
 			                                    +'<td style="color: #666;"><a class="off"><strong>30</strong></a></td>'
@@ -116,8 +116,8 @@ eycompo ={
 			                                    +'<td><a class="cal_cell_date on" data-date="2019-05-02"><strong>2</strong><img src="https://img.moolban.com/unsafe/asset/www/responsive/img/weather/weather-10.png" alt=""><span class="mul">4물</span></a></td>'
 			                                    +'<td><a class="cal_cell_date" data-date="2019-05-03"><strong>3</strong><img src="https://img.moolban.com/unsafe/asset/www/responsive/img/weather/weather-10.png" alt=""><span class="mul">5물</span></a></td>'
 			                                    +'<td><a class="cal_cell_date" data-date="2019-05-04"><strong>4</strong><img src="https://img.moolban.com/unsafe/asset/www/responsive/img/weather/weather-10.png" alt=""><span class="mul">6물</span></a></td>'
-			                                +'</tr>'*/
-/*			                                +'<tr>'
+			                                +'</tr>'
+			                                +'<tr>'
 			                                    +'<td><a class="cal_cell_date sunday" data-date="2019-05-05"><strong>5</strong><img src="https://img.moolban.com/unsafe/asset/www/responsive/img/weather/weather-30.png" alt=""><span>7물</span></a></td>'
 			                                    +'<td><a class="cal_cell_date" data-date="2019-05-06"><strong>6</strong><img src="https://img.moolban.com/unsafe/asset/www/responsive/img/weather/weather-30.png" alt=""><span class="mul">8물</span></a></td>'
 			                                    +'<td><a class="cal_cell_date" data-date="2019-05-07"><strong>7</strong><img src="https://img.moolban.com/unsafe/asset/www/responsive/img/weather/weather-10.png" alt=""><span class="mul">9물</span></a></td>'
@@ -152,7 +152,7 @@ eycompo ={
 			                                    +'<td><a class="cal_cell_date" data-date="2019-05-30"><strong>30</strong><span class="mul">2물</span></a></td>'
 			                                    +'<td><a class="cal_cell_date" data-date="2019-05-31"><strong>31</strong><span class="mul">3물</span></a></td>'
 			                                    +'<td style="color: #666;"><a class="off"><strong>1</strong></a></td>'
-			                                +'</tr>'*/
+			                                +'</tr>'
 			                            +'</tbody>'
 			                        +'</table>'
 			                    +'</div>'
@@ -228,9 +228,9 @@ eycompo ={
 				+'				</div>'
 				+'							</br>'
 			},
-		
+		*/
 /*	은영	캘린더 원본 */
-/*		item_container : ()=>{
+		calender : ()=>{
 			return '<div class="col-md-12">'
 			+'					<div class="row">'
 			+'						<div class="basic-information">'
@@ -383,7 +383,7 @@ eycompo ={
 			+'					</div>'
 			+'				</div>'
 			+'							</br>'
-		},*/
+		},
 			
 		product_info:()=>{
 			return '<section class="proslide">' 
@@ -434,7 +434,7 @@ eycompo ={
 			+'                                <div class="count_box">'
 			+'									<a class="count_minus"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAECAYAAACQli8lAAAAAXNSR0IArs4c6QAAAClJREFUGBljYKATYATZ8/r1661AyotGdm4TFRX1ZqKR4cjG/kfm0JwNAAEfBgMAOMEHAAAAAElFTkSuQmCC" alt="" style="">' 
 			+'                                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAECAYAAACQli8lAAAAAXNSR0IArs4c6QAAAClJREFUGBljYKATYATZ4+rquhVIedHIzm27d+/2ZqKR4cjG/kfm0JwNAEZQBgMM6SkpAAAAAElFTkSuQmCC" alt="" style="display: none;"></a>'                                    
-			+'  								<input type="tel" readonly="readonly">' 
+			+'  								<input class="count" type="tel" value="1">' 
 			+' 									<select style="display: none;">'
 			+'									<option value="1">1명</option><option value="2">2명</option><option value="3">3명</option><option value="4">4명</option><option value="5">5명</option><option value="6">6명</option><option value="7">7명</option><option value="8">8명</option><option value="9">9명</option><option value="10">10명</option><option value="11">11명</option></select>'
 			+'									<a class="count_plus"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAGVJREFUSA1jYCABvH79eisIk6CFgYUUxUC1XiSqZ2AiVQOp6kctIBhio0E0AoKIEZr1Sc6hBMMGomAbrVPRfyIdAlEG9O1/ECZFE619MFrYEY6N0TggGEZDP4hIbVVsA4YJSTkZAPigFhD8xoqXAAAAAElFTkSuQmCC" alt="" style="display: none;"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAGVJREFUSA1jYCABuLq6bgVhErQwsJCiGKjWi0T1DEykaiBV/agFBENsNIhGQBAxQrM+yTmUYNhAFGyjdSr6T6RDIMqAvv0PwqRoorUPRgs7wrExGgcEw2joBxGprYptwDAhKScDAEDZDFaet43aAAAAAElFTkSuQmCC" alt=""></a></div>'
