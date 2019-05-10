@@ -15,6 +15,7 @@
  
 </head>
 <body>
+
 <!-- datepicker -->
 <input type="text" id="datepicker2">
  <!--  modal --->

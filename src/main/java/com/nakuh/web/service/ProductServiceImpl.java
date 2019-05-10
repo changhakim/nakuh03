@@ -26,12 +26,7 @@ public class ProductServiceImpl implements ProductService{
 
 	@Override
 	public List<Product> findCateProducts(Product param){
-		List<Product> list = proMap.selectCateProducts(param);
-		System.out.println("proserimpl에서 찍어본 값 ::" + param.getCategory());
-		System.out.println("proreimple" + list.toString());
-		System.out.println("222" + param.getAddress());
-		System.out.println("333" + param.getFishname());
-		return list;
+		return proMap.selectCateProducts(param);
 	}
 	
 	@Override
@@ -41,7 +36,6 @@ public class ProductServiceImpl implements ProductService{
 
 	@Override
 	public Product findProduct(Product param) {
-		Product product = proMap.selectProduct(param);
 		return proMap.selectProduct(param);
 	}
 
