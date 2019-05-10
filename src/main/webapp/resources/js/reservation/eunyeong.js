@@ -26,10 +26,8 @@ eunyeong = (()=>{
                 $.getScript($.js()+'/aquagram/jeonguk.js'),
                 $.getScript($.js()+'/app.js')
         ).done(()=>{
-            $('#wrapper').html(eycompo.commonnav())
-            $(eycompo.main_search()).appendTo('#wrapper');
+            $('#wrapper').html(eycompo.main_search())
             css();
-            navcss(); 
             switch(x){
             case 'ocean':
                 ocean();
@@ -43,7 +41,7 @@ eunyeong = (()=>{
             }
             
             /*  네비게이션 */
-            $('#home').click(e=>{
+            $('.home').click(e=>{
             
             e.preventDefault();
             $('.rescss').remove();
@@ -52,19 +50,19 @@ eunyeong = (()=>{
             location.assign('/web');
             app.init();
             });
-            $('#ocean').click(()=>{
+            $('.ocean').click(()=>{
             	ocean();
             });
             
-            $('#river').click(()=>{
+            $('.river').click(()=>{
             	river();
             });
             
-            $('#hotel').click(()=>{
+            $('.hotel').click(()=>{
             	hotel();
             });
             
-            $('#aquagram').click(e=>{
+            $('#newsfeed').click(e=>{
                 e.preventDefault();
                 $('.rescss').remove();
                 $(instacss).appendTo('head');
@@ -489,7 +487,6 @@ eunyeong = (()=>{
 		 	 +'<link class="rescss" rel="stylesheet" href="/web/resources/css/reservation/main.css">'
              +'<link class="rescss" rel="stylesheet" href="/web/resources/css/reservation/navbar.css">'
              +'<link class="rescss" rel="stylesheet" href="/web/resources/css/reservation/resdetail.css">'
-             +'<link class="rescss" rel="stylesheet" href="/web/resources/css/reservation/responsive_basic.css">'
              +'<link class="rescss" rel="stylesheet" href="/web/resources/css/reservation/prdpay.css">';
          
          instacss =' <link class="instacss" rel="stylesheet" type="text/css" href="/web/resources/css/aquagram/style.css">'

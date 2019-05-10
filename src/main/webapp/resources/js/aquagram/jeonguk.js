@@ -15,8 +15,7 @@ jeonguk =(()=>{
 				$.getScript($.js()+'/aquagram/auth.js')
 			).done(()=>{
 				
-				$('#wrapper').html(jwcompo.commonnav())
-				$(jwcompo.j_main()).appendTo('#wrapper');
+				$('#wrapper').html(jwcompo.j_main())
 				auth.init();
 				/*$(compo.j_main()).appendTo('#default_css');*/
 				/*$(compo.j_default_script()).html('#test');*/
