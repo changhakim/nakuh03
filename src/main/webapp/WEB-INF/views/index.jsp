@@ -17,7 +17,7 @@
 </head>
 <body>
  <!--  modal --->
-<div id="id01" class="gkwlakmodal">
+<div id="id01" class="modal">
   <div class="modal-content animate" action="#">
     <div class="imgcontainer raw">
       <span class="close1" title="Close Modal">&times;</span>

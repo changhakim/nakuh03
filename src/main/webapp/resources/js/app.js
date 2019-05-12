@@ -16,6 +16,7 @@ app=(()=>{
 		$.getScript($.js()+'/admin/changha.js')
 		).done(()=>{
 			app_defualt_loader();
+			crawl();
 		});
 	};
 	
@@ -149,7 +150,7 @@ app=(()=>{
 	let crawl=()=>{
 		alert('들어옴')
 		 $.ajax({
-			  url:$.ctx()+'/wheater',
+			  url:$.ctx()+'/naver',
 			  type:'get',
 			  data:JSON.stringify(),
 			  dataType:'json',
