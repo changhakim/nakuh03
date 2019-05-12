@@ -13,10 +13,11 @@
  *  right_nav :: right_navibar 
  *  my_navbar :: 중앙에 위치한 navibar
  *  insta_base :: 내 게시물 목록(사진리스트)
- * 
- * 
- * 
- * 
+ *  photo_form :: photo 폼 
+ *  photo_feed_css_hover :: CSS 추가 
+ *  modal_css :: 모달 CSS
+ *  upload_modal :: 업로드 기능 모달에 들어갈 폼
+ * 	img_upload_from :: 이미지 /파일 업로드 컴포
  * 
  * 
  * */
@@ -208,18 +209,6 @@ jwcompo = {
 			+'				 </li>'
 			+'				</ul>'
 			+'		<ul class="nav bs-docs-sidenav" style="overflow:scroll; width:300px; height:210px; padding:10px; background-color: white; border-radius: 6px;  border:1px solid; border-color: #ddd;">'
-			+'				 <li>'
-			+'				 <div class="users_list">'
-			+'				 		<h5> 최신 목록 </h5>'
-			+'				        <div id="item">'
-			+'				        	<div class="list-group-item list-group-item-action" style="height: 58px; border: none;"> '
-			+'							  <img class="img-circle" alt="Cinque Terre" src="resources/img/aquagram/test_img.jpg" style="width: 50px; height: 50px; position: center"/>  '
-			+'								 <div ><h5 style="top:-49px; left: 60px">mpick04</h5></div>'
-			+'								  	<div style="top:-55px; left: 60px; font-size: 7px;">24시간전</div>'
-			+'								</div> '
-			+'							</div> '
-			+'							</div> 	'
-			+'				 </li>'
 			+'				 <li>      '
 			+'				 	<div class="users_list">'
 			+'				 		<h5> 최신 목록 </h5>'
@@ -515,11 +504,11 @@ jwcompo = {
 				  +'    }'
 				+'    }'
 				+' 				'
-				+' #feeds {'
+				+' .feeds {'
 				+'    width: 100%;'
 				+'   height: 100%;;'
 				+' }'
-				+'  #feeds img {'
+				+'  .feeds img {'
 				+' 	height: 293px;'
 				+'   width: 293px;'
 				+' }'
@@ -586,6 +575,31 @@ jwcompo = {
 			+'      </div>'
 			+'    </div>'
 			+'  </div>'
+ 		},
+ 		
+ 		img_upload_from :()=>{
+ 			return '<div class="row">'
+	            +		'<div id="img_upload_div" class="col-md-5  mb-5">'
+	            +		'<form id="img_upload_frm"  encType="multipart/form-data">'
+	            +		'<label for="cc-expiration">이미지  등록(파일 업로드)</label>'
+	            +		'<input type="file" id="photo"  name="photo" class="form-control" id="photo" placeholder=""  required="">'
+	            +	'<div class="invalid-feedback">'
+	            +			'</div>'
+/*	            +			'<input type="submit"  id="img_upload_btn">'*/
+	            +		'</form>'
+	            +	'</div>'
+	            +	'<div class="col-md-5 mb-5">'
+	            +	'<form id="img_drag_frm"   encType="multipart/form-data">'
+	            +		'<label for="cc-cvv">이미지  등록(드레그&드랍)</label>'
+	            +		'<input type="file" class="form-control"  id="cc-cvv" placeholder="" required="">'
+	            +	'<div class="invalid-feedback">'
+	            +		'</div>'
+/*	            +		'<input type="submit" id="img_drag_btn">'*/
+	            +		'</form>'
+	            +		'</div>'
+	            +	'</div>'
+	 			
+ 			
  		}
 	
 	};

@@ -11,8 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.nakuh.web.cmm.Proxy;
 import com.nakuh.web.domain.Visitor;
 import com.nakuh.web.mapper.MemberMapper;
+import com.nakuh.web.mapper.ReservationMapper;
 import com.nakuh.web.mapper.VisitorMapper;
 
 @Service
@@ -23,6 +25,8 @@ public class TxService {
 	@Autowired VisitorMapper vsm;
 	@Autowired Visitor vis;
 	@Autowired List<Visitor> ls;
+	@Autowired ReservationMapper resmapper;
+	@Autowired Proxy pxy;
 	public Map<String, Object> membertx(){
 		map.clear();
 		map.put("total", String.valueOf(memMap.countMembers()));
@@ -40,6 +44,28 @@ public class TxService {
 		vis.setTodayvisit(today1);
 		map.put("term", vsm.tenbefore(vis));
 		map.put("agegroup", vsm.ageCount());
+		return map;
+	}
+	public Map<String, Object> reservation(Proxy pxy){
+		map.clear();
+		map.put("reslist",resmapper.selectpageReservations(pxy));
+		map.put("pxy", pxy);
+		System.out.println(pxy.toString());
+		
+		
+		
+		return map;
+	}
+	public Map<String, Object> reservChart(){
+		map.clear();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Date date1 = new Date();
+		Calendar c = new GregorianCalendar();
+		c.add(Calendar.DATE, -10);
+		vis.setBeforevisit(sdf.format(c.getTime()));
+		vis.setTodayvisit(sdf.format(date1));
+		map.put("chartlist", resmapper.resCateTerm(vis));
+		map.put("catecount", resmapper.resCateCount());
 		return map;
 	}
 

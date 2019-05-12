@@ -25,14 +25,17 @@ public class ProductServiceImpl implements ProductService{
 	}
 
 	@Override
+	public List<Product> findCateProducts(Product param){
+		return proMap.selectCateProducts(param);
+	}
+	
+	@Override
 	public List<Product> findSomeProducts(Product param) {
-		
 		return proMap.selectSomeProducts(param);
 	}
 
 	@Override
 	public Product findProduct(Product param) {
-		Product product = proMap.selectProduct(param);
 		return proMap.selectProduct(param);
 	}
 

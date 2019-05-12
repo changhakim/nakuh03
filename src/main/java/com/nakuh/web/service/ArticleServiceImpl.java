@@ -41,9 +41,9 @@ public class ArticleServiceImpl implements ArticleService{
 	}
 
 	@Override
-	public boolean existsArticle(String searchWord) {
+	public boolean existsArticle(Article art) {
 		boolean res = false;
-		res = artmap.existsArticle(searchWord);
+		res = artmap.existsArticle(art);
 		
 		return res;
 	}
