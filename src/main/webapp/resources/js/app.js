@@ -37,7 +37,6 @@ app=(()=>{
 		$('.ocean').click(e=>{
 			e.preventDefault();
 			alert('app')
-			$('.homecss').remove();
 			$('.instacss').remove();
 			$('.admincss').remove();
 			$(rescss).appendTo('head')
@@ -45,7 +44,6 @@ app=(()=>{
 		})
 		$('.river').click(e=>{
 			e.preventDefault();
-			$('.homecss').remove();
 			$('.instacss').remove();
 			$('.admincss').remove();
 			$(rescss).appendTo('head')
@@ -53,7 +51,6 @@ app=(()=>{
 		})
 		$('.hotel').click(e=>{
 			e.preventDefault();
-			$('.homecss').remove();
 			$('.instacss').remove();
 			$('.admincss').remove();
 			$(rescss).appendTo('head')
@@ -134,8 +131,7 @@ app=(()=>{
 	
          rescss = '<link class="rescss" rel="stylesheet" type="text/css" href="/web/resources/css/reservation/modal.css"> '
              +'<link class="rescss" rel="stylesheet" href="/web/resources/css/reservation/navbar.css">'
-             +'<link class="rescss" rel="stylesheet" href="/web/resources/css/reservation/resdetail.css">'
-             +'<link class="rescss" rel="stylesheet" href="/web/resources/css/reservation/prdpay.css">'; 
+             +'<link class="rescss" rel="stylesheet" href="/web/resources/css/reservation/responsive_basic.css">'
 
 	 
 		 instacss ='  <link rel="stylesheet" type="text/css" href="/web/resources/css/aquagram/style.css">'
