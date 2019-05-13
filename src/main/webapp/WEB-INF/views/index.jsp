@@ -64,28 +64,22 @@
   </div>
 </div>
 <!-- modal-2 end-->
-<div class="header_area ">
+<div class="header_area" id="navheader">
 	<header>
 		<section>
-			<a href="/" class="header_logo off active">
-				<img src="https://img.moolban.com/unsafe/asset/www/responsive/img/basic/header_logo.png" alt="">
+			<a href="#" class="header_logo off active home">
+				<img src="${img}/homeimg/main/nakuhlogo.jpg" style="height: 30px;">
 			</a>
 			<a class="location_setting pos_addr_text btn_geo_popup">서울특별시 금천구 가산동 459-11</a>
 
 			<div class="header_menu">
-				<div class="search_header_box search_box pblock">
-					<input type="text" id="search_input_box" placeholder="검색어를 입력해주세요.">
-					<a class="search_btn"><img src="https://img.moolban.com/unsafe/asset/www/responsive/img/basic/search_ico04.png" alt=""></a>
-				</div>
-
 				<a href="/category/list?sea_type=1" class="menu_txt pblock ocean">바다</a>
 				<a href="/category/list?sea_type=2" class="menu_txt pblock river">민물</a>
 				<a href="/search/home" class="menu_txt pblock hotel">숙박</a>
 				<a href="/reserve/live_search" class="menu_txt pblock newsfeed">뉴스피드</a>
-				<a href="/talk/list" class="menu_txt pblock">반반톡</a>
-<!-- 				<a class="menu_btn">
-					<img src="https://img.moolban.com/unsafe/asset/www/responsive/img/basic/header_menu.png" alt="">
-				</a> -->
+				<a class="menu_btn" id="adminbtn">
+					<img style="padding-top: 10px;"src="${img}/homeimg/main/admin_icon.png">
+				</a> 
 			</div>
 		</section>
 	</header>
@@ -95,23 +89,10 @@
 
 
    		<section class="vdosection">
-  			<div class="overlay-wcs"></div>
   		<video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop">
     		<source src="/web/resources/video/nakuh_main.mp4" type="video/mp4">
   		</video>
 		</section>
-	<div class="main_hot_area">
-		<section>
-			<a data-url="/realtime/sea"><p class="hot_title">실시간 조황 <span>HOT</span></p></a>
-			<div class="hot_list">
-				<div class="vTicker" style="overflow: hidden; position: relative; height: 40px;">
-					<ul style="position: absolute; margin: 0px; padding: 0px; top: 0px;">
-<li style="margin: 0px; padding: 0px; height: 40px;"><a data-url="/realtime/list?sea_type=1&amp;sif_key=7&amp;scm_key=2&amp;srch_from=20190410&amp;srch_to=20190510&amp;fish_name=광어">서해남부 : <strong>광어</strong></a></li><li style="margin: 0px; padding: 0px; height: 40px;"><a data-url="/realtime/list?sea_type=1&amp;sif_key=25&amp;scm_key=1&amp;srch_from=20190410&amp;srch_to=20190510&amp;fish_name=노래미">서해중부 : <strong>노래미</strong></a></li><li style="margin: 0px; padding: 0px; height: 40px;"><a data-url="/realtime/list?sea_type=2&amp;sif_key=43&amp;scm_key=2&amp;srch_from=20190410&amp;srch_to=20190510&amp;fish_name=향어">강원도 : <strong>향어</strong></a></li><li style="margin: 0px; padding: 0px; height: 40px;"><a data-url="/realtime/list?sea_type=2&amp;sif_key=44&amp;scm_key=4&amp;srch_from=20190410&amp;srch_to=20190510&amp;fish_name=잉어">충청남도 : <strong>잉어</strong></a></li><li style="margin: 0px; padding: 0px; height: 40px;"><a data-url="/realtime/list?sea_type=2&amp;sif_key=58&amp;scm_key=1&amp;srch_from=20190410&amp;srch_to=20190510&amp;fish_name=배스">경기도 : <strong>배스</strong></a></li><li style="margin: 0px; padding: 0px; height: 40px;"><a data-url="/realtime/list?sea_type=1&amp;sif_key=8&amp;scm_key=4&amp;srch_from=20190410&amp;srch_to=20190510&amp;fish_name=가자미">동해남부 : <strong>가자미</strong></a></li><li style="margin: 0px; padding: 0px; height: 40px;"><a data-url="/realtime/list?sea_type=2&amp;sif_key=50&amp;scm_key=3&amp;srch_from=20190410&amp;srch_to=20190510&amp;fish_name=메기">충청북도 : <strong>메기</strong></a></li><li style="margin: 0px; padding: 0px; height: 40px;"><a data-url="/realtime/list?sea_type=2&amp;sif_key=87&amp;scm_key=8&amp;srch_from=20190410&amp;srch_to=20190510&amp;fish_name=감성돔">경상남도 : <strong>감성돔</strong></a></li><li style="margin: 0px; padding: 0px; height: 40px;"><a data-url="/realtime/list?sea_type=1&amp;sif_key=14&amp;scm_key=5&amp;srch_from=20190410&amp;srch_to=20190510&amp;fish_name=볼락">남해동부 : <strong>볼락</strong></a></li><li style="margin: 0px; padding: 0px; height: 40px;"><a data-url="/realtime/list?sea_type=2&amp;sif_key=40&amp;scm_key=6&amp;srch_from=20190410&amp;srch_to=20190510&amp;fish_name=붕어">전라남도 : <strong>붕어</strong></a></li><li style="margin: 0px; padding: 0px; height: 40px; opacity: 1; display: none;"><a data-url="/realtime/list?sea_type=2&amp;sif_key=40&amp;scm_key=6&amp;srch_from=20190410&amp;srch_to=20190510&amp;fish_name=붕어">전라남도 : <strong>붕어</strong></a></li><li style="margin: 0px; padding: 0px; height: 40px; opacity: 1; display: none;"><a data-url="/realtime/list?sea_type=2&amp;sif_key=40&amp;scm_key=6&amp;srch_from=20190410&amp;srch_to=20190510&amp;fish_name=붕어">전라남도 : <strong>붕어</strong></a></li><li style="margin: 0px; padding: 0px; height: 40px; opacity: 1; display: none;"><a data-url="/realtime/list?sea_type=2&amp;sif_key=40&amp;scm_key=6&amp;srch_from=20190410&amp;srch_to=20190510&amp;fish_name=붕어">전라남도 : <strong>붕어</strong></a></li><li style="margin: 0px; padding: 0px; height: 40px; opacity: 1; display: none;"><a data-url="/realtime/list?sea_type=2&amp;sif_key=40&amp;scm_key=6&amp;srch_from=20190410&amp;srch_to=20190510&amp;fish_name=붕어">전라남도 : <strong>붕어</strong></a></li><li style="margin: 0px; padding: 0px; height: 40px; opacity: 1; display: none;"><a data-url="/realtime/list?sea_type=2&amp;sif_key=40&amp;scm_key=6&amp;srch_from=20190410&amp;srch_to=20190510&amp;fish_name=붕어">전라남도 : <strong>붕어</strong></a></li><li style="margin: 0px; padding: 0px; height: 40px;"><a data-url="/realtime/list?sea_type=1&amp;sif_key=23&amp;scm_key=8&amp;srch_from=20190410&amp;srch_to=20190510&amp;fish_name=긴꼬리벵에돔">대마도 : <strong>긴꼬리벵에돔</strong></a></li></ul>
-				</div>
-			</div>
-		</section>
-	</div>
-
     	<div class="main_icon_area">
 <section>
              <a class="guide" data-url="/category/list?sea_type=1&amp;cc_key=1&amp;cci_key=1" data-id="1" data-sub="1" data-count="0"><img src="https://img.moolban.com/unsafe/images/icon/A/time.png?rand=1556514130">시간·체험<span>바다</span></a>

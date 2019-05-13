@@ -72,4 +72,10 @@ public class ArticleServiceImpl implements ArticleService{
 		return artmap.countnavArticle(art);
 	}
 
+	@Override
+	public Article retrieverArtnum(String artphoto) {
+		
+		return artmap.selectArtnum(artphoto);
+	}
+
 }
