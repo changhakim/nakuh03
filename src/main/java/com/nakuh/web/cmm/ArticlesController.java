@@ -1,27 +1,27 @@
 package com.nakuh.web.cmm;
 
-import java.io.File;
-import java.util.Iterator;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.nakuh.web.domain.Article;
 import com.nakuh.web.domain.Comment;
 import com.nakuh.web.domain.PostTag;
 import com.nakuh.web.mapper.ArticleMapper;
 import com.nakuh.web.mapper.CommentMapper;
+import com.nakuh.web.mapper.PostTagMapper;
 import com.nakuh.web.service.ArticleServiceImpl;
 import com.nakuh.web.service.CommentServiceImpl;
 import com.nakuh.web.service.PostTagServiceImpl;
@@ -43,13 +43,14 @@ public class ArticlesController {
 	@Autowired PostTagServiceImpl postservice;
 	@Autowired ArticleMapper artMap;
 	@Autowired CommentMapper comMap;
+	@Autowired PostTagMapper posMap;
 	@Autowired Proxy pxy;
 	@Autowired Dummy dum;
 	
 	@Autowired Map<String, Object> map;
 	
 	@PostMapping("/myfeed/{mid}")
-	public Map<?,?> ArticleList(
+	public Map<?,?> articleList(
 			@PathVariable String mid,
 			@RequestBody Article param)throws  Exception {
 		logger.info("=========ArticleList 진입======");
@@ -77,7 +78,7 @@ public class ArticlesController {
 		return map;
 	};
 	@PostMapping("/arti/detail/{artnum}")
-	public Map<?,?> ArticleDetail(@PathVariable String artnum)throws  Exception{
+	public Map<?,?> articleDetail(@PathVariable String artnum)throws  Exception{
 		logger.info("=========ArticleDetail 진입======");
 		map.clear();
 		System.out.println("??"+artnum);
@@ -87,7 +88,7 @@ public class ArticlesController {
 		map.put("cls", cls);
 		pt.setArtseq(als.getArtnum());
 		System.out.println("pt"+pt);
-		List<?> tls = postservice.selectPostTags(pt);
+		List<?> tls = postservice.retrievePostTags(pt);
 		System.out.println("tls::"+tls);
 		map.put("tls", tls);
 		
@@ -95,7 +96,7 @@ public class ArticlesController {
 		return map;
 	};
 	@PostMapping("/arti/feed/{mid}")
-	public Map<?,?> ArticleFeed(String mid, @RequestBody Article arts)throws  Exception{
+	public Map<?,?> articleFeed(String mid, @RequestBody Article arts)throws  Exception{
 		logger.info("=========ArticleFeed 진입======");
 		map.clear();
 		System.out.println("art??"+arts);
@@ -115,69 +116,49 @@ public class ArticlesController {
 		
 		return map;
 	};
-	
-	@PostMapping("/upload/image")
-	public Map<?, ?> imgupload(MultipartHttpServletRequest request)throws  Exception{
-		logger.info("============== imageUpload() {}  =================", "ENTER");
+	@GetMapping("/arti/follo/{mid}")
+	public Map<?,?> feedfollo(@PathVariable String mid)throws Exception{
+		logger.info("=========Feedfollo 진입======");
+		map.clear();
+		System.out.println("mid?::"+mid);
 		
-		String res = "";
-		Iterator<String> it=request.getFileNames();
-		  if(it.hasNext()){
-              MultipartFile file=request.getFile(it.next());
-              logger.info("file upload result:{}",  "success");
-              logger.info("upload file name:{}",  file.getName());
-              logger.info("upload file size:{}",  file.getSize());
-              logger.info("upload file exist:{}",  file.isEmpty());
-              logger.info("upload file original name:{}",  file.getOriginalFilename());
-              logger.info("upload file:{}",  file.getOriginalFilename());
-              String filename = file.getOriginalFilename();
-              Random random = new Random();
-              String ml = "";
-              for(int i=0; i<=9; i++) {
-            	  ml += random.nextInt(10);
-              }
-              System.out.println(ml);
-              art.setArtphoto(filename.substring(0, filename.indexOf("."))+ml+(art.getMid().substring(3)));
-              art.setExtension(filename.substring(filename.lastIndexOf(".")+1));
-              System.out.println("photo?::"+art);
-              
-              int rs = 1;//artservice.registArticle(art); 
-			/* IPredicate p =(Object o)-> artMap.existsArticle(art); */
-              // DB 에 파일 저장하는 서비스 메소드 연결. 여기서는 무조건 성공인 1로 처리
-              if(rs==1){
-                  logger.info("file upload insert: {}",  "success");
-                  File dest = new File(SAVED_FILES +  art.getArtphoto() + art.getExtension());
-                  file.transferTo(dest);
-                  res = "등록 성공";
-              }else{
-                  logger.info("file upload insert: {}",  "fail");
-                  res = "등록 실패";
-              }
-          }else{
-              logger.info("file upload result: {}", "fail");
-              res = "등록 실패";
-          }
-          map.clear();
-          map.put("res", res);
-          
+		
 		return map;
 	};
 	
-	@PostMapping("/upload/arti")
+	@PutMapping("/upload/arti")
 	public Map<?, ?> artiupload(@RequestBody Dummy dum)throws Exception{
 		logger.info("============== artiUpload() {}  =================", "ENTER");
+		map.clear();
 		System.out.println("artiupload ::"+art);
 		System.out.println("dummy::"+dum);
 		art.setContent(dum.getSubCont());
 		art.setTag(dum.getSubtag());
+		Date date = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		art.setArtdate(sdf.format(date));
 		System.out.println("update해야함 ::"+art);
+		artMap.updateArticle(art);
+		IFunction f= (Object ob) -> artMap.selectArtnum(art.getArtphoto());
+		//postservice.insertPostTag(pt);
+		map.put("seq", f.apply(art.getArtphoto()));
 		
+		return map;
+	};
+	
+	@PostMapping("/upload/tag")
+	public Map<?,?> tagupload(@RequestBody PostTag pos)throws Exception{
+		logger.info("============== tagupload() {}  =================", "ENTER");
+		System.out.println("posttag::"+pos);
+		map.clear();
+		IConsumer C = (Object o) -> posMap.insertPostTag(pos);
+		C.accept(pos);
+		map.put("msg", "태그 입력성공");
 		
 		
 		return map;
-	}
+	};
 
-	
 	
 }
 

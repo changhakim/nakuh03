@@ -26,6 +26,8 @@ auth =(()=>{
 		
 	};
 	let defualt_loader=()=>{
+		$('#aq_main').remove();
+		$('#wrapper').attr('style','top: 59px;');
 		$('#right_nav_cont').empty();
 		$('#my_navbar').empty();
 		$(jwcompo.left_content()).appendTo('#leftbar_content');
@@ -36,11 +38,12 @@ auth =(()=>{
 		nav();
 		arti.arti_img_upload();
 		feed_infinitemove();
+		right_nav_lander();
 		//중앙 네비 따라오는 옵션
 		$(document).ready(function() {
 			  $('.navbar').affix({
 			    offset: {
-			      top: 510
+			      top: 50
 			    }
 			  });
 			});
@@ -48,7 +51,7 @@ auth =(()=>{
 		$(document).ready(function() {
 			  $('#right_nav_cont').affix({
 			    offset: {
-			      top: 510
+			      top: 50
 			    }
 			  });
 			});
@@ -61,8 +64,44 @@ auth =(()=>{
 	};
 	
 	let right_nav_lander=()=>{
-		
-		
+		let mid='gigi123';
+		$.ajax({
+			url: $.ctx()+'/arti/follo/'+mid,
+			type: 'get',
+			data: JSON.stringify(mid),
+			dataType: 'json',
+			contentType: 'application/json; charset=UTF-8;',
+			success: d=>{
+
+				
+			},error:e=>{
+				alert('실패!');
+				
+			}
+			
+		});
+//		function fn_dateTimeToFormatted(dt) {
+//			var min = 60 * 1000;
+//			var c = new Date()
+//			var d = new Date(dt);
+//			var minsAgo = Math.floor((c - d) / (min));
+//
+//			var result = {
+//				'raw': d.getFullYear() + '-' + (d.getMonth() + 1 > 9 ? '' : '0') + (d.getMonth() + 1) + '-' + (d.getDate() > 9 ? '' : '0') +  d.getDate() + ' ' + (d.getHours() > 9 ? '' : '0') +  d.getHours() + ':' + (d.getMinutes() > 9 ? '' : '0') +  d.getMinutes() + ':'  + (d.getSeconds() > 9 ? '' : '0') +  d.getSeconds(),
+//				'formatted': '',
+//			};
+//
+//			if (minsAgo < 60) { // 1시간 내
+//				result.formatted = minsAgo + '분 전';
+//			} else if (minsAgo < 60 * 24) { // 하루 내
+//				result.formatted = Math.floor(minsAgo / 60) + '시간 전';
+//			} else { // 하루 이상
+//				result.formatted = Math.floor(minsAgo / 60 / 24) + '일 전';
+//			};
+//
+//			return formatDate;
+//		};
+
 	};
 	
 	let feed_infinitemove =()=>{
@@ -126,7 +165,7 @@ auth =(()=>{
 		                		 mynavd(userd);
 	 	                	 }
 		                  	});
-
+	                	  	
 
 	                  }else{
 	                	  $('div#loadmoreajaxloader').html();
@@ -139,8 +178,10 @@ auth =(()=>{
 				}
 					
 			});
-			
+
 		};
+		
+		
 		
 	};
 	
@@ -225,12 +266,8 @@ auth =(()=>{
 				+'              </div> '
 */
 };
-	
 
-	
-	
-	
-	
+
 	let nav =()=>{
 		/*	General 네비게이션 	*/
 		$('.home').click(e=>{
