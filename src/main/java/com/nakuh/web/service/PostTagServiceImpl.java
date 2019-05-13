@@ -9,32 +9,32 @@ import com.nakuh.web.domain.PostTag;
 import com.nakuh.web.mapper.PostTagMapper;
 
 @Service
-public class PostTagServiceImpl implements PostTagMapper{
+public class PostTagServiceImpl implements PostTagService{
 
 	@Autowired PostTagMapper posMap;
-	
+
 	@Override
-	public void insertPostTag(PostTag pos) {
+	public void registPostTag(PostTag pos) {
 		posMap.insertPostTag(pos);
 		
 	}
 
 	@Override
-	public List<PostTag> selectAllPostTagsList() {
+	public List<PostTag> bringAllPostTagsList() {
 		
 		return posMap.selectAllPostTagsList();
 	}
 
 	@Override
-	public List<PostTag> selectPostTags(PostTag pt) {
+	public List<PostTag> retrievePostTags(PostTag pt) {
 		
 		return posMap.selectPostTags(pt);
 	}
 
 	@Override
-	public PostTag selectPostTag(String searchWord) {
+	public PostTag retrievePostTag(String artseq) {
 		
-		return posMap.selectPostTag(searchWord);
+		return posMap.selectPostTag(artseq);
 	}
 
 	@Override
@@ -51,15 +51,16 @@ public class PostTagServiceImpl implements PostTagMapper{
 	}
 
 	@Override
-	public void updatePostTag(PostTag pos) {
+	public void modifyPostTag(PostTag pos) {
 		posMap.updatePostTag(pos);
 		
 	}
 
 	@Override
-	public void deletePostTag(PostTag pos) {
+	public void removePostTag(PostTag pos) {
 		posMap.deletePostTag(pos);
 		
 	}
+
 
 }
