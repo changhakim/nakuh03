@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.nakuh.web.domain.Article;
 import com.nakuh.web.domain.Comment;
+import com.nakuh.web.domain.Dummy;
 import com.nakuh.web.domain.PostTag;
 import com.nakuh.web.mapper.ArticleMapper;
 import com.nakuh.web.mapper.CommentMapper;

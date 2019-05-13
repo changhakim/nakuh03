@@ -1,4 +1,4 @@
-package com.nakuh.web.cmm;
+package com.nakuh.web.domain;
 
 import org.springframework.stereotype.Component;
 
