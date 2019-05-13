@@ -19,7 +19,13 @@
 		WHERE artseq LIKE #{artseq}
 </select>
 
+<insert id="insertPostTag" parameterType="com.nakuh.web.domain.PostTag"
+				flushCache="true" statementType="PREPARED" timeout="20">
+	INSERT INTO POSTTAG(artseq, tagname) 
+	VALUES(#{artseq},#{tagname})
 
+
+</insert>
 
 
 
