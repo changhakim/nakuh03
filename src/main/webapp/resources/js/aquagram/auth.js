@@ -27,7 +27,7 @@ auth =(()=>{
 	};
 	let defualt_loader=()=>{
 		$('#aq_main').remove();
-		$('#wrapper').attr('style','top: 59px;');
+		$('#wrapper').attr('style','top: 59px; background-color: white;');
 		$('#right_nav_cont').empty();
 		$('#my_navbar').empty();
 		$(jwcompo.left_content()).appendTo('#leftbar_content');
@@ -72,7 +72,7 @@ auth =(()=>{
 			dataType: 'json',
 			contentType: 'application/json; charset=UTF-8;',
 			success: d=>{
-
+				
 				
 			},error:e=>{
 				alert('실패!');
