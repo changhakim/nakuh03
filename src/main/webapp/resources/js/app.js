@@ -38,15 +38,14 @@ app=(()=>{
 		$('.ocean').click(e=>{
 			e.preventDefault();
 			alert('app')
-			$('.homecss').remove();
 			$('.instacss').remove();
+			$('.homecss').remove();
 			$('.admincss').remove();
 			$(rescss).appendTo('head')
 			eunyeong.init('ocean');
 		})
 		$('.river').click(e=>{
 			e.preventDefault();
-			$('.homecss').remove();
 			$('.instacss').remove();
 			$('.admincss').remove();
 			$(rescss).appendTo('head')
@@ -54,7 +53,6 @@ app=(()=>{
 		})
 		$('.hotel').click(e=>{
 			e.preventDefault();
-			$('.homecss').remove();
 			$('.instacss').remove();
 			$('.admincss').remove();
 			$(rescss).appendTo('head')
@@ -142,6 +140,7 @@ app=(()=>{
 			 +'<link class="admincss" rel="stylesheet" href="/web/resources/css/admin/pe-icon-7-stroke.css">';
 			 
 	
+<<<<<<< HEAD
          rescss = '<link class="rescss" rel="stylesheet" type="text/css" href="/web/resources/css/reservation/modal.css"> '
              +'<link class="rescss" rel="stylesheet" href="/web/resources/css/reservation/navbar.css">'
              +'<link class="rescss" rel="stylesheet" href="/web/resources/css/reservation/resdetail.css">'
@@ -157,6 +156,11 @@ app=(()=>{
              +'<link class="rescss" rel="stylesheet" href="/web/resources/css/reservation/prdpay.css">'; 
 
 >>>>>>> 3087dcfe3cffaa4d2bc465ff845da52000a598b5
+=======
+         rescss = '<link class="homecss" href="/web/resources/css/home/responsive.css" rel="stylesheet">'
+        	 +'<link class="homecss" href="/web/resources/css/home/swiper.min.css" rel="stylesheet">'
+        	 +'<link class="rescss" rel="stylesheet" type="text/css" href="/web/resources/css/reservation/modal.css"> ';
+>>>>>>> 1f92479c9c43b29a5834d0b38fa7f08757cc2e62
 	 
 		 instacss ='  <link rel="stylesheet" type="text/css" href="/web/resources/css/aquagram/style.css">'
 			 +'  <link class="instacss" rel="stylesheet" type="text/css" href="/web/resources/css/aquagram/animate.css">'

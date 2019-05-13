@@ -35,8 +35,8 @@
 				(select profilephoto from MEMBERS M WHERE M.MID LIKE ARTICLES.MID) profilephoto
 		FROM ARTICLES
 		WHERE mid LIKE  #{mid}
-		ORDER BY artnum DESC ) A,(SELECT @ROWNUM:=0) TMP  
-		ORDER BY rownum
+		 ) A,(SELECT @ROWNUM:=0) TMP  
+		ORDER BY artnum DESC
 		limit #{startRow},#{pageSize}
 
 </select>

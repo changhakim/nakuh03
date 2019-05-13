@@ -21,10 +21,11 @@ import com.nakuh.web.mapper.ArticleMapper;
 @Transactional
 public class Fileupload {
 	private static final Logger logger = LoggerFactory.getLogger(Fileupload.class);
-	public static final String SAVED_FILES = "//Users//deep//nakuh_project//nakuh03_workspace//nakuh03//src//main//webapp//resources//img//aquagram//articles//";
+	public static final String SAVED_FILES = "C:\\Users\\1027\\nakuh_Project\\nakuh03_workspace\\nakuh03\\src\\main\\webapp\\resources\\img\\aquagram\\articles\\";
 	/*
 	 * C:\Users\1027\nakuh3\nakuh03\src\main\webapp\resources\img\aquagram\articles\//창하꺼
 	 * C:\Users\1027\nakuh_Project\nakuh03_workspace\nakuh03\src\main\webapp\resources\img\aquagram\articles\//형꺼
+	 * //Users//deep//nakuh_project//nakuh03_workspace//nakuh03//src//main//webapp//resources//img//aquagram//articles//  //맥북
 	 */	
 	
 	@Autowired Article art;
@@ -57,7 +58,7 @@ public class Fileupload {
               art.setExtension(filename.substring(filename.lastIndexOf(".")+1));
               System.out.println("photo?::"+art);
               IPredicate p =(Object o)-> artMap.existsArticle(art);
-              int rs = 1;//artservice.registArticle(art); 
+              //int rs = 1;//artservice.registArticle(art); 
 			/* IPredicate p =(Object o)-> artMap.existsArticle(art); */
               // DB 에 파일 저장하는 서비스 메소드 연결. 여기서는 무조건 성공인 1로 처리
               if(p.test(art)==true){
