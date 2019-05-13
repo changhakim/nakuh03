@@ -233,15 +233,15 @@ auth =(()=>{
 	
 	let nav =()=>{
 		/*	General 네비게이션 	*/
-		$('#home').click(e=>{
-		
-		
-		$('.rescss').remove();
-		$('.instacss').remove();
-		$(homecss).appendTo('head');
-		location.assign('/web');
-		app.init();
-	    
+		$('.home').click(e=>{
+			
+			
+			$('.rescss').remove();
+			$('.instacss').remove();
+			$(homecss).appendTo('head');
+			location.assign('/web');
+			app.init();
+		    
 		});
 		$('.ocean').click(e=>{
 		e.preventDefault();

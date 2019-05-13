@@ -72,9 +72,18 @@ app=(()=>{
 			$('.homecss').remove();
 			$('.rescss').remove();
 			$('.instacss').remove();
+			$('#navheader').remove();
+			$('#aaadfa').remove();
 			$(admincss).appendTo('head')
 			changha.init();
 		})
+		 $('.home').click(e=>{
+			 e.preventDefault();
+	            $('.rescss').remove();
+	            $('.instacss').remove();
+	            location.assign('/web');
+	            app.init();
+	    });
 			
 	};
 	
