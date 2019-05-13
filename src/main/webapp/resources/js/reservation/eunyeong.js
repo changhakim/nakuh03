@@ -508,12 +508,12 @@ eunyeong = (()=>{
      let prdres =x=>{
      	$('#wrapper').empty();
      	$(eycompo.product_res()).appendTo('#wrapper');
- 		$('#proname').text(x.proname);
+     	/*$('#proname').text(x.proname);
  		$('#company').text(x.company);
  		$('#startdate').text(x.startdate);
  	    $('#proname1').text(x.proname);
  	    $('#price').text(x.price);
- 	    /*$('.count_plus').click(function(){
+ 	    $('.count_plus').click(function(){
  	    	let count = Number($('.count').val()) + 1;
  	    	$('.count').val(count);
  	    });

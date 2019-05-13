@@ -39,6 +39,7 @@ app=(()=>{
 			e.preventDefault();
 			alert('app')
 			$('.instacss').remove();
+			$('.homecss').remove();
 			$('.admincss').remove();
 			$(rescss).appendTo('head')
 			eunyeong.init('ocean');
@@ -139,10 +140,9 @@ app=(()=>{
 			 +'<link class="admincss" rel="stylesheet" href="/web/resources/css/admin/pe-icon-7-stroke.css">';
 			 
 	
-         rescss = '<link class="rescss" rel="stylesheet" type="text/css" href="/web/resources/css/reservation/modal.css"> '
-             +'<link class="rescss" rel="stylesheet" href="/web/resources/css/reservation/navbar.css">'
-             +'<link class="rescss" rel="stylesheet" href="/web/resources/css/reservation/responsive_basic.css">'
-
+         rescss = '<link class="homecss" href="/web/resources/css/home/responsive.css" rel="stylesheet">'
+        	 +'<link class="homecss" href="/web/resources/css/home/swiper.min.css" rel="stylesheet">'
+        	 +'<link class="rescss" rel="stylesheet" type="text/css" href="/web/resources/css/reservation/modal.css"> ';
 	 
 		 instacss ='  <link rel="stylesheet" type="text/css" href="/web/resources/css/aquagram/style.css">'
 			 +'  <link class="instacss" rel="stylesheet" type="text/css" href="/web/resources/css/aquagram/animate.css">'
