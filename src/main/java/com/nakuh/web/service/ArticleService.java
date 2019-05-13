@@ -12,9 +12,10 @@ public interface ArticleService {
 	
 	public List<Article> bringAllArticlesList(Article art);
 	public List<Article> retrieveArticles(Article art);
-
+	
 	public Article retrieveArticleDetail(String artnum);
 	public Article countnavArticles(Article art);
+	public Article retrieverArtnum(String artphoto);
 	public int countArticles(String mid);
 	public boolean existsArticle(Article art);
 	
