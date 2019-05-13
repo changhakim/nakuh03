@@ -46,7 +46,7 @@ jwcompo = {
 			+'   </div>'
 			+'   <div class="wrap">'
 			+'   	<div>'
-			+'   		<nav class="navbar navbar-inverse" role="navigation" id="my_navbar" data-spy="affix" data-offset-top="525" style="width: 100%; height:75px; background-color: #fafafa; border: none; border-bottom: 1px solid; border-color: #ddd; border-radius: 0px;">	  '
+			+'   		<nav class="navbar navbar-inverse" role="navigation" id="my_navbar" data-spy="affix" data-offset-top="525" style="width: 100%; height:75px; background-color: #fafafa; border: none; border-bottom: 1px solid; border-color: #ddd; border-radius: 0px; z-index: 1000; border-top: 1px solid #ddd;">	  '
 			+'   		</nav>'
 			+'   	</div>'
 			+'   </div>'
