@@ -23,6 +23,8 @@ arti =(()=>{
 	};
 	let arti_default_loader=()=>{
 		$('#donw_content').html(jwcompo.insta_base());
+		$('.instagram-wrap').attr('style','background-color: white;');
+		$('#donw_content').attr('style','background-color: white;');
 		$('head').after(jwcompo.photo_feed_css_hover());
 		feed_my();
 		move();
@@ -172,7 +174,7 @@ arti =(()=>{
 				$('.modal-footer').remove();
 				$('#change_modal_2').html(
 						'        <div class="modal-body">'
-						+'          <div  class="col-sm-8" style="height: 600px; display: block;"><img src="resources/img/aquagram/articles/'+d.als.artphoto+'.'+d.als.extension+'" width="600" height="600"></div>'
+						+'          <div  class="col-sm-8" style="height: 600px; display: block; left: 15px;"><img src="resources/img/aquagram/articles/'+d.als.artphoto+'.'+d.als.extension+'" width="600" height="600"></div>'
 						+'          <div class="col-sm-4" style="background-color:#fff; height: 600px; ">'
 						+'              <div class="row" id="user_info" style="padding-bottom: 7px; border-bottom: 1px solid #ddd;">'
 						+'                    <div class="group-item" style="height: 58px; border: none; margin-top: 15px; margin-left: 0px; display: inline-flex;">'
@@ -187,7 +189,7 @@ arti =(()=>{
 						+'     		<div id="item" style="top: 5px;">'
 						+'                  <div class="list-group-item list-group-item-action" id="comments_my" style="height: 58px; border: none; display: -webkit-box;"> '
 						+'                <img class="img-circle" alt="Cinque Terre" src="resources/img/aquagram/profilephoto/'+d.als.profilephoto+'" style="width: 40px; height: 40px; position: center"/>'
-						+'                 <div style="display: -webkit-box;"><h5 style="top:0px; left: 7px; font-weight:bold;">'+d.als.mid+'</h5><div><h6 id="contag" style="left: 15px; width: 90%;">'+d.als.content+'</h6></div></div>'
+						+'                 <div style="display: -webkit-box;"><h5 style="top:0px; left: 7px; font-weight:bold;">'+d.als.mid+'</h5><div><h6 id="contag" style="left: 15px; width: 90%; display: initial;">'+d.als.content+'</h6></div></div>'
 						+'                   <div style="font-size: 5px; left: 105px; top: 8px;">'+d.als.artdate+'</div>'
 						+'                </div> '
 						+'              </div> '
@@ -375,7 +377,8 @@ arti =(()=>{
 	                					});
 	                					
 	                					$('#myModal').modal('hide');
-
+	                					//window.location.reload(true);
+	                					setContentView();
 	                				},error: e=>{
 	                					
 	                				}
