@@ -50,6 +50,11 @@
 			WHERE artnum LIKE #{artnum}						
 		
 </select>
+<select id="selectArtnum" resultType="com.nakuh.web.domain.Article">
+	SELECT artnum
+	FROM ARTICLES 
+	WHERE artphoto LIKE #{artphoto}
+</select>
 
 <select id="selectAllArticlesList" resultType="com.nakuh.web.domain.Article"
 								parameterType="com.nakuh.web.domain.Article">
@@ -125,12 +130,26 @@ WHERE MID LIKE #{mid}
 
 <select id="countArticles" resultType="int"
 								parameterType="com.nakuh.web.domain.Article">
-SELECT COUNT(*)
-FROM ARTICLES
-WHERE MID LIKE #{mid}
-</select>
+	SELECT COUNT(*)
+	FROM ARTICLES
+	WHERE MID LIKE #{mid}
+</select>	
 
+<insert id="existsArticle" parameterType="com.nakuh.web.domain.Article" 
+			flushCache="true" statementType="PREPARED" timeout="20">
+			
+	INSERT INTO ARTICLES(artphoto, extension, mid) 
+	VALUES(#{artphoto},#{extension},#{mid})
 
+</insert>
+
+<update id="updateArticle" parameterType="com.nakuh.web.domain.Article" 
+    		flushCache="true" statementType="PREPARED" timeout="20"> 
+	UPDATE ARTICLES 
+	SET content = #{content}, artdate = #{artdate}
+	WHERE artphoto like #{artphoto}
+	 
+</update>
 
 
 

@@ -16,6 +16,7 @@ app=(()=>{
 		$.getScript($.js()+'/admin/changha.js')
 		).done(()=>{
 			app_defualt_loader();
+			crawl();
 		});
 	};
 	
@@ -69,9 +70,18 @@ app=(()=>{
 			$('.homecss').remove();
 			$('.rescss').remove();
 			$('.instacss').remove();
+			$('#navheader').remove();
+			$('#aaadfa').remove();
 			$(admincss).appendTo('head')
 			changha.init();
 		})
+		 $('.home').click(e=>{
+			 e.preventDefault();
+	            $('.rescss').remove();
+	            $('.instacss').remove();
+	            location.assign('/web');
+	            app.init();
+	    });
 			
 	};
 	
@@ -145,7 +155,7 @@ app=(()=>{
 	let crawl=()=>{
 		alert('들어옴')
 		 $.ajax({
-			  url:$.ctx()+'/wheater',
+			  url:$.ctx()+'/naver',
 			  type:'get',
 			  data:JSON.stringify(),
 			  dataType:'json',

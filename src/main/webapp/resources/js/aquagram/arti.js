@@ -1,12 +1,8 @@
 var arti = arti || {};
 arti =(()=>{
 	let homecss,admincss,rescss,instacss;
-	let setPath=()=>{
-		 _= $.ctx();
-		 js = $.js();
-	};
 	let init =()=>{
-		setPath();
+
 		onCreate();
 	};
 	let onCreate =()=>{
@@ -85,7 +81,7 @@ arti =(()=>{
 	        let startNo = $("#instafeed").children('.feeds').last().data("no") || 0;
 			let mid ='gigi123';
 			let page = 0;
-			let url = _+'/myfeed/'+mid;
+			let url = $.ctx()+'/myfeed/'+mid;
 			let data = { mid:mid,
 					startRow:startNo,
 					pageSize:6};
@@ -160,7 +156,7 @@ arti =(()=>{
 		$('#change_modal_2').empty();
 		let comlist='';
 		$.ajax({
-			url: _+'/arti/detail/'+x,
+			url: $.ctx()+'/arti/detail/'+x,
 			type: 'post',
 			data: JSON.stringify(x),
 			dataType: 'json',
@@ -341,42 +337,58 @@ arti =(()=>{
 	                        }
 	                    },
 	                    success : function(d) {
-	                    	alert(d.result);
-	                    	
-	                    	arti_upload();
+	                    	alert(d.res);
+	                		let tagarr = $('#taginput').val().split('#');
+	                		let art_upload_data = {
+	                				subCont:$('#commentinput').val(),
+	                				subid:sessionStorage.getItem('userid')
+	                				};
+
+	                			$.ajax({
+	                				url: $.ctx()+'/upload/arti',
+	                				type: 'put',
+	                				data: JSON.stringify(art_upload_data),
+	                				dataType: 'json',
+	                				contentType: 'application/json; charset=UTF-8;',
+	                				success: d=>{
+	                					alert('seq??:::'+d.seq.artnum);
+	                					$.each(tagarr,(i,j)=>{
+	                						let tagdata = {artseq:d.seq.artnum,
+	                								tagname:tagarr[i]}
+	                						if(tagdata.tagname != ''){
+	                							alert(tagdata.tagname);
+			                					$.ajax({
+		        	                				url: $.ctx()+'/upload/tag',
+		        	                				type: 'post',
+		        	                				data: JSON.stringify(tagdata),
+		        	                				dataType: 'json',
+		        	                				contentType: 'application/json; charset=UTF-8;',
+		        	                				success: d=>{
+		        	                					alert(d.msg);
+		        	                					
+		        	                					
+		        	                				},error: e=>{
+		        	                					
+		        	                				}
+	        	                			});	 	
+	                						}
+	                					});
+	                					
+	                					$('#myModal').modal('hide');
+
+	                				},error: e=>{
+	                					
+	                				}
+	                				
+	                			});
 	                    }
 	               }).submit();
-	
-				
+
 	            });
-			
-			
+
 		});
 	};
-	let arti_upload =()=>{
-		alert(''+sessionStorage.getItem('userid'));
-		let art_upload_data = { subtag:$('#taginput').val(),
-				subCont:$('#commentinput').val(),
-				subid:sessionStorage.getItem('userid')
-				};
-			$.ajax({
-				url: $.ctx()+'/upload/arti',
-				type: 'post',
-				data: JSON.stringify(art_upload_data),
-				dataType: 'json',
-				contentType: 'application/json; charset=UTF-8;',
-				success: d=>{
-					
-					
-					
-				},error: e=>{
-					
-				}
-				
-			});
-		
-	};
-	
+
 	
 	
 	return {init:init, arti_img_upload:arti_img_upload};
