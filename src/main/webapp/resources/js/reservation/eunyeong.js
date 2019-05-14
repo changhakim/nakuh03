@@ -98,6 +98,15 @@ eunyeong = (()=>{
         });*/
         
         let cate = 'ocean';
+        $('.select_title').click(()=>{
+        	if($('.sort > .select_option').css('display')){
+        		
+        	}else{
+        	  $('.sort > .select_option').css('display' ,'block');	
+        	}
+            
+        	
+        })
         pro_infinitemove(cate);
     };
     
