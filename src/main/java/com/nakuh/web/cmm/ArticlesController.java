@@ -46,7 +46,6 @@ public class ArticlesController {
 	@Autowired ArticleMapper artMap;
 	@Autowired CommentMapper comMap;
 	@Autowired PostTagMapper posMap;
-	@Autowired FollowerMapper folMap;
 	@Autowired Proxy pxy;
 	@Autowired Dummy dum;
 	
@@ -119,18 +118,7 @@ public class ArticlesController {
 		
 		return map;
 	};
-	@GetMapping("/arti/follo/{mid}")
-	public Map<?,?> feedfollo(@PathVariable String mid)throws Exception{
-		logger.info("=========Feedfollo 진입======");
-		map.clear();
-		System.out.println("mid?::"+mid);
-		IFunction f = (String) -> folMap.selectAllFollowersList(mid);
-		List<?> folList = (List<?>) f.apply(mid);
-		System.out.println("follist"+folList);
-		map.put("follist", folList);
-		
-		return map;
-	};
+
 	
 	@PutMapping("/upload/arti")
 	public Map<?, ?> artiupload(@RequestBody Dummy dum)throws Exception{

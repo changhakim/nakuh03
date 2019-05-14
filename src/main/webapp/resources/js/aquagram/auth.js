@@ -97,7 +97,7 @@ auth =(()=>{
 			dataType: 'json',
 			contentType: 'application/json; charset=UTF-8;',
 			success: d=>{
-				alert('성공.')
+				alert('성공.');
 				
 			},error: e=>{
 				

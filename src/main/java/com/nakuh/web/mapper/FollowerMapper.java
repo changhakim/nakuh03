@@ -10,9 +10,9 @@ import com.nakuh.web.domain.Follower;
 public interface FollowerMapper {
 	public void insertFollower(Follower fol);
 	
-	public List<Follower> selectAllFollowersList(String fid);
-	public List<Follower> selectFollowers(String fid);
-	public List<Follower> selectFollowing(String fid);
+	public List<Follower> selectAllFollowersList(String fod);
+	public List<Follower> selectFollowers(String fod);
+	public List<Follower> selectFollowing(String fod);
 	public Follower selectFollower(String searchWord);
 	public int countFollowers();
 	public boolean existsFollower(String searchWord);
