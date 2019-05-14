@@ -16,7 +16,6 @@ public interface FollowerMapper {
 	public Follower selectFollower(String searchWord);
 	public int countFollowers();
 	public boolean existsFollower(String searchWord);
-	
 	public void updateFollower(Follower fol);
 	public void deleteFollower(Follower fol);
 }

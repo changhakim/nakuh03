@@ -77,6 +77,7 @@
 				<a href="/category/list?sea_type=2" class="menu_txt pblock river">민물</a>
 				<a href="/search/home" class="menu_txt pblock hotel">숙박</a>
 				<a href="/reserve/live_search" class="menu_txt pblock newsfeed">뉴스피드</a>
+				<a href="/search/mypage" class="menu_txt pblock mypage">마이페이지</a>
 				<a class="menu_btn" id="adminbtn">
 					<img style="padding-top: 10px;"src="${img}/homeimg/main/admin_icon.png">
 				</a> 

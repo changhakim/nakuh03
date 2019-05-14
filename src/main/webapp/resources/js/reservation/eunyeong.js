@@ -25,16 +25,19 @@ eunyeong = (()=>{
                 $.getScript($.js()+'/app.js')
         ).done(()=>{
         	css();
+        	
             switch(x){
             case 'ocean':
-                ocean();
+                ocean(x);
             break;
             case 'river':
-                river();
+                river(x);
             break;
             case 'hotel':
-                hotel();
+                hotel(x);
             break;
+            case 'mypage':
+            	mypage();
             }
             
             /*  네비게이션 */
@@ -64,8 +67,8 @@ eunyeong = (()=>{
                 $(instacss).appendTo('head');
                 jeonguk.init();
             });
-            $('#mypage').click(()=>{
-
+            $('.mypage').click(()=>{
+            	mypage();
             });
             
             $('#logout').click(()=>{
@@ -74,7 +77,7 @@ eunyeong = (()=>{
         })
     };
   
-    let cate_search =()=>{
+    let cate_search =t=>{
         $('#wrapper').empty();
         $('.scrolling').remove();
         $(eycompo.header()).appendTo('.header_area');
@@ -92,14 +95,30 @@ eunyeong = (()=>{
         	$('<a class="selectprice'+x+'">'+y+'</a>').appendTo('.sort > .select_option').click(function(){
         		alert($(this).text())
         		$('.price_title').text($(this).text())
+<<<<<<< HEAD
+=======
+                searchlist = {pricetitle:$('.price_title').text(),areatitle:$('.area_title').text(),cate:t}
+        		$('.list_section').empty();
+                pro_infinitemove(searchlist);
+>>>>>>> a851b93f92d2596ec9f880a1dd404b81cae02211
         	})
         })
         $.each(['지역','서울','경기','인천','전남','부산','전북','강원도','광주','충남','충북','제주'],(x,y)=>{
         	$('<a class="selectcity'+x+'">'+y+'</a>').appendTo('.distance > .select_option').click(function(){
         		alert($(this).text())
         		$('.area_title').text($(this).text())
+<<<<<<< HEAD
         	})
         })
+=======
+                searchlist = {pricetitle:$('.price_title').text(),areatitle:$('.area_title').text(),cate:t}
+        		$('.list_section').empty();
+                pro_infinitemove(searchlist);
+        	})
+        })
+        let searchlist='';
+        $('.area_title').attr('value',t)
+>>>>>>> a851b93f92d2596ec9f880a1dd404b81cae02211
         $('.distance').click(()=>{
         	if($('.distance > .select_option').attr('value')=='block'){
             	$('.distance > .select_option').css('display','none')
@@ -108,6 +127,10 @@ eunyeong = (()=>{
             	$('.distance > .select_option').css('display','block')
             	$('.distance > .select_option').attr('value','block')
             }
+<<<<<<< HEAD
+=======
+
+>>>>>>> a851b93f92d2596ec9f880a1dd404b81cae02211
         })
         $('.sort').click(()=>{
         	if($('.sort > .select_option').attr('value')=='block'){
@@ -117,11 +140,18 @@ eunyeong = (()=>{
         	$('.sort > .select_option').css('display','block')
         	$('.sort > .select_option').attr('value','block')
         	}
+<<<<<<< HEAD
         })
+=======
+
+        })
+        
+>>>>>>> a851b93f92d2596ec9f880a1dd404b81cae02211
     };
     
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////*바다 메인화면 */   
     
+<<<<<<< HEAD
     let ocean =()=>{
     	cate_search();
         let cate = 'ocean';
@@ -134,12 +164,17 @@ eunyeong = (()=>{
             
         	
         })
+=======
+    let ocean =x=>{
+    	cate_search(x);
+        let cate = {cate:'ocean'};
+>>>>>>> a851b93f92d2596ec9f880a1dd404b81cae02211
         pro_infinitemove(cate);
     };
     
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////*민물 메인화면 */        
-    let river =()=>{
-    	cate_search();
+    let river =x=>{
+    	cate_search(x);
     	$('#cate_head').text('민물낚시');
     	$('#cate_home').text('민물 홈');
     	$('#cate_menu1').text('연안');
@@ -147,14 +182,14 @@ eunyeong = (()=>{
     	$('#cate_menu3').text('낚시카페');
     	$('#cate_menu4').text('배스');
     	$('#cate_menu5').text('노지');
-        let cate = 'river';
+    	let cate = {cate:'river'};
         pro_infinitemove(cate);
         
     };
     
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////*숙박 메인화면 */  
     
-    let hotel =()=>{
+    let hotel =x=>{
     	alert('hotel진입');
         $(m_ctt).empty();
         $(s_ctt).attr('style','background:#242c36 url(/web/resources/img/reservation/lodge.jpg)');
@@ -164,7 +199,7 @@ eunyeong = (()=>{
         	search();
         });
         
-        let cate = 'hotel';
+        let cate = {cate:'hotel'};
         pro_infinitemove(cate);
         
     };
@@ -195,16 +230,19 @@ eunyeong = (()=>{
 		
 		let pro_fetchList=x=>{
 	        if(isEnd == true){
-	        	
 	        	return;
 	        }
 	        let startNo = $('.list_section').children('.list_ad_box_area3').last().data("no") || 0;	      
-			let cate =x;
+			let cate =x.cate;
 			let page = 0;
 			let url = _+'/catesearch/'+ cate;
 			let data = { cate:cate,
 					startRow:startNo,
-					pageSize:6};
+					pageSize:6,
+					pricetitle:x.pricetitle,
+					areatitle:x.areatitle
+					};
+			
 			$.ajax({
 				url: url,
 				type: 'post',
@@ -226,6 +264,7 @@ eunyeong = (()=>{
 	                		  pro_renderList(j); 
 		                	 
 		                  	});
+	                	  alert(data.pricetitle+'=='+data.areatitle+"=="+data.cate)
 	                  }else{
 	                	  $('div#loadmoreajaxloader').html();
 	                  }
@@ -236,9 +275,7 @@ eunyeong = (()=>{
 				}
 					
 			});
-			
 		};
-		
 	};
 	
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////*전체목록 :페이지네이션 */	
@@ -465,7 +502,6 @@ eunyeong = (()=>{
  	    			
  	    		})
  	    
- 	    
 /* 	    $('#count_plus').click(function(){
  	    	
  	    	$('<input id="count" type="tel" value="1">').appendTo('#count_minus')
@@ -533,29 +569,71 @@ eunyeong = (()=>{
 			});
      };
      
-     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*상품결제 : 완료*/
+     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*상품결제 : 완료*/
      
     let respay =()=>{
     	alert('결제완료 진입');
-    	$(f_ctt).empty();
-		$(eycompo.complete_pay()).appendTo(f_ctt);
-		$('.call_btn').click(e=>{
+    	$('#wrapper').empty();
+		$(eycompo.complete_pay()).appendTo('#wrapper');
+		$('#check_res').click(e=>{
 			alert('업체통화는 앱에서만 이용가능합니다.');
+			mypage();
 		});
-    	$('#check_res').click(e=>{
-    		
-    		$.ajax({});
-    		
-				$(f_ctt).empty();
-				$(eycompo.list_res()).appendTo(f_ctt);
-				$('.cancel_btn').click(e=>{
-					alert('마이페이지로 이동');
-	 				$(f_ctt).empty();
-	 				$(eycompo.mypage()).appendTo(f_ctt); 	 				
-	 				})
-			});
     }; 
-     
+ 
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*마이페이지*/
+    
+    let mypage =()=>{
+    	alert('마이페이지 진입');
+      	let mid = 'test'
+      		$.ajax({
+    			url :_+'/reservation/' + mid,
+    			type :'POST',
+    			data : JSON.stringify(mid),
+    			dataType : 'json',
+    			contentType : 'application/json',
+    			success : d=>{
+    				alert('AJAX 성공' + d.list);
+    				$('#wrapper').empty();
+    		      	$(eycompo.mypage()).appendTo('#wrapper');
+    		      	$('.rtreserve_more_list').empty();
+    		      	alert('내가 그려준다');
+    		      	$.each(d.list, (i,j)=>{
+        		      	$('<div class="rtreserve_more_list clearfix" id="reserveList" data-start_key="0" data-offset="0" data-limit="5" data-last_offset=""><div class="rtreserve_list_box">'
+        		    			+'    <div class="rtreserve_con ">'
+        		    			+'        <a class="clearfix" href="/reserve/reserve_view/73060">'
+        		    			+'            <div class="img_box">'
+        		    			+'                <img src="https://img.moolban.com/unsafe/750x390/filters:no_upscale()/company/images/1318/8acf1c6750ab3211f963122c54f11c32.jpg" alt="" class="">'
+        		    			+'                <!-- <img src="https://img.moolban.com/unsafe/asset/www/responsive/img/test/view_test_img_06.PNG" alt=""> -->'
+        		    			+'            </div>'
+        		    			+'            <div class="txt_box">'
+        		    			+'                <p class="pic_line">'
+        		    			+'                                        <span class="pic_wait">예약대기</span>'
+        		    			+'                                                            <span class="pic_none">보험미적용</span>'
+        		    			+'                                    </p>'
+        		    			+'                <p id="proname" class="title_line">'+j.proname+'</p>'
+        		    			+'                <p class="address_line">'
+        		    			+'                    <span id="category" class="place">선상</span>'
+        		    			+'                    <span id="address" class="km">'+j.address+'</span>'
+        		    			+'                </p>'
+        		    			+'                <div class="order_line ">'
+        		    			+'                                    <p><span id="startdate">이용일</span>'+j.startdate+'</p>'
+        		    			+'                    <p><span id="resnum">예약번호</span>73060</p>'
+        		    			+'                                </div>'
+        		    			+'            </div>'
+        		    			+'        </a>'
+        		    			+'            </div>'
+        		    			+'</div></div>')
+        		    			.attr('id', j.resnum)
+        		    			.appendTo('.rtreserve_guide');
+    		      	});
+    			},
+    			error: e=>{
+    				alert('AJAX 실패');
+    			}
+    		});
+    };
+    
     let navcss = ()=>{
         $(document).ready(function() {
              $('#comnav').affix({

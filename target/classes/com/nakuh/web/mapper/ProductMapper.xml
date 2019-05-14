@@ -20,15 +20,26 @@
 		PHONE phone,
 		LAT lat,
 		LNG lng
-	FROM PRODUCTS
-									  
+	FROM PRODUCTS								  
 	</select>
 	
 <!--  카테고리별 상품 조회 -->
 	<select id="selectCateProducts" resultType="com.nakuh.web.domain.Product"
 									parameterType="com.nakuh.web.domain.Product">
 
-	SELECT  ROW_NUMBER() over(order by pronum desc) rownum, P.*
+	SELECT  ROW_NUMBER() over(
+	<choose>
+	 <when test="pricetitle =='높은가격순'">
+     	ORDER BY price*1 DESC
+     </when>
+     <when test="pricetitle =='낮은가격순'">
+     	ORDER BY price*1
+     </when>
+     <otherwise>
+      order by pronum desc
+    </otherwise>
+ 	</choose>	
+	) rownum, P.*
 	FROM	(SELECT 
 			PRONUM pronum, 
 			PRONAME proname, 
@@ -44,7 +55,15 @@
 			LNG lng
 		FROM PRODUCTS 
 		WHERE CATEGORY LIKE #{category} ) P
+	 	<choose>
+     	<when test="areatitle !='지역' and areatitle !=null and pricetitle !=null ">
+     	WHERE  ADDRESS LIKE '%${areatitle}%'
+     	ORDER BY price*1 DESC
+     	</when>
+     	</choose>
+
 		LIMIT #{startRow},#{pageSize}
+ 
 		
 		
 <!-- 		SELECT 

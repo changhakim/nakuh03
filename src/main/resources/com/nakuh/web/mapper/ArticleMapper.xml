@@ -63,8 +63,8 @@ SELECT  ROW_NUMBER() over(order by artnum desc) rownum, A.*
 				F.folloid as mname, F.mid,
 				(SELECT profilephoto FROM MEMBERS WHERE MID LIKE mname) profilephoto,
 				(SELECT COUNT(*) FROM ARTICLES WHERE MID LIKE #{mid}) artcount,
-			   (SELECT COUNT(*) FROM FOLLOWERS WHERE MID LIKE #{mid}) followerCount,
-			   (SELECT COUNT(*) FROM FOLLOWERS WHERE folloid LIKE #{mid}) folloingCount,
+			   (SELECT COUNT(DISTINCT folloid) FROM FOLLOWERS WHERE MID LIKE #{mid}) folloingCount,
+			   (SELECT COUNT(DISTINCT mid) FROM FOLLOWERS WHERE folloid LIKE #{mid}) followerCount,
 			   (SELECT profilephoto FROM MEMBERS WHERE MID LIKE #{mid}) userpo,
 			   (SELECT GROUP_CONCAT(DISTINCT '#',P.tagname SEPARATOR '.') AS tag
 					FROM POSTTAG P

@@ -4,7 +4,7 @@ import org.springframework.stereotype.Component;
 
 import lombok.Data;
 
-@Data@Component
+@Data @Component
 public class Follower {
-	private String folloseq,folloid,mid, artdate, artnum, follpphoto;
+	private String folloseq,folloid, mid, artdate, artnum, follpphoto , name, follostate;
 }

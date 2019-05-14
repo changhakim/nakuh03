@@ -4,14 +4,6 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.nakuh.web.mapper.FollowerMapper">
 
-<resultMap id="result" type="hashmap">
-  <id property="folloseq" column="folloseq" />
-  <result property="folloid" column="folloid"/>
-  <result property="mid" column="mid"/>
-
-<!-- folloseq,folloid,mid, artdate; -->
-</resultMap>
-
 <select id="selectAllFollowersList" resultType="com.nakuh.web.domain.Follower" 
 			parameterType="string">
 SELECT DISTINCT artnum,  M.mid mid, M.`profilephoto` follpphoto, A.artdate artdate
@@ -23,19 +15,32 @@ FROM MEMBERS M
     ORDER BY artnum DESC
 	LIMIT 6
 </select>
-
+<!-- folloseq,folloid, mid, artdate, artnum, follpphoto , name, follostate -->
 <select id="selectFollowers" resultType="com.nakuh.web.domain.Follower" 
 			parameterType="string">
-SELECT DISTINCT artnum,  M.mid mid, M.`profilephoto` follpphoto, A.artdate artdate
-FROM MEMBERS M
-    JOIN (SELECT * FROM FOLLOWERS WHERE FOLLOID LIKE '${value}') F
-    ON M.mid LIKE F.`mid`
-    JOIN (SELECT * FROM ARTICLES A WHERE A.mid LIKE mid) A
-    ON M.mid LIKE A.mid
-    ORDER BY artnum DESC
-	LIMIT 6
+SELECT IFNULL(V.mid, '0') follostate, V2.mid mid, V2.name name, V2.follpphoto follpphoto
+FROM  (SELECT M.mid mid, M.name name, M.profilephoto follpphoto
+			FROM MEMBERS M
+			JOIN (SELECT DISTINCT folloid, mid
+			FROM FOLLOWERS 
+			WHERE mid LIKE #{mid}) F
+			ON F.folloid LIKE M.mid) V
+			RIGHT JOIN (SELECT M2.mid mid, M2.name name, M2.profilephoto follpphoto, F2.folloid
+							FROM MEMBERS M2
+							JOIN (SELECT DISTINCT mid, folloid
+							FROM FOLLOWERS 
+							WHERE folloid LIKE #{mid}) F2
+							ON F2.mid LIKE M2.mid) V2
+			ON V.mid LIKE V2.mid
 </select>
-
-
+<select id="selectFollowing" resultType="com.nakuh.web.domain.Follower" 
+			parameterType="string">
+SELECT M.mid mid, M.name name, M.profilephoto follpphoto
+FROM MEMBERS M
+	JOIN (SELECT DISTINCT folloid, mid
+			FROM FOLLOWERS 
+			WHERE mid LIKE #{mid}) F
+	ON F.folloid LIKE M.mid
+</select>
 
 </mapper>
