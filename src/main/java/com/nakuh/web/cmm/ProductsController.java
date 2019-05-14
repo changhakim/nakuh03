@@ -71,7 +71,8 @@ public class ProductsController {
 
 	// 상품 상세 조회
 	@PostMapping("/products/{proid}")
-	public Map<?, ?> proinfo(@PathVariable String proid) {
+	public Map<?, ?> proinfo(
+			@PathVariable String proid) {
 		logger.info("=======  ProductController proinfo:상품상세조회  진입 ======");
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -136,6 +137,7 @@ public class ProductsController {
 
 		}
 		String realtoday = nowYear + "-" + "0" + nowMonth + "-" +today;
+		String calheader = nowYear+"년"+nowMonth+"월";
 
 		/*
 		 * 예약상세용 : 캘린더 화면
@@ -147,13 +149,18 @@ public class ProductsController {
 		 * 
 		 * 윤년에 따른 월의 마지막날짜 계산 if(year % 4 ==0 && year% 100 != 0 || year % 400 ==0) {
 		 * lastday = LEAP_MAX_DAYS[month]; }else { lastday = MAX_DAYS[month]; }
+<<<<<<< HEAD
 		 */
 
 		product.setRegidate("2019-05-13");
 >>>>>>> 1f92479c9c43b29a5834d0b38fa7f08757cc2e62
+=======
+		 */	
+>>>>>>> 7bc97e96347da1e97fdf263110a573f89aac47d1
 		product.setPronum(proid);
 		product = productService.findProduct(product);
 		map.clear();
+		map.put("calheader", calheader);
 		map.put("callist", callist);
 		map.put("calday", calday);
 		map.put("product", product);

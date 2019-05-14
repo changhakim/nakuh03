@@ -141,6 +141,7 @@ app=(()=>{
 			 
 	
 <<<<<<< HEAD
+<<<<<<< HEAD
          rescss = '<link class="rescss" rel="stylesheet" type="text/css" href="/web/resources/css/reservation/modal.css"> '
              +'<link class="rescss" rel="stylesheet" href="/web/resources/css/reservation/navbar.css">'
              +'<link class="rescss" rel="stylesheet" href="/web/resources/css/reservation/resdetail.css">'
@@ -158,6 +159,9 @@ app=(()=>{
 >>>>>>> 3087dcfe3cffaa4d2bc465ff845da52000a598b5
 =======
          rescss = '<link class="homecss" href="/web/resources/css/home/responsive.css" rel="stylesheet">'
+=======
+         rescss =  '<link class="homecss" href="/web/resources/css/home/responsive.css" rel="stylesheet">'
+>>>>>>> 7bc97e96347da1e97fdf263110a573f89aac47d1
         	 +'<link class="homecss" href="/web/resources/css/home/swiper.min.css" rel="stylesheet">'
         	 +'<link class="rescss" rel="stylesheet" type="text/css" href="/web/resources/css/reservation/modal.css"> ';
 >>>>>>> 1f92479c9c43b29a5834d0b38fa7f08757cc2e62
