@@ -10,8 +10,9 @@ import com.nakuh.web.domain.Follower;
 public interface FollowerService {
 	public void registFollower(Follower fol);
 	
-	public List<Follower> bringAllFollowersList();
-	public List<Follower> retrieveFollowers();
+	public List<Follower> bringAllFollowersList(String fid);
+	public List<Follower> retrieveFollowers(String fid);
+	public List<Follower> retrieveFollowing(String fid);
 	public Follower retrieveFollower(String searchWord);
 	public int countFollowers();
 	public boolean existsFollower(String searchWord);

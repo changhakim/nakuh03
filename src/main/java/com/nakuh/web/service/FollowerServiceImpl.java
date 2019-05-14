@@ -20,15 +20,15 @@ public class FollowerServiceImpl implements FollowerService{
 	}
 
 	@Override
-	public List<Follower> bringAllFollowersList() {
+	public List<Follower> bringAllFollowersList(String fid) {
 		
-		return folMap.selectAllFollowersList();
+		return folMap.selectAllFollowersList(fid);
 	}
 
 	@Override
-	public List<Follower> retrieveFollowers() {
+	public List<Follower> retrieveFollowers(String fid) {
 		
-		return folMap.selectFollowers();
+		return folMap.selectFollowers(fid);
 	}
 
 	@Override
@@ -60,6 +60,11 @@ public class FollowerServiceImpl implements FollowerService{
 	public void removeFollower(Follower fol) {
 		folMap.deleteFollower(fol);
 		
+	}
+
+	@Override
+	public List<Follower> retrieveFollowing(String fid) {
+		return folMap.selectFollowing(fid);
 	}
 
 }

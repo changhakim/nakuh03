@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nakuh.web.mapper.FollowerMapper">
+
+<resultMap id="result" type="hashmap">
+  <id property="folloseq" column="folloseq" />
+  <result property="folloid" column="folloid"/>
+  <result property="mid" column="mid"/>
+
+<!-- folloseq,folloid,mid, artdate; -->
+</resultMap>
+
+<select id="selectAllFollowersList" resultType="com.nakuh.web.domain.Follower" 
+			parameterType="string">
+SELECT DISTINCT artnum,  M.mid mid, M.`profilephoto` follpphoto, A.artdate artdate
+FROM MEMBERS M
+    JOIN (SELECT * FROM FOLLOWERS WHERE FOLLOID LIKE '${value}') F
+    ON M.mid LIKE F.`mid`
+    JOIN (SELECT * FROM ARTICLES A WHERE A.mid LIKE mid) A
+    ON M.mid LIKE A.mid
+    ORDER BY artnum DESC
+	LIMIT 6
+</select>
+
+<select id="selectAllFollowersList" resultType="com.nakuh.web.domain.Follower" 
+			parameterType="string">
+SELECT DISTINCT artnum,  M.mid mid, M.`profilephoto` follpphoto, A.artdate artdate
+FROM MEMBERS M
+    JOIN (SELECT * FROM FOLLOWERS WHERE FOLLOID LIKE '${value}') F
+    ON M.mid LIKE F.`mid`
+    JOIN (SELECT * FROM ARTICLES A WHERE A.mid LIKE mid) A
+    ON M.mid LIKE A.mid
+    ORDER BY artnum DESC
+	LIMIT 6
+</select>
+
+
+
+</mapper>

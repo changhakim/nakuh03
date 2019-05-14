@@ -22,6 +22,7 @@ import com.nakuh.web.domain.Dummy;
 import com.nakuh.web.domain.PostTag;
 import com.nakuh.web.mapper.ArticleMapper;
 import com.nakuh.web.mapper.CommentMapper;
+import com.nakuh.web.mapper.FollowerMapper;
 import com.nakuh.web.mapper.PostTagMapper;
 import com.nakuh.web.service.ArticleServiceImpl;
 import com.nakuh.web.service.CommentServiceImpl;
@@ -45,6 +46,7 @@ public class ArticlesController {
 	@Autowired ArticleMapper artMap;
 	@Autowired CommentMapper comMap;
 	@Autowired PostTagMapper posMap;
+	@Autowired FollowerMapper folMap;
 	@Autowired Proxy pxy;
 	@Autowired Dummy dum;
 	
@@ -122,7 +124,10 @@ public class ArticlesController {
 		logger.info("=========Feedfollo 진입======");
 		map.clear();
 		System.out.println("mid?::"+mid);
-		
+		IFunction f = (String) -> folMap.selectAllFollowersList(mid);
+		List<?> folList = (List<?>) f.apply(mid);
+		System.out.println("follist"+folList);
+		map.put("follist", folList);
 		
 		return map;
 	};
