@@ -40,8 +40,19 @@ public class FollowerController {
 		IFunction f = (String) -> folmap.selectFollowers(mid);
 		List<?> ls = (List<?>) f.apply(mid);
 		map.put("werlist", ls);
+		System.out.println("ls"+ls);
+		return map;
+	};
+	@GetMapping("/serach/folloing/{mid}")
+	public Map<?,?> folloingList(@PathVariable String mid)throws Exception{
+		logger.info("============== folloingList() {}  =================", "ENTER");
+		map.clear();
+		IFunction f = (String) -> folmap.selectFollowing(mid);
+		List<?> ls = (List<?>) f.apply(mid);
+		map.put("inglist", ls);
 		
 		return map;
-	}
+	};
+	
 	
 }

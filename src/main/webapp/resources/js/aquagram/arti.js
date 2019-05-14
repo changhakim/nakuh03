@@ -169,7 +169,7 @@ arti =(()=>{
 				$('.modal-dialog').attr('style','top:200px;');
 				$('.modal-dialog').attr('class','modal-dialog modal-lg');
 				$('.modal-content').attr('style','margin:auto;');
-				$('.modal-header').remove();
+				$('.modal-header').hide();
 				$('.modal-body').remove();
 				$('.modal-footer').remove();
 				$('#change_modal_2').html(
