@@ -20,6 +20,18 @@ public class FollowerController {
 	@Autowired Follower fol;
 	@Autowired FollowerMapper folmap;
 	
+	@GetMapping("/arti/follo/{mid}")
+	public Map<?,?> feedfollo(@PathVariable String mid)throws Exception{
+		logger.info("=========Feedfollo 진입======");
+		map.clear();
+		System.out.println("mid?::"+mid);
+		IFunction f = (String) -> folmap.selectAllFollowersList(mid);
+		List<?> folList = (List<?>) f.apply(mid);
+		System.out.println("follist"+folList);
+		map.put("follist", folList);
+		
+		return map;
+	};
 	
 	@GetMapping("/serach/follower/{mid}")
 	public Map<?, ?> followerList(@PathVariable String mid)throws Exception{
