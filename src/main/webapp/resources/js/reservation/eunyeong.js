@@ -3,13 +3,14 @@ var eunyeong = eunyeong || {};
 eunyeong = (()=>{
     const WHEN_ERR = '호출하는 JS파일을 찾지 못지 못했습니다.'
     let _,compojs, js, m_ctt;
-    let homecss,admincss,rescss,instacss;
+    let homecss,admincss,rescss,instacss,calnum;
     
     let init =x=>{
         _= $.ctx();
     	js = $.js();
         compojs = js + '/component/eycompo.js';
         m_ctt = '#wrapper';
+        calnum=1;
         onCreate(x);
     }
     
@@ -256,7 +257,8 @@ eunyeong = (()=>{
    		    		success : d=>{
    		    			alert('AJAX성공' + d.today);
    		    			let pro ={pronum:d.product.pronum,proname:d.product.proname,price:d.product.price,company:d.product.company,address:d.product.address,category:d.product.category,
-   		    					  proimg:d.product.proimg,fishname:d.product.fishname,phone:d.product.phone,lat:d.product.lat,lng:d.product.lng, today:d.today, lastday:d.lastday,calday:d.calday,callist:d.callist};
+   		    					  proimg:d.product.proimg,fishname:d.product.fishname,phone:d.product.phone,lat:d.product.lat,lng:d.product.lng, today:d.today, lastday:d.lastday,calday:d.calday,callist:d.callist,calheader:d.calheader};
+   		    			
    		    			detail(pro);
    		    		},
    		    		error :e=>{
@@ -335,9 +337,9 @@ eunyeong = (()=>{
     	+'      </section>'
     	+'    </div>'
     	+'</div>').appendTo('.header_area');
-  
     	$(eycompo.pro_head()).appendTo('#wrapper');
     	$(eycompo.pro_info()).appendTo('.view_area');
+    	$('.title_arrow').append(x.calheader);
     	  let calval = 0;
           let calno = 0;
           //캘린더 : 물반고기반 
@@ -345,7 +347,12 @@ eunyeong = (()=>{
               $('<tr id="rescal'+a+'">'         
                   +'</tr>').appendTo('#rescalendar')
           	for(let i=0;i<7;i++){
-          		if(x.callist[calno]==='★'||x.callist[calno] === undefined){
+          		if(x.callist[calno]==='★'){
+          		 $('<td style="color: #666;"><a class="off"><strong>'+x.callist[calno]+'</strong></a></td>').appendTo('#rescal'+a) 
+          	    }else if(x.callist[calno]!='★'&&x.callist[calno]<x.today){
+          		 $('<td style="color: #666;"><a class="off"><strong>'+x.callist[calno]+'</strong></a></td>').appendTo('#rescal'+a)
+          		calval+=1;
+          		}else if(x.callist[calno] === undefined){
           			$('<td style="color: #666;"><a class="off"><strong>'+""+'</strong></a></td>').appendTo('#rescal'+a)
           		}else{
           		$('<td><a class="cal_cell_date" value="'+x.calday[calval]+'"><strong>'+x.callist[calno]+'</strong><img src="https://img.moolban.com/unsafe/asset/www/responsive/img/weather/weather-30.png" alt=""><span class="mul">'+(i+a)+'물</span></a></td>')
@@ -364,8 +371,7 @@ eunyeong = (()=>{
               alert(datesplit[0]);
               $('.miniinfo').html('<div class="date_widget_area view_box" data-date="2019-05-13">'
           			+'        <div class="date_title">'
-        			+'            <p>'+datesplit[0]+'년 '+datesplit[1]+'월 '+datesplit[2]+'일</p>'
-        			+'            <span>(음)04.09</span>'
+        			+'            <p>'+datesplit[0]+'년 '+datesplit[1]+'월 '+datesplit[2]+'일</p>'        		
         			+'        </div>'
         			+'        <div class="widget_area clearfix">'
         			+'                        <dl class="widget_box_left widget_box">'
@@ -380,7 +386,7 @@ eunyeong = (()=>{
         			+'            </a>'
         			+'        </div>'
         			+'    </div>')
-          })
+          })        
            
 
          
@@ -398,7 +404,7 @@ eunyeong = (()=>{
     	});
 
         $('.proname').text(x.proname);
-        $('.price').text(x.price);
+        $('.price').html(x.price+'<span>원</span>');
         $('#company').text(x.company);
         $('#proimg').attr('src',$.img() + '/reservation/' + x.proimg);
         $('#category').text(x.category);
@@ -408,7 +414,8 @@ eunyeong = (()=>{
         $('#resdate').text(x.today);
         
 		let pro ={pronum:x.pronum,proname:x.proname,price:x.price,company:x.company,address:x.address,category:x.category,proimg:x.proimg,
-				  regidate:x.today,lastday:x.lastday,fishname:x.fishname,phone:x.phone,lat:x.lat,lng:x.lng, today:x.today, lastday:x.lastday};
+				  regidate:x.today,lastday:x.lastday,fishname:x.fishname,phone:x.phone,
+				  lat:x.lat,lng:x.lng, today:x.today, lastday:x.lastday,startdate:$('.miniinfo').attr('value')};
 
         $('.sel_reserve_goods').attr('data-toggle','modal').attr('data-target','#myModal').click(function(e){
         	$('#myModal').attr('style','display: block; z-index:99999;').appendTo('#myModal');
@@ -446,12 +453,10 @@ eunyeong = (()=>{
  	    		+'</a>').appendTo('#count_box').click(function(){
  	    			switch($(this).attr('value')){
  	    			case 'count_plus':
- 	    				alert('클릭'+$('#count').attr('value'))
  	    				count = Number($('#count').attr('value'));
  	    				count++;
  	    				$('#count').attr('value',count);
- 	    				$('.price').text(Number(x.price.replace(',',''))*count+'원');
- 	    				alert(count);
+ 	    				$('.price').text(Number(x.price.replace(',',''))*count+'원');	    			
  	    				break;
  	    			case 'count_minus':
  	    				count = Number($('#count').attr('value'));
@@ -487,9 +492,10 @@ eunyeong = (()=>{
  	    });*/
  	    
  		$('.reserve_btn').click(e=>{
-			e.preventDefault();
-			let pro ={pronum:x.pronum,proname:x.proname,price:x.price,company:x.company,address:x.address,category:x.category,proimg:x.proimg,
-					  regidate:x.today,lastday:x.lastday,fishname:x.fishname,phone:x.phone,lat:x.lat,lng:x.lng, today:x.today, lastday:x.lastday};
+			e.preventDefault();			
+			let pro ={pronum:x.pronum,proname:x.proname,price:$('.price').text(),company:x.company,address:x.address,category:x.category,proimg:x.proimg,
+					  regidate:x.today,lastday:x.lastday,fishname:x.fishname,
+					  phone:x.phone,lat:x.lat,lng:x.lng, today:x.today, lastday:x.lastday,startdate:x.startdate};
 			reserve_pro(pro);
  			
  				
@@ -505,6 +511,7 @@ eunyeong = (()=>{
 			$('.fishname').text(x.fishname);
 			$('.tb1').text(x.proname);
 			$('.price').text(x.price);
+			$('.totalmoney').text(x.price);
 			$('.reserve_btn').click(e=>{
 				e.preventDefault();
 		    	 let res = {
