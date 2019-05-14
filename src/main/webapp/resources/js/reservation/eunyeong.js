@@ -88,6 +88,36 @@ eunyeong = (()=>{
         		+'                        <div class="ad_txt">인기추천 광고상품이 표시되는 영역입니다.</div>'
         		+'                    </div>')
        .appendTo('#category_list');
+        $.each(['최신순','높은가격순','낮은가격순'],(x,y)=>{
+        	$('<a class="selectprice'+x+'">'+y+'</a>').appendTo('.sort > .select_option').click(function(){
+        		alert($(this).text())
+        		$('.price_title').text($(this).text())
+        	})
+        })
+        $.each(['지역','서울','경기','인천','전남','부산','전북','강원도','광주','충남','충북','제주'],(x,y)=>{
+        	$('<a class="selectcity'+x+'">'+y+'</a>').appendTo('.distance > .select_option').click(function(){
+        		alert($(this).text())
+        		$('.area_title').text($(this).text())
+        	})
+        })
+        $('.distance').click(()=>{
+        	if($('.distance > .select_option').attr('value')=='block'){
+            	$('.distance > .select_option').css('display','none')
+            	$('.distance > .select_option').attr('value','none')
+            }else{
+            	$('.distance > .select_option').css('display','block')
+            	$('.distance > .select_option').attr('value','block')
+            }
+        })
+        $('.sort').click(()=>{
+        	if($('.sort > .select_option').attr('value')=='block'){
+        	$('.sort > .select_option').css('display','none')
+        	$('.sort > .select_option').attr('value','none')
+        	}else{
+        	$('.sort > .select_option').css('display','block')
+        	$('.sort > .select_option').attr('value','block')
+        	}
+        })
     };
     
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////*바다 메인화면 */   
