@@ -23,23 +23,6 @@
 <select id="selectArticles" resultType="com.nakuh.web.domain.Article"
 							parameterType="com.nakuh.web.domain.Article">
 			
-<<<<<<< HEAD
-		SELECT  @ROWNUM:=@ROWNUM+1 AS rownum, A.*
-		FROM (SELECT 
-				 artnum,
-				content,
-				artdate,
-				artphoto,
-				mid,
-				extension,
-				(select count(*) from COMMENTS where titleseq like artnum) comcount,
-				(select profilephoto from MEMBERS M WHERE M.MID LIKE ARTICLES.MID) profilephoto
-		FROM ARTICLES
-		WHERE mid LIKE  #{mid}
-		ORDER BY artnum DESC ) A,(SELECT @ROWNUM:=0) TMP  
-		ORDER BY artnum DESC
-		limit #{startRow},#{pageSize}
-=======
 SELECT  ROW_NUMBER() over(order by artnum desc) rownum, A.*
         FROM (SELECT 
                  artnum,
@@ -53,7 +36,7 @@ SELECT  ROW_NUMBER() over(order by artnum desc) rownum, A.*
         FROM ARTICLES
         WHERE mid LIKE  #{mid}) A
         LIMIT #{startRow},#{pageSize}
->>>>>>> 7bc97e96347da1e97fdf263110a573f89aac47d1
+
 
 </select>
 

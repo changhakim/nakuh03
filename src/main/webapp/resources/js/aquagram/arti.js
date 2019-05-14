@@ -238,7 +238,7 @@ arti =(()=>{
 			$('.modal-header').remove();
 			$('.modal-body').remove();
 			$('.modal-footer').remove();
-			$('#change_modal_2').html('<div class="modal-body">'
+			$('#change_modal_2').attr('sytle','top: 200px; width: 40%;').html('<div class="modal-body">'
 					+'          <div  class="col-sm-8" style="height: 600px; display: block;"><img id="mirror_img" src="resources/img/aquagram/default_image.jpg" width="600" height="600"></div>'
 					+'          <div class="col-sm-4" style="background-color:#fff; height: 600px; ">'
 					+'            	  <div class="row" id="user_info" style="padding-bottom: 7px; border-bottom: 1px solid #ddd;">'
