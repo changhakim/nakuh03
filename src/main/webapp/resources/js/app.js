@@ -140,7 +140,7 @@ app=(()=>{
 			 +'<link class="admincss" rel="stylesheet" href="/web/resources/css/admin/pe-icon-7-stroke.css">';
 			 
 	
-         rescss = '<link class="homecss" href="/web/resources/css/home/responsive.css" rel="stylesheet">'
+         rescss =  '<link class="homecss" href="/web/resources/css/home/responsive.css" rel="stylesheet">'
         	 +'<link class="homecss" href="/web/resources/css/home/swiper.min.css" rel="stylesheet">'
         	 +'<link class="rescss" rel="stylesheet" type="text/css" href="/web/resources/css/reservation/modal.css"> ';
 	 
