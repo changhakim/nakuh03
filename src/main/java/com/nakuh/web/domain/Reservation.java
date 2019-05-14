@@ -6,6 +6,7 @@ import lombok.Data;
 
 @Data@Component
 public class Reservation {
+<<<<<<< HEAD
 
 	private String resnum, startdate, resname, mid, phone, resdate, rescount, deposit, message, pronum, proname, ampm,company,category;
 <<<<<<< HEAD
@@ -46,4 +47,8 @@ public class Reservation {
 >>>>>>> 19a0bb56eb027bafc4f1e37dfe6f949d28f7cc9f
 >>>>>>> bf0a489c393347ca42b20b6af2cb5fc8bf352834
 >>>>>>> 68fc04fd18d5c66f956df3893ddf7ec2d7f20b13
+=======
+	private String resnum, mid, resname, startdate, ampm, phone, resdate, rescount, 
+	deposit, message, proname, company, pronum,category,ocean,river,hotel;
+>>>>>>> a851b93f92d2596ec9f880a1dd404b81cae02211
 }

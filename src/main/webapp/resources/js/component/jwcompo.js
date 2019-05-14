@@ -330,7 +330,7 @@ jwcompo = {
 			+'		</li>'
 			+'    <li style="position: center; top:15px;  margin-right: 25px;">'
 			+'		<div>'
-			+'			<div> 팔로잉</div>'
+			+'			<div> 팔로우</div>'
 			+'			<div id="folloingid"> 43 </div>'
 			+'		 </div>'
 			+'		</li>'

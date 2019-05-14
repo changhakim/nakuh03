@@ -9,10 +9,13 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.nakuh.web.domain.Product;
 import com.nakuh.web.domain.Reservation;
 import com.nakuh.web.service.ReservationServiceImpl;
 
@@ -60,5 +63,17 @@ public class ReservationController {
 		System.out.println("param에 담긴 값" + param.toString());
 		return map;
 	}
+	
+	/*마이페이지 : 예약한 상품 조회하기 */ 
+	@PostMapping("/reservation/{mid}")
+	public HashMap<?, ?> resSomelist(@PathVariable String mid){
+		logger.info("=======  ReservationController reserve:예약목록 조회 진입 ======");
+		reservation.setMid(mid);
+		list = resService.findSomeReservations(reservation);
+		map.clear();
+		map.put("list", list);
+		System.out.println("map에 담긴 값" + list.toString());
+		return map;
+	}		
 	
 }

@@ -31,10 +31,13 @@
 >>>>>>> 3087dcfe3cffaa4d2bc465ff845da52000a598b5
 	</insert>
 	
-<!-- 	방금 전 예약한 상품 조회하기  -->
-	<select id="selectReservation" resultType="com.nakuh.web.domain.Reservation"
-								   parameterType="com.nakuh.web.domain.Reservation">
-	
+<!-- 마이페이지 : 예약한 상품 조회  -->
+	<select id="selectSomeReservations" resultType="com.nakuh.web.domain.Reservation"
+								  		parameterType="com.nakuh.web.domain.Reservation">
+	SELECT RESNUM resnum, MID mid, RESNAME resname, STARTDATE startdate, AMPM ampm, PHONE phone, RESDATE resdate, RESCOUNT rescount, DEPOSIT deposit, 
+				MESSAGE message, PRONAME proname, COMPANY company, PRONUM pronum 
+	FROM RESERVATION 
+	WHERE MID LIKE #{mid};
 	
 	</select>
 	

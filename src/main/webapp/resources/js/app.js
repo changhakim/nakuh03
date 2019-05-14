@@ -66,6 +66,13 @@ app=(()=>{
 			jeonguk.init();
 			alert('아쿠아리움')
 		})
+		$('.mypage').click(e=>{
+			e.preventDefault();
+			$('.instacss').remove();
+			$('.admincss').remove();
+			$(rescss).appendTo('head')
+			eunyeong.init('mypage');
+		})
 		$('#adminbtn').click(()=>{
 			alert('들어옴')
 			$('.homecss').remove();
