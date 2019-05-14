@@ -37,6 +37,7 @@ public class ReservationController {
 =======
 >>>>>>> 1f92479c9c43b29a5834d0b38fa7f08757cc2e62
 		logger.info("=======  ReservationController reserve:상품예약 진입 ======");
+<<<<<<< HEAD
 		Date date = new Date(); 
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd"); 
 		param.setResdate(sdf.format(date));
@@ -51,6 +52,8 @@ public class ReservationController {
 >>>>>>> 1f92479c9c43b29a5834d0b38fa7f08757cc2e62
 		logger.info("=======  ReservationController reserve: 상품예약 진입 ======");
 >>>>>>> 3087dcfe3cffaa4d2bc465ff845da52000a598b5
+=======
+>>>>>>> ef5677f5be5c517516ffdeeb9ba20b0f427d1915
 		resService.createReservation(param);
 		map.clear();
 		map.put("msg", "reserve success");

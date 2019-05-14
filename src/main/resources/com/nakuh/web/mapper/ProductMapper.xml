@@ -28,8 +28,7 @@
 	<select id="selectCateProducts" resultType="com.nakuh.web.domain.Product"
 									parameterType="com.nakuh.web.domain.Product">
 
-
-	SELECT  @ROWNUM:=@ROWNUM+1 AS rownum, P.*
+	SELECT  ROW_NUMBER() over(order by pronum desc) rownum, P.*
 	FROM	(SELECT 
 			PRONUM pronum, 
 			PRONAME proname, 
@@ -44,9 +43,7 @@
 			LAT lat,
 			LNG lng
 		FROM PRODUCTS 
-		WHERE CATEGORY LIKE #{category}
-		ORDER BY pronum DESC) P , (SELECT @ROWNUM:=0) TMP
-		ORDER BY rownum  
+		WHERE CATEGORY LIKE #{category} ) P
 		LIMIT #{startRow},#{pageSize}
 		
 		

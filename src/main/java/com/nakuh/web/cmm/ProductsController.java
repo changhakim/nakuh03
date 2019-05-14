@@ -165,7 +165,7 @@ public class ProductsController {
 		map.put("calday", calday);
 		map.put("product", product);
 		map.put("today", today);
-		map.put("lastday",  realtoday);
+		map.put("realtoday",  realtoday);
 		System.out.println("맵에 담겼는가?? : " + map.get("today"));
 		System.out.printf("keySet : %s\n", map.keySet());
 		System.out.println("map에 담긴 모든값" + map);

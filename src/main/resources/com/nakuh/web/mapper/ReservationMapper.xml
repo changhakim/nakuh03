@@ -14,6 +14,7 @@
 =======
 	INSERT INTO RESERVATION (
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> b246bade3d506c2db4e0d67ad84d1fbce3b7ce1a
 	RESNUM, STARTDATE, RESNAME, MID, PHONE, 
 	RESDATE, RESCOUNT, DEPOSIT, MESSAGE, PRONUM, PRONAME, AMPM) VALUES(
@@ -22,6 +23,10 @@
 =======
 	STARTDATE, RESNAME, MID, PHONE, RESDATE, RESCOUNT, DEPOSIT, MESSAGE, PRONUM, PRONAME) VALUES(
 	#{startdate},#{resname},#{mid},#{phone},#{resdate},#{rescount},#{deposit},#{message}, #{pronum}, #{proname})
+=======
+	STARTDATE, RESNAME, MID, PHONE, RESDATE, RESCOUNT, DEPOSIT,PRONUM,COMPANY,PRONAME) VALUES(
+	#{startdate},#{resname},#{mid},#{phone},#{resdate},#{rescount},#{deposit},#{pronum}, #{company},#{proname})
+>>>>>>> ef5677f5be5c517516ffdeeb9ba20b0f427d1915
 	
 >>>>>>> 3087dcfe3cffaa4d2bc465ff845da52000a598b5
 	</insert>
@@ -33,16 +38,14 @@
 	
 	</select>
 	
-	<select id="selectpageReservations" resultType="com.nakuh.web.domain.Reservation" 
-	parameterType="com.nakuh.web.cmm.Proxy">
-	SELECT @ROWNUM:=@ROWNUM+1 AS rownum,A.*
-	FROM (SELECT R.resnum,R.mid,R.resname,P.company,P.proname,R.startdate,R.ampm,R.phone,R.resdate,R.deposit,P.category
-			FROM RESERVATION R JOIN PRODUCTS P ON
-			R.pronum = P.pronum
-	   		ORDER BY resnum DESC) A,(SELECT @ROWNUM:=0) TMP
-	ORDER BY rownum
-	limit #{startRow},#{pageSize}
-	</select>
+<select id="selectpageReservations" resultType="com.nakuh.web.domain.Reservation"
+    parameterType="com.nakuh.web.cmm.Proxy">
+    SELECT ROW_NUMBER() over(order by resnum desc) as rownum,A.*
+    FROM (SELECT R.resnum,R.mid,R.resname,P.company,P.proname,R.startdate,R.ampm,R.phone,R.resdate,R.deposit,P.category
+            FROM RESERVATION R JOIN PRODUCTS P ON
+            R.pronum = P.pronum) A
+    limit #{startRow},#{pageSize};
+    </select>
 	
 	<select id="countReservation" resultType="Integer">
 	  SELECT COUNT(*)
