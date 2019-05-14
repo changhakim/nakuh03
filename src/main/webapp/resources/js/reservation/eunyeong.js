@@ -74,50 +74,47 @@ eunyeong = (()=>{
         })
     };
   
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////*바다 메인화면 */    
-    let ocean =()=>{
+    let cate_search =()=>{
         $('#wrapper').empty();
         $('.scrolling').remove();
         $(eycompo.header()).appendTo('.header_area');
         $(eycompo.main()).appendTo('#wrapper');
         $('#category_list').empty();
-        $('<div id="category_list" class="list_contents" data-start_key="0" data-offset="0" data-limit="10" data-last_offset="">').appendTo('#category_list');
-        $('<div class="category_title_line level_3">'
+        $('<div id="category_list" class="list_contents" data-start_key="0" data-offset="0" data-limit="10" data-last_offset="" style="width: 500px;">').appendTo('#category_list');
+        $('<div class="category_title_line level_3" style="width: 500px;">'
         		+'                    <p>인기추천</p>'
         		+'                    <div class="ad_guide">'
         		+'                        <a>광고 <i><img src="https://img.moolban.com/unsafe/asset/www/responsive/img/basic/reserve_ico04.png" alt=""></i></a>'
         		+'                        <div class="ad_txt">인기추천 광고상품이 표시되는 영역입니다.</div>'
         		+'                    </div>')
        .appendTo('#category_list');
-        
-     /*홈네비에 있는 검색바 사용할 예정  
-       $('input.btn[type=submit]').click(e=>{
-        	e.preventDefault();
-        	alert('키워드검색');
-        	search();
-        });*/
-        
+    };
+    
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////*바다 메인화면 */   
+    
+    let ocean =()=>{
+    	cate_search();
         let cate = 'ocean';
         pro_infinitemove(cate);
     };
     
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////*민물 메인화면 */        
     let river =()=>{
-    	alert('river진입');
-        $(m_ctt).empty();
-        $(s_ctt).attr('style','background:#242c36 url(/web/resources/img/reservation/river.jpg)');
-        $('input.btn[type=submit]').click(e=>{
-        	e.preventDefault();
-        	alert('키워드검색');
-        	search();
-        });
-
+    	cate_search();
+    	$('#cate_head').text('민물낚시');
+    	$('#cate_home').text('민물 홈');
+    	$('#cate_menu1').text('연안');
+    	$('#cate_menu2').text('수상');
+    	$('#cate_menu3').text('낚시카페');
+    	$('#cate_menu4').text('배스');
+    	$('#cate_menu5').text('노지');
         let cate = 'river';
         pro_infinitemove(cate);
         
     };
     
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////*숙박 메인화면 */            
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////*숙박 메인화면 */  
+    
     let hotel =()=>{
     	alert('hotel진입');
         $(m_ctt).empty();
@@ -208,40 +205,40 @@ eunyeong = (()=>{
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////*전체목록 :페이지네이션 */	
 	
 	let pro_renderList =(j)=>{
-	   	$('<a class="list_box_area list_ad_box_area list_ad_box_area3" data-view_type="3" data-level="2" data-key="9296" data-no="'+j.rownum+'">'
-		+'    <div class="list_visual_area">'
-		+'    <div class="img_box company_info">'
-		+'			<img src=' + $.img() + '/reservation/' + j.proimg + ' alt="" class="list_visual_img">'
+	   	$('<a class="list_box_area list_ad_box_area list_ad_box_area3" data-view_type="3" data-level="2" data-key="9296" data-no="'+j.rownum+'" style="width: 500px;">'
+	   	+'    <div class="list_visual_area" style="width: 500px; padding-bottom: 10px;">'
+		+'    <div class="img_box company_info" style="width: 500px;">'
+		+'			<img src=' + $.img() + '/reservation/' + j.proimg + ' alt="" class="list_visual_img"  style="width: 500px;">'
 		+'         </div>'
 		+'        <div class="cover_area"></div>'
 		+'        <div class="list_box_txt clearfix">'
 		+'            <div class="list_box_left">'
 		+'                <div class="list_pic">'
 		+'                    '
-		+'                 	<span id="fishname" class="kind_blue_txt">'+ j.fishname +'</span>'
+		+'                 	<span id="fishname" class="kind_blue_txt" style=font-size: 10px;">'+ j.fishname +'</span>'
 		+'                </div>'
-		+'                <p name="company" class="list_name_line">'+ j.company +'</p>'
+		+'                <p name="company" class="list_name_line" style="font-weight: bold; font-size: 20px;">'+ j.company +'</p>'
 		+'                <div class="write_comment_line">'
 		+'                <p>'
 		+'                <img src="https://img.moolban.com/unsafe/asset/www/responsive/img/basic/ico_fish.png" alt="">조황 2개'
 		+'                 </p>'
 		+'                </div>'
-		+'                                <p id="address" class="list_address_line">'+ j.address +'</p>'
+		+'                                <p id="address" class="list_address_line" style=font-size: 10px;">'+ j.address +'</p>'
 		+'            </div>'
 		+'                        <div class="list_box_right">'
 		+'                <div class="live_price">'
-		+'                    <p class="price_pic">'
+		+'                    <p class="price_pic"  style=font-size: 10px;">'
 		+'                        <span>실시간예약</span>'
 		+'                                                <span class="insurance_pic">보험</span>'
 		+'                                                                    </p>'
-		+'                    <p id="price" class="price_pay">'+ j.price +'<span>원~</span></p>'
+		+'                    <p id="price" class="price_pay" "font-weight: bold; font-size: 20px;">'+ j.price +'<span>원~</span></p>'
 		+'                </div>'
 		+'            </div>'
 		+'                    </div>'
 		+'    </div>'
-		+'        <div class="opacity_txt">'
+		+'        <div class="opacity_txt"  style="padding-top: 8px;padding-bottom: 8px;">'
 		+'        <!--p><strong>EVENT</strong>가족  체험낚시 또는 어린이도  낚시할 수 있도록 준비되어 있습니다. 이색 데이트 코스 및 펜션과 리조트도 소개해 드립니다.</p-->'
-		+'        <div class="marquee1">가족  체험낚시 또는 어린이도  낚시할 수 있도록 준비되어 있습니다. 이색 데이트 코스 및 펜션과 리조트도 소개해 드립니다.</div>'
+		+'        <div class="marquee1" style="font-size: 13px;">가족  체험낚시 또는 어린이도  낚시할 수 있도록 준비되어 있습니다. 이색 데이트 코스 및 펜션과 리조트도 소개해 드립니다.</div>'
 		+'    </div>'
 		+'    </a>')
    		.attr('id', j.pronum)
@@ -257,7 +254,7 @@ eunyeong = (()=>{
    		    		success : d=>{
    		    			alert('AJAX성공' + d.today);
    		    			let pro ={pronum:d.product.pronum,proname:d.product.proname,price:d.product.price,company:d.product.company,address:d.product.address,category:d.product.category,
-   		    					  proimg:d.product.proimg,fishname:d.product.fishname,phone:d.product.phone,lat:d.product.lat,lng:d.product.lng, today:d.today, lastday:d.lastday,calday:d.calday,callist:d.callist,calheader:d.calheader};
+   		    					  proimg:d.product.proimg,fishname:d.product.fishname,phone:d.product.phone,lat:d.product.lat,lng:d.product.lng, today:d.today, realtoday:d.realtoday,calday:d.calday,callist:d.callist,calheader:d.calheader};
    		    			
    		    			detail(pro);
    		    		},
@@ -268,72 +265,25 @@ eunyeong = (()=>{
    		})
 	};
     
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////*일부 검색창 : 키워드 */
-
-   let search =()=>{
-    	let keyword ={
-    			proword:$('#search_keyword').val()};
-    	alert('keyword에 들어온 값' + keyword.proword);
-    	$.getJSON(_+'/prosearch/' + keyword.proword,d=>{
-    		alert('Ajax 성공')
-    		$(s_ctt).remove();
-    		$(m_ctt).empty();
-    		$(eycompo.search_bar()).prependTo(f_ctt);
-    			$('button[type=button]').click(e=>{
-    				e.preventDefault();
-    				alert('search 다시한번진입');
-    				search();
-    			   });
-    			
-				$.each(d.list, (x,y)=>{
-	            	$('<div class="col-sm-4">'
-	            			+'	<div class="left-widget-sidebar">'
-	            			+'		<div class="card-widget bg-white user-card" style="height:400px">'              
-	            			+'			<div id="proimg" class="u-img img-cover" style="background-image: url(/web/resources/img/reservation/'+ y.proimg + ');background-size:cover; height: 300px;"></div>'
-	            			+'					<div class="u-content"></br></br>'
-	            			+'					<h5>' + y.company + '</h5>'
-	            			+'					<p class="text-muted">' + y.price +'</p>'
-	            			+'					</div>'
-	            			+'					</div>'
-	            			+'				</div>'
-	            			+'			</div>'
-	            			+'		</div>')
-	            			.attr('id', y.pronum)
-	            			.appendTo(m_ctt)
-	            			.click(function(){
-	            				let proid = $(this).attr('id');
-	                				$.ajax({
-	                		    		url:_+'/products/'+ proid,
-	                		    		type:'POST',
-	                		    		data : JSON.stringify(proid),
-	                		    		dataType :'json',
-	                		    		contentType :'application/json',
-	                		    		success : d=>{
-	                		    			alert('AJAX성공' + d.proname);
-	                		    			alert('d.today' + d.today);
-	                		    			let de ={pronum:d.pronum,proname:d.proname,price:d.price,company:d.company,address:d.address,category:d.category,proimg:d.proimg,
-	                		  					  	  fishname:d.fishname,phone:d.phone,lat:d.lat,lng:d.lng, today:d.today, lastday:d.lastday};
-	                		    			detail(de);
-	                		    		},
-	                		    		error :e=>{
-	                		    			alert('AJAX실패');
-	                		    		}
-	                		    	});
-	            			})
-    	            })
-    		})
-    };
-    
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*상품정보 : 상세 */
  
     let detail =x=>{
     	alert('detail 진입');
+    	let cate_title='';
+    	if(x.category==='ocean'){
+    		cate_title = '바다낚시';
+    	}else if(x.category==='river'){
+    		cate_title = '민물낚시';
+    	}else{
+    		cate_title = '숙  박';
+    	};
+    	
     	$('#wrapper').empty();
     	$('.scrolling').empty();
     	$('<div id="scrolling" class="scrolling">'
     	+'   <div class="header_title">'
     	+'      <section>'
-    	+'         <h1>바다낚시</h1>'
+    	+'         <h1>'+ cate_title +'</h1>'
     	+'      </section>'
     	+'    </div>'
     	+'</div>').appendTo('.header_area');
@@ -362,7 +312,7 @@ eunyeong = (()=>{
           		calno+=1;
           		}
           })
-          $('.miniinfo').attr('value',x.lastday)
+          $('.miniinfo').attr('value',x.realtoday)
           $('.cal_cell_date').click(function(){
         	  $( '.cal_cell_date' ).removeClass( 'on' );
         	  $(this).addClass('on')
@@ -414,8 +364,8 @@ eunyeong = (()=>{
         $('#resdate').text(x.today);
         
 		let pro ={pronum:x.pronum,proname:x.proname,price:x.price,company:x.company,address:x.address,category:x.category,proimg:x.proimg,
-				  regidate:x.today,lastday:x.lastday,fishname:x.fishname,phone:x.phone,
-				  lat:x.lat,lng:x.lng, today:x.today, lastday:x.lastday,startdate:$('.miniinfo').attr('value')};
+				  regidate:x.today,realtoday:x.realtoday,fishname:x.fishname,phone:x.phone,
+				  lat:x.lat,lng:x.lng, today:x.today, realtoday:x.realtoday,startdate:$('.miniinfo').attr('value')};
 
         $('.sel_reserve_goods').attr('data-toggle','modal').attr('data-target','#myModal').click(function(e){
         	$('#myModal').attr('style','display: block; z-index:99999;').appendTo('#myModal');
@@ -439,12 +389,13 @@ eunyeong = (()=>{
      	$('#wrapper').empty();
      	$(eycompo.product_res()).appendTo('#wrapper');
 		$(rescss).appendTo('head')
+		$('#price').text(x.price+'원')
 		$('.fishname').text(x.fishname);
      	$('#proname').text(x.proname);
  		$('#company').text(x.company);
  		$('#startdate').text(x.startdate);
  	    $('#proname1').text(x.proname);
- 	    $('.price').text(x.price+'원');
+ 	    $('.price').text(x.price);
  	    let count = '';
  	    /*let count = Number($('#count').val()) + 1;*/
  	    $('<a class="count_minus" value="count_minus"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAECAYAAACQli8lAAAAAXNSR0IArs4c6QAAAClJREFUGBljYKATYATZ4+rquhVIedHIzm27d+/2ZqKR4cjG/kfm0JwNAEZQBgMM6SkpAAAAAElFTkSuQmCC" alt="" ></a>'
@@ -456,13 +407,13 @@ eunyeong = (()=>{
  	    				count = Number($('#count').attr('value'));
  	    				count++;
  	    				$('#count').attr('value',count);
- 	    				$('.price').text(Number(x.price.replace(',',''))*count+'원');	    			
+ 	    				$('.price').text(Number(x.price.replace(',',''))*count);	    			
  	    				break;
  	    			case 'count_minus':
  	    				count = Number($('#count').attr('value'));
  	    				count--;
  	    				$('#count').attr('value',count);
- 	    				$('.price').text(Number(x.price.replace(',',''))*count+'원');
+ 	    				$('.price').text(Number(x.price.replace(',',''))*count);
  	    				/*alert('마이너스')
  	    				let count = Number($('#count').attr('value'));
  	    				count--;
@@ -494,11 +445,9 @@ eunyeong = (()=>{
  		$('.reserve_btn').click(e=>{
 			e.preventDefault();			
 			let pro ={pronum:x.pronum,proname:x.proname,price:$('.price').text(),company:x.company,address:x.address,category:x.category,proimg:x.proimg,
-					  regidate:x.today,lastday:x.lastday,fishname:x.fishname,
-					  phone:x.phone,lat:x.lat,lng:x.lng, today:x.today, lastday:x.lastday,startdate:x.startdate};
+					  regidate:x.today,realtoday:x.realtoday,fishname:x.fishname,
+					  phone:x.phone,lat:x.lat,lng:x.lng, today:x.today, realtoday:x.realtoday,startdate:x.startdate,rescount:$('#count').attr('value')};
 			reserve_pro(pro);
- 			
- 				
  			});
      };
      
@@ -508,8 +457,7 @@ eunyeong = (()=>{
 			$('#wrapper').empty();
 			$(eycompo.reserve_pro()).appendTo('#wrapper');
 			$('#proname').text(x.proname);
-			$('.fishname').text(x.fishname);
-			$('.tb1').text(x.proname);
+			$('.proname').text(x.proname);
 			$('.price').text(x.price);
 			$('.totalmoney').text(x.price);
 			$('.reserve_btn').click(e=>{
@@ -519,15 +467,15 @@ eunyeong = (()=>{
 	   				deposit : 자바에서 계산*/ 
 	     			 mid : 'test',
 	     			 resname : $('#resname').val(),
-	     			 startdate : $('#startdate').val(),
+	     			 startdate : x.startdate,
 	     			 phone : $('#phone').val(),
-	     			 resdate : x.today,
-	     			 rescount : $('#rescount').val(),
-	     			 message :  $('#message').val(),
+	     			 resdate : x.realtoday,
+	     			 rescount : x.rescount,	     			 
 	     			 pronum :  x.pronum,
 	     			 proname : x.proname,
 	     			 company : x.company,
 	     			 deposit : x.price};
+		    	 
 	     	 
 	     	 $.ajax({
 	     		 url : _+'/reservation',
@@ -607,5 +555,5 @@ eunyeong = (()=>{
              +' <link class="instacss" rel="stylesheet" type="text/css" href="/web/resources/css/aquagram/default_css.css">';
              
     };
-    return {init:init, ocean:ocean, river:river, hotel:hotel, detail:detail, search:search, prdres:prdres};
+    return {init:init, ocean:ocean, river:river, hotel:hotel, detail:detail, prdres:prdres};
 })();
