@@ -43,4 +43,10 @@ FROM MEMBERS M
 	ON F.folloid LIKE M.mid
 </select>
 
+<insert id="insertFollower" parameterType="com.nakuh.web.domain.Follower">
+			
+	INSERT INTO FOLLOWERS(mid, folloid) VALUES(#{mid},#{folloid})
+
+</insert>
+
 </mapper>
