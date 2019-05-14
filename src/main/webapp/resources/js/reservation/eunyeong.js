@@ -95,22 +95,15 @@ eunyeong = (()=>{
         	$('<a class="selectprice'+x+'">'+y+'</a>').appendTo('.sort > .select_option').click(function(){
         		alert($(this).text())
         		$('.price_title').text($(this).text())
-<<<<<<< HEAD
-=======
                 searchlist = {pricetitle:$('.price_title').text(),areatitle:$('.area_title').text(),cate:t}
         		$('.list_section').empty();
                 pro_infinitemove(searchlist);
->>>>>>> a851b93f92d2596ec9f880a1dd404b81cae02211
         	})
         })
         $.each(['지역','서울','경기','인천','전남','부산','전북','강원도','광주','충남','충북','제주'],(x,y)=>{
         	$('<a class="selectcity'+x+'">'+y+'</a>').appendTo('.distance > .select_option').click(function(){
         		alert($(this).text())
         		$('.area_title').text($(this).text())
-<<<<<<< HEAD
-        	})
-        })
-=======
                 searchlist = {pricetitle:$('.price_title').text(),areatitle:$('.area_title').text(),cate:t}
         		$('.list_section').empty();
                 pro_infinitemove(searchlist);
@@ -118,7 +111,6 @@ eunyeong = (()=>{
         })
         let searchlist='';
         $('.area_title').attr('value',t)
->>>>>>> a851b93f92d2596ec9f880a1dd404b81cae02211
         $('.distance').click(()=>{
         	if($('.distance > .select_option').attr('value')=='block'){
             	$('.distance > .select_option').css('display','none')
@@ -127,10 +119,7 @@ eunyeong = (()=>{
             	$('.distance > .select_option').css('display','block')
             	$('.distance > .select_option').attr('value','block')
             }
-<<<<<<< HEAD
-=======
 
->>>>>>> a851b93f92d2596ec9f880a1dd404b81cae02211
         })
         $('.sort').click(()=>{
         	if($('.sort > .select_option').attr('value')=='block'){
@@ -140,35 +129,16 @@ eunyeong = (()=>{
         	$('.sort > .select_option').css('display','block')
         	$('.sort > .select_option').attr('value','block')
         	}
-<<<<<<< HEAD
-        })
-=======
 
         })
         
->>>>>>> a851b93f92d2596ec9f880a1dd404b81cae02211
     };
     
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////*바다 메인화면 */   
     
-<<<<<<< HEAD
-    let ocean =()=>{
-    	cate_search();
-        let cate = 'ocean';
-        $('.select_title').click(()=>{
-        	if($('.sort > .select_option').css('display')){
-        		
-        	}else{
-        	  $('.sort > .select_option').css('display' ,'block');	
-        	}
-            
-        	
-        })
-=======
     let ocean =x=>{
     	cate_search(x);
         let cate = {cate:'ocean'};
->>>>>>> a851b93f92d2596ec9f880a1dd404b81cae02211
         pro_infinitemove(cate);
     };
     
