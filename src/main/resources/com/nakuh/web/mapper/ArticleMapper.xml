@@ -37,6 +37,7 @@ SELECT  ROW_NUMBER() over(order by artnum desc) rownum, A.*
         WHERE mid LIKE  #{mid}) A
         LIMIT #{startRow},#{pageSize}
 
+
 </select>
 
 <select id="selectArticlesDetail" resultType="com.nakuh.web.domain.Article" 
