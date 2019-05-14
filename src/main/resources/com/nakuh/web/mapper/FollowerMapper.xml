@@ -24,7 +24,7 @@ FROM MEMBERS M
 	LIMIT 6
 </select>
 
-<select id="selectAllFollowersList" resultType="com.nakuh.web.domain.Follower" 
+<select id="selectFollowers" resultType="com.nakuh.web.domain.Follower" 
 			parameterType="string">
 SELECT DISTINCT artnum,  M.mid mid, M.`profilephoto` follpphoto, A.artdate artdate
 FROM MEMBERS M
