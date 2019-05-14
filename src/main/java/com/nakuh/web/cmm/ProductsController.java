@@ -50,10 +50,14 @@ public class ProductsController {
 	public Map<?, ?> cateAlllist(@PathVariable String cate, @RequestBody Product param) {
 		logger.info("=======  ProductController prosomelist:상품카테고리별 전체조회  진입 ======");
 		map.clear();
+		System.out.println(param.getAreatitle()+"===="+param.getPricetitle());
+		product.setAreatitle(param.getAreatitle());
+		product.setPricetitle(param.getPricetitle());
 		product.setCategory(cate);
 		product.setPageSize(param.getPageSize());
 		product.setStartRow(param.getStartRow());
 		list = productService.findCateProducts(product);
+		System.out.println(list.toString());
 		map.put("list", list);
 		return map;
 	}
@@ -87,7 +91,6 @@ public class ProductsController {
 		// 1일이 시작되는 이전의 요일 공백으로 채우기
 		for (int i = 1; i < sDayNum; i++) {
 			callist.add("★");
-
 		}
 		for (int i = 1; i <= endDate; i++) {
 			callist.add(String.valueOf(i));

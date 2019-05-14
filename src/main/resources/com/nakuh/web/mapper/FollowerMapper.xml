@@ -43,6 +43,4 @@ FROM MEMBERS M
 	ON F.folloid LIKE M.mid
 </select>
 
-
-
 </mapper>
