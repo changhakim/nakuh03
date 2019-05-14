@@ -63,15 +63,10 @@ eycompo ={
 			+'            <div class="list_filter_hide wide_filter" >'
 			+'                <div class="list_filter_area">'
 			+'                    <section class="clearfix" style="right: 90px;">'
-<<<<<<< HEAD
-			+'                        <a class="adress_btn">지역 필터</a>'
-			+'                        <a class="filter_btn">필터<img src="https://img.moolban.com/unsafe/asset/www/responsive/img/basic/filter_ico04.png" alt="" style="display:none"></a>'
-=======
 			+'                        <div class="search_header_box search_box pblock">'
 			+'<input type="text" id="search_input_box" placeholder="검색어를 입력해주세요.">'
 			+'<a class="search_btn"><img src="https://img.moolban.com/unsafe/asset/www/responsive/img/basic/search_ico04.png" alt=""></a>'
 			+'</div>'		
->>>>>>> a851b93f92d2596ec9f880a1dd404b81cae02211
 			+'                        <a class="map_btn">지도보기</a>'
 			+'                        <div class="filter_warp">'
 			+'<div class="select_btn sort">'
