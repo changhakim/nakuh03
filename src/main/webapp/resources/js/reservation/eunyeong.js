@@ -3,7 +3,7 @@ var eunyeong = eunyeong || {};
 eunyeong = (()=>{
     const WHEN_ERR = '호출하는 JS파일을 찾지 못지 못했습니다.'
     let _,compojs, js, m_ctt;
-    let homecss,admincss,rescss,instacss,calnum;
+    let homecss,admincss,rescss,instacss,calnum,pricetitle,areatitle;
     
     let init =x=>{
         _= $.ctx();
@@ -91,25 +91,32 @@ eunyeong = (()=>{
         		+'                        <div class="ad_txt">인기추천 광고상품이 표시되는 영역입니다.</div>'
         		+'                    </div>')
        .appendTo('#category_list');
+        let searchlist='';
         $.each(['최신순','높은가격순','낮은가격순'],(x,y)=>{
         	$('<a class="selectprice'+x+'">'+y+'</a>').appendTo('.sort > .select_option').click(function(){
         		alert($(this).text())
         		$('.price_title').text($(this).text())
-                searchlist = {pricetitle:$('.price_title').text(),areatitle:$('.area_title').text(),cate:t}
+        		pricetitle=$('.price_title').text()
+        		areatitle=$('.area_title').text()
+                searchlist = {cate:t}
+        		$(window).data('ajaxready',false);
         		$('.list_section').empty();
-                pro_infinitemove(searchlist);
+        		pro_fetchList(searchlist);
         	})
         })
         $.each(['지역','서울','경기','인천','전남','부산','전북','강원도','광주','충남','충북','제주'],(x,y)=>{
         	$('<a class="selectcity'+x+'">'+y+'</a>').appendTo('.distance > .select_option').click(function(){
         		alert($(this).text())
         		$('.area_title').text($(this).text())
-                searchlist = {pricetitle:$('.price_title').text(),areatitle:$('.area_title').text(),cate:t}
+        		pricetitle=$('.price_title').text()
+        		areatitle=$('.area_title').text()
+                searchlist = {cate:t}
+        		$(window).data('ajaxready',false);
         		$('.list_section').empty();
-                pro_infinitemove(searchlist);
+        		pro_fetchList(searchlist);
         	})
         })
-        let searchlist='';
+        
         $('.area_title').attr('value',t)
         $('.distance').click(()=>{
         	if($('.distance > .select_option').attr('value')=='block'){
@@ -179,7 +186,7 @@ eunyeong = (()=>{
 
     let pro_infinitemove =(x)=>{
 
-		let isEnd = false;
+		
 
 		$(function(){
 			$(document).ready(function(){
@@ -198,54 +205,55 @@ eunyeong = (()=>{
 			pro_fetchList(x); 
 		});
 		
-		let pro_fetchList=x=>{
-	        if(isEnd == true){
-	        	return;
-	        }
-	        let startNo = $('.list_section').children('.list_ad_box_area3').last().data("no") || 0;	      
-			let cate =x.cate;
-			let page = 0;
-			let url = _+'/catesearch/'+ cate;
-			let data = { cate:cate,
-					startRow:startNo,
-					pageSize:6,
-					pricetitle:x.pricetitle,
-					areatitle:x.areatitle
-					};
-			
-			$.ajax({
-				url: url,
-				type: 'post',
-				data: JSON.stringify(data),
-				dataType: 'json',
-				contentType: 'application/json; charset=UTF-8;',
-				success: d=>{
-					  let length = d.list.length;
-					  //alert(length);
-					  //db에 있는 값이 5 이하길 경우 멈춤
-	                  if( length < 5 ){
-	                	  isEnd = true;
-	                	  alert(isEnd+'success')
-	                  }
-	                  if(d){
-	           
-	                	  $('div#loadmoreajaxloader').hide();
-	                	  $.each(d.list,(i, j)=>{
-	                		  pro_renderList(j); 
-		                	 
-		                  	});
-	                	  alert(data.pricetitle+'=='+data.areatitle+"=="+data.cate)
-	                  }else{
-	                	  $('div#loadmoreajaxloader').html();
-	                  }
-	                  $(window).data('ajaxready', true);
-				},
-				error: e=>{
-					alert('에러!');
-				}
-					
-			});
-		};
+	};
+	let pro_fetchList=(x)=>{
+		let isEnd = false;
+        if(isEnd == true){
+        	return;
+        }
+        let startNo = $('.list_section').children('.list_ad_box_area3').last().data("no") || 0;	      
+		let cate =x.cate;
+		let page = 0;
+		let url = _+'/catesearch/'+ cate;
+		let data = { cate:cate,
+				startRow:startNo,
+				pageSize:6,
+				pricetitle:pricetitle,
+				areatitle:areatitle
+				};
+		
+		$.ajax({
+			url: url,
+			type: 'post',
+			data: JSON.stringify(data),
+			dataType: 'json',
+			contentType: 'application/json; charset=UTF-8;',
+			success: d=>{
+				  let length = d.list.length;
+				  //alert(length);
+				  //db에 있는 값이 5 이하길 경우 멈춤
+                  if( length < 5 ){
+                	  isEnd = true;
+                	  alert(isEnd+'success')
+                  }
+                  if(d){
+           
+                	  $('div#loadmoreajaxloader').hide();
+                	  $.each(d.list,(i, j)=>{
+                		  pro_renderList(j); 
+	                	 
+	                  	});
+                	  alert(data.pricetitle+'=='+data.areatitle+"=="+data.cate)
+                  }else{
+                	  $('div#loadmoreajaxloader').html();
+                  }
+                  $(window).data('ajaxready', true);
+			},
+			error: e=>{
+				alert('에러!');
+			}
+				
+		});
 	};
 	
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////*전체목록 :페이지네이션 */	
