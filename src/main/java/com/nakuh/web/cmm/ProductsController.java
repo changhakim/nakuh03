@@ -50,20 +50,18 @@ public class ProductsController {
 	public Map<?, ?> cateAlllist(@PathVariable String cate, @RequestBody Product param) {
 		logger.info("=======  ProductController prosomelist:상품카테고리별 전체조회  진입 ======");
 		map.clear();
-		System.out.println(param.getAreatitle()+"===="+param.getPricetitle());
 		product.setAreatitle(param.getAreatitle());
 		product.setPricetitle(param.getPricetitle());
 		product.setCategory(cate);
 		product.setPageSize(param.getPageSize());
 		product.setStartRow(param.getStartRow());
 		list = productService.findCateProducts(product);
-		System.out.println(list.toString());
 		map.put("list", list);
 		return map;
 	}
 
 	// 상품 일부 조회
-	@GetMapping("/prosearch/{search}")
+	@GetMapping("/prosearch/{company}")
 	public Map<?, ?> prosomelist(@PathVariable String search) {
 		logger.info("=======  ProductController prosomelist:상품일부조회  진입 ======");
 		product.setProname(search);
@@ -74,9 +72,9 @@ public class ProductsController {
 	}
 
 	// 상품 상세 조회
-	@PostMapping("/products/{proid}")
+	@PostMapping("/products/{company}")
 	public Map<?, ?> proinfo(
-			@PathVariable String proid) {
+			@PathVariable String company) {
 		logger.info("=======  ProductController proinfo:상품상세조회  진입 ======");
 		Calendar cal = Calendar.getInstance();
 		int today = cal.get(Calendar.DATE);
@@ -99,34 +97,17 @@ public class ProductsController {
 			} else {
 				calday.add(nowYear + "-" + "0" + nowMonth + "-" + i);
 			}
-
 		}
 		String realtoday = nowYear + "-" + "0" + nowMonth + "-" +today;
 		String calheader = nowYear+"년"+nowMonth+"월";
-
-		/*
-		 * 예약상세용 : 캘린더 화면
-		 * 
-		 * 기준 : 오늘의 날짜 구하기 int year = 0, month = 0, day = 0, lastday = 0; String today =
-		 * ""; Calendar cal = Calendar.getInstance(); year = cal.get(Calendar.YEAR);
-		 * month = cal.get(Calendar.MONTH) + 1; day = cal.get(Calendar.DATE); today =
-		 * year + "-" + month + "-" + day;
-		 * 
-		 * 윤년에 따른 월의 마지막날짜 계산 if(year % 4 ==0 && year% 100 != 0 || year % 400 ==0) {
-		 * lastday = LEAP_MAX_DAYS[month]; }else { lastday = MAX_DAYS[month]; }
-		 */	
-		product.setPronum(proid);
-		product = productService.findProduct(product);
+		product.setCompany(company);
 		map.clear();
+		map = productService.findProduct(product);
 		map.put("calheader", calheader);
 		map.put("callist", callist);
 		map.put("calday", calday);
-		map.put("product", product);
 		map.put("today", today);
 		map.put("realtoday",  realtoday);
-		System.out.println("맵에 담겼는가?? : " + map.get("today"));
-		System.out.printf("keySet : %s\n", map.keySet());
-		System.out.println("map에 담긴 모든값" + map);
 		return map;
 	}
 

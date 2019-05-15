@@ -39,7 +39,6 @@ public class ReservationController {
 		resService.createReservation(param);
 		map.clear();
 		map.put("msg", "reserve success");
-		System.out.println("param에 담긴 값" + param.toString());
 		return map;
 	}
 	
@@ -51,7 +50,6 @@ public class ReservationController {
 		list = resService.findSomeReservations(reservation);
 		map.clear();
 		map.put("list", list);
-		System.out.println("map에 담긴 값" + list.toString());
 		return map;
 	}		
 	
