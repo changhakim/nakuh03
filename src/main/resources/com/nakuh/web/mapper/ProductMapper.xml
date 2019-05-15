@@ -54,37 +54,20 @@
 			LAT lat,
 			LNG lng
 		FROM PRODUCTS 
-		WHERE CATEGORY LIKE #{category} ) P
+		WHERE CATEGORY LIKE #{category} 
+		GROUP BY company
+		HAVING price LIKE min(price)
+		) P
 	 	<choose>
      	<when test="areatitle !='지역' and areatitle !=null and pricetitle !=null ">
      	WHERE  ADDRESS LIKE '%${areatitle}%'
      	ORDER BY price*1 DESC
      	</when>
      	</choose>
-
 		LIMIT #{startRow},#{pageSize}
- 
 		
-		
-<!-- 		SELECT 
-			PRONUM pronum, 
-			PRONAME proname, 
-			PRICE price, 
-			COMPANY company, 
-			ADDRESS address, 
-			CATEGORY category, 
-			PROIMG proimg, 
-			REGIDATE regidate,
-			FISHNAME fishname,
-			PHONE phone,
-			LAT lat,
-			LNG lng
-		FROM PRODUCTS 
-		WHERE CATEGORY LIKE #{category}	 -->					
-	
 	</select>
-	
-	
+		
 <!-- 일부 상품 조회 --> 
 	<select id="selectSomeProducts" resultType="com.nakuh.web.domain.Product"
 									parameterType="com.nakuh.web.domain.Product">
@@ -107,6 +90,26 @@
 	</select>
 
 <!-- 선택한 상품 상세 조회 -->
+	<select id="selectProducts" resultType="com.nakuh.web.domain.Product"
+							   parameterType="com.nakuh.web.domain.Product">
+	SELECT  
+		PRONUM pronum, 
+		PRONAME proname, 
+		PRICE price, 
+		COMPANY company, 
+		ADDRESS address, 
+		CATEGORY category, 
+		PROIMG proimg, 
+		REGIDATE regidate,
+		FISHNAME fishname,
+		PHONE phone,
+		LAT lat,
+		LNG lng
+	FROM PRODUCTS 
+	WHERE COMPANY LIKE #{company}
+	
+	</select>
+	
 	<select id="selectProduct" resultType="com.nakuh.web.domain.Product"
 							   parameterType="com.nakuh.web.domain.Product">
 	SELECT  
@@ -123,7 +126,9 @@
 		LAT lat,
 		LNG lng
 	FROM PRODUCTS 
-	WHERE PRONUM LIKE #{pronum}
+	WHERE COMPANY LIKE #{company}
+	GROUP BY company
+	HAVING price LIKE min(price) 
 	
 	</select>
 

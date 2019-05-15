@@ -3,6 +3,7 @@ package com.nakuh.web.service;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,7 @@ import com.nakuh.web.mapper.ProductMapper;
 public class ProductServiceImpl implements ProductService{
 
 	@Autowired ProductMapper proMap;
+	@Autowired HashMap<String, Object> map;
 	@Override
 	public void createProduct(Product param) {
 		proMap.insertProduct(param);
@@ -35,8 +37,10 @@ public class ProductServiceImpl implements ProductService{
 	}
 
 	@Override
-	public Product findProduct(Product param) {
-		return proMap.selectProduct(param);
+	public HashMap<String, Object> findProduct(Product param) {
+		map.put("prolist", proMap.selectProducts(param));
+		map.put("product", proMap.selectProduct(param));
+		return map;
 	}
 
 	@Override
