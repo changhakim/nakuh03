@@ -37,7 +37,7 @@
 	SELECT RESNUM resnum, MID mid, RESNAME resname, STARTDATE startdate, AMPM ampm, PHONE phone, RESDATE resdate, RESCOUNT rescount, DEPOSIT deposit, 
 				MESSAGE message, PRONAME proname, COMPANY company, PRONUM pronum 
 	FROM RESERVATION 
-	WHERE MID LIKE #{mid};
+	WHERE MID LIKE #{mid}
 	
 	</select>
 	

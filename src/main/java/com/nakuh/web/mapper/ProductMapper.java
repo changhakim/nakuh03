@@ -13,6 +13,7 @@ public interface ProductMapper {
 	public List<Product> selectAllProduct();
 	public List<Product> selectCateProducts(Product param);
 	public List<Product> selectSomeProducts(Product param);
+	public List<Product> selectProducts(Product param);
 	public Product selectProduct(Product param);
 	public int countProduct();
 	public void updateProduct(Product param);

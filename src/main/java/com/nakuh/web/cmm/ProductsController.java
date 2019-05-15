@@ -50,20 +50,18 @@ public class ProductsController {
 	public Map<?, ?> cateAlllist(@PathVariable String cate, @RequestBody Product param) {
 		logger.info("=======  ProductController prosomelist:상품카테고리별 전체조회  진입 ======");
 		map.clear();
-		System.out.println(param.getAreatitle()+"===="+param.getPricetitle());
 		product.setAreatitle(param.getAreatitle());
 		product.setPricetitle(param.getPricetitle());
 		product.setCategory(cate);
 		product.setPageSize(param.getPageSize());
 		product.setStartRow(param.getStartRow());
 		list = productService.findCateProducts(product);
-		System.out.println(list.toString());
 		map.put("list", list);
 		return map;
 	}
 
 	// 상품 일부 조회
-	@GetMapping("/prosearch/{search}")
+	@GetMapping("/prosearch/{company}")
 	public Map<?, ?> prosomelist(@PathVariable String search) {
 		logger.info("=======  ProductController prosomelist:상품일부조회  진입 ======");
 		product.setProname(search);
@@ -74,9 +72,9 @@ public class ProductsController {
 	}
 
 	// 상품 상세 조회
-	@PostMapping("/products/{proid}")
+	@PostMapping("/products/{company}")
 	public Map<?, ?> proinfo(
-			@PathVariable String proid) {
+			@PathVariable String company) {
 		logger.info("=======  ProductController proinfo:상품상세조회  진입 ======");
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -137,10 +135,10 @@ public class ProductsController {
 			} else {
 				calday.add(nowYear + "-" + "0" + nowMonth + "-" + i);
 			}
-
 		}
 		String realtoday = nowYear + "-" + "0" + nowMonth + "-" +today;
 		String calheader = nowYear+"년"+nowMonth+"월";
+<<<<<<< HEAD
 
 		/*
 		 * 예약상세용 : 캘린더 화면
@@ -162,16 +160,16 @@ public class ProductsController {
 >>>>>>> 7bc97e96347da1e97fdf263110a573f89aac47d1
 		product.setPronum(proid);
 		product = productService.findProduct(product);
+=======
+		product.setCompany(company);
+>>>>>>> 1fedfbb7bedf08b8f61ec2d21a8a04d9c738dc67
 		map.clear();
+		map = productService.findProduct(product);
 		map.put("calheader", calheader);
 		map.put("callist", callist);
 		map.put("calday", calday);
-		map.put("product", product);
 		map.put("today", today);
 		map.put("realtoday",  realtoday);
-		System.out.println("맵에 담겼는가?? : " + map.get("today"));
-		System.out.printf("keySet : %s\n", map.keySet());
-		System.out.println("map에 담긴 모든값" + map);
 		return map;
 	}
 

@@ -22,7 +22,6 @@ import com.nakuh.web.domain.Dummy;
 import com.nakuh.web.domain.PostTag;
 import com.nakuh.web.mapper.ArticleMapper;
 import com.nakuh.web.mapper.CommentMapper;
-import com.nakuh.web.mapper.FollowerMapper;
 import com.nakuh.web.mapper.PostTagMapper;
 import com.nakuh.web.service.ArticleServiceImpl;
 import com.nakuh.web.service.CommentServiceImpl;
@@ -153,6 +152,18 @@ public class ArticlesController {
 		return map;
 	};
 
+	@GetMapping("/comments/list/{artnum}")
+	public Map<?,?> feedcomment(@PathVariable String artnum)throws Exception{
+		logger.info("============== feedcomment() {}  =================", "ENTER");
+		com.setTitleseq(artnum);
+		System.out.println("++"+artnum);
+		IFunction f = (Object o) -> comMap.selectComment(com.getTitleseq());
+		List<?> cls = (List<?>) f.apply(com.getTitleseq());
+		System.out.println("cls?"+cls.size()+"//"+cls);
+		map.put("cls", cls);
+		map.put("msg","feedcomment 성공:: ");
+		return map;
+	}
 	
 }
 
