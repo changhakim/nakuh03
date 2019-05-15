@@ -16,7 +16,7 @@ app=(()=>{
 		$.getScript($.js()+'/admin/changha.js')
 		).done(()=>{
 			app_defualt_loader();
-			crawl();
+			/*crawl();*/
 		});
 	};
 	

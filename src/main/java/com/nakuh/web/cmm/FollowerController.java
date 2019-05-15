@@ -8,6 +8,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.nakuh.web.domain.Follower;
@@ -51,6 +53,16 @@ public class FollowerController {
 		List<?> ls = (List<?>) f.apply(mid);
 		map.put("inglist", ls);
 		
+		return map;
+	};
+	@PostMapping("/regist/folloing")
+	public Map<?,?> registfolloing(@RequestBody Follower foll)throws Exception{
+		logger.info("============== registfolloing() {}  =================", "ENTER");
+		map.clear();
+		System.out.println("//"+foll);
+		IConsumer c = (Object o) -> folmap.insertFollower(foll);
+		c.accept(foll);
+		map.put("msg", "success");
 		return map;
 	};
 	
