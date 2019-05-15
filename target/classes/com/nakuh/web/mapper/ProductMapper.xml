@@ -33,7 +33,7 @@
      	ORDER BY price*1 DESC
      </when>
      <when test="pricetitle =='낮은가격순'">
-     	ORDER BY price*1
+     	ORDER BY price*1 ASC
      </when>
      <otherwise>
       order by pronum desc

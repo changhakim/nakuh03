@@ -12,7 +12,8 @@
  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAY5vEXIghqf7_mEdWcG9kqcEeDOpaLixY&callback=initMap"></script>
  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
  <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
- <link id="aaadfa" href="/web/resources/css/home/responsive_basic.css" rel="stylesheet">
+   <link id="aaadfa" href="/web/resources/css/home/responsive_basic.css" rel="stylesheet">
+ <link id="aaadfa" href="/web/resources/css/home/notosans.css" rel="stylesheet">
 
 </head>
 <body>
@@ -70,14 +71,14 @@
 			<a href="#" class="header_logo off active home">
 				<img src="${img}/homeimg/main/nakuhlogo.jpg" style="height: 30px;">
 			</a>
-			<a class="location_setting pos_addr_text btn_geo_popup">서울특별시 금천구 가산동 459-11</a>
+			<a class="location_setting pos_addr_text btn_geo_popup">서울특별시 마포구 대흥동 백범로 23</a>
 
-			<div class="header_menu">
-				<a href="/category/list?sea_type=1" class="menu_txt pblock ocean">바다</a>
-				<a href="/category/list?sea_type=2" class="menu_txt pblock river">민물</a>
-				<a href="/search/home" class="menu_txt pblock hotel">숙박</a>
-				<a href="/reserve/live_search" class="menu_txt pblock newsfeed">뉴스피드</a>
-				<a href="/search/mypage" class="menu_txt pblock mypage">마이페이지</a>
+			<div class="header_menu" style="font-weight: bold;">
+				<a href="#" class="menu_txt pblock ocean">바다</a>
+				<a href="#" class="menu_txt pblock river">민물</a>
+				<a href="#" class="menu_txt pblock hotel">숙박</a>
+				<a href="#" class="menu_txt pblock newsfeed">뉴스피드</a>
+				<a href="#" class="menu_txt pblock mypage">마이페이지</a>
 				<a class="menu_btn" id="adminbtn">
 					<img style="padding-top: 10px;"src="${img}/homeimg/main/admin_icon.png">
 				</a> 
