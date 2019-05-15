@@ -18,7 +18,6 @@ import com.nakuh.web.service.MemberServiceImpl;
 import com.nakuh.web.service.VisitorServiceImpl;
 
 @RestController
-@Transactional
 public class MemberController {
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 	@Autowired Map<String,Object> map;
@@ -28,6 +27,7 @@ public class MemberController {
 	@Autowired VisitorServiceImpl visiservice;
 	@Autowired Visitor vis;
 	
+	@Transactional
 	@PostMapping("/login/kakao/{kaid}")
 	public Map<?,?> login(@RequestBody Map<?,?> res) {
 		logger.info("=========login 진입======");

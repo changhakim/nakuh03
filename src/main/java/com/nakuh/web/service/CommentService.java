@@ -13,8 +13,9 @@ public interface CommentService {
 	public List<Comment> bringAllCommentsList();
 	public List<Comment> retrieveComments();
 	public List<Comment> retrieveComment(String titleseq);
+	public Comment retrieveOneComment(String titleseq);
 	public int countComments(String ci);
-	public boolean existsComment(String searchWord);
+	public boolean existsComment(Comment com);
 	
 	public void modifyComment(Comment com);
 	public void removeComment(Comment com);

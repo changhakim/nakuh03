@@ -363,7 +363,7 @@ auth =(()=>{
 					+'						         </div>'
 					+'						          <div id="feedcomments_nav">'
 					+'    <ul class="nav bs-docs-sidenav" id="feedcomments" style="-ms-overflow-style: none; overflow:scroll; width:100%; height:130px; border-top: none;">'
-					+'						<li class="comlist_'+a+'">'
+					+'						<li class="comlist_'+x.rownum+'">'
 					+'						</li> '
 				    +'          				</ul>'						
 					+'							    	</div>'
@@ -397,10 +397,35 @@ auth =(()=>{
 					});
 					
 					/*$(comitem).appendTo('.comlist');*/
-					$('.comlist_'+a).append(comitem);
+					$('.comlist_'+x.rownum).append(comitem);
 	  				$('#input-group_'+x.rownum).children('span').click(function(e){
 						e.preventDefault();
-						alert('몇번이냐'+$(this).attr('value'));
+						let com_data = {
+								comid : 'gigi123',
+								comm : $('#upcomment_'+$(this).attr('value')).val(),
+								titleseq : $(this).attr('value')
+						};
+						$.ajax({
+							url: $.ctx()+'/regist/comm/'+com_data.mid,
+							type: 'post',
+							data: JSON.stringify(com_data),
+							dataType: 'json',
+							contentType: 'application/json; charset=UTF-8;',
+							success: d=>{
+								alert('??'+d.comlist);
+								$('#input-group_'+x.rownum).children('input').val('');
+								let incomm =	'			<div class="item" style="display: -webkit-box; " value="'+d.comlist.comid+'">'	
+								+'				        	<div class="list-group-item list-group-item-action" style="height: 58px; width: 100%; top: 11px; border: none; display: -webkit-box;"> '
+								+'							 <div> <img class="img-circle" alt="Cinque Terre" src="resources/img/aquagram/profilephoto/'+d.comlist.comprophoto+'" style="width: 50px; height: 50px; position: center"/></div> '
+								+'								<div style="left: 13px; text-align: left;"><h5 style="margin-bottom: 3px; font-weight: bold;">'+d.comlist.comid+'</h5><p style="font-size: 7px;">'+d.comlist.cmname+'</p></div>'
+								+'							<div style="position: relative; left: 30px;"><h5>'+d.comlist.comm+'</h5></div>'
+								+'								</div> '		
+								+'						</div> ';	
+								$('.comlist_'+x.rownum).prepend(incomm);
+
+								
+							},error:e=>{}
+						});
 						
 						
 					});
@@ -426,18 +451,18 @@ auth =(()=>{
 		$('.home').click(e=>{
 			
 			
-			$('.rescss').remove();
-			$('.instacss').remove();
-			$(homecss).appendTo('head');
-			location.assign('/web');
-			app.init();
-		    
+		$('.rescss').remove();
+		$('.instacss').remove();
+		$(homecss).appendTo('head');
+		location.assign('/web');
+		app.init();
+	    
 		});
 		$('.ocean').click(e=>{
 		e.preventDefault();
 		$('.instacss').remove();
 		$(rescss).appendTo('head');
-		eunyeong.init('ocean')
+		eunyeong.init('ocean');
 		});
 		
 		$('.river').click(()=>{
