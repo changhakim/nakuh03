@@ -37,6 +37,7 @@ auth =(()=>{
 		arti.arti_img_upload();
 		feed_infinitemove();
 		right_nav_lander();
+		
 		//중앙 네비 따라오는 옵션
 		$(document).ready(function() {
 			  $('.navbar').affix({
@@ -109,7 +110,7 @@ auth =(()=>{
 					$(follower_item).appendTo('#follower_list').children('button').click(function(){
 						alert($(this).attr('value'));
 						if($(this).text()=='팔로우'){
-							alert('??'+$(this).attr('value'));
+							/*alert('??'+$(this).attr('value'));*/
 							let data = {mid:'gigi123', 
 									folloid:$(this).attr('value')};
 							
@@ -245,11 +246,11 @@ auth =(()=>{
 
 		let isEnd = false;
 
-		$(function(){
+
 			$(document).ready(function(){
 				$(window).data('ajaxready',true).scroll(function(){
 					if($(window).data('ajaxready')==false) return;
-					if($(window).scrollTop() + 300 >=$(document).height()-$(window).height()){
+					if($(window).scrollTop() + 600 >=$(document).height()-$(window).height()){
 						$(document).ready(function(){
 							$('div#loadmoreajaxloader').show();
 							$(window).data('ajaxready',false);
@@ -260,68 +261,66 @@ auth =(()=>{
 				
 			});
 			feed_fetchList(); 
-		});
-		
-		let feed_fetchList=()=>{
-	        if(isEnd == true){
-	        	return;
-	        }
-	        let startNo = $("#leftbar_content").children('#data_wow').last().data("no") || 0;
-			let mid ='gigi123';
-			let page = 0;
-			let url = $.ctx()+'/myfeed/'+mid;
-			let data = { mid:mid,
-					startRow:startNo,
-					pageSize:2};
-			let userd={};
-			$.ajax({
-				url: $.ctx()+'/arti/feed/'+data.mid,
-				type: 'post',
-				data: JSON.stringify(data),
-				dataType: 'json',
-				contentType: 'application/json; charset=UTF-8;',
-				success: d=>{
-					
-					  let length = d.ffeed.length;
-					  //alert(length);
-	                  if( length < 1 ){
-	                	  isEnd = true;
-	
-	                  }
-	                  if(d){
-	                	  $('div#loadmoreajaxloader').hide();
-	                	
-	                	  $.each(d.ffeed,(i, j)=>{
-	                		  feed_renderList(j); 
-	                		  userd[i] = {userid: j.mid,
-	                				  		userphoto:j.userpo,
-	                				  		artcount:j.artCount,
-	                				  		followerCount:j.followerCount,
-	                				  		folloingCount:j.folloingCount};
-	 	                	 if(j.mid !== ''){
-		                		 mynavd(userd);
-	 	                	 }
-		                  	});
-	                	  	
 
-	                  }else{
-	                	  $('div#loadmoreajaxloader').html();
-	                  }
-	                  $(window).data('ajaxready', true);
 
-				},
-				error: e=>{
-					alert('에러!');
-				}
-					
-			});
-
-		};
-		
-		
-		
 	};
-	
+	let feed_fetchList=()=>{
+		let isEnd = false;
+        if(isEnd == true){
+        	return;
+        }
+        let startNo = $("#leftbar_content").children('#data_wow').last().data("no") || 0;
+		let mid ='gigi123';
+		let page = 0;
+		let url = $.ctx()+'/myfeed/'+mid;
+		let data = { mid:mid,
+				startRow:startNo,
+				pageSize:2};
+		let userd={};
+		$.ajax({
+			url: $.ctx()+'/arti/feed/'+data.mid,
+			type: 'post',
+			data: JSON.stringify(data),
+			dataType: 'json',
+			contentType: 'application/json; charset=UTF-8;',
+			success: d=>{
+				
+				  let length = d.ffeed.length;
+				  //alert(length);
+                  if( length < 1 ){
+                	  isEnd = true;
+
+                  }
+                  if(d){
+                	  $('div#loadmoreajaxloader').hide();
+                	
+                	  $.each(d.ffeed,(i, j)=>{
+                		  userd[i] = {userid: j.mid,
+          				  		userphoto:j.userpo,
+          				  		artcount:j.artCount,
+          				  		followerCount:j.followerCount,
+          				  		folloingCount:j.folloingCount};
+	                	 if(j.mid !== ''){
+	                		 mynavd(userd);
+	                	 }
+                		  feed_renderList(j,i); 
+
+	                  	});
+
+
+                  }else{
+                	  $('div#loadmoreajaxloader').html();
+                  }
+                  $(window).data('ajaxready', true);
+                  
+			},
+			error: e=>{
+				alert('에러!');
+			}
+				
+		});
+
+	};
 	let mynavd =(x)=>{
 		
 		 $('#my_fv').text(x[0].artcount);
@@ -332,11 +331,6 @@ auth =(()=>{
 					+'style="width: 50px; height: 50px; position: center;"/>'+x[0].userid+'</div></li>');
 		
 	};
-/*	tagar[i] = tagcut.split(' /');
-	alert('??'+tagar[i]);
-	if(tagar[i] == ''){
-		return;		
-	}*/
 	let settags = (x)=>{
 		let settag ='';
 		let tagcut = x.tag.split('.');
@@ -345,13 +339,10 @@ auth =(()=>{
 				
 			});	
 			$(settag).appendTo('#tags');
-		
-	
+			
 	};
-
-	let feed_renderList =(x)=>{
-
-				let feeditem = '<div class="wow fadeInDown" id="data_wow" style="border-radius: 6px;" data-no="'+x.rownum+'">'
+	let feed_renderList =(x,a)=>{
+				let feeditem = '<div class="wow fadeInDown" id="data_wow" style="border-radius: 6px;" data-no="'+x.rownum+'" >'
 					+'					    <div class="panel panel-default">'
 					+'						        <div class="heading">'
 					+' 			<div class="item" id="'+x.artnum+'" style="height: 58px; border: none; margin: 8px;"> ' 
@@ -372,30 +363,55 @@ auth =(()=>{
 					+'						         </div>'
 					+'						          <div id="feedcomments_nav">'
 					+'    <ul class="nav bs-docs-sidenav" id="feedcomments" style="-ms-overflow-style: none; overflow:scroll; width:100%; height:130px; border-top: none;">'
-					+'						<li>'
+					+'						<li class="comlist_'+a+'">'
 					+'						</li> '
 				    +'          				</ul>'						
 					+'							    	</div>'
-					+'							    	<div class="input-group" >'
-					+'									     <input style="border: none; background: transparent;" id="upcomment'+x.artnum+'" type="text" class="form-control" name="upcomment'+x.artnum+'" placeholder="댓글입력">'
-					+'									      <span style="border: none; background: transparent;"class="input-group-addon"><p>게시</p></span>   '
+					+'							    	<div class="input-group" id="input-group_'+x.rownum+'">'
+					+'										<input style="border: none; background: transparent;" id="upcomment_'+x.artnum+'" type="text" class="form-control" name="" placeholder="댓글입력">'
+					+'										<span style="border: none; background: transparent;" class="input-group-addon" value="'+x.artnum+'"><p>게시</p></span>'
 					+'									    </div>'
 					+'									</div>'
 					+'									</div>'
 					+'									</div>'
 					+'						        </div>';
-			
-				$('#leftbar_content').append(feeditem).click(function(){
-					alert('아아아~');
-				});
+				
+				$(feeditem).appendTo('#leftbar_content');
+
 				if(x.tag == null){
 					x.tag ='';
 				}else{
 					settags(x);
 				}
+				
+  				$.getJSON($.ctx()+'/comments/list/'+x.artnum,d=>{
+					let comitem ='';
+					$.each(d.cls,(i,j)=>{
+						comitem +=	'			<div class="item" style="display: -webkit-box; " value="'+j.comid+'">'	
+						+'				        	<div class="list-group-item list-group-item-action" style="height: 58px; width: 100%; top: 11px; border: none; display: -webkit-box;"> '
+						+'							 <div> <img class="img-circle" alt="Cinque Terre" src="resources/img/aquagram/profilephoto/'+j.comprophoto+'" style="width: 50px; height: 50px; position: center"/></div> '
+						+'								<div style="left: 13px; text-align: left;"><h5 style="margin-bottom: 3px; font-weight: bold;">'+j.comid+'</h5><p style="font-size: 7px;">'+j.cmname+'</p></div>'
+						+'							<div style="position: relative; left: 30px;"><h5>'+j.comm+'</h5></div>'
+						+'								</div> '		
+						+'						</div> ';					
+					});
+					
+					/*$(comitem).appendTo('.comlist');*/
+					$('.comlist_'+a).append(comitem);
+	  				$('#input-group_'+x.rownum).children('span').click(function(e){
+						e.preventDefault();
+						alert('몇번이냐'+$(this).attr('value'));
+						
+						
+					});
+					
+					
+				});
+
+
 	/*			
 
-				+'     		<div id="item" style="top: 5px;">'
+				+'     		<div id="com_item" style="top: 5px;">'
 				+'                  <div class="list-group-item list-group-item-action" id="comments_my" style="height: 58px; border: none; display: -webkit-box;"> '
 				+'                <img class="img-circle" alt="Cinque Terre" src="resources/img/aquagram/profilephoto/'+d.als.profilephoto+'" style="width: 40px; height: 40px; position: center"/>'
 				+'                 <div style="display: -webkit-box;"><h5 style="top:0px; left: 7px; font-weight:bold;">'+d.als.mid+'</h5><div><h6 id="contag" style="left: 15px; width: 90%;">'+d.als.content+'</h6></div></div>'
@@ -403,9 +419,8 @@ auth =(()=>{
 				+'                </div> '
 				+'              </div> '
 */
+				
 };
-
-
 	let nav =()=>{
 		/*	General 네비게이션 	*/
 		$('.home').click(e=>{
