@@ -385,7 +385,9 @@ auth =(()=>{
 					+'									</div>'
 					+'						        </div>';
 			
-				$('#leftbar_content').append(feeditem)
+				$('#leftbar_content').append(feeditem).click(function(){
+					alert('아아아~');
+				});
 				if(x.tag == null){
 					x.tag ='';
 				}else{
