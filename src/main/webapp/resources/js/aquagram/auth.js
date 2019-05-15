@@ -92,23 +92,50 @@ auth =(()=>{
 			contentType: 'application/json; charset=UTF-8;',
 			success: d=>{
 				$.each(d.werlist,(i,j)=>{
-					follower_item +='			<div class="item" style="display: -webkit-box;">'	
+					follower_item ='			<div class="item" style="display: -webkit-box; " value="'+j.mid+'">'	
 						+'				        	<div class="list-group-item list-group-item-action" style="height: 58px; width: 80%; top: 11px; border: none; display: -webkit-box;"> '
 						+'							 <div> <img class="img-circle" alt="Cinque Terre" src="resources/img/aquagram/profilephoto/'+j.follpphoto+'" style="width: 50px; height: 50px; position: center"/></div> '
 						+'								<div style="left: 13px; text-align: left;"><h5 style="margin-bottom: 3px; font-weight: bold;">'+j.mid+'</h5><p style="font-size: 7px;">'+j.name+'</p></div>'
 						+'								</div> '
 
 					if(j.follostate=='0'){
-						follower_item+=	'<button type="button" class="btn btn-primary" style="position: relative; top: 21px;">팔로우</button>'
+						follower_item+=	'<button type="button" class="btn btn-primary" id="btn_follower" value="'+j.mid+'" style="position: relative; top: 21px;">팔로우</button>'
 						+'</div> ';
 					}else {
-						follower_item+=	'<button type="button" class="btn btn-default" style="position: relative; top: 21px;">팔로잉</button>'
+						follower_item+=	'<button type="button" class="btn btn-default" id="btn_folloing" value="'+j.mid+'" style="position: relative; top: 21px;">팔로잉</button>'
 							+'</div> ';
 						
 					}
-					
+					$(follower_item).appendTo('#follower_list').children('button').click(function(){
+						alert($(this).attr('value'));
+						if($(this).text()=='팔로우'){
+							alert('??'+$(this).attr('value'));
+							let data = {mid:'gigi123', 
+									folloid:$(this).attr('value')};
+							
+							$.ajax({
+								url: $.ctx()+'/regist/folloing',
+								type: 'post',
+								data: JSON.stringify(data),
+								dataType: 'json',
+								contentType: 'application/json; charset=UTF-8;',
+								success: d=>{
+									alert(d.msg);
+									$(this).attr('class','btn btn-default').text('팔로잉');
+								},error:e=>{}
+							});
+							
+						}else{
+							alert('!!');
+							$(this).attr('class','btn btn-primary').text('팔로우');
+							
+						}
+						
+					});
 				});
-				$(follower_item).appendTo('#follower_list');
+				
+
+				
 			},error: e=>{
 				
 			}
@@ -350,7 +377,7 @@ auth =(()=>{
 				    +'          				</ul>'						
 					+'							    	</div>'
 					+'							    	<div class="input-group" >'
-					+'									     <input style="border: none; background: transparent;" id="upcomment'+x.artnum+'" type="text" class="form-control" name="upcomment" placeholder="댓글입력">'
+					+'									     <input style="border: none; background: transparent;" id="upcomment'+x.artnum+'" type="text" class="form-control" name="upcomment'+x.artnum+'" placeholder="댓글입력">'
 					+'									      <span style="border: none; background: transparent;"class="input-group-addon"><p>게시</p></span>   '
 					+'									    </div>'
 					+'									</div>'
@@ -358,7 +385,9 @@ auth =(()=>{
 					+'									</div>'
 					+'						        </div>';
 			
-				$('#leftbar_content').append(feeditem)
+				$('#leftbar_content').append(feeditem).click(function(){
+					alert('아아아~');
+				});
 				if(x.tag == null){
 					x.tag ='';
 				}else{
@@ -421,9 +450,9 @@ auth =(()=>{
 		 homecss = '<link class="homecss" rel="stylesheet" type="text/css" href="/web/resources/css/home/homemain.css" />'
 			+'<link class="homecss" href="https://fonts.googleapis.com/css?family=Raleway:300,400,600,600i,700" rel="stylesheet">'
 			+'<link class="homecss" href="/web/resources/css/home/style.css" rel="stylesheet">';
-		 rescss ='<link class="rescss" rel="stylesheet" href="/web/resources/css/reservation/common.css">'
-			 +'<link class="rescss" rel="stylesheet" href="/web/resources/css/reservation/main.css">'
-			 +'<link class="rescss" rel="stylesheet" href="/web/resources/css/reservation/navbar.css">';
+		 rescss ='<link class="homecss" href="/web/resources/css/home/responsive.css" rel="stylesheet">'
+	            +'<link class="homecss" href="/web/resources/css/home/swiper.min.css" rel="stylesheet">'
+	            +'<link class="rescss" rel="stylesheet" type="text/css" href="/web/resources/css/reservation/modal.css"> ';
 		 instacss =' <link class="instacss" rel="stylesheet" type="text/css" href="/web/resources/css/aquagram/style.css">'
 			 +'  <link class="instacss" rel="stylesheet" type="text/css" href="/web/resources/css/aquagram/animate.css">'
 			 +'  <link class="instacss" rel="stylesheet" type="text/css" href="/web/resources/css/aquagram/structure.css">'
