@@ -199,6 +199,13 @@ arti =(()=>{
 						+'        </li>'
 						+'          </ul>'
 						+'            </div>'
+						+'				<div sytle="height: 147px;">	'
+						+'				</div>		'
+						+'							    	<div class="input-group">'
+						+'										<input style="border: none; background: transparent;" id="upcomment_'+d.als.mid+'" type="text" class="form-control" name="" placeholder="댓글입력">'
+						+'										<span style="border: none; background: transparent;" class="input-group-addon" value="'+d.als.mid+'"><p>게시</p></span>'
+						+'									    </div>'
+						+'									</div>'
 						+'        </div>'
 						+'    </div>'
 						+'  </div>'
@@ -207,13 +214,15 @@ arti =(()=>{
 					$('#contag').append('&nbsp;<a>'+j.tagname+'</a>');
 				});
 				$.each(d.cls,(i,j)=>{
-					comlist +=	'     <div id="item">'
-					+'                  <div class="list-group-item list-group-item-action" style="height: 58px; border: none; display: -webkit-box;"> '
-					+'                <img class="img-circle" alt="Cinque Terre" src="resources/img/aquagram/profilephoto/'+j.comprophoto+'" style="width: 40px; height: 40px; position: center"/>'
-					+'                 <div style="display: -webkit-box;"><h5 style="top:0px; left: 7px; font-weight:bold;">'+j.comid+'</h5><div style="width: 100%;"><h6 style="left: 15px;">'+j.comm+'</h6></div></div>'
-					+'                    <div style="top:0px; left: 60px; font-size: 7px;"></div>'
-					+'                </div> '
-					+'              </div> '
+					comlist +=					'			<div class="item" style="display: -webkit-box; " value="'+j.comid+'">'	
+					+'				        	<div class="list-group-item list-group-item-action" style="height: 58px; width: 100%; top: 11px; border: none; display: -webkit-box;"> '
+					+'							 <div> <img class="img-circle" alt="Cinque Terre" src="resources/img/aquagram/profilephoto/'+j.comprophoto+'" style="width: 50px; height: 50px; position: center"/></div> '
+					+'								<div style="left: 13px; text-align: left;"><h5 style="margin-bottom: 3px; font-weight: bold;">'+j.comid+'</h5><p style="font-size: 7px;">'+j.cmname+'</p></div>'
+					+'							<div style="position: relative; left: 30px;"><h5>'+j.comm+'</h5></div>'
+					+'								</div> '		
+					+'						</div> ';
+					
+	
 					
 				});
 				$(comlist).appendTo('#comments_list');
