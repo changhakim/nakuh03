@@ -56,24 +56,12 @@ public class ArticlesController {
 		logger.info("=========ArticleList 진입======");
 		System.out.println("page???????????"+param);
 		map.clear();
-		/*
-		 * map.put("page_num", page); map.put("mid", param.getMid());
-		 * map.put("page_size", "12"); IFunction f = (Object o) ->
-		 * artMap.countArticles(param.getMid()); map.put("total_count",
-		 * f.apply(param.getMid())); pxy.carryOut(map);
-		 * System.out.println("??pxy??"+pxy); map.put("pxy", pxy);
-		 */
-		/*
-		 * art.setMid(param.getMid()); art.setStartRow(param.getStartRow());
-		 */
 		art.setMid(param.getMid());
 		art.setStartRow(param.getStartRow());
 		art.setPageSize(param.getPageSize());
 		List<?> ls = (List<?>) artservice.retrieveArticles(art);
 		map.put("myList", ls);
-		System.out.println("ls?"+ls);
-//		mapput("myfeedList", ls);
-//		System.out.println("map??::"+map.get("myfeedList"));
+
 		
 		return map;
 	};
@@ -83,15 +71,12 @@ public class ArticlesController {
 	public Map<?,?> articleDetail(@PathVariable String artnum)throws  Exception{
 		logger.info("=========ArticleDetail 진입======");
 		map.clear();
-		System.out.println("??"+artnum);
 		Article als = artservice.retrieveArticleDetail(artnum);
 		map.put("als", als);
 		List<?> cls = (List<?>) comservice.retrieveComment(als.getArtnum());
 		map.put("cls", cls);
 		pt.setArtseq(als.getArtnum());
-		System.out.println("pt"+pt);
 		List<?> tls = postservice.retrievePostTags(pt);
-		System.out.println("tls::"+tls);
 		map.put("tls", tls);
 		
 		
@@ -101,17 +86,11 @@ public class ArticlesController {
 	public Map<?,?> articleFeed(String mid, @RequestBody Article arts)throws  Exception{
 		logger.info("=========ArticleFeed 진입======");
 		map.clear();
-		System.out.println("art??"+arts);
 		art.setMid(arts.getMid());
-		System.out.println(art);
 		art.setStartRow(arts.getStartRow());
 		art.setPageSize(arts.getPageSize());
-		/*
-		 * IFunction f1 = (Object o)-> artMap.countnavArticle(art);
-		 * System.out.println("artcount"+f1.apply(art)); map.put("nav", f1.apply(art));
-		 */
 		IFunction f2 = (Object o) -> artMap.selectAllArticlesList(art);
-		System.out.println("art??:::::"+f2.apply(art));
+
 		List<?> ffeed = (List<?>) f2.apply(art);
 		map.put("ffeed", ffeed);
 
@@ -124,14 +103,11 @@ public class ArticlesController {
 	public Map<?, ?> artiupload(@RequestBody Dummy dum)throws Exception{
 		logger.info("============== artiUpload() {}  =================", "ENTER");
 		map.clear();
-		System.out.println("artiupload ::"+art);
-		System.out.println("dummy::"+dum);
 		art.setContent(dum.getSubCont());
 		art.setTag(dum.getSubtag());
 		Date date = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		art.setArtdate(sdf.format(date));
-		System.out.println("update해야함 ::"+art);
 		artMap.updateArticle(art);
 		IFunction f= (Object ob) -> artMap.selectArtnum(art.getArtphoto());
 		//postservice.insertPostTag(pt);
@@ -143,7 +119,6 @@ public class ArticlesController {
 	@PostMapping("/upload/tag")
 	public Map<?,?> tagupload(@RequestBody PostTag pos)throws Exception{
 		logger.info("============== tagupload() {}  =================", "ENTER");
-		System.out.println("posttag::"+pos);
 		map.clear();
 		IConsumer C = (Object o) -> posMap.insertPostTag(pos);
 		C.accept(pos);
@@ -157,10 +132,8 @@ public class ArticlesController {
 	public Map<?,?> feedcomment(@PathVariable String artnum)throws Exception{
 		logger.info("============== feedcomment() {}  =================", "ENTER");
 		com.setTitleseq(artnum);
-		System.out.println("++"+artnum);
 		IFunction f = (Object o) -> comMap.selectComment(com.getTitleseq());
 		List<?> cls = (List<?>) f.apply(com.getTitleseq());
-		System.out.println("cls?"+cls.size()+"//"+cls);
 		map.put("cls", cls);
 		map.put("msg","feedcomment 성공:: ");
 		return map;
@@ -170,7 +143,6 @@ public class ArticlesController {
 	@PostMapping("/regist/comm/{comid}")
 	public Map<?,?> registcomm(@RequestBody Comment co)throws Exception{
 		logger.info("============== comminsert() {}  =================", "ENTER");
-		System.out.println("co::"+co);
 		map.clear();
 		IPredicate p = (Object o) -> comMap.existsComment(co); 
 		if(p.test(co)) {

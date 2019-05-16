@@ -13,6 +13,7 @@ auth =(()=>{
 				$.getScript($.js()+'/component/jwcompo.js'),
 				$.getScript($.js()+'/aquagram/auth.js'),
 				$.getScript($.js()+'/aquagram/arti.js'),
+				$.getScript($.js()+'/aquagram/fous.js'),
 				$.getScript($.js()+'/reservation/eunyeong.js')
 			).done(()=>{
 				$('#homemainnav').remove()
@@ -21,7 +22,7 @@ auth =(()=>{
                         +'            <a href="#" class="header_logo off active home">'
                         +'                <img src="/web/resources/img/homeimg/main/nakuhlogo.jpg" style="height: 30px;">'
                         +'            </a>'
-                        +'            <a class="location_setting pos_addr_text btn_geo_popup">서울특별시 마포구 대흥동 백범로 23</a>+'
+                        +'            <a class="location_setting pos_addr_text btn_geo_popup">서울특별시 마포구 대흥동 백범로 23</a>'
 
                         +'            <div class="header_menu" style="font-weight: bold;">'
                         +'                <a href="#" class="menu_txt pblock ocean">바다</a>'
@@ -128,28 +129,16 @@ auth =(()=>{
 						
 					}
 					$(follower_item).appendTo('#follower_list').children('button').click(function(){
-						alert($(this).attr('value'));
+						/*alert($(this).attr('value'));*/
+						let data = {mid:'gigi123', 
+								folloid:$(this).attr('value')};
 						if($(this).text()=='팔로우'){
 							/*alert('??'+$(this).attr('value'));*/
-							let data = {mid:'gigi123', 
-									folloid:$(this).attr('value')};
-							
-							$.ajax({
-								url: $.ctx()+'/regist/folloing',
-								type: 'post',
-								data: JSON.stringify(data),
-								dataType: 'json',
-								contentType: 'application/json; charset=UTF-8;',
-								success: d=>{
-									alert(d.msg);
-									$(this).attr('class','btn btn-default').text('팔로잉');
-								},error:e=>{}
-							});
-							
+							folloings(data);
+							$(this).attr('class','btn btn-default').text('팔로잉');
 						}else{
-							alert('!!');
+							nufollower(data);
 							$(this).attr('class','btn btn-primary').text('팔로우');
-							
 						}
 						
 					});
@@ -165,6 +154,32 @@ auth =(()=>{
 			
 		});
 				
+	};
+	let folloings=(x)=>{
+		$.ajax({
+			url: $.ctx()+'/regist/folloing',
+			type: 'put',
+			data: JSON.stringify(x),
+			dataType: 'json',
+			contentType: 'application/json; charset=UTF-8;',
+			success: d=>{
+				
+			},error:e=>{}
+		});
+		
+		
+	};
+	let nufollower=(x)=>{
+		$.ajax({
+			url: $.ctx()+'/delete/unfollower',
+			type: 'delete',
+			data: JSON.stringify(x),
+			dataType: 'json',
+			contentType: 'application/json; charset=UTF-8;',
+			success: d=>{
+				
+			},error:e=>{}
+		});
 	};
 	let folloing_list=()=>{
 		let mid='gigi123'
@@ -195,11 +210,25 @@ auth =(()=>{
 							+'							 <div> <img class="img-circle" alt="Cinque Terre" src="resources/img/aquagram/profilephoto/'+j.follpphoto+'" style="width: 50px; height: 50px; position: center"/></div> '
 							+'								<div style="left: 13px; text-align: left;"><h5 style="margin-bottom: 3px; font-weight: bold;">'+j.mid+'</h5><p style="font-size: 7px;">'+j.name+'</p></div>'
 							+'								</div> '
-							+'								<button type="button" class="btn btn-default" style="position: relative; top: 21px;">팔로잉</button>'
+							+'								<button type="button" class="btn btn-default" value="'+j.mid+'" style="position: relative; top: 21px;">팔로잉</button>'
 							+'							</div> ';
 							
 					});
-					$(folloing_item).appendTo('#folloing_list');
+					$(folloing_item).appendTo('#folloing_list').children('button').click(function(){
+						let data = {mid:'gigi123', 
+								folloid:$(this).attr('value')};
+						if($(this).text()=='팔로우'){
+							/*alert('??'+$(this).attr('value'));*/
+							folloings(data);
+							$(this).attr('class','btn btn-default').text('팔로잉');
+						}else{
+							nufollower(data);
+							$(this).attr('class','btn btn-primary').text('팔로우');
+							
+						}
+						nufollower();
+					});
+					
 				},error: e=>{
 					
 				}
@@ -220,18 +249,24 @@ auth =(()=>{
 			dataType: 'json',
 			contentType: 'application/json; charset=UTF-8;',
 			success: d=>{
+
 				$.each(d.follist,(i,j)=>{
-					foitem += '			<div id="item">'
-					+'				        	<div class="list-group-item list-group-item-action" style="height: 58px; border: none;"> '
-					+'							  <img class="img-circle" alt="Cinque Terre" src="resources/img/aquagram/profilephoto/'+j.follpphoto+'" style="width: 50px; height: 50px; position: center"/>' 
-					+'								 <div ><h5 style="top:-49px; left: 60px">'+j.mid+'</h5></div>'
-					+'								  	<div style="top:-55px; left: 60px; font-size: 7px;">24시간전</div>'
-					+'								</div> '
-					+'							</div> '
-					
-					
+					foitem = '			<div class="item" id="item_'+j.artnum+' style="display: -webkit-box; value="'+j.folloid+'"">'	
+						+'				        	<div class="list-group-item list-group-item-action" style="height: 58px; width: 80%; top: 11px; border: none; display: -webkit-box;"> '
+						+'							 <div> <img class="img-circle" alt="Cinque Terre" src="resources/img/aquagram/profilephoto/'+j.follpphoto+'" style="width: 50px; height: 50px; position: center"/></div> '
+						+'								<div style="left: 13px; text-align: left;"><h5 style="margin-bottom: 3px; font-weight: bold;">'+j.folloid+'</h5><p style="font-size: 7px;">'+j.name+'</p></div>'
+						+'								</div> '
+						+'								<button type="button" class="btn btn-default" value="'+j.folloid+'" style="position: relative; top: 21px;">팔로잉</button>'
+						+'							</div> ';
+
+					$(foitem).appendTo('#users_list').attr('style','cursor:pointer').click(function(){
+						/*alert('??!!'+$(this).attr('value'));*/
+						let scahid = $(this).attr('value');
+						fous.init(scahid);
+						
+					});
 				});
-				$(foitem).appendTo('#users_list');
+
 			},error:e=>{
 				alert('실패!');
 				
@@ -352,13 +387,7 @@ auth =(()=>{
 		
 	};
 	let settags = (x)=>{
-		let settag ='';
-		let tagcut = x.tag.split('.');
-			$.each(tagcut,(i,j)=>{
-				settag += '<a>'+tagcut[i]+'</a>';
-				
-			});	
-			$(settag).appendTo('#tags');
+			
 			
 	};
 	let feed_renderList =(x,a)=>{
@@ -376,7 +405,7 @@ auth =(()=>{
 					+'						         	<!-- Right-aligned -->'
 					+'									<div class="media">'
 					+'									  <div class="media-body" style="text-align: left; padding-top: 15px; padding-bottom: 15px;">'
-					+'									   	<div> <h4 class="media-heading" style="margin-left: 5px">'+x.content+'<div id="tags"></div></h4></div>'
+					+'									   	<div> <h4 class="media-heading" style="margin-left: 5px">'+x.content+'<div id="tags_'+x.artnum+'">'+x.tag+'</div></h4></div>'
 					+'									   	<div> <h6 class="media-heading" style="margin-left: 5px">53 like</h6></div>'
 					+'									  </div>'
 					+'									</div>'
@@ -397,12 +426,23 @@ auth =(()=>{
 					+'						        </div>';
 				
 				$(feeditem).appendTo('#leftbar_content');
-
-				if(x.tag == null){
+				let tags = x.tag;
+				 /*let tagcut = x.tag;
+				let settag = '';
+				if(x.tag.split('.') == null){
 					x.tag ='';
+					return
 				}else{
-					settags(x);
+					tagcuts= x.tag.split('.');
+					$.each(tagcuts,(i,j)=>{
+						settag += '<a>'+tagcuts[i]+'</a>';
+						
+					});	
+					
 				}
+				$(settag).appendTo('#tags_'+x.artnum);*/
+				
+
 				
   				$.getJSON($.ctx()+'/comments/list/'+x.artnum,d=>{
 					let comitem ='';
@@ -415,8 +455,6 @@ auth =(()=>{
 						+'								</div> '		
 						+'						</div> ';					
 					});
-					
-					/*$(comitem).appendTo('.comlist');*/
 					$('.comlist_'+x.rownum).append(comitem);
 	  				$('#input-group_'+x.rownum).children('span').click(function(e){
 						e.preventDefault();
@@ -426,13 +464,13 @@ auth =(()=>{
 								titleseq : $(this).attr('value')
 						};
 						$.ajax({
-							url: $.ctx()+'/regist/comm/'+com_data.mid,
+							url: $.ctx()+'/regist/comm/'+com_data.comid,
 							type: 'post',
 							data: JSON.stringify(com_data),
 							dataType: 'json',
 							contentType: 'application/json; charset=UTF-8;',
 							success: d=>{
-								alert('??'+d.comlist);
+								
 								$('#input-group_'+x.rownum).children('input').val('');
 								let incomm =	'			<div class="item" style="display: -webkit-box; " value="'+d.comlist.comid+'">'	
 								+'				        	<div class="list-group-item list-group-item-action" style="height: 58px; width: 100%; top: 11px; border: none; display: -webkit-box;"> '
@@ -501,13 +539,13 @@ let nav =()=>{
     $(window).data('resajaxready',"undefined");
     eunyeong.init('hotel')
     });
-    $('.aquagram').click(e=>{
+    $('.newsfeed').click(e=>{
     e.preventDefault();
     $('.rescss').remove();
     $(instacss).appendTo('head');
     jeonguk.init();
     });
-    $('#mypage').click(()=>{
+    $('.mypage').click(()=>{
     e.preventDefault();
     $('.instacss').remove();
     $(rescss).appendTo('head');
