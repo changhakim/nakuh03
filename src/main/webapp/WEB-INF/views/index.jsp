@@ -66,7 +66,7 @@
 </div>
 <!-- modal-2 end-->
 <div class="header_area" id="navheader">
-	<header>
+	<header id="homemainnav">
 		<section>
 			<a href="#" class="header_logo off active home">
 				<img src="${img}/homeimg/main/nakuhlogo.jpg" style="height: 30px;">

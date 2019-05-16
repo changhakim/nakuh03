@@ -21,6 +21,12 @@
 		FROM ARTICLES
 		WHERE mid LIKE #{mid}
 </select> -->
+<insert id="existsComment" parameterType="com.nakuh.web.domain.Comment">
+
+		INSERT INTO COMMENTS(titleseq, comm, comid) VALUES(#{titleseq},#{comm},#{comid}) 
+
+</insert>
+
 <select id="countComments" parameterType="com.nakuh.web.domain.Comment">
 		SELECT COUNT(*)
 		FROM COMMENTS
@@ -39,11 +45,27 @@
 			JOIN (SELECT M.mid, M.name, M.profilephoto FROM MEMBERS M ) M
 			ON C.comid LIKE M.mid 
 		WHERE titleseq LIKE #{titleseq}
-		ORDER BY comseq
+		ORDER BY comseq DESC
 <!-- 	commseq, titleseq, comm, comid, cmname, comprophoto; -->
 
 </select>
 
+
+<select id="selectOneComment" parameterType="com.nakuh.web.domain.Comment"
+								resultType="com.nakuh.web.domain.Comment">
+		SELECT C.commseq commseq,
+				C.titleseq titleseq,
+				C.comm comm,
+				C.comid comid,
+				M.name cmname,
+				M.profilephoto comprophoto 
+		FROM COMMENTS C
+			JOIN (SELECT M.mid, M.name, M.profilephoto FROM MEMBERS M ) M
+			ON C.comid LIKE M.mid 
+		WHERE titleseq LIKE #{titleseq}
+		ORDER BY comseq DESC
+		LIMIT 1						
+</select>
 
 
 

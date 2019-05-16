@@ -27,7 +27,6 @@ import com.nakuh.web.service.ArticleServiceImpl;
 import com.nakuh.web.service.CommentServiceImpl;
 import com.nakuh.web.service.PostTagServiceImpl;
 
-@Transactional
 @RestController
 public class ArticlesController {
 	private static final Logger logger = LoggerFactory.getLogger(ArticlesController.class);
@@ -78,6 +77,8 @@ public class ArticlesController {
 		
 		return map;
 	};
+	
+	@Transactional
 	@PostMapping("/arti/detail/{artnum}")
 	public Map<?,?> articleDetail(@PathVariable String artnum)throws  Exception{
 		logger.info("=========ArticleDetail 진입======");
@@ -163,7 +164,25 @@ public class ArticlesController {
 		map.put("cls", cls);
 		map.put("msg","feedcomment 성공:: ");
 		return map;
+	};
+	
+	@Transactional
+	@PostMapping("/regist/comm/{comid}")
+	public Map<?,?> registcomm(@RequestBody Comment co)throws Exception{
+		logger.info("============== comminsert() {}  =================", "ENTER");
+		System.out.println("co::"+co);
+		map.clear();
+		IPredicate p = (Object o) -> comMap.existsComment(co); 
+		if(p.test(co)) {
+			IFunction f = (Object o) -> comMap.selectOneComment(co.getTitleseq());
+			map.put("comlist", f.apply(co.getTitleseq()));
+			System.out.println("???===="+f.apply(co));
+		}
+		
+		
+		return map;
 	}
+	
 	
 }
 
