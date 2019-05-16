@@ -23,10 +23,31 @@ eunyeong = (()=>{
                 $.getScript($.js()+'/aquagram/jeonguk.js'),
                 $.getScript($.js()+'/app.js')
         ).done(()=>{
+        	$('#homemainnav').remove()
+			$('<header id="homemainnav">'
+					+'        <section>'
+					+'            <a href="#" class="header_logo off active home">'
+					+'                <img src="/web/resources/img/homeimg/main/nakuhlogo.jpg" style="height: 30px;">'
+					+'            </a>'
+					+'            <a class="location_setting pos_addr_text btn_geo_popup">서울특별시 마포구 대흥동 백범로 23</a>+'
+
+					+'            <div class="header_menu" style="font-weight: bold;">'
+					+'                <a href="#" class="menu_txt pblock ocean">바다</a>'
+					+'                <a href="#" class="menu_txt pblock river">민물</a>'
+					+'                <a href="#" class="menu_txt pblock hotel">숙박</a>'
+					+'                <a href="#" class="menu_txt pblock newsfeed">뉴스피드</a>'
+					+'                <a href="#" class="menu_txt pblock mypage">마이페이지</a>'
+					+'                <a class="menu_btn" id="adminbtn">'
+					+'                    <img style="padding-top: 10px;"src="/web/resources/img/homeimg/main/admin_icon.png">'
+					+'                </a> '
+					+'            </div>'
+					+'        </section>'
+					+'    </header>').appendTo('#navheader')
         	css();
         	
             switch(x){
             case 'ocean':
+            	alert('ocean init switch')
                 ocean(x);
             break;
             case 'river':
@@ -48,19 +69,22 @@ eunyeong = (()=>{
             location.assign('/web');
             app.init();
             });
-            $('#ocean').click(()=>{
+            $('.ocean').click(()=>{
+            	$(window).data('resajaxready',false);
+            	alert('오션네비')
             	setContentView('ocean')
             });
             
-            $('#river').click(()=>{
+            $('.river').click(()=>{
+            	$(window).data('resajaxready',false);
             	setContentView('river')
             });
             
-            $('#hotel').click(()=>{
+            $('.hotel').click(()=>{
             	setContentView('hotel')
             });
             
-            $('#newsfeed').click(e=>{
+            $('.newsfeed').click(e=>{
                 e.preventDefault();
                 $('.rescss').remove();
                 $(instacss).appendTo('head');
@@ -77,6 +101,11 @@ eunyeong = (()=>{
     };
   
     let cate_search =t=>{
+    	alert($(window).data('resajaxready')+'111')
+    	if(typeof $(window).data('resajaxready')!= "undefined" && $(window).data('resajaxready')!=='undefined'){
+    	$(window).data('resajaxready',false);
+    	}
+    	alert($(window).data('resajaxready'))
         $('#wrapper').empty();
         $('.scrolling').remove();
         $(eycompo.header()).appendTo('.header_area');
@@ -95,7 +124,7 @@ eunyeong = (()=>{
         		+'	<input type="text" id="search_input_box" placeholder="검색어를 입력해주세요." style="border: none; font-size: 15px; letter-spacing: -0.7px;  width: 250px; height: 40px; border-radius: 0px; vertical-align: middle; padding-bottom: 10px;">'
         		+'	<a class="search_btn" style="float: right; margin-left: 0;"><img src="https://img.moolban.com/unsafe/asset/www/responsive/img/basic/search_ico04.png" alt=""></a>'
         		+'</div>').prependTo('.filter_warp');
-        
+        $('.list_menu_area').attr('value',t)
         let searchlist='';
         $.each(['최신순','높은가격순','낮은가격순'],(x,y)=>{
         	$('<a class="selectprice'+x+'">'+y+'</a>').appendTo('.sort > .select_option').click(function(){
@@ -104,7 +133,7 @@ eunyeong = (()=>{
         		pricetitle=$('.price_title').text()
         		areatitle=$('.area_title').text()
                 searchlist = {cate:t};
-        		$(window).data('ajaxready',false);
+        		$(window).data('resajaxready',false);
         		$('.list_section').empty();
         		pro_fetchList(searchlist);
         	})
@@ -116,7 +145,7 @@ eunyeong = (()=>{
         		pricetitle=$('.price_title').text()
         		areatitle=$('.area_title').text()
                 searchlist = {cate:t};
-        		$(window).data('ajaxready',false);
+        		$(window).data('resajaxready',false);
         		$('.list_section').empty();
         		pro_fetchList(searchlist);
         	})
@@ -143,14 +172,22 @@ eunyeong = (()=>{
         	}
 
         })
+         if(typeof $(window).data('resajaxready')=== "undefined"||$(window).data('resajaxready')==='undefined'){
+        	 alert('인피니티'+$(window).data('resajaxready'))
+        	 pro_infinitemove(t); 
+        	 
+         }else{
+        	 alert('패치리스트'+$(window).data('resajaxready'))
+        	 pro_fetchList({cate:t});
+         }
+       
     };
     
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////*바다 메인화면 */   
     
     let ocean =x=>{
     	cate_search(x);
-        let cate = {cate:'ocean'};
-        pro_infinitemove(cate);
+
     };
     
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////*민물 메인화면 */        
@@ -163,8 +200,8 @@ eunyeong = (()=>{
     	$('#cate_menu3').text('낚시카페');
     	$('#cate_menu4').text('배스');
     	$('#cate_menu5').text('노지');
-    	let cate = {cate:'river'};
-        pro_infinitemove(cate);
+    	
+       
         
     };
     
@@ -173,9 +210,6 @@ eunyeong = (()=>{
     let hotel =x=>{
     	cate_search(x);
     	$('div .list_menu_area').empty();
-    	
-    	let cate = {cate:'hotel'};
-        pro_infinitemove(cate);
         
     };
     
@@ -185,19 +219,18 @@ eunyeong = (()=>{
     let pro_infinitemove =(x)=>{
 
     	$(function(){
-            $(document).ready(function(){
-                $(window).data('ajaxready',true).scroll(function(){
-                    if($(window).data('ajaxready')==false) return;
+            $(window).data('resajaxready',true).scroll(function(){
+                    if($(window).data('resajaxready')==false) return;
                     if($(window).scrollTop() + 300 >=$(document).height()-$(window).height()){
                         $(document).ready(function(){
                             //로딩될 때 충돌막아줌
                             $('div#loadmoreajaxloader').show();
-                            $(window).data('ajaxready',false);
-                            pro_fetchList(x);
+                            $(window).data('resajaxready',false);
+                            pro_fetchList();
                         });
                     }        
                 })
-            });
+           
             pro_fetchList(x);
         });
 		
@@ -208,7 +241,7 @@ eunyeong = (()=>{
         	return;
         }
         let startNo = $('.list_section').children('.list_ad_box_area3').last().data("no") || 0;	      
-		let cate =x.cate;
+		let cate =$('.list_menu_area').attr('value');
 		let page = 0;
 		let url = _+'/catesearch/'+ cate;
 		let data = { cate:cate,
@@ -243,7 +276,7 @@ eunyeong = (()=>{
                   }else{
                 	  $('div#loadmoreajaxloader').html();
                   }
-                  $(window).data('ajaxready', true);
+                  $(window).data('resajaxready', true);
 			},
 			error: e=>{
 				alert('에러!');

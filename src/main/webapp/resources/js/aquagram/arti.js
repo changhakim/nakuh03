@@ -170,7 +170,7 @@ arti =(()=>{
 				$('.modal-dialog').attr('class','modal-dialog modal-lg');
 				$('.modal-content').attr('style','margin:auto;');
 				$('.modal-header').hide();
-				$('.modal-body').remove();
+				$('.modal-body').hide();
 				$('.modal-footer').remove();
 				$('#change_modal_2').html(
 						'        <div class="modal-body">'
@@ -234,7 +234,7 @@ arti =(()=>{
 			
 			
 		});
-		
+
 		
 	};
 	let arti_img_upload =()=>{
@@ -244,8 +244,8 @@ arti =(()=>{
 			$('.modal-dialog').attr('class','modal-dialog');
 			$('.modal-dialog').attr('style','top:200px;')
 			$('.modal-content').attr('style','margin:auto;');
-			$('.modal-header').remove();
-			$('.modal-body').remove();
+			$('.modal-header').hide();
+			$('.modal-body').hide();
 			$('.modal-footer').remove();
 			$('#change_modal_2').attr('sytle','top: 200px; width: 40%;').html('<div class="modal-body">'
 					+'          <div  class="col-sm-8" style="height: 600px; display: block;"><img id="mirror_img" src="resources/img/aquagram/default_image.jpg" width="600" height="600"></div>'
@@ -376,7 +376,7 @@ arti =(()=>{
 		        	                				contentType: 'application/json; charset=UTF-8;',
 		        	                				success: d=>{
 		        	                					alert(d.msg);
-		        	                					
+		        	                						
 		        	                					
 		        	                				},error: e=>{
 		        	                					

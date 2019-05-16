@@ -44,9 +44,9 @@ public class CommentServiceImpl implements CommentService{
 	}
 
 	@Override
-	public boolean existsComment(String searchWord) {
+	public boolean existsComment(Comment com) {
 		boolean res = false;
-		res = comMap.existsComment(searchWord);
+		res = comMap.existsComment(com);
 		return res;
 	}
 
@@ -61,5 +61,11 @@ public class CommentServiceImpl implements CommentService{
 		comMap.deleteComment(com);
 		
 	}
+
+	@Override
+	public Comment retrieveOneComment(String titleseq) {
+		return comMap.selectOneComment(titleseq);
+	}
+
 
 }
