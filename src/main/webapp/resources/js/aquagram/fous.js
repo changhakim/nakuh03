@@ -86,7 +86,7 @@ let infinitemove =(x)=>{
 		});
 		
 		let fous_fetchList=()=>{
-			alert('들어옴??'+foid);
+			//alert('들어옴??'+foid);
 	        if(isEnd == true){
 	       
 	        	return;
@@ -246,8 +246,8 @@ let infinitemove =(x)=>{
 				$(comlist).appendTo('#comments_list');
 				$('#input-group_'+x.rownum).children('span').click(function(e){
 					e.preventDefault();
-					alert('이거 크릭한거 맞아?' + $('#dicomment_'+$(this).attr('value')).val());
-					alert('글번호는?'+$(this).attr('value'));
+					//alert('이거 크릭한거 맞아?' + $('#dicomment_'+$(this).attr('value')).val());
+					//alert('글번호는?'+$(this).attr('value'));
 					let com_data = {
 							comid : 'gigi123',
 							comm : $('#dicomment_'+$(this).attr('value')).val(),
@@ -261,7 +261,7 @@ let infinitemove =(x)=>{
 						dataType: 'json',
 						contentType: 'application/json; charset=UTF-8;',
 						success: d=>{
-							alert('??'+d.comlist);
+							//alert('??'+d.comlist);
 							$('#input-group_'+x.rownum).children('input').val('');
 							let dincomm =	'			<div class="item" style="display: -webkit-box; " value="'+d.comlist.comid+'">'	
 							+'				        	<div class="list-group-item list-group-item-action" style="height: 58px; width: 100%; top: 11px; border: none; display: -webkit-box;"> '

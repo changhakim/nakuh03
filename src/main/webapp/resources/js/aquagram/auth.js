@@ -129,7 +129,7 @@ auth =(()=>{
 						
 					}
 					$(follower_item).appendTo('#follower_list').children('button').click(function(){
-						alert($(this).attr('value'));
+						/*alert($(this).attr('value'));*/
 						let data = {mid:'gigi123', 
 								folloid:$(this).attr('value')};
 						if($(this).text()=='팔로우'){
@@ -260,7 +260,7 @@ auth =(()=>{
 						+'							</div> ';
 
 					$(foitem).appendTo('#users_list').attr('style','cursor:pointer').click(function(){
-						alert('??!!'+$(this).attr('value'));
+						/*alert('??!!'+$(this).attr('value'));*/
 						let scahid = $(this).attr('value');
 						fous.init(scahid);
 						
@@ -470,7 +470,7 @@ auth =(()=>{
 							dataType: 'json',
 							contentType: 'application/json; charset=UTF-8;',
 							success: d=>{
-								alert('??'+d.comlist);
+								
 								$('#input-group_'+x.rownum).children('input').val('');
 								let incomm =	'			<div class="item" style="display: -webkit-box; " value="'+d.comlist.comid+'">'	
 								+'				        	<div class="list-group-item list-group-item-action" style="height: 58px; width: 100%; top: 11px; border: none; display: -webkit-box;"> '

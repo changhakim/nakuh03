@@ -27,10 +27,8 @@ public class FollowerController {
 	public Map<?,?> feedfollo(@PathVariable String mid)throws Exception{
 		logger.info("=========Feedfollo 진입======");
 		map.clear();
-		System.out.println("mid?::"+mid);
 		IFunction f = (String) -> folmap.selectAllFollowersList(mid);
 		List<?> folList = (List<?>) f.apply(mid);
-		System.out.println("follist"+folList);
 		map.put("follist", folList);
 		
 		return map;
@@ -43,7 +41,6 @@ public class FollowerController {
 		IFunction f = (String) -> folmap.selectFollowers(mid);
 		List<?> ls = (List<?>) f.apply(mid);
 		map.put("werlist", ls);
-		System.out.println("ls"+ls);
 		return map;
 	};
 	@GetMapping("/serach/folloing/{mid}")
@@ -60,7 +57,6 @@ public class FollowerController {
 	public Map<?,?> registfolloing(@RequestBody Follower foll)throws Exception{
 		logger.info("============== registfolloing() {}  =================", "ENTER");
 		map.clear();
-		System.out.println("등록"+foll);
 		IConsumer c = (Object o) -> folmap.insertFollower(foll);
 		c.accept(foll);
 		map.put("msg", "success");
@@ -70,7 +66,6 @@ public class FollowerController {
 	public Map<?,?> unfolloing(@RequestBody Follower foll)throws Exception{
 		logger.info("============== unfolloing() {}  =================", "ENTER");
 		map.clear();
-		System.out.println("삭제"+foll);
 		IConsumer c = (Object o) -> folmap.deleteFollower(foll);
 		c.accept(foll);
 		map.put("msg", "nufollowerSuccess");

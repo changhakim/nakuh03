@@ -228,8 +228,8 @@ arti =(()=>{
 				$(comlist).appendTo('#comments_list');
 				$('#input-group_'+x.rownum).children('span').click(function(e){
 					e.preventDefault();
-					alert('이거 크릭한거 맞아?' + $('#dicomment_'+$(this).attr('value')).val());
-					alert('글번호는?'+$(this).attr('value'));
+					//alert('이거 크릭한거 맞아?' + $('#dicomment_'+$(this).attr('value')).val());
+					//alert('글번호는?'+$(this).attr('value'));
 					let com_data = {
 							comid : 'gigi123',
 							comm : $('#dicomment_'+$(this).attr('value')).val(),
@@ -243,7 +243,7 @@ arti =(()=>{
 						dataType: 'json',
 						contentType: 'application/json; charset=UTF-8;',
 						success: d=>{
-							alert('??'+d.comlist);
+							//alert('??'+d.comlist);
 							$('#input-group_'+x.rownum).children('input').val('');
 							let dincomm =	'			<div class="item" style="display: -webkit-box; " value="'+d.comlist.comid+'">'	
 							+'				        	<div class="list-group-item list-group-item-action" style="height: 58px; width: 100%; top: 11px; border: none; display: -webkit-box;"> '
@@ -362,7 +362,7 @@ arti =(()=>{
 			$('#from_submit_btn').click(function(e){
 				e.preventDefault();
 
-				alert('??'+$('#photo').val())
+				//alert('??'+$('#photo').val())
 				 $('#img_upload_frm').ajaxForm({
 	                    url : $.ctx()+'/upload/image',
 	                    dataType : 'json',
@@ -395,12 +395,12 @@ arti =(()=>{
 	                				dataType: 'json',
 	                				contentType: 'application/json; charset=UTF-8;',
 	                				success: d=>{
-	                					alert('seq??:::'+d.seq.artnum);
+	                					//alert('seq??:::'+d.seq.artnum);
 	                					$.each(tagarr,(i,j)=>{
 	                						let tagdata = {artseq:d.seq.artnum,
 	                								tagname:tagarr[i]}
 	                						if(tagdata.tagname != ''){
-	                							alert(tagdata.tagname);
+	                							//alert(tagdata.tagname);
 			                					$.ajax({
 		        	                				url: $.ctx()+'/upload/tag',
 		        	                				type: 'post',
@@ -408,7 +408,7 @@ arti =(()=>{
 		        	                				dataType: 'json',
 		        	                				contentType: 'application/json; charset=UTF-8;',
 		        	                				success: d=>{
-		        	                					alert(d.msg);
+		        	                					//alert(d.msg);
 		        	                						
 		        	                					
 		        	                				},error: e=>{
