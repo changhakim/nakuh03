@@ -6,20 +6,22 @@
 
 <select id="selectAllFollowersList" resultType="com.nakuh.web.domain.Follower" 
 			parameterType="string">
-SELECT DISTINCT artnum,  M.mid mid, M.`profilephoto` follpphoto, A.artdate artdate
-FROM MEMBERS M
-    JOIN (SELECT * FROM FOLLOWERS WHERE FOLLOID LIKE '${value}') F
-    ON M.mid LIKE F.`mid`
-    JOIN (SELECT * FROM ARTICLES A WHERE A.mid LIKE mid) A
-    ON M.mid LIKE A.mid
-    ORDER BY artnum DESC
-	LIMIT 6
+		SELECT M.mid folloid, M.name name, M.profilephoto follpphoto, A2.artdate artdate, A2.artnum artnum
+		FROM MEMBERS M 
+			JOIN (SELECT DISTINCT A.mid, A.artnum, A.content, A.artdate
+					FROM ARTICLES A
+				JOIN (SELECT DISTINCT folloid FROM FOLLOWERS WHERE mid like '${value}') F
+					ON A.mid LIKE F.folloid
+					ORDER BY A.artdate DESC) A2
+			ON M.mid LIKE A2.mid
+		GROUP BY M.mid
+		LIMIT 6			
 </select>
 <!-- folloseq,folloid, mid, artdate, artnum, follpphoto , name, follostate -->
 <select id="selectFollowers" resultType="com.nakuh.web.domain.Follower" 
 			parameterType="string">
-SELECT IFNULL(V.mid, '0') follostate, V2.mid mid, V2.name name, V2.follpphoto follpphoto
-FROM  (SELECT M.mid mid, M.name name, M.profilephoto follpphoto
+	SELECT IFNULL(V.mid, '0') follostate, V2.mid mid, V2.name name, V2.follpphoto follpphoto
+	FROM  (SELECT M.mid mid, M.name name, M.profilephoto follpphoto
 			FROM MEMBERS M
 			JOIN (SELECT DISTINCT folloid, mid
 			FROM FOLLOWERS 
@@ -48,5 +50,11 @@ FROM MEMBERS M
 	INSERT INTO FOLLOWERS(mid, folloid) VALUES(#{mid},#{folloid})
 
 </insert>
+<delete id="deleteFollower"  parameterType="com.nakuh.web.domain.Follower">
+	DELETE FROM FOLLOWERS WHERE folloid LIKE #{folloid} AND mid LIKE #{mid};
+</delete>
+
+
+
 
 </mapper>

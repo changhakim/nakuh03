@@ -6,9 +6,10 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,10 +27,8 @@ public class FollowerController {
 	public Map<?,?> feedfollo(@PathVariable String mid)throws Exception{
 		logger.info("=========Feedfollo 진입======");
 		map.clear();
-		System.out.println("mid?::"+mid);
 		IFunction f = (String) -> folmap.selectAllFollowersList(mid);
 		List<?> folList = (List<?>) f.apply(mid);
-		System.out.println("follist"+folList);
 		map.put("follist", folList);
 		
 		return map;
@@ -42,7 +41,6 @@ public class FollowerController {
 		IFunction f = (String) -> folmap.selectFollowers(mid);
 		List<?> ls = (List<?>) f.apply(mid);
 		map.put("werlist", ls);
-		System.out.println("ls"+ls);
 		return map;
 	};
 	@GetMapping("/serach/folloing/{mid}")
@@ -55,14 +53,22 @@ public class FollowerController {
 		
 		return map;
 	};
-	@PostMapping("/regist/folloing")
+	@PutMapping("/regist/folloing")
 	public Map<?,?> registfolloing(@RequestBody Follower foll)throws Exception{
 		logger.info("============== registfolloing() {}  =================", "ENTER");
 		map.clear();
-		System.out.println("//"+foll);
 		IConsumer c = (Object o) -> folmap.insertFollower(foll);
 		c.accept(foll);
 		map.put("msg", "success");
+		return map;
+	};
+	@DeleteMapping("/delete/unfollower")
+	public Map<?,?> unfolloing(@RequestBody Follower foll)throws Exception{
+		logger.info("============== unfolloing() {}  =================", "ENTER");
+		map.clear();
+		IConsumer c = (Object o) -> folmap.deleteFollower(foll);
+		c.accept(foll);
+		map.put("msg", "nufollowerSuccess");
 		return map;
 	};
 	
