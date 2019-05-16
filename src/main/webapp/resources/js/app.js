@@ -32,12 +32,11 @@ app=(()=>{
 		$('#login').click(()=>{
 			$('#userid').val();
 			$('#password').val();
-			alert('로그인')
+			
 		});
 
 		$('.ocean').click(e=>{
 			e.preventDefault();
-			alert('app')
 			$('.instacss').remove();
 			$('.homecss').remove();
 			$('.admincss').remove();
@@ -64,7 +63,6 @@ app=(()=>{
 			$('.rescss').remove();
 			$(instacss).appendTo('head');
 			jeonguk.init();
-			alert('아쿠아리움')
 		})
 		$('.mypage').click(e=>{
 			e.preventDefault();
@@ -74,7 +72,6 @@ app=(()=>{
 			eunyeong.init('mypage');
 		})
 		$('#adminbtn').click(()=>{
-			alert('들어옴')
 			$('.homecss').remove();
 			$('.rescss').remove();
 			$('.instacss').remove();
@@ -170,8 +167,13 @@ app=(()=>{
          rescss =  '<link class="homecss" href="/web/resources/css/home/responsive.css" rel="stylesheet">'
 >>>>>>> 7bc97e96347da1e97fdf263110a573f89aac47d1
         	 +'<link class="homecss" href="/web/resources/css/home/swiper.min.css" rel="stylesheet">'
+<<<<<<< HEAD
         	 +'<link class="rescss" rel="stylesheet" type="text/css" href="/web/resources/css/reservation/modal.css"> ';
 >>>>>>> 1f92479c9c43b29a5834d0b38fa7f08757cc2e62
+=======
+        	 +'<link class="rescss" rel="stylesheet" type="text/css" href="/web/resources/css/reservation/modal.css"> '
+        	 +'<link class="rescss" rel="stylesheet" href="/web/resources/css/reservation/prdpay.css">';
+>>>>>>> 7e7d067476c7d5cab2a4d8949631112b30108956
 	 
 		 instacss ='  <link class="instacss" rel="stylesheet" type="text/css" href="/web/resources/css/aquagram/style.css">'
 			 +'  <link class="instacss" rel="stylesheet" type="text/css" href="/web/resources/css/aquagram/animate.css">'
@@ -182,7 +184,7 @@ app=(()=>{
 	}
 	
 	let crawl=()=>{
-		alert('들어옴')
+		
 		 $.ajax({
 			  url:$.ctx()+'/naver',
 			  type:'get',

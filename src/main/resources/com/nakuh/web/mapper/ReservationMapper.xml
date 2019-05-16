@@ -34,9 +34,9 @@
 <!-- 마이페이지 : 예약한 상품 조회  -->
 	<select id="selectSomeReservations" resultType="com.nakuh.web.domain.Reservation"
 								  		parameterType="com.nakuh.web.domain.Reservation">
-	SELECT RESNUM resnum, MID mid, RESNAME resname, STARTDATE startdate, AMPM ampm, PHONE phone, RESDATE resdate, RESCOUNT rescount, DEPOSIT deposit, 
-				MESSAGE message, PRONAME proname, COMPANY company, PRONUM pronum 
-	FROM RESERVATION 
+	SELECT RESNUM resnum, MID mid, RESNAME resname, STARTDATE startdate, AMPM ampm, PHONE phone,
+	RESDATE resdate, RESCOUNT rescount, DEPOSIT deposit,PRONAME proname, COMPANY company,PROIMG proimg
+	FROM RESSEARCH 
 	WHERE MID LIKE #{mid}
 	
 	</select>

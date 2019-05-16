@@ -10,8 +10,12 @@ import com.nakuh.web.domain.Reservation;
 
 @Component
 public interface ReservationService {
+<<<<<<< HEAD
 
 	public void createReservation(Reservation param);
+=======
+	public void createReservation(List<Reservation> param);
+>>>>>>> 7e7d067476c7d5cab2a4d8949631112b30108956
 	public List<Reservation> findAllReservation();
 	public List<Reservation> findSomeReservations(Reservation param);
 	public Reservation findReservation(Reservation param);

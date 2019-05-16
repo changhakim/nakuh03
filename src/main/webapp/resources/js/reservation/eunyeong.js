@@ -3,7 +3,7 @@ var eunyeong = eunyeong || {};
 eunyeong = (()=>{
     const WHEN_ERR = '호출하는 JS파일을 찾지 못지 못했습니다.'
     let _,compojs, js;
-    let homecss,admincss,rescss,instacss,calnum,pricetitle,areatitle;
+    let homecss,admincss,rescss,instacss,calnum,pricetitle,areatitle,searchword;
     
     let init =x=>{
         _= $.ctx();
@@ -47,7 +47,7 @@ eunyeong = (()=>{
         	
             switch(x){
             case 'ocean':
-            	alert('ocean init switch')
+
                 ocean(x);
             break;
             case 'river':
@@ -71,7 +71,7 @@ eunyeong = (()=>{
             });
             $('.ocean').click(()=>{
             	$(window).data('resajaxready',false);
-            	alert('오션네비')
+            	
             	setContentView('ocean')
             });
             
@@ -87,10 +87,12 @@ eunyeong = (()=>{
             $('.newsfeed').click(e=>{
                 e.preventDefault();
                 $('.rescss').remove();
+                $('#home_menu').remove();
                 $(instacss).appendTo('head');
                 jeonguk.init();
             });
             $('.mypage').click(()=>{
+            	$('#home_menu').remove();
             	mypage();
             });
             
@@ -101,11 +103,12 @@ eunyeong = (()=>{
     };
   
     let cate_search =t=>{
-    	alert($(window).data('resajaxready')+'111')
+    	pricetitle='최신순';
+    	areatitle='지역';
+    	searchword='';
     	if(typeof $(window).data('resajaxready')!= "undefined" && $(window).data('resajaxready')!=='undefined'){
     	$(window).data('resajaxready',false);
     	}
-    	alert($(window).data('resajaxready'))
         $('#wrapper').empty();
         $('.scrolling').remove();
         $(eycompo.header()).appendTo('.header_area');
@@ -121,7 +124,7 @@ eunyeong = (()=>{
        .appendTo('#category_list');
         
         $('<div class="search_header_box search_box pblock" style="border: 1px solid #e84418; border-radius: 0.3rem; padding: 6px 8px; width: 320px; height: 49px; margin: 12px 0; font-size: 0;">'
-        		+'	<input type="text" id="search_input_box" placeholder="검색어를 입력해주세요." style="border: none; font-size: 15px; letter-spacing: -0.7px;  width: 250px; height: 40px; border-radius: 0px; vertical-align: middle; padding-bottom: 10px;">'
+        		+'	<input type="text" id="search_input_box" placeholder="검색어를 입력해주세요." style="border: none; font-size: 15px; letter-spacing: -0.7px;  width: 250px; height: 30px; border-radius: 0px; vertical-align: middle; padding-bottom: 10px;">'
         		+'	<a class="search_btn" style="float: right; margin-left: 0;"><img src="https://img.moolban.com/unsafe/asset/www/responsive/img/basic/search_ico04.png" alt=""></a>'
         		+'</div>').prependTo('.filter_warp');
         $('.list_menu_area').attr('value',t)
@@ -129,9 +132,10 @@ eunyeong = (()=>{
         $.each(['최신순','높은가격순','낮은가격순'],(x,y)=>{
         	$('<a class="selectprice'+x+'">'+y+'</a>').appendTo('.sort > .select_option').click(function(){
         		
-        		$('.price_title').text($(this).text())
-        		pricetitle=$('.price_title').text()
-        		areatitle=$('.area_title').text()
+        		$('.price_title').text($(this).text());
+        		pricetitle=$('.price_title').text();
+        		areatitle=$('.area_title').text();
+        		searchword=$('#search_input_box').val();
                 searchlist = {cate:t};
         		$(window).data('resajaxready',false);
         		$('.list_section').empty();
@@ -141,15 +145,26 @@ eunyeong = (()=>{
         $.each(['지역','서울','경기','인천','전남','부산','전북','강원도','광주','충남','충북','제주'],(x,y)=>{
         	$('<a class="selectcity'+x+'">'+y+'</a>').appendTo('.distance > .select_option').click(function(){
         		
-        		$('.area_title').text($(this).text())
-        		pricetitle=$('.price_title').text()
-        		areatitle=$('.area_title').text()
+        		$('.area_title').text($(this).text());
+        		pricetitle=$('.price_title').text();
+        		areatitle=$('.area_title').text();
+        		searchword=$('#search_input_box').val();
                 searchlist = {cate:t};
         		$(window).data('resajaxready',false);
         		$('.list_section').empty();
         		pro_fetchList(searchlist);
         	})
         })
+        $('.search_btn').click(()=>{
+    		pricetitle=$('.price_title').text();
+    		areatitle=$('.area_title').text();
+    		searchword=$('#search_input_box').val();
+            searchlist = {cate:t};
+    		$(window).data('resajaxready',false);
+    		$('.list_section').empty();
+    		pro_fetchList(searchlist);
+        })
+
         
         $('.area_title').attr('value',t)
         $('.distance').click(()=>{
@@ -173,11 +188,11 @@ eunyeong = (()=>{
 
         })
          if(typeof $(window).data('resajaxready')=== "undefined"||$(window).data('resajaxready')==='undefined'){
-        	 alert('인피니티'+$(window).data('resajaxready'))
+        	
         	 pro_infinitemove(t); 
         	 
          }else{
-        	 alert('패치리스트'+$(window).data('resajaxready'))
+        	 
         	 pro_fetchList({cate:t});
          }
        
@@ -248,8 +263,10 @@ eunyeong = (()=>{
 				startRow:startNo,
 				pageSize:6,
 				pricetitle:pricetitle,
-				areatitle:areatitle
+				areatitle:areatitle,
+				searchword:searchword
 				};
+		
 		
 		$.ajax({
 			url: url,
@@ -279,7 +296,7 @@ eunyeong = (()=>{
                   $(window).data('resajaxready', true);
 			},
 			error: e=>{
-				alert('에러!');
+				
 			}
 				
 		});
@@ -341,7 +358,7 @@ eunyeong = (()=>{
    		    			detail(pro);
    		    		},
    		    		error :e=>{
-   		    			alert('AJAX실패');
+   		    			
    		    		}
    				});
    		})
@@ -729,12 +746,12 @@ eunyeong = (()=>{
      	$('#wrapper').empty();
     	$('.scrolling').empty();
      	$(eycompo.product_res()).appendTo('#wrapper');
-		$(rescss).appendTo('head')
 		let count = '';
+		let pro = [];
 		$.each(x.details,(a,b)=>{
 			$('<div class="goods_area reserve_area secInner">'
 					+'                            <div class="box_title clearfix count">'
-					+'                                <p class="proname" class="ico_goods">'+b.proname+'<span id="price">'+b.price+'원</span>'
+					+'                                <p class="proname'+a+'" class="ico_goods">'+b.proname+'<span id="price">'+b.price+'원</span>'
 					+'                                    <!---->'
 					+'                                </p>'
 					+'                                <div class="count_box"id="count_box'+a+'">'
@@ -766,18 +783,19 @@ eunyeong = (()=>{
 
  	    			}
  	    		})
+ 	    $('.reserve_btn').click(e=>{
+		e.preventDefault();			
+		pro.push({pronum:b.pronum,proname:b.proname,price:$('.price'+a).text(),
+				  regidate:x.today,realtoday:x.realtoday,fishname:x.fishname,today:x.today,realtoday:x.realtoday,startdate:x.startdate,rescount:$('#count'+a).attr('value')});
+		if(x.details.length==a+1){
+		reserve_pro(pro);
+		}
+			});
 		})
 		$('.fishname').text(x.fishname);
  		$('#company').text(x.company);
- 		$('#startdate').text(x.startdate);
  	    
- 		$('.reserve_btn').click(e=>{
-			e.preventDefault();			
-			let pro ={pronum:x.pronum,proname:x.proname,price:$('.price').text(),company:x.company,address:x.address,category:x.category,proimg:x.proimg,
-					  regidate:x.today,realtoday:x.realtoday,fishname:x.fishname,
-					  phone:x.phone,lat:x.lat,lng:x.lng, today:x.today, realtoday:x.realtoday,startdate:x.startdate,rescount:$('#count').attr('value')};
-			reserve_pro(pro);
- 			});
+
      };
      
      //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*상품결제 : 결제값입력*/
@@ -785,42 +803,86 @@ eunyeong = (()=>{
      let reserve_pro =x=>{
 			$('#wrapper').empty();
 			$(eycompo.reserve_pro()).appendTo('#wrapper');
-			$('#proname').text(x.proname);
 			$('.proname').text(x.proname);
 			$('.price').text(x.price);
-			$('.totalmoney').text(x.price);
-			$('.reserve_btn').click(e=>{
-				e.preventDefault();
-		    	 let res = {
-		    		/*mid : 세션에서 들어온 값
-	   				deposit : 자바에서 계산*/ 
-	     			 mid : 'test',
-	     			 resname : $('#resname').val(),
-	     			 startdate : x.startdate,
-	     			 phone : $('#phone').val(),
-	     			 resdate : x.realtoday,
-	     			 rescount : x.rescount,	     			 
-	     			 pronum :  x.pronum,
-	     			 proname : x.proname,
-	     			 company : x.company,
-	     			 deposit : x.price};
-		    	 
-	     	 
-	     	 $.ajax({
-	     		 url : _+'/reservation',
-	     		 type : 'POST',
-	     		 data : JSON.stringify(res),
-	     		 dataType : 'json',
-	     		 contentType : 'application/json',
-	     		 success : d=>{
-	     			 respay();
-	     		 },
-	     		 error : e=>{
-	     			 alert('AJAX 실패');
-	     		 }
-	     	 });
-			});
-     };
+			
+			let res = [];
+			let totalmoney = 0;
+			$.each(x,(a,b)=>{
+			totalmoney += Number(b.price)
+			$('                        <div class="reserve_area secInner result_area">'
+					+'                            <div class="box_title clearfix">'
+					+'                                <p class="ico_goods">'+b.proname+'</p>'
+					+'                            </div>'
+					+'                            <div class="inner reserve_tb">'
+					+'                                <div class="reserve_td_tit clearfix">'
+					+'                                    <p class="tb1">상품정보</p>'
+					+'                                    <p class="tb2">수량</p>'
+					+'                                    <p class="tb3">금액</p>'
+					+'                                </div>'
+					+'                                <div class="reserve_td_con">'
+					+'                                    <div class="clearfix">'
+					+'                                        <p class="tb1 proname">'+b.proname+'</p>'
+					+'                                        <p class="tb2 rescount">'+b.rescount+'명</p>'
+					+'                                        <p class="tb3 price">'+b.price+'원</p>'
+					+'                                    </div>'
+					+'                                </div>'
+					+'                            </div>'
+					+'                            <div class="result_price">'
+					+'                                <div class="price_box clearfix">'
+					+'                                    <dl><dt>상품 금액</dt>'
+					+'                                        <dd class="price" >'+b.price+'원</dd>'
+					+'                                    </dl> <i>-</i>'
+					+'                                    <dl><dt class="mulban_txt">할인 금액</dt>'
+					+'                                        <dd class="mulban_txt"><strong><span class="mulban_txt" style="display: inline;">0원</span></strong></dd>'
+					+'                                    </dl> <i>=</i>'
+					+'                                    <dl><dt>쿠폰 적용 금액</dt>'
+					+'                                        <dd><strong><span class="price" style="display: inline;">'+b.price+'원</span></strong></dd>'
+					+'                                    </dl>'
+					+'                                </div>'
+					+'                            </div>'
+					+'                            <!---->'
+					+'                            <!---->'
+					+'                        </div>').appendTo('#productinfo');
+			$('<p class="proname"><span>상품</span>'+b.proname+''
+			  +'</p>').appendTo('.innerproname')
+				
+			  
+			  $('.reserve_btn').click(e=>{
+					e.preventDefault();
+			    	 res.push({
+			    		/*mid : 세션에서 들어온 값
+		   				deposit : 자바에서 계산*/ 
+		     			 mid : 'test',
+		     			 resname : $('#resname').val(),
+		     			 startdate : b.startdate,
+		     			 phone : $('#phone').val(),
+		     			 resdate : b.realtoday,
+		     			 rescount : b.rescount,	     			 
+		     			 pronum :  b.pronum,
+		     			 proname : b.proname,
+		     			 deposit : b.price});
+			    	 
+			  if(x.length==a+1){
+		     	 $.ajax({
+		     		 url : _+'/reservation',
+		     		 type : 'PUT',
+		     		 data : JSON.stringify(res),
+		     		 dataType : 'json',
+		     		 contentType : 'application/json',
+		     		 success : d=>{
+		     			 respay();
+		     		 },
+		     		 error : e=>{
+		     			 
+		     		 }
+		     	 });
+			  }
+			})
+			
+		});
+		$('.totalmoney').text(totalmoney+'원');
+     }
      
      //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*상품결제 : 완료*/
      
@@ -836,7 +898,7 @@ eunyeong = (()=>{
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*마이페이지*/
     
     let mypage =()=>{
-      	let mid = 'abgfg66'
+      	let mid = 'test'
       		$.ajax({
     			url :_+'/reservation/' + mid,
     			type :'POST',
@@ -850,10 +912,9 @@ eunyeong = (()=>{
     		      	$.each(d.list, (i,j)=>{
         		      	$('<div class="rtreserve_more_list clearfix" id="reserveList" data-start_key="0" data-offset="0" data-limit="5" data-last_offset=""><div class="rtreserve_list_box">'
         		    			+'    <div class="rtreserve_con ">'
-        		    			+'        <a class="clearfix" href="/reserve/reserve_view/73060">'
+        		    			+'        <a class="clearfix" href="#">'
         		    			+'            <div class="img_box">'
-        		    			+'                <img src="https://img.moolban.com/unsafe/750x390/filters:no_upscale()/company/images/1318/8acf1c6750ab3211f963122c54f11c32.jpg" alt="" class="">'
-        		    			+'                <!-- <img src="https://img.moolban.com/unsafe/asset/www/responsive/img/test/view_test_img_06.PNG" alt=""> -->'
+        		    			+'                <img src="' + $.img() + '/reservation/' + j.proimg + '" alt="" class="">'
         		    			+'            </div>'
         		    			+'            <div class="txt_box">'
         		    			+'                <p class="pic_line">'
@@ -863,11 +924,11 @@ eunyeong = (()=>{
         		    			+'                <p id="proname" class="title_line">'+j.proname+'</p>'
         		    			+'                <p class="address_line">'
         		    			+'                    <span id="category" class="place">선상</span>'
-        		    			+'                    <span id="address" class="km">'+j.address+'</span>'
+        		    			+'                    <span id="address" class="km">'+j.deposit+'</span>'
         		    			+'                </p>'
         		    			+'                <div class="order_line ">'
         		    			+'                                    <p><span id="startdate">이용일</span>'+j.startdate+'</p>'
-        		    			+'                    <p><span id="resnum">예약번호</span>73060</p>'
+        		    			+'                    <p><span id="resnum">예약번호</span>'+j.resnum+'</p>'
         		    			+'                                </div>'
         		    			+'            </div>'
         		    			+'        </a>'
@@ -878,7 +939,7 @@ eunyeong = (()=>{
     		      	});
     			},
     			error: e=>{
-    				alert('AJAX 실패');
+    				
     			}
     		});
     };

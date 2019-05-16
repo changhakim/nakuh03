@@ -1,21 +1,17 @@
 package com.nakuh.web.cmm;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.nakuh.web.domain.Product;
 import com.nakuh.web.domain.Reservation;
 import com.nakuh.web.service.ReservationServiceImpl;
 
@@ -33,12 +29,17 @@ public class ReservationController {
 	List<Reservation> list;
 
 	/* 상품 예약하기 */
+<<<<<<< HEAD
 	@PostMapping("/reservation")
 	public HashMap<?, ?> reserve(@RequestBody Reservation param) {
 <<<<<<< HEAD
 <<<<<<< HEAD
 =======
 >>>>>>> 1f92479c9c43b29a5834d0b38fa7f08757cc2e62
+=======
+	@PutMapping("/reservation")
+	public HashMap<?, ?> reserve(@RequestBody List<Reservation> param) {
+>>>>>>> 7e7d067476c7d5cab2a4d8949631112b30108956
 		logger.info("=======  ReservationController reserve:상품예약 진입 ======");
 <<<<<<< HEAD
 		Date date = new Date(); 

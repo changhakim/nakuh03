@@ -50,6 +50,7 @@ public class ProductsController {
 	public Map<?, ?> cateAlllist(@PathVariable String cate, @RequestBody Product param) {
 		logger.info("=======  ProductController prosomelist:상품카테고리별 전체조회  진입 ======");
 		map.clear();
+		product.setSearchword(param.getSearchword());
 		product.setAreatitle(param.getAreatitle());
 		product.setPricetitle(param.getPricetitle());
 		product.setCategory(cate);

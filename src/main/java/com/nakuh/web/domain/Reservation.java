@@ -49,6 +49,10 @@ public class Reservation {
 >>>>>>> 68fc04fd18d5c66f956df3893ddf7ec2d7f20b13
 =======
 	private String resnum, mid, resname, startdate, ampm, phone, resdate, rescount, 
+<<<<<<< HEAD
 	deposit, message, proname, company, pronum,category,ocean,river,hotel;
 >>>>>>> a851b93f92d2596ec9f880a1dd404b81cae02211
+=======
+	deposit, message, proname, company, pronum,category,ocean,river,hotel,proimg;
+>>>>>>> 7e7d067476c7d5cab2a4d8949631112b30108956
 }

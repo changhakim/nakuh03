@@ -865,7 +865,7 @@ eycompo ={
 			+'                            </div>'
 			+'                        </div>'
 			+'                    </div>'
-			+'                    <div>'
+			+'                    <div id="productinfo">'
 			+'                        <div class="coupon_area reserve_area">'
 			+'                            <div class="box_title clearfix">'
 			+'                                <p class="ico_coupon">할인 쿠폰 선택</p>'
@@ -886,6 +886,7 @@ eycompo ={
 			+'                                </dl>'
 			+'                            </div>'
 			+'                        </div>'
+<<<<<<< HEAD
 			+'                        <div class="reserve_area secInner result_area">'
 			+'                            <div class="box_title clearfix">'
 			+'                                <p class="proname ico_goods">광어/우럭</p>'
@@ -960,6 +961,8 @@ eycompo ={
 			+'                            <!---->'
 			+'                            <!---->'
 			+'                        </div>'
+=======
+>>>>>>> 7e7d067476c7d5cab2a4d8949631112b30108956
 			+'                        <div class="insur_area reserve_area" style="display: none;">'
 			+'                            <div class="box_title clearfix">'
 			+'                                <p class="ico_insur">보험 결제정보</p> <a class="type_btn">가입내용<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAaCAYAAAC6nQw6AAAAAXNSR0IArs4c6QAAAkZJREFUOBGtlEtrFEEQx6t6pwcJCIpEg6ecfCCKeBARQUg0ZjeLiAchJI4X/RR+Ag/iRxA0D8jZZJOY3RgQH+BZPcQHOXjxICpuZnsyW1YvVO/s7MzuHjIw/Lv/VfWjeqa7AfbpQeE0XszNIjYf83xbE9zHcvBJYoOoaifFj4joKL+XI6StRmXhXDvWf+RACPhF0olgGOO9mlmePy9eP3UgXdABAO5IAQEdAdirmtXnF8Trpe4b2SSqLI6aptkEglEp4k5/AcKEPxV8EC9LXUc2iMXp776PV3n0VZK5s8NA9NKszl8UL0s7QDYBrwc7vlIWti0FBHAI4njdrMxdEi+tHUtLBml98biJIl4mnRCfk/8iqEldvvtGPNGujiSAE9M/fDjAncFn8bizg7zUtajy7Ip4orkdSQJtLByLwqjKkDPiIeI/RJjSpWDLeTLopbSyNBxRWOXNelbyuIM6qMK4X5p9Z73cpUmBVSzd+amHvDHeCm/F5w6HqBk/lflAoFZy3fMI+e91POjL1JNBL6XlpREDYY3/4GnJ4+4MKngg876gFoR2N7nglBTxh24oBbe9YlATrycoBxKiwlsMWROI1VxQJgRwF4lu6mKwkYTkgrIhUEcolHV5xi6z6+nqKBPiNuCM24BpUgcoE2LPl4ISL+d1ujg5d6AWBMJXHDwpCXwU/qCiSYa4jSixtDoQH4EnfLUlIb85+YYu3nufLsqat3c2JjqxtyLANb4VB4JYsAMpVA/5VH0DxI+gaLzf1ZrV1b54/wHaA85JLzJ+gwAAAABJRU5ErkJggg==" alt=""></a></div>'
@@ -984,6 +987,7 @@ eycompo ={
 			+'                            <div class="box_title clearfix">'
 			+'                                <p class="ico_goods">주문 목록</p>'
 			+'                            </div>'
+<<<<<<< HEAD
 			+'                            <div class="inner">'
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -1004,6 +1008,9 @@ eycompo ={
 			+'                                <p class="fishname"><span>상품</span>광어/우럭'
 			+'                                </p>'
 >>>>>>> 1f92479c9c43b29a5834d0b38fa7f08757cc2e62
+=======
+			+'                            <div class="inner innerproname">'
+>>>>>>> 7e7d067476c7d5cab2a4d8949631112b30108956
 			+'                            </div>'
 			+'                        </div>'
 			+'                        <div class="price_area reserve_area">'
