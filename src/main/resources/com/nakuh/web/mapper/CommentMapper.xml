@@ -35,7 +35,7 @@
 <select id="selectComment" resultType="com.nakuh.web.domain.Comment"
 						parameterType="com.nakuh.web.domain.Comment">
 		
-		SELECT C.commseq comseq,
+		SELECT C.commseq commseq,
 				C.titleseq titleseq,
 				C.comm comm,
 				C.comid comid,
@@ -45,7 +45,7 @@
 			JOIN (SELECT M.mid, M.name, M.profilephoto FROM MEMBERS M ) M
 			ON C.comid LIKE M.mid 
 		WHERE titleseq LIKE #{titleseq}
-		ORDER BY comseq DESC
+		ORDER BY commseq DESC
 <!-- 	commseq, titleseq, comm, comid, cmname, comprophoto; -->
 
 </select>
@@ -63,7 +63,7 @@
 			JOIN (SELECT M.mid, M.name, M.profilephoto FROM MEMBERS M ) M
 			ON C.comid LIKE M.mid 
 		WHERE titleseq LIKE #{titleseq}
-		ORDER BY comseq DESC
+		ORDER BY commseq DESC
 		LIMIT 1						
 </select>
 

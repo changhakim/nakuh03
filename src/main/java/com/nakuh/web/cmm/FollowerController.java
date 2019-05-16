@@ -6,9 +6,10 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -55,14 +56,24 @@ public class FollowerController {
 		
 		return map;
 	};
-	@PostMapping("/regist/folloing")
+	@PutMapping("/regist/folloing")
 	public Map<?,?> registfolloing(@RequestBody Follower foll)throws Exception{
 		logger.info("============== registfolloing() {}  =================", "ENTER");
 		map.clear();
-		System.out.println("//"+foll);
+		System.out.println("등록"+foll);
 		IConsumer c = (Object o) -> folmap.insertFollower(foll);
 		c.accept(foll);
 		map.put("msg", "success");
+		return map;
+	};
+	@DeleteMapping("/delete/unfollower")
+	public Map<?,?> unfolloing(@RequestBody Follower foll)throws Exception{
+		logger.info("============== unfolloing() {}  =================", "ENTER");
+		map.clear();
+		System.out.println("삭제"+foll);
+		IConsumer c = (Object o) -> folmap.deleteFollower(foll);
+		c.accept(foll);
+		map.put("msg", "nufollowerSuccess");
 		return map;
 	};
 	
