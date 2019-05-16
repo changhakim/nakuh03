@@ -49,15 +49,15 @@ eunyeong = (()=>{
             app.init();
             });
             $('#ocean').click(()=>{
-            	setContentView('ocean')
+            	setContentView('ocean');
             });
             
             $('#river').click(()=>{
-            	setContentView('river')
+            	setContentView('river');
             });
             
             $('#hotel').click(()=>{
-            	setContentView('hotel')
+            	setContentView('hotel');
             });
             
             $('#newsfeed').click(e=>{
