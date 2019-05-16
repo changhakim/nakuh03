@@ -54,14 +54,13 @@
 			LAT lat,
 			LNG lng
 		FROM PRODUCTS 
-		WHERE CATEGORY LIKE #{category} 
+		WHERE CATEGORY LIKE #{category} <choose><when test="searchword != '' and searchword != null ">AND concat(COMPANY,PRICE,FISHNAME) regexp #{searchword}</when></choose> 
 		GROUP BY company
 		HAVING price LIKE min(price)
 		) P
 	 	<choose>
      	<when test="areatitle !='지역' and areatitle !=null and pricetitle !=null ">
      	WHERE  ADDRESS LIKE '%${areatitle}%'
-     	ORDER BY price*1 DESC
      	</when>
      	</choose>
 		LIMIT #{startRow},#{pageSize}

@@ -19,8 +19,11 @@ public class ReservationServiceImpl implements ReservationService {
 	@Autowired List<Reservation> reslist;
 	@Autowired Map<String, Object> map;
 	@Override
-	public void createReservation(Reservation param) {
-		resMap.insertReservation(param);
+	public void createReservation(List<Reservation> param) {
+		for(int i=0;i<param.size();i++) {
+			resMap.insertReservation(param.get(i));
+		}
+		
 	}
 
 	@Override

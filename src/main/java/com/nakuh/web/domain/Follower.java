@@ -6,5 +6,5 @@ import lombok.Data;
 
 @Data @Component
 public class Follower {
-	private String folloseq,folloid, mid, artdate, artnum, follpphoto , name, follostate;
+	private String folloseq, folloid, mid, artdate, artnum, follpphoto , name, follostate;
 }
