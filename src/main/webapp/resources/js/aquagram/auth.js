@@ -15,6 +15,26 @@ auth =(()=>{
 				$.getScript($.js()+'/aquagram/arti.js'),
 				$.getScript($.js()+'/reservation/eunyeong.js')
 			).done(()=>{
+				$('#homemainnav').remove()
+                $('<header id="homemainnav">'
+                        +'        <section>'
+                        +'            <a href="#" class="header_logo off active home">'
+                        +'                <img src="/web/resources/img/homeimg/main/nakuhlogo.jpg" style="height: 30px;">'
+                        +'            </a>'
+                        +'            <a class="location_setting pos_addr_text btn_geo_popup">서울특별시 마포구 대흥동 백범로 23</a>+'
+
+                        +'            <div class="header_menu" style="font-weight: bold;">'
+                        +'                <a href="#" class="menu_txt pblock ocean">바다</a>'
+                        +'                <a href="#" class="menu_txt pblock river">민물</a>'
+                        +'                <a href="#" class="menu_txt pblock hotel">숙박</a>'
+                        +'                <a href="#" class="menu_txt pblock newsfeed">뉴스피드</a>'
+                        +'                <a href="#" class="menu_txt pblock mypage">마이페이지</a>'
+                        +'                <a class="menu_btn" id="adminbtn">'
+                        +'                    <img style="padding-top: 10px;"src="/web/resources/img/homeimg/main/admin_icon.png">'
+                        +'                </a> '
+                        +'            </div>'
+                        +'        </section>'
+                        +'    </header>').appendTo('#navheader');
 				defualt_loader();
 				
 
@@ -363,7 +383,7 @@ auth =(()=>{
 					+'						         </div>'
 					+'						          <div id="feedcomments_nav">'
 					+'    <ul class="nav bs-docs-sidenav" id="feedcomments" style="-ms-overflow-style: none; overflow:scroll; width:100%; height:130px; border-top: none;">'
-					+'						<li class="comlist_'+a+'">'
+					+'						<li class="comlist_'+x.rownum+'">'
 					+'						</li> '
 				    +'          				</ul>'						
 					+'							    	</div>'
@@ -397,10 +417,35 @@ auth =(()=>{
 					});
 					
 					/*$(comitem).appendTo('.comlist');*/
-					$('.comlist_'+a).append(comitem);
+					$('.comlist_'+x.rownum).append(comitem);
 	  				$('#input-group_'+x.rownum).children('span').click(function(e){
 						e.preventDefault();
-						alert('몇번이냐'+$(this).attr('value'));
+						let com_data = {
+								comid : 'gigi123',
+								comm : $('#upcomment_'+$(this).attr('value')).val(),
+								titleseq : $(this).attr('value')
+						};
+						$.ajax({
+							url: $.ctx()+'/regist/comm/'+com_data.mid,
+							type: 'post',
+							data: JSON.stringify(com_data),
+							dataType: 'json',
+							contentType: 'application/json; charset=UTF-8;',
+							success: d=>{
+								alert('??'+d.comlist);
+								$('#input-group_'+x.rownum).children('input').val('');
+								let incomm =	'			<div class="item" style="display: -webkit-box; " value="'+d.comlist.comid+'">'	
+								+'				        	<div class="list-group-item list-group-item-action" style="height: 58px; width: 100%; top: 11px; border: none; display: -webkit-box;"> '
+								+'							 <div> <img class="img-circle" alt="Cinque Terre" src="resources/img/aquagram/profilephoto/'+d.comlist.comprophoto+'" style="width: 50px; height: 50px; position: center"/></div> '
+								+'								<div style="left: 13px; text-align: left;"><h5 style="margin-bottom: 3px; font-weight: bold;">'+d.comlist.comid+'</h5><p style="font-size: 7px;">'+d.comlist.cmname+'</p></div>'
+								+'							<div style="position: relative; left: 30px;"><h5>'+d.comlist.comm+'</h5></div>'
+								+'								</div> '		
+								+'						</div> ';	
+								$('.comlist_'+x.rownum).prepend(incomm);
+
+								
+							},error:e=>{}
+						});
 						
 						
 					});
@@ -421,45 +466,59 @@ auth =(()=>{
 */
 				
 };
-	let nav =()=>{
-		/*	General 네비게이션 	*/
-		$('.home').click(e=>{
-			
-			
-			$('.rescss').remove();
-			$('.instacss').remove();
-			$(homecss).appendTo('head');
-			location.assign('/web');
-			app.init();
-		    
-		});
-		$('.ocean').click(e=>{
-		e.preventDefault();
-		$('.instacss').remove();
-		$(rescss).appendTo('head');
-		eunyeong.init('ocean')
-		});
-		
-		$('.river').click(()=>{
-		
-		});
-		
-		$('.hotel').click(()=>{
-		
-		});
-		$('.aquagram').click(e=>{
-		e.preventDefault();
-		$('.rescss').remove();
-		$(instacss).appendTo('head');
-		jeonguk.init();
-		});
-		$('#mypage').click(()=>{
-			
-		});
-		$('#logout').click(()=>{
-			
-		});
-	}
+let nav =()=>{
+    /*  General 네비게이션     */
+    $('.home').click(e=>{
+        
+        
+        $('.rescss').remove();
+        $('.instacss').remove();
+        $(homecss).appendTo('head');
+        location.assign('/web');
+        app.init();
+        
+    });
+    $('.ocean').click(e=>{
+    e.preventDefault();
+    $('.instacss').remove();
+    $(rescss).appendTo('head');
+    $(window).data('resajaxready',"undefined");
+    eunyeong.init('ocean')
+    });
+    
+    $('.river').click(e=>{
+    e.preventDefault();
+    $('.instacss').remove();
+    $(rescss).appendTo('head');
+    $(window).data('resajaxready',"undefined");
+    eunyeong.init('river')
+    });
+    
+    $('.hotel').click(e=>{
+    e.preventDefault();
+    $('.instacss').remove();
+    $(rescss).appendTo('head');
+    $(window).data('resajaxready',"undefined");
+    eunyeong.init('hotel')
+    });
+    $('.aquagram').click(e=>{
+    e.preventDefault();
+    $('.rescss').remove();
+    $(instacss).appendTo('head');
+    jeonguk.init();
+    });
+    $('#mypage').click(()=>{
+    e.preventDefault();
+    $('.instacss').remove();
+    $(rescss).appendTo('head');
+    $(window).data('resajaxready',"undefined");
+    eunyeong.init('mypage') 
+        
+    });
+    $('#logout').click(()=>{
+        
+    });
+}
 	let css = ()=>{
 		/* head css  */
 		 homecss = '<link class="homecss" rel="stylesheet" type="text/css" href="/web/resources/css/home/homemain.css" />'
