@@ -6,5 +6,5 @@ import lombok.Data;
 
 @Data @Component
 public class Dummy {
-	private String subid, subCont, subtag;
+	private String subid, subCont, subtag, subnum;
 }
