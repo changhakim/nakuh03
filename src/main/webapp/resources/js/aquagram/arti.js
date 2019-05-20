@@ -85,7 +85,7 @@ arti =(()=>{
 			let mid = 'gigi123';
 			let page = 0;
 			let url = $.ctx()+'/myfeed/'+mid;
-			let data = { mid:x,
+			let data = { mid:mid,
 					startRow:startNo,
 					pageSize:6};
 
