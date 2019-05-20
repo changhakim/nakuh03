@@ -31,7 +31,7 @@
 		FROM MEMBERS
 		WHERE mid LIKE #{mid}
 </select>
-<select id="existsMember" resultType="boolean" 
+<select id="existMemberForKakao" resultType="boolean" 
 			parameterType="com.nakuh.web.domain.Member">
 	SELECT if(COUNT(*) > 0, 'false','true') 
     FROM MEMBERS
@@ -41,6 +41,12 @@
 <select id="countMembers" resultType="Integer">
         SELECT COUNT(*)
         FROM MEMBERS
+</select>
+<select id="existsMember" resultType="com.nakuh.web.domain.Member"
+						parameterType="com.nakuh.web.domain.Member">
+        SELECT mid
+        FROM MEMBERS
+        WHERE MID LIKE #{mid} AND PASSWORD LIKE #{password}
 </select>
 
 

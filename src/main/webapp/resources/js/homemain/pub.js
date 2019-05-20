@@ -261,18 +261,6 @@ $(a25_0x3f9d('0x3d', '*AFK'))['click'](function() {
     $(a25_0x3f9d('0x43', 'L4Vz'))['val']('');
 });
 var share_url;
-Kakao[a25_0x3f9d('0x204', 'jyIw')]('523ca3a269fb81a9a2f121ce3811d0ee');
-
-function shareStory() {
-    var _0xd8ac4 = $('#copy_url')[a25_0x3f9d('0x205', 'v]F^')]();
-    if (_0xd8ac4[a25_0x3f9d('0x206', '!bvk')]('share/event_view') != -0x1) {
-        _0xd8ac4 += a25_0x3f9d('0x207', 'vt^P');
-    }
-    Kakao[a25_0x3f9d('0x208', 'Ui&*')][a25_0x3f9d('0x209', 'v]F^')]({
-        'url': _0xd8ac4,
-        'text': $(a25_0x3f9d('0x20a', 'RbPu'))[a25_0x3f9d('0x20b', 'eaIL')](a25_0x3f9d('0x20c', '$9b*'))
-    });
-}
 
 function shareNaver() {
     var _0x2cd8b5 = encodeURIComponent($(a25_0x3f9d('0x20d', '4K*N'))[a25_0x3f9d('0x20e', '4afA')]('content'));
