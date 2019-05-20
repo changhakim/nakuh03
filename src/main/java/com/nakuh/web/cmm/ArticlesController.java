@@ -64,7 +64,7 @@ public class ArticlesController {
 
 		
 		return map;
-	};
+	}
 	
 	@Transactional
 	@PostMapping("/arti/detail/{artnum}")
@@ -81,7 +81,7 @@ public class ArticlesController {
 		
 		
 		return map;
-	};
+	}
 	@PostMapping("/arti/feed/{mid}")
 	public Map<?,?> articleFeed(String mid, @RequestBody Article arts)throws  Exception{
 		logger.info("=========ArticleFeed 진입======");
@@ -96,7 +96,7 @@ public class ArticlesController {
 
 		
 		return map;
-	};
+	}
 
 	
 	@PutMapping("/upload/arti")
@@ -114,7 +114,7 @@ public class ArticlesController {
 		map.put("seq", f.apply(art.getArtphoto()));
 		
 		return map;
-	};
+	}
 	
 	@PostMapping("/upload/tag")
 	public Map<?,?> tagupload(@RequestBody PostTag pos)throws Exception{
@@ -126,7 +126,7 @@ public class ArticlesController {
 		
 		
 		return map;
-	};
+	}
 
 	@GetMapping("/comments/list/{artnum}")
 	public Map<?,?> feedcomment(@PathVariable String artnum)throws Exception{
@@ -137,7 +137,7 @@ public class ArticlesController {
 		map.put("cls", cls);
 		map.put("msg","feedcomment 성공:: ");
 		return map;
-	};
+	}
 	
 	@Transactional
 	@PostMapping("/regist/comm/{comid}")
