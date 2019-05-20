@@ -15,7 +15,8 @@ public interface MemberMapper {
 	public List<Member> selectMembers(String mid);
 	public Member selectMember(Member mem);
 	public int countMembers();
-	public boolean existsMember(String searchWord);
+	public Member existsMember(Member m);
+	public boolean existMemberForKakao(String searchword);
 	
 	public void updateMember(Member mem);
 	public void deleteMember(Member mem);

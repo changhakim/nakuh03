@@ -32,7 +32,18 @@ public class FollowerController {
 		map.put("follist", folList);
 		
 		return map;
-	};
+	}
+	@GetMapping("/arti/subfollo/{mid}")
+	public Map<?,?> feedfollosub(@PathVariable String mid)throws Exception{
+		logger.info("=========feedfollosub 진입======");
+		map.clear();
+		IFunction f = (String) -> folmap.selectFollowers(mid);
+		List<?> folList = (List<?>) f.apply(mid);
+		System.out.println("??"+folList);
+		map.put("follist", folList);
+		
+		return map;
+	}
 	
 	@GetMapping("/serach/follower/{mid}")
 	public Map<?, ?> followerList(@PathVariable String mid)throws Exception{
@@ -42,7 +53,7 @@ public class FollowerController {
 		List<?> ls = (List<?>) f.apply(mid);
 		map.put("werlist", ls);
 		return map;
-	};
+	}
 	@GetMapping("/serach/folloing/{mid}")
 	public Map<?,?> folloingList(@PathVariable String mid)throws Exception{
 		logger.info("============== folloingList() {}  =================", "ENTER");
@@ -52,7 +63,7 @@ public class FollowerController {
 		map.put("inglist", ls);
 		
 		return map;
-	};
+	}
 	@PutMapping("/regist/folloing")
 	public Map<?,?> registfolloing(@RequestBody Follower foll)throws Exception{
 		logger.info("============== registfolloing() {}  =================", "ENTER");
@@ -61,7 +72,7 @@ public class FollowerController {
 		c.accept(foll);
 		map.put("msg", "success");
 		return map;
-	};
+	}
 	@DeleteMapping("/delete/unfollower")
 	public Map<?,?> unfolloing(@RequestBody Follower foll)throws Exception{
 		logger.info("============== unfolloing() {}  =================", "ENTER");
@@ -70,7 +81,19 @@ public class FollowerController {
 		c.accept(foll);
 		map.put("msg", "nufollowerSuccess");
 		return map;
-	};
+	}
+	@GetMapping("/search/follo/{searchword}/{userid}")
+	public Map<?,?> searching(@PathVariable String searchword,  String userid)throws Exception{
+		map.clear();
+		fol.setFolloid(userid);
+		fol.setMid(searchword);
+		IFunction f = (Object o) -> folmap.selectFollower(fol);
+		List<?> ls = (List<?>) f.apply(fol);
+		System.out.println("하하"+f.apply(searchword));
+		map.put("searclist", ls);
+	
+		return map;
+	}
 	
 	
 }

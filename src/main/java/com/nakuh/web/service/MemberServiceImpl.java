@@ -44,9 +44,10 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public boolean existsMember(String searchWord) {
-		boolean res = memMap.existsMember(searchWord);
-		return res;
+	public Member existsMember(Member m) {
+		
+		System.out.println(memMap.existsMember(m).toString());
+		return m ;
 	}
 
 	@Override
@@ -59,6 +60,12 @@ public class MemberServiceImpl implements MemberService{
 	public void removeMember(Member mem) {
 		memMap.deleteMember(mem);
 		
+	}
+
+	@Override
+	public boolean existsMemberforkakao(String searchword) {
+		boolean res = memMap.existMemberForKakao(searchword);
+		return res;
 	}
 
 }

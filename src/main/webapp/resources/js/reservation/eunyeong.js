@@ -29,7 +29,7 @@ eunyeong = (()=>{
 					+'            <a href="#" class="header_logo off active home">'
 					+'                <img src="/web/resources/img/homeimg/main/nakuhlogo.jpg" style="height: 30px;">'
 					+'            </a>'
-					+'            <a class="location_setting pos_addr_text btn_geo_popup">서울특별시 마포구 대흥동 백범로 23</a>+'
+					+'            <a class="location_setting pos_addr_text btn_geo_popup">서울특별시 마포구 대흥동 백범로 23</a>'
 
 					+'            <div class="header_menu" style="font-weight: bold;">'
 					+'                <a href="#" class="menu_txt pblock ocean">바다</a>'
@@ -37,6 +37,7 @@ eunyeong = (()=>{
 					+'                <a href="#" class="menu_txt pblock hotel">숙박</a>'
 					+'                <a href="#" class="menu_txt pblock newsfeed">뉴스피드</a>'
 					+'                <a href="#" class="menu_txt pblock mypage">마이페이지</a>'
+					+'				  <a href="#" class="menu_txt pblock logout">로그아웃</a>'
 					+'                <a class="menu_btn" id="adminbtn">'
 					+'                    <img style="padding-top: 10px;"src="/web/resources/img/homeimg/main/admin_icon.png">'
 					+'                </a> '
@@ -96,9 +97,14 @@ eunyeong = (()=>{
             	mypage();
             });
             
-            $('#logout').click(()=>{
-                
-            });
+            $('.logout').click(function(){
+        		Kakao.Auth.logout(function(){
+        			sessionStorage.removeItem('userid');
+        			sessionStorage.removeItem('userpo');
+        			sessionStorage.removeItem('kakaosession');
+        			location.assign('/web');
+        		});
+        	})
         })
     };
   
@@ -139,6 +145,7 @@ eunyeong = (()=>{
                 searchlist = {cate:t};
         		$(window).data('resajaxready',false);
         		$('.list_section').empty();
+            	$(eycompo.search_head()).appendTo('.list_section');
         		pro_fetchList(searchlist);
         	})
         })
@@ -152,6 +159,7 @@ eunyeong = (()=>{
                 searchlist = {cate:t};
         		$(window).data('resajaxready',false);
         		$('.list_section').empty();
+            	$(eycompo.search_head()).appendTo('.list_section');
         		pro_fetchList(searchlist);
         	})
         })
@@ -162,6 +170,7 @@ eunyeong = (()=>{
             searchlist = {cate:t};
     		$(window).data('resajaxready',false);
     		$('.list_section').empty();
+        	$(eycompo.search_head()).appendTo('.list_section');
     		pro_fetchList(searchlist);
         })
 
@@ -215,9 +224,6 @@ eunyeong = (()=>{
     	$('#cate_menu3').text('낚시카페');
     	$('#cate_menu4').text('배스');
     	$('#cate_menu5').text('노지');
-    	
-       
-        
     };
     
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////*숙박 메인화면 */  
@@ -266,7 +272,6 @@ eunyeong = (()=>{
 				areatitle:areatitle,
 				searchword:searchword
 				};
-		
 		
 		$.ajax({
 			url: url,
@@ -378,15 +383,20 @@ eunyeong = (()=>{
     	
     	$('#wrapper').empty();
     	$('.scrolling').empty();
-    	$('<div id="scrolling" class="scrolling">'
+    	
+    	$('<div id="scrolling" class="scrolling scroll_up">'
     	+'   <div class="header_title">'
     	+'      <section>'
     	+'         <h1>'+ cate_title +'</h1>'
     	+'      </section>'
     	+'    </div>'
-    	+'</div>').appendTo('.header_area');
-    	$(eycompo.pro_head()).appendTo('#wrapper');
+    	+'</div>').appendTo('.scrolling');
+    	
+    	$('<div class="view_area container">'
+    			+'        <!-- 업체상세 상단 -->').appendTo('#wrapper');
     	$(eycompo.pro_info()).appendTo('.view_area');
+    	$(eycompo.pro_head()).prependTo('#view_reserve');
+    	
     	$('.title_arrow').append(x.calheader);
     	  let calval = 0;
           let calno = 0;
@@ -432,20 +442,12 @@ eunyeong = (()=>{
         			+'                <i class="personnel_choice" data-person="60">인원선택</i>'
         			+'            </a>'
         			+'        </div>'
-        			+'    </div>')
+        			+'    </div>');
           })        
-           
-    	$('#pro_review').click(e=>{
-    		$('#view_reserve').remove();
-    		$(eycompo.pro_review()).appendTo('.view_area');
-    	});
-    	
-    	$('#pro_use').click(e=>{
-    		$('#view_reserve').remove();
-    		$(eycompo.pro_use()).appendTo('.view_area');
+          
+    		$(eycompo.pro_map()).appendTo('#view_reserve');
         	$(document).ready(function() {
             	initMap(x);
-            });
     	});
         $('.proname').text(x.proname);
         $('.price').html(x.price+'<span>원</span>');
@@ -457,9 +459,6 @@ eunyeong = (()=>{
         $('#phone').text(x.phone);
         $('#resdate').text(x.today);
         
-	
-		
-		
 		$('#reserve_section').empty();
 		$.each(x.prolist, (i, j)=>{
    		   $('    <a class="reserve_area  view_box" data-cg-key="5201" value="noclick" data-gi-type="1" data-gi-key="1564964">'
@@ -567,7 +566,6 @@ eunyeong = (()=>{
 		$('.fishname').text(x.fishname);
  		$('#company').text(x.company);
  	    
-
      };
      
      //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*상품결제 : 결제값입력*/
@@ -662,7 +660,6 @@ eunyeong = (()=>{
     	$('#wrapper').empty();
 		$(eycompo.complete_pay()).appendTo('#wrapper');
 		$('#check_res').click(e=>{
-			alert('업체통화는 앱에서만 이용가능합니다.');
 			mypage();
 		});
     }; 

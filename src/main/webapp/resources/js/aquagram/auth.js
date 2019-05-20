@@ -24,12 +24,13 @@ auth =(()=>{
                         +'            </a>'
                         +'            <a class="location_setting pos_addr_text btn_geo_popup">서울특별시 마포구 대흥동 백범로 23</a>'
 
-                        +'            <div class="header_menu" style="font-weight: bold;">'
+                        +'            <div class="header_menu" style="font-weight: bold;font-weight: bold;font-size: 14px;color: black;">'
                         +'                <a href="#" class="menu_txt pblock ocean">바다</a>'
                         +'                <a href="#" class="menu_txt pblock river">민물</a>'
                         +'                <a href="#" class="menu_txt pblock hotel">숙박</a>'
                         +'                <a href="#" class="menu_txt pblock newsfeed">뉴스피드</a>'
                         +'                <a href="#" class="menu_txt pblock mypage">마이페이지</a>'
+                        +'				  <a href="#" class="menu_txt pblock logout">로그아웃</a>'
                         +'                <a class="menu_btn" id="adminbtn">'
                         +'                    <img style="padding-top: 10px;"src="/web/resources/img/homeimg/main/admin_icon.png">'
                         +'                </a> '
@@ -53,10 +54,19 @@ auth =(()=>{
 		$(jwcompo.my_navbar()).appendTo('#my_navbar');
 		$('#leftbar_content').empty();
 		$('#users_list').empty();
+		$('#new_users_list').empty();
 		css();
 		nav();
+		user_search();
 		arti.arti_img_upload();
-		feed_infinitemove();
+		alert($(window).data('ajaxready'));
+
+		if(typeof $(window).data('ajaxready') == "undefined"){
+			feed_infinitemove();
+		}else{
+			feed_fetchList();
+		}
+		
 		right_nav_lander();
 		
 		//중앙 네비 따라오는 옵션
@@ -75,23 +85,81 @@ auth =(()=>{
 			    }
 			  });
 			});
-		$('#my_fv').attr('style','cursor:pointer').click(function(e){
+		$('#my_fv').attr('style','text-align: center; cursor:pointer').click(function(e){
 			e.preventDefault();
 			arti.init();
 		});
 		//$('leftbar_content').empty();
-		$('#followerid').attr('style','cursor:pointer').attr('data-toggle','modal').attr('data-target','#myModal').click(function(e){
+		$('#followerid').attr('style','text-align: center; cursor:pointer').attr('data-toggle','modal').attr('data-target','#myModal').click(function(e){
 			e.preventDefault();
 			follower_list();
 		});
-		$('#folloingid').attr('style','cursor:pointer').attr('data-toggle','modal').attr('data-target','#myModal').click(function(e){
+		$('#folloingid').attr('style','text-align: center; cursor:pointer').attr('data-toggle','modal').attr('data-target','#myModal').click(function(e){
 			e.preventDefault();
 			folloing_list();
 		});
 			
 	};
+	
+	let user_search=()=>{
+		$('#search_but').attr('style','cursor:pointer').attr('data-toggle','modal').attr('data-target','#myModal').click(function(e){
+			e.preventDefault();
+			$('#myModal').attr('style','display: block; z-index:99999;');
+			$('.modal-dialog').attr('class','modal-dialog');
+			$('.modal-dialog').attr('style','top:200px;')
+			$('.modal-content').attr('style','margin:auto; width: 65%; height: 600px;');
+			$('.modal-title').text('검색결과');
+			$('.modal-footer').remove();
+			$('.modal-body').attr('style','height: 90%;');
+			$('.modal-body').html('<ul class="nav bs-docs-sidenav" style="overflow:scroll; width:100%; height:100%; padding:10px; background-color: white; border-radius: 6px;  border:1px solid; border-color: #ddd;">'
+					+'				 <li>      '
+					+'				 	<div id="search_list">'
+					+'					</div>'
+					+'				</li>'
+					+'		      </ul>');
+			let search_item ='';
+			alert( $('#search_from').val());
+			let searchword = $('#search_from').val();
+			$.getJSON($.ctx()+'/search/follo/'+searchword+'/'+sessionStorage.getItem('userid'),d=>{
+				
+				$.each(d.searclist,(i,j)=>{
+					search_item ='			<div class="item" style="display: -webkit-box; " value="'+j.folloid+'">'	
+						+'				        	<div class="list-group-item list-group-item-action" style="height: 58px; width: 80%; top: 11px; border: none; display: -webkit-box;"> '
+						+'							 <div> <img class="img-circle" alt="Cinque Terre" src="resources/img/aquagram/profilephoto/'+j.follpphoto+'" style="width: 50px; height: 50px; position: center"/></div> '
+						+'								<div style="left: 13px; text-align: left;"><h5 style="margin-bottom: 3px; font-weight: bold;">'+j.folloid+'</h5><p style="font-size: 7px;">'+j.name+'</p></div>'
+						+'								</div> '
+
+					if(j.follostate=='0'){
+						search_item+=	'<button type="button" class="btn btn-primary" id="btn_follower" value="'+j.folloid+'" style="position: relative; top: 21px;">팔로우</button>'
+						+'</div> ';
+					}else {
+						search_item+=	'<button type="button" class="btn btn-default" id="btn_folloing" value="'+j.folloid+'" style="position: relative; top: 21px;">팔로잉</button>'
+							+'</div> ';
+						
+					}
+					$(search_item).appendTo('#search_list').children('button').click(function(){
+						/*alert($(this).attr('value'));*/
+						let data = {mid:sessionStorage.getItem('userid'), 
+								folloid:$(this).attr('value')};
+						if($(this).text()=='팔로우'){
+							/*alert('??'+$(this).attr('value'));*/
+							folloings(data);
+							$(this).attr('class','btn btn-default').text('팔로잉');
+						}else{
+							nufollower(data);
+							$(this).attr('class','btn btn-primary').text('팔로우');
+						}
+						
+					});
+				
+				});
+			});
+			
+		});
+		
+	};
 	let follower_list=()=>{
-		let mid='gigi123'
+		let mid=sessionStorage.getItem('userid');
 		let follower_item='';
 		$('#myModal').attr('style','display: block; z-index:99999;');
 		$('.modal-dialog').attr('class','modal-dialog');
@@ -130,7 +198,7 @@ auth =(()=>{
 					}
 					$(follower_item).appendTo('#follower_list').children('button').click(function(){
 						/*alert($(this).attr('value'));*/
-						let data = {mid:'gigi123', 
+						let data = {mid:sessionStorage.getItem('userid'), 
 								folloid:$(this).attr('value')};
 						if($(this).text()=='팔로우'){
 							/*alert('??'+$(this).attr('value'));*/
@@ -182,7 +250,7 @@ auth =(()=>{
 		});
 	};
 	let folloing_list=()=>{
-		let mid='gigi123'
+		let mid=sessionStorage.getItem('userid');
 		let folloing_item='';
 			$('#myModal').attr('style','display: block; z-index:99999;');
 			$('.modal-dialog').attr('class','modal-dialog');
@@ -241,7 +309,8 @@ auth =(()=>{
 	
 	let right_nav_lander=()=>{
 		let foitem = '';
-		let mid='gigi123';
+		let ffoitem = '';
+		let mid=sessionStorage.getItem('userid');
 		$.ajax({
 			url: $.ctx()+'/arti/follo/'+mid,
 			type: 'get',
@@ -249,17 +318,17 @@ auth =(()=>{
 			dataType: 'json',
 			contentType: 'application/json; charset=UTF-8;',
 			success: d=>{
-
 				$.each(d.follist,(i,j)=>{
-					foitem = '			<div class="item" id="item_'+j.artnum+' style="display: -webkit-box; value="'+j.folloid+'"">'	
-						+'				        	<div class="list-group-item list-group-item-action" style="height: 58px; width: 80%; top: 11px; border: none; display: -webkit-box;"> '
+					foitem = '			<div class="item" id="item_'+j.artnum+'" style="cursor:pointer; display: -webkit-box; height: 60px;" value="'+j.folloid+'">'	
+						+'				        	<div class="list-group-item list-group-item-action" style="height: 58px; width: 76%; top: 11px; border: none; display: -webkit-box;"> '
 						+'							 <div> <img class="img-circle" alt="Cinque Terre" src="resources/img/aquagram/profilephoto/'+j.follpphoto+'" style="width: 50px; height: 50px; position: center"/></div> '
 						+'								<div style="left: 13px; text-align: left;"><h5 style="margin-bottom: 3px; font-weight: bold;">'+j.folloid+'</h5><p style="font-size: 7px;">'+j.name+'</p></div>'
 						+'								</div> '
-						+'								<button type="button" class="btn btn-default" value="'+j.folloid+'" style="position: relative; top: 21px;">팔로잉</button>'
+						+'								<div value="'+j.folloid+'" style="position: relative; top: 14px;"><h5>새로운소식</h5><h5>'+j.artdate+'</h5></div>'
+						+'							</div> '
 						+'							</div> ';
 
-					$(foitem).appendTo('#users_list').attr('style','cursor:pointer').click(function(){
+					$(foitem).appendTo('#users_list').click(function(){
 						/*alert('??!!'+$(this).attr('value'));*/
 						let scahid = $(this).attr('value');
 						fous.init(scahid);
@@ -267,12 +336,59 @@ auth =(()=>{
 					});
 				});
 
+				$.ajax({
+					url: $.ctx()+'/arti/subfollo/'+mid,
+					type: 'get',
+					data: JSON.stringify(mid),
+					dataType: 'json',
+					contentType: 'application/json; charset=UTF-8;',
+					success: d=>{
+						$.each(d.follist,(i,j)=>{
+							if(j.follostate==0){
+								ffoitem = '			<div class="item" style="display: -webkit-box;">'	
+									+'				        	<div class="list-group-item list-group-item-action" style="height: 58px; width: 76%; top: 11px; border: none; display: -webkit-box;"> '
+									+'							 <div> <img class="img-circle" alt="Cinque Terre" src="resources/img/aquagram/profilephoto/'+j.follpphoto+'" style="width: 50px; height: 50px; position: center"/></div> '
+									+'								<div style="left: 13px; text-align: left;"><h5 style="margin-bottom: 3px; font-weight: bold;">'+j.mid+'</h5><p style="font-size: 7px;">'+j.name+'</p></div>'
+									+'								</div> '
+									+'								<button type="button" class="btn btn-primary" value="'+j.mid+'" style="position: relative; top: 21px;">팔로우</button>'
+									+'							</div> ';
+
+								$(ffoitem).appendTo('#new_users_list').children('button').click(function(){
+									let data = {mid:'gigi123', 
+											folloid:$(this).attr('value')};
+									if($(this).text()=='팔로우'){
+										/*alert('??'+$(this).attr('value'));*/
+										folloings(data);
+										$(this).attr('class','btn btn-default').text('팔로잉');
+									}else{
+										nufollower(data);
+										$(this).attr('class','btn btn-primary').text('팔로우');
+										
+									}
+									/*alert('??!!'+$(this).attr('value'));*/
+/*									let scahid = $(this).attr('value');
+									fous.init(scahid);*/
+
+								});
+							}
+
+						});
+					
+						},error:e=>{}
+					
+				});
+					
+				
+				
+				
 			},error:e=>{
 				alert('실패!');
 				
 			}
 			
 		});
+
+		
 //		function fn_dateTimeToFormatted(dt) {
 //			var min = 60 * 1000;
 //			var c = new Date()
@@ -325,7 +441,7 @@ auth =(()=>{
         	return;
         }
         let startNo = $("#leftbar_content").children('#data_wow').last().data("no") || 0;
-		let mid ='gigi123';
+		let mid =sessionStorage.getItem('userid');
 		let page = 0;
 		let url = $.ctx()+'/myfeed/'+mid;
 		let data = { mid:mid,
@@ -351,6 +467,7 @@ auth =(()=>{
                 	
                 	  $.each(d.ffeed,(i, j)=>{
                 		  userd[i] = {userid: j.mid,
+                				  username:j.name,
           				  		userphoto:j.userpo,
           				  		artcount:j.artCount,
           				  		followerCount:j.followerCount,
@@ -378,13 +495,14 @@ auth =(()=>{
 	};
 	let mynavd =(x)=>{
 		
-		 $('#my_fv').text(x[0].artcount);
-		  $('#followerid').text(x[0].followerCount);
-		  $('#folloingid').text(x[0].folloingCount);
+		 $('#my_fv').attr('styel','text-align: center;').text(x[0].artcount);
+		 $('#followerid').attr('styel','text-align: center;').text(x[0].followerCount);
+		 $('#folloingid').attr('styel','text-align: center;').text(x[0].folloingCount);
 			//$('#userimg').attr('src','resources/img/aquagram/profilephoto/'+d.nav.profilephoto);
-		  $('#navmypage').html('<img id="userimg" class="img-circle" alt="Cinque Terre" src="resources/img/aquagram/profilephoto/'+x[0].userphoto+'" '
+		 $('#navmypage').html('<img id="userimg" class="img-circle" alt="Cinque Terre" src="resources/img/aquagram/profilephoto/'+x[0].userphoto+'" '
 					+'style="width: 50px; height: 50px; position: center;"/>'+x[0].userid+'</div></li>');
-		
+		 $('#right_mynav').attr('src','resources/img/aquagram/profilephoto/'+x[0].userphoto);
+		 $('#right_mynavid').text(x[0].userid);
 	};
 	let settags = (x)=>{
 			
@@ -395,7 +513,7 @@ auth =(()=>{
 					+'					    <div class="panel panel-default">'
 					+'						        <div class="heading">'
 					+' 			<div class="item" id="'+x.artnum+'" style="height: 58px; border: none; margin: 8px;"> ' 
-					+'  	<img class="img-circle" alt="Cinque Terre" src="resources/img/aquagram/profilephoto/'+x.profilephoto+'" style="width: 50px; height: 50px; position: center"><div><h5 style="top:-49px; left: 60px">'+x.mname+'</h5></div>	'							  							
+					+'  	<img class="img-circle" alt="Cinque Terre" src="resources/img/aquagram/profilephoto/'+x.profilephoto+'" style="width: 50px; height: 50px; position: center"><div><h5 id="user_'+x.mname+'_'+x.rownum+'" style="top:-49px; left: 60px" value="'+x.mname+'">'+x.mname+'</h5></div>	'							  							
 					+' 			</div>'
 					+'						        <div class="body">'
 					+'						         <img src="resources/img/aquagram/articles/'+x.artphoto+'" style="display: block; margin: 0px auto; width: 100%;">'
@@ -405,7 +523,7 @@ auth =(()=>{
 					+'						         	<!-- Right-aligned -->'
 					+'									<div class="media">'
 					+'									  <div class="media-body" style="text-align: left; padding-top: 15px; padding-bottom: 15px;">'
-					+'									   	<div> <h4 class="media-heading" style="margin-left: 5px">'+x.content+'<div id="tags_'+x.artnum+'">'+x.tag+'</div></h4></div>'
+					+'									   	<div> <h4 class="media-heading" style="margin-left: 5px">'+x.content+'<div id="tags_'+x.artnum+'"></div></h4></div>'
 					+'									   	<div> <h6 class="media-heading" style="margin-left: 5px">53 like</h6></div>'
 					+'									  </div>'
 					+'									</div>'
@@ -426,7 +544,19 @@ auth =(()=>{
 					+'						        </div>';
 				
 				$(feeditem).appendTo('#leftbar_content');
+				$('#user_'+x.mname+'_'+x.rownum).click(function(){
+					alert('클릭'+$(this).attr('value'));
+					let scahid = $(this).attr('value');
+					fous.init(scahid);
+				});
+
 				let tags = x.tag;
+				if(tags==null){
+					$('#tags_'+x.artnum).append('&nbsp;<a> </a>');
+				}else{
+					$('#tags_'+x.artnum).append('&nbsp;<a>'+tags+'</a>');					
+				}
+
 				 /*let tagcut = x.tag;
 				let settag = '';
 				if(x.tag.split('.') == null){
@@ -553,9 +683,14 @@ let nav =()=>{
     eunyeong.init('mypage') 
         
     });
-    $('#logout').click(()=>{
-        
-    });
+    $('.logout').click(function(){
+		Kakao.Auth.logout(function(){
+			sessionStorage.removeItem('userid');
+			sessionStorage.removeItem('userpo');
+			sessionStorage.removeItem('kakaosession');
+			location.assign('/web');
+		});
+	})
 }
 	let css = ()=>{
 		/* head css  */
