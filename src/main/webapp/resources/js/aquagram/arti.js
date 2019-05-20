@@ -83,7 +83,7 @@ arti =(()=>{
 	        	return;
 	        }
 	        let startNo = $("#instafeed").children('.feeds').last().data("no") || 0;
-			let mid = 'gigi123';
+			let mid = sessionStorage.getItem('userid');
 			let page = 0;
 			let url = $.ctx()+'/myfeed/'+mid;
 			let data = { mid:mid,
@@ -232,7 +232,7 @@ arti =(()=>{
 					//alert('이거 크릭한거 맞아?' + $('#dicomment_'+$(this).attr('value')).val());
 					//alert('글번호는?'+$(this).attr('value'));
 					let com_data = {
-							comid : 'gigi123',
+							comid : sessionStorage.getItem('userid'),
 							comm : $('#dicomment_'+$(this).attr('value')).val(),
 							titleseq : $(this).attr('value')
 					};

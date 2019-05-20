@@ -21,9 +21,6 @@ app=(()=>{
 		});
 	};
 	
-	//미사용시 삭제. 다른 js 에서 세션 안먹음.
-	let session_u ={userid:sessionStorage.getItem('userid'),
-					userpo:sessionStorage.getItem('userpo')};
 	
 	let app_defualt_loader =()=>{
 		css();
@@ -94,23 +91,38 @@ app=(()=>{
 				sessionStorage.removeItem('kakaosession');
 				location.assign('/web');
 			});
-			
-
-				
-			})
-				/*$('#id01').css('display','block');
-				  $('#kakao_login_btn').attr('style','cursor:pointer').click(function loginWithKakao() {
-
-					  kakaore();
-					 
-				  })*/
-		}
+		})
+	}
 		if(sessionStorage.getItem('userid') === null){
 			$('#id01').css('display','block');
+		$('#kakao_login_btn').attr('style','cursor:pointer').click(function loginWithKakao() {  
 			kakao();
+		
+		});
+		$('#login').click(()=>{
 			
-			
-			
+			let data = {mid:$('#userid').val(),password:$('#password').val()}
+			$.ajax({
+				 url: $.ctx()+'/login/general',
+                 type: 'POST',
+                 data: JSON.stringify(data),
+                 dataType:'json',
+                 contentType : "application/json; charset=UTF-8",
+                 success: d=>{
+                	 if(typeof d.member.mid==='undefined'){
+                		 alert('입력하신 아이디가 없습니다')
+                	 }else{
+                		 sessionStorage.setItem('userid',d.member.mid);
+                		 $('#id01').css('display','none');
+                		 logManager();
+                	 }
+                	 
+                 },
+                 error:e=>{
+                	 
+                 }
+			})
+		})
 			
 		}
 
@@ -160,7 +172,7 @@ app=(()=>{
 			
 	
 	let kakao=()=>{
-        $('#kakao_login_btn').attr('style','cursor:pointer').click(function loginWithKakao() {      
+            
         	Kakao.Auth.loginForm({
               success: function(authObj) {
                    Kakao.API.request({
@@ -206,7 +218,7 @@ app=(()=>{
               
             });
         	
-          });
+         
        
 	};
 	

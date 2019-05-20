@@ -24,12 +24,13 @@ auth =(()=>{
                         +'            </a>'
                         +'            <a class="location_setting pos_addr_text btn_geo_popup">서울특별시 마포구 대흥동 백범로 23</a>'
 
-                        +'            <div class="header_menu" style="font-weight: bold;">'
+                        +'            <div class="header_menu" style="font-weight: bold;font-weight: bold;font-size: 14px;color: black;">'
                         +'                <a href="#" class="menu_txt pblock ocean">바다</a>'
                         +'                <a href="#" class="menu_txt pblock river">민물</a>'
                         +'                <a href="#" class="menu_txt pblock hotel">숙박</a>'
                         +'                <a href="#" class="menu_txt pblock newsfeed">뉴스피드</a>'
                         +'                <a href="#" class="menu_txt pblock mypage">마이페이지</a>'
+                        +'				  <a href="#" class="menu_txt pblock logout">로그아웃</a>'
                         +'                <a class="menu_btn" id="adminbtn">'
                         +'                    <img style="padding-top: 10px;"src="/web/resources/img/homeimg/main/admin_icon.png">'
                         +'                </a> '
@@ -103,7 +104,7 @@ auth =(()=>{
 		
 	};
 	let follower_list=()=>{
-		let mid='gigi123'
+		let mid=sessionStorage.getItem('userid');
 		let follower_item='';
 		$('#myModal').attr('style','display: block; z-index:99999;');
 		$('.modal-dialog').attr('class','modal-dialog');
@@ -194,7 +195,7 @@ auth =(()=>{
 		});
 	};
 	let folloing_list=()=>{
-		let mid='gigi123'
+		let mid=sessionStorage.getItem('userid');
 		let folloing_item='';
 			$('#myModal').attr('style','display: block; z-index:99999;');
 			$('.modal-dialog').attr('class','modal-dialog');
@@ -254,7 +255,7 @@ auth =(()=>{
 	let right_nav_lander=()=>{
 		let foitem = '';
 		let ffoitem = '';
-		let mid='gigi123';
+		let mid=sessionStorage.getItem('userid');
 		$.ajax({
 			url: $.ctx()+'/arti/follo/'+mid,
 			type: 'get',
@@ -385,7 +386,7 @@ auth =(()=>{
         	return;
         }
         let startNo = $("#leftbar_content").children('#data_wow').last().data("no") || 0;
-		let mid ='gigi123';
+		let mid =sessionStorage.getItem('userid');
 		let page = 0;
 		let url = $.ctx()+'/myfeed/'+mid;
 		let data = { mid:mid,
@@ -625,9 +626,14 @@ let nav =()=>{
     eunyeong.init('mypage') 
         
     });
-    $('#logout').click(()=>{
-        
-    });
+    $('.logout').click(function(){
+		Kakao.Auth.logout(function(){
+			sessionStorage.removeItem('userid');
+			sessionStorage.removeItem('userpo');
+			sessionStorage.removeItem('kakaosession');
+			location.assign('/web');
+		});
+	})
 }
 	let css = ()=>{
 		/* head css  */
