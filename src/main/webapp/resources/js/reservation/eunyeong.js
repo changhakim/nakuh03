@@ -139,6 +139,7 @@ eunyeong = (()=>{
                 searchlist = {cate:t};
         		$(window).data('resajaxready',false);
         		$('.list_section').empty();
+            	$(eycompo.search_head()).appendTo('.list_section');
         		pro_fetchList(searchlist);
         	})
         })
@@ -152,6 +153,7 @@ eunyeong = (()=>{
                 searchlist = {cate:t};
         		$(window).data('resajaxready',false);
         		$('.list_section').empty();
+            	$(eycompo.search_head()).appendTo('.list_section');
         		pro_fetchList(searchlist);
         	})
         })
@@ -162,6 +164,7 @@ eunyeong = (()=>{
             searchlist = {cate:t};
     		$(window).data('resajaxready',false);
     		$('.list_section').empty();
+        	$(eycompo.search_head()).appendTo('.list_section');
     		pro_fetchList(searchlist);
         })
 
@@ -263,7 +266,6 @@ eunyeong = (()=>{
 				areatitle:areatitle,
 				searchword:searchword
 				};
-		
 		
 		$.ajax({
 			url: url,
@@ -375,15 +377,20 @@ eunyeong = (()=>{
     	
     	$('#wrapper').empty();
     	$('.scrolling').empty();
-    	$('<div id="scrolling" class="scrolling">'
+    	
+    	$('<div id="scrolling" class="scrolling scroll_up">'
     	+'   <div class="header_title">'
     	+'      <section>'
     	+'         <h1>'+ cate_title +'</h1>'
     	+'      </section>'
     	+'    </div>'
-    	+'</div>').appendTo('.header_area');
-    	$(eycompo.pro_head()).appendTo('#wrapper');
+    	+'</div>').appendTo('.scrolling');
+    	
+    	$('<div class="view_area container">'
+    			+'        <!-- 업체상세 상단 -->').appendTo('#wrapper');
     	$(eycompo.pro_info()).appendTo('.view_area');
+    	$(eycompo.pro_head()).prependTo('#view_reserve');
+    	
     	$('.title_arrow').append(x.calheader);
     	  let calval = 0;
           let calno = 0;
@@ -429,20 +436,12 @@ eunyeong = (()=>{
         			+'                <i class="personnel_choice" data-person="60">인원선택</i>'
         			+'            </a>'
         			+'        </div>'
-        			+'    </div>')
+        			+'    </div>');
           })        
-           
-    	$('#pro_review').click(e=>{
-    		$('#view_reserve').remove();
-    		$(eycompo.pro_review()).appendTo('.view_area');
-    	});
-    	
-    	$('#pro_use').click(e=>{
-    		$('#view_reserve').remove();
-    		$(eycompo.pro_use()).appendTo('.view_area');
+          
+    		$(eycompo.pro_map()).appendTo('#view_reserve');
         	$(document).ready(function() {
             	initMap(x);
-            });
     	});
         $('.proname').text(x.proname);
         $('.price').html(x.price+'<span>원</span>');
@@ -454,9 +453,6 @@ eunyeong = (()=>{
         $('#phone').text(x.phone);
         $('#resdate').text(x.today);
         
-	
-		
-		
 		$('#reserve_section').empty();
 		$.each(x.prolist, (i, j)=>{
    		   $('    <a class="reserve_area  view_box" data-cg-key="5201" value="noclick" data-gi-type="1" data-gi-key="1564964">'
@@ -564,7 +560,6 @@ eunyeong = (()=>{
 		$('.fishname').text(x.fishname);
  		$('#company').text(x.company);
  	    
-
      };
      
      //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*상품결제 : 결제값입력*/
@@ -659,7 +654,6 @@ eunyeong = (()=>{
     	$('#wrapper').empty();
 		$(eycompo.complete_pay()).appendTo('#wrapper');
 		$('#check_res').click(e=>{
-			alert('업체통화는 앱에서만 이용가능합니다.');
 			mypage();
 		});
     }; 
