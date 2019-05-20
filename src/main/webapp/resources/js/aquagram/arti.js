@@ -15,7 +15,6 @@ arti =(()=>{
 				$.getScript($.js()+'/reservation/eunyeong.js')
 			).done(()=>{
 				arti_default_loader();
-
 				
 			});  
 		

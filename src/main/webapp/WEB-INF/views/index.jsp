@@ -12,17 +12,16 @@
  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAY5vEXIghqf7_mEdWcG9kqcEeDOpaLixY&callback=initMap"></script>
  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
  <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
-   <link id="aaadfa" href="/web/resources/css/home/responsive_basic.css" rel="stylesheet">
+ <link id="aaadfa" href="/web/resources/css/home/responsive_basic.css" rel="stylesheet">
  <link id="aaadfa" href="/web/resources/css/home/notosans.css" rel="stylesheet">
+ <link href="https://fonts.googleapis.com/css?family=Baloo+Bhai|Nanum+Gothic|Nanum+Myeongjo|Noto+Sans+KR&display=swap" rel="stylesheet">
+ 
 
 </head>
 <body>
  <!--  modal --->
 <div id="id01" class="modal">
   <div class="modal-content animate" action="#">
-    <div class="imgcontainer raw">
-      <span class="close1" title="Close Modal">&times;</span>
-    </div>
 	
     <div class="container-fluid">
       <div id="change_login_form">
@@ -145,7 +144,7 @@
 </div>
 	<footer style="text-align: center;margin-top: 50px;"> 
 	<div>
-	<h1 style="margin-bottom: 30px;font-family: 'Nanum Gothic', sans-serif;">Our Team Member</h1>
+	<h1 style="margin-bottom: 30px;font-family:  'Baloo Bhai', cursive;">Our Team Member</h1>
 	</div>
 		<div>
 		<img src="${img}/homeimg/main/nakuh_footer.JPG">
@@ -196,7 +195,6 @@
 
 <script>
 app.init('<%= application.getContextPath() %>');
-app.kakao();
 
 </script>
 </html>

@@ -22,7 +22,7 @@ eycompo ={
 			+'                <div class="header_title">'
 			+'            <section>'
 			+'                <!-- <a class="title_reserve_line">예약검색</a> -->'
-			+'                <h1 id="cate_head">'
+			+'                <h1 id="cate_head" >'
 			+'                    바다낚시                                    </h1>'
 			+'            </section>'
 			+'        </div>'
