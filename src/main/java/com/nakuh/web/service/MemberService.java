@@ -14,7 +14,8 @@ public interface MemberService {
 	public List<Member> retrieveMembers();
 	public List<Member> retrieveMembers(String mid);
 	public int countMembers();
-	public boolean existsMember(String searchWord);
+	public Member existsMember(Member m);
+	public boolean existsMemberforkakao(String searchword);
 	
 	public void modifyMember(Member mem);
 	public void removeMember(Member mem);

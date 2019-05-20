@@ -35,7 +35,7 @@ public class MemberController {
 		member.setMail(res.get("email").toString());
 		member.setProfilephoto(res.get("profileimg").toString());
 		member.setName(res.get("name").toString());
-		IPredicate p = (Object o) -> memberMap.existsMember(member.getMid());
+		IPredicate p = (Object o) -> memberMap.existMemberForKakao(member.getMid());
 		if(p.test(member.getMid())) {
 			map.clear();
 			IConsumer c = (Object o) -> memberMap.insertMember(member);
@@ -59,6 +59,13 @@ public class MemberController {
 		 * System.out.println(map.get("member").toString());
 		 */
 	
+		return map;
+	}
+	@PostMapping("/login/general")
+	public Map<?, ?> generallogin(@RequestBody Member m){
+		map.clear();
+		IFunction f = (Object o) -> memberservice.existsMember(m);
+		map.put("member", f.apply(m));
 		return map;
 	}
 	
