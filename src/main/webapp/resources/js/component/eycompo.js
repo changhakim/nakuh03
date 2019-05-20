@@ -300,7 +300,7 @@ eycompo ={
 			+'                    					<em>보험</em>'
 			+'					                    <strong id="company">현대로얄호</strong>'
 			+'                </dt>'
-			+'                <dd id="address" >인천 중구 축항대로 142</dd>'
+			+'                <dd id="address" style="font-size: 17px;">인천 중구 축항대로 142</dd>'
 			+'                                <dd class="call_dd"><a class="login_tel" data-key="1326"></a></dd>'
 			+'                            </dl>'
 			+'            <div class="like_call_link">'
