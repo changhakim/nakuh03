@@ -28,7 +28,7 @@ arti =(()=>{
 		$('head').after(jwcompo.photo_feed_css_hover());
 		feed_my();
 		move();
-		infinitemove();
+		infinitemove();	
 		arti_img_upload();
 		
 		
@@ -189,12 +189,11 @@ arti =(()=>{
 						+'     		<div id="item" style="top: 5px;">'
 						+'                  <div class="list-group-item list-group-item-action" id="comments_my" style="height: 58px; border: none; display: -webkit-box;"> '
 						+'                <img class="img-circle" alt="Cinque Terre" src="resources/img/aquagram/profilephoto/'+d.als.profilephoto+'" style="width: 40px; height: 40px; position: center"/>'
-						+'                 <div style="display: -webkit-box;"><h5 style="top:0px; left: 7px; font-weight:bold;">'+d.als.mid+'</h5><div><h6 id="contag" style="left: 15px; width: 90%; display: initial;">'+d.als.content+'</h6></div></div>'
-						+'                   <div style="font-size: 5px; left: 105px; top: 8px;">'+d.als.artdate+'</div>'
+						+'                 <div style="display: -webkit-box;"><h5 style="top:0px; left: 7px; font-weight:bold;">'+d.als.mid+'</h5><div><h6 id="contag" style="left: 15px; width: 100%; text-align: left;">'+d.als.content+'<br></h6></div></div>'
 						+'                </div> '
 						+'              </div> '
 						+'         <li>'
-						+'         <div class="comments_list_'+x.rownum+'" id="comments_list_'+x.rownum+'">'
+						+'         <div class="comments_list_'+d.als.rownum+'" id="comments_list_'+d.als.rownum+'">'
 						+'             </div>               '
 						+'        </li>'
 						+'          </ul>'
@@ -210,22 +209,36 @@ arti =(()=>{
 						+'    </div>'
 						+'  </div>'
 						+'</div>');
-				$.each(d.tls,(i,j)=>{
-					$('#contag').append('&nbsp;<a>'+j.tagname+'</a>');
-				});
+				
+					$.each(d.tls,(i,j)=>{
+						if(j.tagname == null){
+							j.tagname = '';
+						$('#contag').append('&nbsp;<a>'+j.tagname+'</a>');
+						}
+						$('#contag').append('&nbsp;<a>'+j.tagname+'</a>');
+					});
+			
 				$.each(d.cls,(i,j)=>{
-					comlist +=					'			<div class="item" style="display: -webkit-box; " value="'+j.comid+'">'	
+					comlist =					'			<div class="item_'+i+'" style="display: -webkit-box; " value="'+j.comid+'">'	
 					+'				        	<div class="list-group-item list-group-item-action" style="height: 58px; width: 100%; top: 11px; border: none; display: -webkit-box;"> '
 					+'							 <div> <img class="img-circle" alt="Cinque Terre" src="resources/img/aquagram/profilephoto/'+j.comprophoto+'" style="width: 50px; height: 50px; position: center"/></div> '
-					+'								<div style="left: 13px; text-align: left;"><h5 style="margin-bottom: 3px; font-weight: bold;">'+j.comid+'</h5><p style="font-size: 7px;">'+j.cmname+'</p></div>'
+					+'								<div style="left: 13px; text-align: left;"><h5 id="item_user_'+i+'"style="margin-bottom: 3px; font-weight: bold;" value="'+j.comid+'">'+j.comid+'</h5><p style="font-size: 7px;">'+j.cmname+'</p></div>'
 					+'							<div style="position: relative; left: 30px;"><h5>'+j.comm+'</h5></div>'
 					+'								</div> '		
 					+'						</div> ';
 					
 	
 					
+					$(comlist).appendTo('#comments_list_'+d.als.rownum);
+					$('#item_user_'+i).click(function(){
+					let scahid = $(this).attr('value');
+						$('#myModal').modal('hide');
+						fous.init(scahid);
+						
+					});
 				});
-				$(comlist).appendTo('#comments_list');
+				
+				
 				$('#input-group_'+x.rownum).children('span').click(function(e){
 					e.preventDefault();
 					//alert('이거 크릭한거 맞아?' + $('#dicomment_'+$(this).attr('value')).val());
@@ -281,8 +294,8 @@ arti =(()=>{
 			$('.modal-body').hide();
 			$('.modal-footer').remove();
 			$('#change_modal_2').attr('sytle','top: 200px; width: 40%;').html('<div class="modal-body">'
-					+'          <div  class="col-sm-8" style="height: 600px; display: block;"><img id="mirror_img" src="resources/img/aquagram/default_image.jpg" width="600" height="600"></div>'
-					+'          <div class="col-sm-4" style="background-color:#fff; height: 600px; ">'
+			/*		+'          <div  class="col-sm-8" style="height: 600px; display: block;"><img id="mirror_img" src="resources/img/aquagram/default_image.jpg" width="600" height="600"></div>'*/
+					+'          <div class="col-sm-4" style="background-color:#fff; height: 600px; width: 100%;">'
 					+'            	  <div class="row" id="user_info" style="padding-bottom: 7px; border-bottom: 1px solid #ddd;">'
 					+'						                    <div class="group-item" style="height: 58px; border: none; margin-top: 15px; margin-left: 0px; display: inline-flex;">'
 					+'						                        <img class="img-circle" alt="Cinque Terre" src="resources/img/aquagram/'+sessionStorage.getItem('userid')+'" style="width: 50px; height: 50px; position: center"/>'
@@ -309,9 +322,9 @@ arti =(()=>{
 					+'						        </li>'
 					+'						          </ul>'
 					+'						            </div>'
-					+'						            <div style="text-align: center; padding: 6px; display: -webkit-box; margin-left: 35px;">'
-					+' 										<div style="margin: 1px"><button type="button" class="btn btn-danger">Danger</button></div>'
-					+' 										<div style="margin: 1px"><button type="submit" class="btn btn-primary" id="from_submit_btn">Primary</button></div>'
+					+'						            <div style="text-align: center; padding: 6px; display: -webkit-box; margin-left: 380px;">'
+					+' 										<div style="margin: 1px"><button type="button" class="btn btn-danger">취소</button></div>'
+					+' 										<div style="margin: 1px"><button type="submit" class="btn btn-primary" id="from_submit_btn">등록</button></div>'
 					+'						      		</div>'
 					+'						        </div>'
 					+'						  </div>'
