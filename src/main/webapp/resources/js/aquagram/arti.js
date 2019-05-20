@@ -21,6 +21,8 @@ arti =(()=>{
 		
 	};
 	let arti_default_loader=()=>{
+		$(window).data('ajaxready2',false);
+		$(window).data('ajaxready',false);
 		$('#donw_content').html(jwcompo.insta_base());
 		$('.instagram-wrap').attr('style','background-color: white;');
 		$('#donw_content').attr('style','background-color: white;');

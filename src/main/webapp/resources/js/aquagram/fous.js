@@ -15,6 +15,7 @@ fous =(()=>{
 				$.getScript($.js()+'/aquagram/arti.js'),
 				$.getScript($.js()+'/reservation/eunyeong.js')
 			).done(()=>{
+				$(window).data('ajaxready',false);
 				fous_default_loader(x);
 				
 				
@@ -41,6 +42,7 @@ fous =(()=>{
 			$('<div id="right_nav" class="col-md-4" role="complementary"><nav id="right_nav_cont" class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix-top" data-spy="affix"></div></div>').appendTo('#donw_content');
 			$(jwcompo.left_content()).appendTo('#leftbar_content');
 			$(jwcompo.right_nav()).appendTo('#right_nav_cont');
+			$('#leftbar_content').empty();
 /*			$('#leftbar_content').empty();
 			$('#right_nav').empty();*/
 			auth.init();
@@ -52,7 +54,7 @@ fous =(()=>{
 		$('head').children('style').empty();
 	};
 	
-	let fous_mynavd =(x)=>{
+/*	let fous_mynavd =(x)=>{
 		
 		 $('#my_fv').text(x[0].artcount);
 		  $('#followerid').text(x[0].followerCount);
@@ -61,7 +63,7 @@ fous =(()=>{
 		  $('#navmypage').html('<img id="userimg" class="img-circle" alt="Cinque Terre" src="resources/img/aquagram/profilephoto/'+x[0].userphoto+'" '
 					+'style="width: 50px; height: 50px; position: center;"/>'+x[0].userid+'</div></li>');
 		
-	};
+	};*/
 let infinitemove =(x)=>{
 		
 		let isEnd = false;
@@ -122,9 +124,9 @@ let infinitemove =(x)=>{
 	            				  		artcount:j.artCount,
 	            				  		followerCount:j.followerCount,
 	            				  		folloingCount:j.folloingCount};
-	 	                	 if(j.mid !== ''){
+/*	 	                	 if(j.mid !== ''){
 	 	                		//fous_mynavd(userd);
-		                	 }
+		                	 }*/
 	                		  fous_renderList(false, j); 
 		                	 
 		                  	});
@@ -173,7 +175,7 @@ let infinitemove =(x)=>{
 	};
 	
 	let fous_detail =(x)=>{
-		$('#change_modal_2').empty();
+		$('#change_modal_2').empty();	
 		let comlist='';
 		$.ajax({
 			url: $.ctx()+'/arti/detail/'+x,
@@ -184,7 +186,7 @@ let infinitemove =(x)=>{
 			success: d=>{
 				$(window).data('ajaxready', false);
 				$('#myModal').attr('style','display: block; z-index:99999;');
-				$('.modal-dialog').attr('style','top:200px;');
+				$('.modal-dialog').attr('style','top: 150px;');
 				$('.modal-dialog').attr('class','modal-dialog modal-lg');
 				$('.modal-content').attr('style','margin:auto;');
 				$('.modal-header').hide();
@@ -207,19 +209,19 @@ let infinitemove =(x)=>{
 						+'     		<div id="item" style="top: 5px;">'
 						+'                  <div class="list-group-item list-group-item-action" id="comments_my" style="height: 58px; border: none; display: -webkit-box;"> '
 						+'                <img class="img-circle" alt="Cinque Terre" src="resources/img/aquagram/profilephoto/'+d.als.profilephoto+'" style="width: 40px; height: 40px; position: center"/>'
-						+'                 <div style="display: -webkit-box;"><h5 style="top:0px; left: 7px; font-weight:bold;">'+d.als.mid+'</h5><div><h6 id="contag" style="left: 15px; width: 90%; display: initial;">'+d.als.content+'</h6></div></div>'
+						+'                 <div style="display: -webkit-box;"><h5 style="top:0px; left: 7px; font-weight:bold;">'+d.als.mid+'</h5><div><h6 id="contag" style="left: 15px; width: 100%; text-align: left;">'+d.als.content+'<br></h6></div></div>'
 						+'                   <div style="font-size: 5px; left: 105px; top: 8px;">'+d.als.artdate+'</div>'
 						+'                </div> '
 						+'              </div> '
 						+'         <li>'
-						+'         <div class="comments_list_'+x.rownum+'" id="comments_list_'+x.rownum+'">'
+						+'         <div class="comments_list_'+x.artnum+'" id="comments_list_'+x.artnum+'">'
 						+'             </div>               '
 						+'        </li>'
 						+'          </ul>'
 						+'            </div>'
 						+'				<div sytle="height: 147px;">	'
 						+'				</div>		'
-						+'							    	<div class="input-group" id="input-group_'+x.rownum+'">'
+						+'							    	<div class="input-group" id="input-group_'+d.als.rownum+'">'
 						+'										<input style="border: none; background: transparent;" id="dicomment_'+d.als.artnum+'" type="text" class="form-control" name="" placeholder="댓글입력">'
 						+'										<span style="border: none; background: transparent;" class="input-group-addon" value="'+d.als.artnum+'"><p>게시</p></span>'
 						+'									    </div>'
@@ -243,8 +245,9 @@ let infinitemove =(x)=>{
 	
 					
 				});
-				$(comlist).appendTo('#comments_list');
-				$('#input-group_'+x.rownum).children('span').click(function(e){
+				$(comlist).appendTo('#comments_list_'+x.artnum);
+				$('#input-group_'+d.als.rownum).children('span').click(function(e){
+					alert($(this).attr('value'));
 					e.preventDefault();
 					//alert('이거 크릭한거 맞아?' + $('#dicomment_'+$(this).attr('value')).val());
 					//alert('글번호는?'+$(this).attr('value'));
