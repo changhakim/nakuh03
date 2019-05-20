@@ -17,7 +17,7 @@ app=(()=>{
 		).done(()=>{
 			Kakao.init('f7d32ac01021f4eb79136a2e7d1c5523');
 			app_defualt_loader();
-			/*crawl();*/
+			/*acrawl();*/
 		});
 	};
 	
