@@ -33,6 +33,17 @@ public class FollowerController {
 		
 		return map;
 	};
+	@GetMapping("/arti/subfollo/{mid}")
+	public Map<?,?> feedfollosub(@PathVariable String mid)throws Exception{
+		logger.info("=========feedfollosub 진입======");
+		map.clear();
+		IFunction f = (String) -> folmap.selectFollowers(mid);
+		List<?> folList = (List<?>) f.apply(mid);
+		System.out.println("??"+folList);
+		map.put("follist", folList);
+		
+		return map;
+	};
 	
 	@GetMapping("/serach/follower/{mid}")
 	public Map<?, ?> followerList(@PathVariable String mid)throws Exception{

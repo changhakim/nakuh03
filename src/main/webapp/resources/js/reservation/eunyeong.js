@@ -29,7 +29,7 @@ eunyeong = (()=>{
 					+'            <a href="#" class="header_logo off active home">'
 					+'                <img src="/web/resources/img/homeimg/main/nakuhlogo.jpg" style="height: 30px;">'
 					+'            </a>'
-					+'            <a class="location_setting pos_addr_text btn_geo_popup">서울특별시 마포구 대흥동 백범로 23</a>+'
+					+'            <a class="location_setting pos_addr_text btn_geo_popup">서울특별시 마포구 대흥동 백범로 23</a>'
 
 					+'            <div class="header_menu" style="font-weight: bold;">'
 					+'                <a href="#" class="menu_txt pblock ocean">바다</a>'
