@@ -71,6 +71,8 @@
 			<a href="#" class="header_logo off active home">
 				<img src="${img}/homeimg/main/nakuhlogo.jpg" style="height: 30px;">
 			</a>
+			<p id = "status"></p>
+			<a id = "map-link" target="_blank"></a>
 			<a class="location_setting pos_addr_text btn_geo_popup">서울특별시 마포구 대흥동 백범로 23</a>
 
 			<div class="header_menu" style="font-weight: bold;">
@@ -89,13 +91,17 @@
 <div class="wrap_area" id="wrapper">
 <div class="main_area container bg_mt" style="padding-top: 58px;">
 
-
-   		<section class="vdosection">
-  		<video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop">
+<div class="main_visual_area">
+				<div class="visual_cover" style="background:#399dff ;height: 300px;" >
+					<a class="visual_img" data-url="https://www.moolban.com/more/notice_info/140" data-key="102" data-sort="5"><img src="https://img.moolban.com/unsafe/1440x810/filters:no_upscale()/admin/banner/20181217/4c032f0394b932d7b9054792c6e1e8bb.png?date=1558074607" alt=""></a>
+				</div>
+</div>
+<!--    		<section class="vdosection">
+  		<video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop" style="object-fit: fill;">
     		<source src="/web/resources/video/nakuh_main.mp4" type="video/mp4">
   		</video>
-		</section>
-    	<div class="main_icon_area">
+		</section> -->
+    	<div class="main_icon_area" style="margin-top: 60px;">
 <section>
              <a class="guide" data-url="/category/list?sea_type=1&amp;cc_key=1&amp;cci_key=1" data-id="1" data-sub="1" data-count="0"><img src="https://img.moolban.com/unsafe/images/icon/A/time.png?rand=1556514130">시간·체험<span>바다</span></a>
              <a class="guide ocean" data-url="/category/list?sea_type=1&amp;cc_key=2&amp;cci_key=" data-id="1" data-sub="2" data-count="1"><img src="https://img.moolban.com/unsafe/images/icon/A/seahole.png?rand=1556514130">바다낚시<span>바다</span></a>
@@ -119,7 +125,7 @@
 	</div>
     
     <!-- 기획전 -->
-<div class="main_plan_area list_sty_box">
+<div class="main_plan_area list_sty_box" style="margin-top: 50px;">
     <section>
         <p class="list_title">기획전<!--<a>모두보기</a>--></p>
         <div class="swiper-container swiper-container-horizontal">
@@ -137,47 +143,13 @@
         <div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets"><span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button" aria-label="Go to slide 1"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 2"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 3"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 4"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 5"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 6"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 7"></span></div>
     </section>
 </div>
-
-<div class="main_plan_banner list_sty_box">
-    <p class="list_title">기획전<!--<a>모두보기</a>--></p>
-    <div class="inner">
-                <a href="/home/plan_view?seq_key=74"><img src="https://img.moolban.com/unsafe/images/promotion/9c097b401ac3e964843ec3666c2534a9.jpg?rand=1556514130" alt=""></a>
-                <a href="/home/plan_view?seq_key=67"><img src="https://img.moolban.com/unsafe/images/promotion/dc992d27905dd97c44c06a979bdd6c69.jpg?rand=1556514130" alt=""></a>
-                <a href="/home/plan_view?seq_key=64"><img src="https://img.moolban.com/unsafe/images/promotion/7f8581faa3654cc840c8c946b271d5b5.jpg?rand=1556514130" alt=""></a>
-                <a href="/home/plan_view?seq_key=68"><img src="https://img.moolban.com/unsafe/images/promotion/ba3b990c345e0916de4a6e5b71bcc4a4.jpg?rand=1556514130" alt=""></a>
-                <a href="/home/plan_view?seq_key=69"><img src="https://img.moolban.com/unsafe/images/promotion/075b7f9ec541801b680e9b94ca2caf2f.jpg?rand=1556514130" alt=""></a>
-                <a href="/home/plan_view?seq_key=65"><img src="https://img.moolban.com/unsafe/images/promotion/8d546c9af908c8c4ad7b38b3812fe965.jpg?rand=1556514130" alt=""></a>
-                <a href="/home/plan_view?seq_key=66"><img src="https://img.moolban.com/unsafe/images/promotion/adba7d9940984c53dfcb15f46c25e8b0.jpg?rand=1556514130" alt=""></a>
-                <a href="/home/plan_view?seq_key=62"><img src="https://img.moolban.com/unsafe/images/promotion/5080c439f4f6f85c0c989990b600f492.jpg?rand=1556514130" alt=""></a>
-            </div>
-</div>
-<section>
- 
-</section>
-
-	<footer class="main_footer_area">
-		<section>
-			<div class="logo_drop clearfix">
-				<a class="footer_logo"><img src="https://img.moolban.com/unsafe/asset/www/responsive/img/basic/footer_logo.png" alt=""></a>
-				<a class="footer_drop">사업자정보</a>
-			</div>
-			<div class="adress_box">
-				<address>
-					<p><span>(주)아이스앤브이</span><span>대표이사 : 박종언</span><span>주소 : 서울시 금천구 가산디지털1로 186 704호 ICE&amp;V</span></p>
-					<p><a href="tel:1599-6975">고객센터 : 1599-6975</a><a href="mailto:help@moolban.com">일반문의 : help@moolban.com</a></p>
-                    <p><span>업무제휴 관련 문의 : <a href="mailto:marketing@moolban.com">marketing@moolban.com</a></span></p>
-					<p><span>사업자 등록번호 : 617-81-81455</span><span>통신판매번호 : 제2012-서울금천-0485호</span></p>
-
-				</address>
-			</div>
-			<div class="agree_box">
-				<a href="/about">서비스 소개</a>
-				<a href="/more/policy_info/personal">개인정보처리방침</a>
-				<a href="/more/policy_info/agreement">서비스이용약관</a>
-				<a href="/more/policy_info/youth_protection">청소년보호정책</a>
-			</div>
-			<p class="copyright">Copyright ICE&amp;V Corp. All Rights Reserved.</p>
-		</section>
+	<footer style="text-align: center;margin-top: 50px;"> 
+	<div>
+	<h1 style="margin-bottom: 30px;font-family: 'Nanum Gothic', sans-serif;">Our Team Member</h1>
+	</div>
+		<div>
+		<img src="${img}/homeimg/main/nakuh_footer.JPG">
+		</div>
 	</footer>
 </div>
 </div>
