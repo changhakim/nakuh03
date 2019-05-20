@@ -53,6 +53,7 @@ auth =(()=>{
 		$(jwcompo.my_navbar()).appendTo('#my_navbar');
 		$('#leftbar_content').empty();
 		$('#users_list').empty();
+		$('#new_users_list').empty();
 		css();
 		nav();
 		arti.arti_img_upload();
@@ -241,6 +242,7 @@ auth =(()=>{
 	
 	let right_nav_lander=()=>{
 		let foitem = '';
+		let ffoitem = '';
 		let mid='gigi123';
 		$.ajax({
 			url: $.ctx()+'/arti/follo/'+mid,
@@ -249,17 +251,17 @@ auth =(()=>{
 			dataType: 'json',
 			contentType: 'application/json; charset=UTF-8;',
 			success: d=>{
-
 				$.each(d.follist,(i,j)=>{
-					foitem = '			<div class="item" id="item_'+j.artnum+' style="display: -webkit-box; value="'+j.folloid+'"">'	
-						+'				        	<div class="list-group-item list-group-item-action" style="height: 58px; width: 80%; top: 11px; border: none; display: -webkit-box;"> '
+					foitem = '			<div class="item" id="item_'+j.artnum+'" style="cursor:pointer; display: -webkit-box; height: 60px;" value="'+j.folloid+'">'	
+						+'				        	<div class="list-group-item list-group-item-action" style="height: 58px; width: 76%; top: 11px; border: none; display: -webkit-box;"> '
 						+'							 <div> <img class="img-circle" alt="Cinque Terre" src="resources/img/aquagram/profilephoto/'+j.follpphoto+'" style="width: 50px; height: 50px; position: center"/></div> '
 						+'								<div style="left: 13px; text-align: left;"><h5 style="margin-bottom: 3px; font-weight: bold;">'+j.folloid+'</h5><p style="font-size: 7px;">'+j.name+'</p></div>'
 						+'								</div> '
-						+'								<button type="button" class="btn btn-default" value="'+j.folloid+'" style="position: relative; top: 21px;">팔로잉</button>'
+						+'								<div value="'+j.folloid+'" style="position: relative; top: 14px;"><h5>새로운소식</h5><h5>'+j.artdate+'</h5></div>'
+						+'							</div> '
 						+'							</div> ';
 
-					$(foitem).appendTo('#users_list').attr('style','cursor:pointer').click(function(){
+					$(foitem).appendTo('#users_list').click(function(){
 						/*alert('??!!'+$(this).attr('value'));*/
 						let scahid = $(this).attr('value');
 						fous.init(scahid);
@@ -267,12 +269,59 @@ auth =(()=>{
 					});
 				});
 
+				$.ajax({
+					url: $.ctx()+'/arti/subfollo/'+mid,
+					type: 'get',
+					data: JSON.stringify(mid),
+					dataType: 'json',
+					contentType: 'application/json; charset=UTF-8;',
+					success: d=>{
+						$.each(d.follist,(i,j)=>{
+							if(j.follostate==0){
+								ffoitem = '			<div class="item" style="display: -webkit-box;">'	
+									+'				        	<div class="list-group-item list-group-item-action" style="height: 58px; width: 76%; top: 11px; border: none; display: -webkit-box;"> '
+									+'							 <div> <img class="img-circle" alt="Cinque Terre" src="resources/img/aquagram/profilephoto/'+j.follpphoto+'" style="width: 50px; height: 50px; position: center"/></div> '
+									+'								<div style="left: 13px; text-align: left;"><h5 style="margin-bottom: 3px; font-weight: bold;">'+j.mid+'</h5><p style="font-size: 7px;">'+j.name+'</p></div>'
+									+'								</div> '
+									+'								<button type="button" class="btn btn-primary" value="'+j.mid+'" style="position: relative; top: 21px;">팔로우</button>'
+									+'							</div> ';
+
+								$(ffoitem).appendTo('#new_users_list').children('button').click(function(){
+									let data = {mid:'gigi123', 
+											folloid:$(this).attr('value')};
+									if($(this).text()=='팔로우'){
+										/*alert('??'+$(this).attr('value'));*/
+										folloings(data);
+										$(this).attr('class','btn btn-default').text('팔로잉');
+									}else{
+										nufollower(data);
+										$(this).attr('class','btn btn-primary').text('팔로우');
+										
+									}
+									/*alert('??!!'+$(this).attr('value'));*/
+/*									let scahid = $(this).attr('value');
+									fous.init(scahid);*/
+
+								});
+							}
+
+						});
+					
+						},error:e=>{}
+					
+				});
+					
+				
+				
+				
 			},error:e=>{
 				alert('실패!');
 				
 			}
 			
 		});
+
+		
 //		function fn_dateTimeToFormatted(dt) {
 //			var min = 60 * 1000;
 //			var c = new Date()
