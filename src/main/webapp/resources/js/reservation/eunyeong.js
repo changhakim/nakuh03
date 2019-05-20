@@ -12,7 +12,7 @@ eunyeong = (()=>{
         calnum=1;
         onCreate(x);
     }
-    
+
     let onCreate =(x)=>{
         setContentView(x);
     }
