@@ -21,11 +21,13 @@ arti =(()=>{
 		
 		
 	};
+	
 	let arti_default_loader=()=>{
 		$('#donw_content').html(jwcompo.insta_base());
 		$('.instagram-wrap').attr('style','background-color: white;');
 		$('#donw_content').attr('style','background-color: white;');
 		$('head').after(jwcompo.photo_feed_css_hover());
+		let session_u = app.session_u();
 		feed_my();
 		move();
 		infinitemove();
