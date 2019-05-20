@@ -32,9 +32,9 @@ public class FollowerServiceImpl implements FollowerService{
 	}
 
 	@Override
-	public Follower retrieveFollower(String searchWord) {
+	public List<Follower> retrieveFollower(Follower fol) {
 		
-		return folMap.selectFollower(searchWord);
+		return folMap.selectFollower(fol);
 	}
 
 	@Override

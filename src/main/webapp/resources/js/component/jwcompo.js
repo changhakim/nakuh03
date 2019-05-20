@@ -346,9 +346,9 @@ jwcompo = {
 			+'    <li style="position: center"><div style="top:10px; left:40px;"><span class="glyphicon glyphicon-use" aria-hidden="true"></span></div></li>'
 			+'    '*/
 		  +'  <div class="input-group" style=" top: 16px; left: 20px; width: 30%; border-radius: 6px; border: 2px solid; border-color : #f5050396;">'
-		  +'   <input type="text" class="form-control" placeholder="Search for...">'
+		  +'   <input type="text" id="search_from" class="form-control" placeholder="Search for...">'
 		  +'   <span class="input-group-btn">'
-		  +'     <button class="btn btn-default" type="button">검색</button>'
+		  +'     <button class="btn btn-default" id="search_but" type="button">검색</button>'
 		  +'   </span>'
 			+'  </ul>'
 			
