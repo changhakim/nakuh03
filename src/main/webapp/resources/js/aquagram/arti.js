@@ -195,7 +195,7 @@ arti =(()=>{
 						+'                </div> '
 						+'              </div> '
 						+'         <li>'
-						+'         <div class="comments_list_'+x.rownum+'" id="comments_list_'+x.rownum+'">'
+						+'         <div class="comments_list_'+x.artnum+'" id="comments_list_'+x.artnum+'">'
 						+'             </div>               '
 						+'        </li>'
 						+'          </ul>'
@@ -212,6 +212,9 @@ arti =(()=>{
 						+'  </div>'
 						+'</div>');
 				$.each(d.tls,(i,j)=>{
+					if(j.tagname==null){
+						$('#contag').append('&nbsp;<a> </a>');
+					}
 					$('#contag').append('&nbsp;<a>'+j.tagname+'</a>');
 				});
 				$.each(d.cls,(i,j)=>{
@@ -226,8 +229,8 @@ arti =(()=>{
 	
 					
 				});
-				$(comlist).appendTo('#comments_list');
-				$('#input-group_'+x.rownum).children('span').click(function(e){
+				$(comlist).appendTo('#comments_list_'+x.artnum);
+				$('#input-group_'+d.als.rownum).children('span').click(function(e){
 					e.preventDefault();
 					//alert('이거 크릭한거 맞아?' + $('#dicomment_'+$(this).attr('value')).val());
 					//alert('글번호는?'+$(this).attr('value'));

@@ -13,7 +13,7 @@ public interface FollowerMapper {
 	public List<Follower> selectAllFollowersList(String fod);
 	public List<Follower> selectFollowers(String fod);
 	public List<Follower> selectFollowing(String fod);
-	public Follower selectFollower(String searchWord);
+	public List<Follower> selectFollower(Follower fol);
 	public int countFollowers();
 	public boolean existsFollower(String searchWord);
 	public void updateFollower(Follower fol);
