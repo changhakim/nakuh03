@@ -224,7 +224,7 @@ app=(()=>{
 	
 	
 	return {init:init,
-			onCreate:onCreate, kakao:kakao, session_u:session_u}
+			onCreate:onCreate, kakao:kakao}
 	
 	
 })();

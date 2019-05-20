@@ -46,12 +46,15 @@ FROM MEMBERS M
 </select>
 <select id="selectFollower" resultType="com.nakuh.web.domain.Follower" 
 			parameterType="com.nakuh.web.domain.Follower">
-SELECT CASE WHEN F.FOLLOID=#{folloid} THEN '1' ELSE '0' END AS follostate, M5.MID MID, M5.name name,M5.PROFILEPHOTO follpphoto, F.FOLLOID, F.MID
-FROM (SELECT * 
-		FROM MEMBERS M 
-		WHERE MID LIKE '%${mid}%')M5
-		JOIN FOLLOWERS F
-		ON M5.MID LIKE F.MID		
+
+       SELECT CASE WHEN FOLLOID = #{folloid} THEN '1' ELSE '0' END AS  follostate, FOLLOID, M.MID, NAME, M.PROFILEPHOTO follpphoto
+        FROM (SELECT *
+           FROM FOLLOWERS 
+           WHERE FOLLOID LIKE #{folloid}) F RIGHT JOIN
+              (SELECT *
+              FROM MEMBERS
+              WHERE mid like '%${mid}%') M ON F.MID LIKE M.MID		
+		
 </select>
 
 <insert id="insertFollower" parameterType="com.nakuh.web.domain.Follower">
