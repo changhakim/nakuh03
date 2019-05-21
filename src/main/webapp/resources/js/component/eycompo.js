@@ -849,7 +849,7 @@ eycompo ={
 		},
 		
 		mypage : ()=>{
-			return '<div class="rtreserve_area container bg_mt" style="padding-top: 111.445px;">'
+			return '<div class="rtreserve_area container bg_mt" style="padding-top: 10px;">'
 			+'	<div class="rtreserve_fix">'
 			+'		<div class="rtreserve_tab">'
 			+'			<div class="tab_area">'

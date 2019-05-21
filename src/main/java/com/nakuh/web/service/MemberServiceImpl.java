@@ -46,8 +46,7 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public Member existsMember(Member m) {
 		
-		System.out.println(memMap.existsMember(m).toString());
-		return m ;
+		return memMap.existsMember(m) ;
 	}
 
 	@Override

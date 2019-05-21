@@ -111,7 +111,7 @@ app=(()=>{
                  dataType:'json',
                  contentType : "application/json; charset=UTF-8",
                  success: d=>{
-                	 if(typeof d.member.mid==='undefined'){
+                	 if(d.member.mid==='1'){
                 		 alert('입력하신 아이디가 없습니다')
                 	 }else{
                 		 sessionStorage.setItem('userid',d.member.mid);

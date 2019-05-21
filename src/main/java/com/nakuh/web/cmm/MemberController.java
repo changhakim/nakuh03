@@ -65,7 +65,13 @@ public class MemberController {
 	public Map<?, ?> generallogin(@RequestBody Member m){
 		map.clear();
 		IFunction f = (Object o) -> memberservice.existsMember(m);
-		map.put("member", f.apply(m));
+		if(f.apply(m)==null) {
+		member.setMid("1");
+		map.put("member", member);
+		}else {
+		 map.put("member", f.apply(m));
+		}
+		
 		return map;
 	}
 	

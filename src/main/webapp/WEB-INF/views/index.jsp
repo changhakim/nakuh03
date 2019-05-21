@@ -13,7 +13,6 @@
  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
  <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
  <link id="aaadfa" href="/web/resources/css/home/responsive_basic.css" rel="stylesheet">
- <link id="aaadfa" href="/web/resources/css/home/notosans.css" rel="stylesheet">
  <link href="https://fonts.googleapis.com/css?family=Baloo+Bhai|Nanum+Gothic|Nanum+Myeongjo|Noto+Sans+KR&display=swap" rel="stylesheet">
  
 
