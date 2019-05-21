@@ -25,19 +25,16 @@
 	
     <div class="container-fluid">
       <div id="change_login_form">
-      <label for="uname"><b>Username</b></label>
-      <input type="text" placeholder="Enter UserID" name="userid" id="userid" required>
-      <label for="psw"><b>Password</b></label>
-      <input type="password" placeholder="Enter Password" name="password" id="password" required>
-      <button id="login" type="submit">Login</button>  
+      <label for="uname"></label>
+      <input type="text" placeholder="아이디를 입력하세요" name="userid" id="userid" required>
+      <label for="psw"></label>
+      <input type="password" placeholder="비밀번호를 입력하세요" name="password" id="password" required>
+      <button id="login" style="background-color: #e84418 ;font-size: 18px;font-weight: bolder;"type="submit">로그인하기</button>  
       
       <div>
       <a id="kakao_login_btn">
       <img src="//mud-kage.kakao.com/14/dn/btqbjxsO6vP/KPiGpdnsubSq3a0PHEGUK1/o.jpg" alt="" width="100%"></a>  
       </div>
-      <label>
-        <input type="checkbox" checked="checked" name="remember"> Remember me
-      </label>
       </div>
     </div>
   </div>
@@ -101,7 +98,7 @@
   		</video>
 		</section> -->
     	<div class="main_icon_area" style="margin-top: 60px;">
-<section>
+<section style="font-family: 'Noto Sans KR', sans-serif;">
              <a class="guide" data-url="/category/list?sea_type=1&amp;cc_key=1&amp;cci_key=1" data-id="1" data-sub="1" data-count="0"><img src="https://img.moolban.com/unsafe/images/icon/A/time.png?rand=1556514130">시간·체험<span>바다</span></a>
              <a class="guide ocean" data-url="/category/list?sea_type=1&amp;cc_key=2&amp;cci_key=" data-id="1" data-sub="2" data-count="1"><img src="https://img.moolban.com/unsafe/images/icon/A/seahole.png?rand=1556514130">바다낚시<span>바다</span></a>
              <a class="guide river" data-url="/category/list?sea_type=2&amp;cc_key=12&amp;cci_key=" data-id="2" data-sub="12" data-count="2"><img src="https://img.moolban.com/unsafe/images/icon/A/bass.png?rand=1556514130">민물낚시<span>민물</span></a>

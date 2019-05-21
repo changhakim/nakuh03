@@ -95,6 +95,8 @@ app=(()=>{
 	}
 		if(sessionStorage.getItem('userid') === null){
 			$('#id01').css('display','block');
+			$('.modal-content').css({'height':'350px','width':'362px'});
+            $('#change_login_form').css('padding-top','50px');
 		$('#kakao_login_btn').attr('style','cursor:pointer').click(function loginWithKakao() {  
 			kakao();
 		
