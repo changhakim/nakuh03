@@ -54,7 +54,6 @@ public class ArticlesController {
 			@PathVariable String mid,
 			@RequestBody Article param)throws  Exception {
 		logger.info("=========ArticleList 진입======");
-		System.out.println("page???????????"+param);
 		map.clear();
 		art.setMid(param.getMid());
 		art.setStartRow(param.getStartRow());
@@ -90,7 +89,6 @@ public class ArticlesController {
 		art.setStartRow(arts.getStartRow());
 		art.setPageSize(arts.getPageSize());
 		IFunction f2 = (Object o) -> artMap.selectAllArticlesList(art);
-
 		List<?> ffeed = (List<?>) f2.apply(art);
 		map.put("ffeed", ffeed);
 
@@ -148,7 +146,7 @@ public class ArticlesController {
 		if(p.test(co)) {
 			IFunction f = (Object o) -> comMap.selectOneComment(co.getTitleseq());
 			map.put("comlist", f.apply(co.getTitleseq()));
-			System.out.println("???===="+f.apply(co));
+
 		}
 		
 		

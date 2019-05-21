@@ -14,8 +14,8 @@ arti =(()=>{
 				$.getScript($.js()+'/aquagram/auth.js'),
 				$.getScript($.js()+'/reservation/eunyeong.js')
 			).done(()=>{
-				arti_default_loader();
 				
+				arti_default_loader();
 			});  
 		
 		
@@ -27,11 +27,12 @@ arti =(()=>{
 		$('#donw_content').html(jwcompo.insta_base());
 		$('.instagram-wrap').attr('style','background-color: white;');
 		$('#donw_content').attr('style','background-color: white;');
+		$('#photo_feed_css_hover').remove();
 		$('head').after(jwcompo.photo_feed_css_hover());
 		feed_my();
 		move();
 		if(typeof $(window).data('ajaxready2') == "undefined"){
-			alert('들어옴')
+		
 			infinitemove();
 			$(window).data('ajaxready2',false);
 			
@@ -52,8 +53,8 @@ arti =(()=>{
 			$('.instagram-wrap').empty();
 			$('#donw_content').append('<div id="leftbar_content" class="col-md-8"></div>');
 			$('<div id="right_nav" class="col-md-4" role="complementary"><nav id="right_nav_cont" class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix-top" data-spy="affix"></div></div>').appendTo('#donw_content');
-			$(jwcompo.left_content()).appendTo('#leftbar_content');
-			$(jwcompo.right_nav()).appendTo('#right_nav_cont');
+/*			$(jwcompo.left_content()).appendTo('#leftbar_content');
+			$(jwcompo.right_nav()).appendTo('#right_nav_cont');*/
 /*			$('#leftbar_content').empty();
 			$('#right_nav').empty();*/
 			auth.init();
@@ -206,7 +207,7 @@ arti =(()=>{
 						+'                </div> '
 						+'              </div> '
 						+'         <li>'
-						+'         <div class="comments_list_'+x.artnum+'" id="comments_list_'+x.artnum+'">'
+						+'         <div class="comments_list_'+x.rownum+'" id="comments_list_'+x.rownum+'">'
 						+'             </div>               '
 						+'        </li>'
 						+'          </ul>'
@@ -215,7 +216,7 @@ arti =(()=>{
 						+'				</div>		'
 						+'							    	<div class="input-group" id="input-group_'+x.rownum+'">'
 						+'										<input style="border: none; background: transparent;" id="dicomment_'+d.als.artnum+'" type="text" class="form-control" name="" placeholder="댓글입력">'
-						+'										<span style="border: none; background: transparent;" class="input-group-addon" value="'+d.als.artnum+'"><p>게시</p></span>'
+						+'										<span style="border: none; background: transparent; cursor:pointer;" class="input-group-addon" value="'+d.als.artnum+'"><p>게시</p></span>'
 						+'									    </div>'
 						+'									</div>'
 						+'        </div>'
@@ -240,11 +241,9 @@ arti =(()=>{
 	
 					
 				});
-				$(comlist).appendTo('#comments_list_'+x.artnum);
-				$('#input-group_'+d.als.rownum).children('span').click(function(e){
+				$(comlist).appendTo('#comments_list_'+x.rownum);
+				$('#input-group_'+x.rownum).children('span').click(function(e){
 					e.preventDefault();
-					//alert('이거 크릭한거 맞아?' + $('#dicomment_'+$(this).attr('value')).val());
-					//alert('글번호는?'+$(this).attr('value'));
 					let com_data = {
 							comid : sessionStorage.getItem('userid'),
 							comm : $('#dicomment_'+$(this).attr('value')).val(),
@@ -259,7 +258,7 @@ arti =(()=>{
 						contentType: 'application/json; charset=UTF-8;',
 						success: d=>{
 							//alert('??'+d.comlist);
-							$('#input-group_'+x.rownum).children('input').val('');
+							$('#input-group_'+x).children('input').val('');
 							let dincomm =	'			<div class="item" style="display: -webkit-box; " value="'+d.comlist.comid+'">'	
 							+'				        	<div class="list-group-item list-group-item-action" style="height: 58px; width: 100%; top: 11px; border: none; display: -webkit-box;"> '
 							+'							 <div> <img class="img-circle" alt="Cinque Terre" src="resources/img/aquagram/profilephoto/'+d.comlist.comprophoto+'" style="width: 50px; height: 50px; position: center"/></div> '
@@ -396,7 +395,7 @@ arti =(()=>{
 	                        }
 	                    },
 	                    success : function(d) {
-	                    	alert(d.res);
+	                    	
 	                		let tagarr = $('#taginput').val().split('#');
 	                		let art_upload_data = {
 	                				subCont:$('#commentinput').val(),

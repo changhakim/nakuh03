@@ -389,7 +389,7 @@ jwcompo = {
 		},
 	
 		photo_feed_css_hover :()=>{
-			return '<style>'
+			return '<style id="photo_feed_css_hover">'
 			+'    @import url("https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i");'
 				+'    body {'
 				+'    }'
