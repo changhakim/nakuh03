@@ -22,7 +22,7 @@ arti =(()=>{
 	};
 	
 	let arti_default_loader=()=>{
-		$(window).data('ajaxready2',false);
+		$("#wrapper").scrollTop(0);
 		$(window).data('ajaxready',false);
 		$('#donw_content').html(jwcompo.insta_base());
 		$('.instagram-wrap').attr('style','background-color: white;');
@@ -30,7 +30,15 @@ arti =(()=>{
 		$('head').after(jwcompo.photo_feed_css_hover());
 		feed_my();
 		move();
-		infinitemove();
+		if(typeof $(window).data('ajaxready2') == "undefined"){
+			alert('들어옴')
+			infinitemove();
+			$(window).data('ajaxready2',false);
+			
+		}else{
+			fetchList();
+		}
+		
 		arti_img_upload();
 		
 		
@@ -38,6 +46,9 @@ arti =(()=>{
 	let move =()=>{
 		$('#feed_fv').attr('style','cursor:pointer').click(function(e){
 			e.preventDefault();
+			$(window).data('ajaxready',false);
+			$(window).data('ajaxready2',false);
+			$('#photo_feed_css_hover').remove();
 			$('.instagram-wrap').empty();
 			$('#donw_content').append('<div id="leftbar_content" class="col-md-8"></div>');
 			$('<div id="right_nav" class="col-md-4" role="complementary"><nav id="right_nav_cont" class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix-top" data-spy="affix"></div></div>').appendTo('#donw_content');
@@ -56,13 +67,11 @@ arti =(()=>{
 	
 	let infinitemove =()=>{
 		
-		let isEnd = false;
-
-		$(function(){
+		
 			$(document).ready(function(){
 				$(window).data('ajaxready2',true).scroll(function(){
 					if($(window).data('ajaxready2')==false) return;
-					if($(window).scrollTop() + 300>=$(document).height()-$(window).height()){
+					if($(window).scrollTop() + 600>=$(document).height()-$(window).height()){
 						$(document).ready(function(){
 							$('div#loadmoreajaxloader2').show();
 							$(window).data('ajaxready2',false);
@@ -75,55 +84,56 @@ arti =(()=>{
 				
 			});
 			fetchList(); 
+		
+		
+		
+	};
+	let fetchList=()=>{
+		let isEnd = false;
+        if(isEnd == true){
+       
+        	return;
+        }
+        let startNo = $("#instafeed").children('.feeds').last().data("no") || 0;
+		let mid = sessionStorage.getItem('userid');
+		let page = 0;
+		let url = $.ctx()+'/myfeed/'+mid;
+		let data = { mid:mid,
+				startRow:startNo,
+				pageSize:6};
+
+		
+		$.ajax({
+			url: url,
+			type: 'post',
+			data: JSON.stringify(data),
+			dataType: 'JSON',
+			contentType: 'application/json; charset=UTF-8;',
+			success: d=>{
+				  let length = d.myList.length;
+				  //alert(length);
+                  if( length < 3 ){
+                	  isEnd = true;
+        
+                  }
+                  if(d){
+           
+                	  $('div#loadmoreajaxloader2').hide();
+                	  $.each(d.myList,(i, j)=>{
+	                	  renderList(false, j); 
+	                	 
+	                  	});
+                  }else{
+                	  $('div#loadmoreajaxloader2').html();
+                  }
+                  $(window).data('ajaxready2', true);
+			},
+			error: e=>{
+				alert('에러!');
+			}
+				
 		});
 		
-		let fetchList=()=>{
-
-	        if(isEnd == true){
-	       
-	        	return;
-	        }
-	        let startNo = $("#instafeed").children('.feeds').last().data("no") || 0;
-			let mid = sessionStorage.getItem('userid');
-			let page = 0;
-			let url = $.ctx()+'/myfeed/'+mid;
-			let data = { mid:mid,
-					startRow:startNo,
-					pageSize:6};
-
-			
-			$.ajax({
-				url: url,
-				type: 'post',
-				data: JSON.stringify(data),
-				dataType: 'JSON',
-				contentType: 'application/json; charset=UTF-8;',
-				success: d=>{
-					  let length = d.myList.length;
-					  //alert(length);
-	                  if( length < 3 ){
-	                	  isEnd = true;
-	        
-	                  }
-	                  if(d){
-	           
-	                	  $('div#loadmoreajaxloader2').hide();
-	                	  $.each(d.myList,(i, j)=>{
-		                	  renderList(false, j); 
-		                	 
-		                  	});
-	                  }else{
-	                	  $('div#loadmoreajaxloader2').html();
-	                  }
-	                  $(window).data('ajaxready2', true);
-				},
-				error: e=>{
-					alert('에러!');
-				}
-					
-			});
-			
-		};
 	};
 
 

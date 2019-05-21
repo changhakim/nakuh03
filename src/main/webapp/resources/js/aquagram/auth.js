@@ -17,6 +17,7 @@ auth =(()=>{
 				$.getScript($.js()+'/reservation/eunyeong.js')
 			).done(()=>{
 				$('#homemainnav').remove()
+				$('body').scrollTop(0);
                 $('<header id="homemainnav">'
                         +'        <section>'
                         +'            <a href="#" class="header_logo off active home">'
@@ -63,6 +64,7 @@ auth =(()=>{
 
 		if(typeof $(window).data('ajaxready') == "undefined"){
 			feed_infinitemove();
+			
 		}else{
 			feed_fetchList();
 		}
@@ -87,6 +89,7 @@ auth =(()=>{
 			});
 		$('#my_fv').attr('style','text-align: center; cursor:pointer').click(function(e){
 			e.preventDefault();
+			$('#photo_feed_css_hover').remove();
 			arti.init();
 		});
 		//$('leftbar_content').empty();
@@ -677,7 +680,7 @@ let nav =()=>{
     $(instacss).appendTo('head');
     jeonguk.init();
     });
-    $('.mypage').click(()=>{
+    $('.mypage').click(e=>{
     e.preventDefault();
     $('.instacss').remove();
     $(rescss).appendTo('head');
