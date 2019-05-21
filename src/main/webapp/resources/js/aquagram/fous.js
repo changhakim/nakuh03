@@ -223,7 +223,7 @@ let infinitemove =(x)=>{
 						+'				</div>		'
 						+'							    	<div class="input-group" id="input-group_'+d.als.rownum+'">'
 						+'										<input style="border: none; background: transparent;" id="dicomment_'+d.als.artnum+'" type="text" class="form-control" name="" placeholder="댓글입력">'
-						+'										<span style="border: none; background: transparent;" class="input-group-addon" value="'+d.als.artnum+'"><p>게시</p></span>'
+						+'										<span style="border: none; background: transparent; cursor:pointer;" class="input-group-addon" value="'+d.als.artnum+'"><p>게시</p></span>'
 						+'									    </div>'
 						+'									</div>'
 						+'        </div>'
@@ -247,7 +247,7 @@ let infinitemove =(x)=>{
 				});
 				$(comlist).appendTo('#comments_list_'+x.artnum);
 				$('#input-group_'+d.als.rownum).children('span').click(function(e){
-					alert($(this).attr('value'));
+					
 					e.preventDefault();
 					//alert('이거 크릭한거 맞아?' + $('#dicomment_'+$(this).attr('value')).val());
 					//alert('글번호는?'+$(this).attr('value'));

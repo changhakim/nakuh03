@@ -45,13 +45,17 @@ auth =(()=>{
 		
 		
 	};
-	let defualt_loader=()=>{		
+	let defualt_loader=()=>{
+		$("#wrapper").scrollTop(0);
 		$('#users_list').empty();
 	    $('#new_users_list').empty();
 		$('#aq_main').remove();
 		$('#wrapper').attr('style','top: 59px; background-color: white;');
 		$('#right_nav_cont').empty();
 		$('#my_navbar').empty();
+/*		$('#leftbar_content').empty();
+		$('#right_nav_cont').empty();
+		$('#my_navbar').empty();*/
 		$(jwcompo.left_content()).appendTo('#leftbar_content');
 		$(jwcompo.right_nav()).appendTo('#right_nav_cont');
 		$(jwcompo.my_navbar()).appendTo('#my_navbar');
@@ -60,11 +64,11 @@ auth =(()=>{
 		nav();
 		user_search();
 		arti.arti_img_upload();
-		alert($(window).data('ajaxready'));
+		
 
 		if(typeof $(window).data('ajaxready') == "undefined"){
 			feed_infinitemove();
-			
+			$(window).data('ajaxready',false);
 		}else{
 			feed_fetchList();
 		}
@@ -87,8 +91,10 @@ auth =(()=>{
 			    }
 			  });
 			});
-		$('#my_fv').attr('style','text-align: center; cursor:pointer').click(function(e){
+		$('#my_fv').attr('style','text-align: center; cursor:pointer;').click(function(e){
 			e.preventDefault();
+			$(window).data('ajaxready',false);
+			$('body').scrollTop(0);
 			$('#photo_feed_css_hover').remove();
 			arti.init();
 		});
@@ -122,7 +128,7 @@ auth =(()=>{
 					+'				</li>'
 					+'		      </ul>');
 			let search_item ='';
-			alert( $('#search_from').val());
+			
 			let searchword = $('#search_from').val();
 			$.getJSON($.ctx()+'/search/follo/'+searchword+'/'+sessionStorage.getItem('userid'),d=>{
 				$('#search_from').val('');
@@ -552,7 +558,7 @@ auth =(()=>{
 					+'							    	</div>'
 					+'							    	<div class="input-group" id="input-group_'+x.rownum+'">'
 					+'										<input style="border: none; background: transparent;" id="upcomment_'+x.artnum+'" type="text" class="form-control" name="" placeholder="댓글입력">'
-					+'										<span style="border: none; background: transparent;" class="input-group-addon" value="'+x.artnum+'"><p>게시</p></span>'
+					+'										<span style="border: none; background: transparent; cursor:pointer;" class="input-group-addon" value="'+x.artnum+'"><p>게시</p></span>'
 					+'									    </div>'
 					+'									</div>'
 					+'									</div>'
@@ -561,11 +567,11 @@ auth =(()=>{
 				
 				$(feeditem).appendTo('#leftbar_content');
 				$('#user_'+x.mname+'_'+x.rownum).click(function(){
-					alert('클릭'+$(this).attr('value'));
+					
 					let scahid = $(this).attr('value');
 					fous.init(scahid);
 				});
-
+				
 				let tags = x.tag;
 				if(tags==null){
 					$('#tags_'+x.artnum).append('&nbsp;<a> </a>');

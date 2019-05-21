@@ -39,7 +39,6 @@ public class FollowerController {
 		map.clear();
 		IFunction f = (String) -> folmap.selectFollowers(mid);
 		List<?> folList = (List<?>) f.apply(mid);
-		System.out.println("??"+folList);
 		map.put("follist", folList);
 		
 		return map;
@@ -88,10 +87,8 @@ public class FollowerController {
 		map.clear();
 		fol.setFolloid(userid);
 		fol.setMid(searchword);
-		System.out.println("?!?!?!?"+fol);
 		IFunction f = (Object o) -> folmap.selectFollower(fol);
 		List<?> ls = (List<?>) f.apply(fol);
-		System.out.println("하하"+f.apply(fol));
 		map.put("searclist", ls);
 	
 		return map;
