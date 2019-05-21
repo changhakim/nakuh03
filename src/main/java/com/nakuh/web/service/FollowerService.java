@@ -13,7 +13,7 @@ public interface FollowerService {
 	public List<Follower> bringAllFollowersList(String fid);
 	public List<Follower> retrieveFollowers(String fid);
 	public List<Follower> retrieveFollowing(String fid);
-	public Follower retrieveFollower(String searchWord);
+	public List<Follower> retrieveFollower(Follower fol);
 	public int countFollowers();
 	public boolean existsFollower(String searchWord);
 	

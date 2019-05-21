@@ -57,6 +57,7 @@ auth =(()=>{
 		$('#new_users_list').empty();
 		css();
 		nav();
+		user_search();
 		arti.arti_img_upload();
 		alert($(window).data('ajaxready'));
 
@@ -101,6 +102,60 @@ auth =(()=>{
 	};
 	
 	let user_search=()=>{
+		$('#search_but').attr('style','cursor:pointer').attr('data-toggle','modal').attr('data-target','#myModal').click(function(e){
+			e.preventDefault();
+			$('#myModal').attr('style','display: block; z-index:99999;');
+			$('.modal-dialog').attr('class','modal-dialog');
+			$('.modal-dialog').attr('style','top:200px;')
+			$('.modal-content').attr('style','margin:auto; width: 65%; height: 600px;');
+			$('.modal-title').text('검색결과');
+			$('.modal-footer').remove();
+			$('.modal-body').attr('style','height: 90%;');
+			$('.modal-body').html('<ul class="nav bs-docs-sidenav" style="overflow:scroll; width:100%; height:100%; padding:10px; background-color: white; border-radius: 6px;  border:1px solid; border-color: #ddd;">'
+					+'				 <li>      '
+					+'				 	<div id="search_list">'
+					+'					</div>'
+					+'				</li>'
+					+'		      </ul>');
+			let search_item ='';
+			alert( $('#search_from').val());
+			let searchword = $('#search_from').val();
+			$.getJSON($.ctx()+'/search/follo/'+searchword+'/'+sessionStorage.getItem('userid'),d=>{
+				
+				$.each(d.searclist,(i,j)=>{
+					search_item ='			<div class="item" style="display: -webkit-box; " value="'+j.folloid+'">'	
+						+'				        	<div class="list-group-item list-group-item-action" style="height: 58px; width: 80%; top: 11px; border: none; display: -webkit-box;"> '
+						+'							 <div> <img class="img-circle" alt="Cinque Terre" src="resources/img/aquagram/profilephoto/'+j.follpphoto+'" style="width: 50px; height: 50px; position: center"/></div> '
+						+'								<div style="left: 13px; text-align: left;"><h5 style="margin-bottom: 3px; font-weight: bold;">'+j.folloid+'</h5><p style="font-size: 7px;">'+j.name+'</p></div>'
+						+'								</div> '
+
+					if(j.follostate=='0'){
+						search_item+=	'<button type="button" class="btn btn-primary" id="btn_follower" value="'+j.folloid+'" style="position: relative; top: 21px;">팔로우</button>'
+						+'</div> ';
+					}else {
+						search_item+=	'<button type="button" class="btn btn-default" id="btn_folloing" value="'+j.folloid+'" style="position: relative; top: 21px;">팔로잉</button>'
+							+'</div> ';
+						
+					}
+					$(search_item).appendTo('#search_list').children('button').click(function(){
+						/*alert($(this).attr('value'));*/
+						let data = {mid:sessionStorage.getItem('userid'), 
+								folloid:$(this).attr('value')};
+						if($(this).text()=='팔로우'){
+							/*alert('??'+$(this).attr('value'));*/
+							folloings(data);
+							$(this).attr('class','btn btn-default').text('팔로잉');
+						}else{
+							nufollower(data);
+							$(this).attr('class','btn btn-primary').text('팔로우');
+						}
+						
+					});
+				
+				});
+			});
+			
+		});
 		
 	};
 	let follower_list=()=>{
@@ -143,7 +198,7 @@ auth =(()=>{
 					}
 					$(follower_item).appendTo('#follower_list').children('button').click(function(){
 						/*alert($(this).attr('value'));*/
-						let data = {mid:'gigi123', 
+						let data = {mid:sessionStorage.getItem('userid'), 
 								folloid:$(this).attr('value')};
 						if($(this).text()=='팔로우'){
 							/*alert('??'+$(this).attr('value'));*/
@@ -468,7 +523,7 @@ auth =(()=>{
 					+'						         	<!-- Right-aligned -->'
 					+'									<div class="media">'
 					+'									  <div class="media-body" style="text-align: left; padding-top: 15px; padding-bottom: 15px;">'
-					+'									   	<div> <h4 class="media-heading" style="margin-left: 5px">'+x.content+'<div id="tags_'+x.artnum+'">'+x.tag+'</div></h4></div>'
+					+'									   	<div> <h4 class="media-heading" style="margin-left: 5px">'+x.content+'<div id="tags_'+x.artnum+'"></div></h4></div>'
 					+'									   	<div> <h6 class="media-heading" style="margin-left: 5px">53 like</h6></div>'
 					+'									  </div>'
 					+'									</div>'
@@ -494,12 +549,14 @@ auth =(()=>{
 					let scahid = $(this).attr('value');
 					fous.init(scahid);
 				});
-				
 
-				
-				
-				
 				let tags = x.tag;
+				if(tags==null){
+					$('#tags_'+x.artnum).append('&nbsp;<a> </a>');
+				}else{
+					$('#tags_'+x.artnum).append('&nbsp;<a>'+tags+'</a>');					
+				}
+
 				 /*let tagcut = x.tag;
 				let settag = '';
 				if(x.tag.split('.') == null){
