@@ -144,7 +144,7 @@ h2{font-family:'Varela',sans-serif}
 .scrollToTop{background:none repeat scroll 0 0 #FFD200; border:1px solid #FFF; bottom:105px; color:#FFF; display:none; font-size:32px; font-weight:bold; height:50px; position:fixed; right:75px; text-align:center; text-decoration:none; width:50px; z-index:9999; -webkit-transition:all 0.5s; -moz-transition:all 0.5s; -ms-transition:all 0.5s; -o-transition:all 0.5s; transition:all 0.5s}
 .scrollToTop:hover, .scrollToTop:focus{background-color:#09c; color:#FFF !important; text-decoration:none; outline:none}
 #preloader{position:fixed; top:0; left:0; right:0; bottom:0; background-color:#fff; z-index:99}
-#status{width:200px; height:200px; position:absolute; left:50%; top:50%; background-image:url("img/status.gif"); background-repeat:no-repeat; background-position:center; margin:-100px 0 0 -100px}
+#status{width:200px; height:200px; position:absolute; left:50%; top:50%;background-repeat:no-repeat; background-position:center; margin:-100px 0 0 -100px}
 
 @media(max-width:1199px ){
 .navbar-collapse{padding-right:0}

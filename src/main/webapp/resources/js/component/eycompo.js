@@ -247,7 +247,6 @@ eycompo ={
 			+'<div style="display:none">'
 			+'    <!-- 상품선택 fixed -->'
 			+'    <a class="reserve_scroll_btn">'
-			+'        <img src="/asset/www/responsive/img/basic/reserve_scroll.png" alt="">'
 			+'    </a>'
 			+'    <!--// 상품선택 fixed -->'
 

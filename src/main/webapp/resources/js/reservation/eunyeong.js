@@ -231,6 +231,7 @@ eunyeong = (()=>{
     let hotel =x=>{
     	cate_search(x);
     	$('div .list_menu_area').empty();
+    	$('#cate_head').text('숙박');
         
     };
     
