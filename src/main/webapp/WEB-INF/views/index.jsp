@@ -144,7 +144,7 @@
 </div>
 	<footer style="text-align: center;margin-top: 50px;"> 
 	<div>
-	<h1 style="margin-bottom: 30px;font-family:  'Baloo Bhai', cursive;">Our Team Member</h1>
+	<h1 style="margin-bottom: 30px; font-family:'Baloo Bhai', cursive;">Our Team Member</h1>
 	</div>
 		<div>
 		<img src="${img}/homeimg/main/nakuh_footer.JPG">

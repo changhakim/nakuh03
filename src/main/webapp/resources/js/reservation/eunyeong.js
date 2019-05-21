@@ -136,7 +136,7 @@ eunyeong = (()=>{
         $('.list_menu_area').attr('value',t)
         let searchlist='';
         $.each(['최신순','높은가격순','낮은가격순'],(x,y)=>{
-        	$('<a class="selectprice'+x+'">'+y+'</a>').appendTo('.sort > .select_option').click(function(){
+        	$('<a style="font-weight: bold;font-family: Noto Sans KR, sans-serif;font-size:15px;" class="selectprice'+x+'">'+y+'</a>').appendTo('.sort > .select_option').click(function(){
         		
         		$('.price_title').text($(this).text());
         		pricetitle=$('.price_title').text();
@@ -150,7 +150,7 @@ eunyeong = (()=>{
         	})
         })
         $.each(['지역','서울','경기','인천','전남','부산','전북','강원도','광주','충남','충북','제주'],(x,y)=>{
-        	$('<a class="selectcity'+x+'">'+y+'</a>').appendTo('.distance > .select_option').click(function(){
+        	$('<a style="font-weight: bold;font-family: Noto Sans KR, sans-serif;font-size:15px;" class="selectcity'+x+'">'+y+'</a>').appendTo('.distance > .select_option').click(function(){
         		
         		$('.area_title').text($(this).text());
         		pricetitle=$('.price_title').text();
@@ -322,7 +322,7 @@ eunyeong = (()=>{
 		+'                    '
 		+'                 	<span id="fishname" class="kind_blue_txt" style=font-size: 10px;">'+ j.fishname +'</span>'
 		+'                </div>'
-		+'                <p name="'+j.company+'" class="list_name_line" style="font-weight: bold; font-size: 20px;">'+ j.company +'</p>'
+		+'                <p name="'+j.company+'" class="list_name_line" font-family: Noto Sans KR, sans-serif;font-size:12px;>'+ j.company +'</p>'
 		+'                <div class="write_comment_line">'
 		+'                <p>'
 		+'                <img src="https://img.moolban.com/unsafe/asset/www/responsive/img/basic/ico_fish.png" alt="">조황 2개'
@@ -383,11 +383,11 @@ eunyeong = (()=>{
     	
     	$('#wrapper').empty();
     	$('.scrolling').empty();
-    	
+    	$("body").scrollTop(0);
     	$('<div id="scrolling" class="scrolling scroll_up">'
     	+'   <div class="header_title">'
     	+'      <section>'
-    	+'         <h1>'+ cate_title +'</h1>'
+    	+'         <h1 style="font-weight: bold;" "font-family: "Noto Sans KR", Sans-serif;">'+ cate_title +'</h1>'
     	+'      </section>'
     	+'    </div>'
     	+'</div>').appendTo('.scrolling');
@@ -428,7 +428,7 @@ eunyeong = (()=>{
              let datesplit = $('.miniinfo').attr('value').split('-');
               $('.miniinfo').html('<div class="date_widget_area view_box" data-date="2019-05-13">'
           			+'        <div class="date_title">'
-        			+'            <p>'+datesplit[0]+'년 '+datesplit[1]+'월 '+datesplit[2]+'일</p>'        		
+        			+'            <p style="font-weight: bold;font-family: Noto Sans KR, sans-serif;font-size:18px;">'+datesplit[0]+'년 '+datesplit[1]+'월 '+datesplit[2]+'일</p>'        		
         			+'        </div>'
         			+'        <div class="widget_area clearfix">'
         			+'                        <dl class="widget_box_left widget_box">'
@@ -463,15 +463,15 @@ eunyeong = (()=>{
 		$.each(x.prolist, (i, j)=>{
    		   $('    <a class="reserve_area  view_box" data-cg-key="5201" value="noclick" data-gi-type="1" data-gi-key="1564964">'
    				+'        <div class="reserve_con"> <span class="count_pic">남은수60명</span>'
-   				+'            <p class="reserve_title proname">'+j.proname+'</p>'
+   				+'            <p class="reserve_title proname" style="font-weight: bold;font-family: Noto Sans KR, sans-serif;font-size:20px;">'+j.proname+'</p>'
    				+'            <div class="reserve_price">'
    				+'                <p class="price reserve_pay" value="'+j.price+'">'+j.price+'<span>원</span></p>'
    				+'                <!-- <p class="coupon_pay"><strong>50% 반덤 쿠폰 지급</strong>75,000<span>원</span><i>예약하기</i></p> <p class="one_pay"><strong>천원 한장</strong>1,000<span>원</span><i>예약하기</i></p> -->'
    				+'            </div>'
    				+'            <div class="reserve_dot">'
-   				+'                <p>최소인원 10명 / 최대인원 60명</p>'
-   				+'                <p>오전 7시 ~ 오전 12시 30분 (5시간 30분)</p>'
-   				+'                <p class="fishname">'+j.fishname+'</p>'
+   				+'                <p style="font-family: Noto Sans KR, sans-serif;font-size:15px;">최소인원 10명 / 최대인원 60명</p>'
+   				+'                <p style="font-family: Noto Sans KR, sans-serif;font-size:15px;>오전 7시 ~ 오전 12시 30분 (5시간 30분)</p>'
+   				+'                <p style="font-family: Noto Sans KR, sans-serif;font-size:15px; class="fishname">'+j.fishname+'</p>'
    				+'            </div>'
    				+'        </div>'
    				+'    </a>').attr('id', j.pronum)
@@ -516,6 +516,7 @@ eunyeong = (()=>{
      let prdres =x=>{
      	$('#wrapper').empty();
     	$('.scrolling').empty();
+    	$("body").scrollTop(0);
      	$(eycompo.product_res()).appendTo('#wrapper');
 		let count = '';
 		let pro = [];
@@ -572,6 +573,7 @@ eunyeong = (()=>{
   
      let reserve_pro =x=>{
 			$('#wrapper').empty();
+			$("body").scrollTop(0);
 			$(eycompo.reserve_pro()).appendTo('#wrapper');
 			$('.proname').text(x.proname);
 			$('.price').text(x.price);
@@ -623,7 +625,7 @@ eunyeong = (()=>{
 			    	 res.push({
 			    		/*mid : 세션에서 들어온 값
 		   				deposit : 자바에서 계산*/ 
-		     			 mid : 'test',
+		     			 mid : sessionStorage.getItem('userid'),
 		     			 resname : $('#resname').val(),
 		     			 startdate : b.startdate,
 		     			 phone : $('#phone').val(),
@@ -667,7 +669,7 @@ eunyeong = (()=>{
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*마이페이지*/
     
     let mypage =()=>{
-      	let mid = 'test'
+      	let mid = sessionStorage.getItem('userid');
       		$.ajax({
     			url :_+'/reservation/' + mid,
     			type :'POST',
