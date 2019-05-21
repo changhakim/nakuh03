@@ -83,13 +83,15 @@ public class FollowerController {
 		return map;
 	}
 	@GetMapping("/search/follo/{searchword}/{userid}")
-	public Map<?,?> searching(@PathVariable String searchword,  String userid)throws Exception{
+	public Map<?,?> searching(@PathVariable String searchword,  @PathVariable String userid)throws Exception{
+		logger.info("============== searching() {}  =================", "ENTER");
 		map.clear();
 		fol.setFolloid(userid);
 		fol.setMid(searchword);
+		System.out.println("?!?!?!?"+fol);
 		IFunction f = (Object o) -> folmap.selectFollower(fol);
 		List<?> ls = (List<?>) f.apply(fol);
-		System.out.println("하하"+f.apply(searchword));
+		System.out.println("하하"+f.apply(fol));
 		map.put("searclist", ls);
 	
 		return map;

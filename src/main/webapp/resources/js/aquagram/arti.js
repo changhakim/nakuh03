@@ -20,6 +20,7 @@ arti =(()=>{
 		
 		
 	};
+	
 	let arti_default_loader=()=>{
 		$(window).data('ajaxready2',false);
 		$(window).data('ajaxready',false);

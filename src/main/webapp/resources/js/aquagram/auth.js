@@ -44,7 +44,9 @@ auth =(()=>{
 		
 		
 	};
-	let defualt_loader=()=>{
+	let defualt_loader=()=>{		
+		$('#users_list').empty();
+	    $('#new_users_list').empty();
 		$('#aq_main').remove();
 		$('#wrapper').attr('style','top: 59px; background-color: white;');
 		$('#right_nav_cont').empty();
@@ -53,8 +55,6 @@ auth =(()=>{
 		$(jwcompo.right_nav()).appendTo('#right_nav_cont');
 		$(jwcompo.my_navbar()).appendTo('#my_navbar');
 		$('#leftbar_content').empty();
-		$('#users_list').empty();
-		$('#new_users_list').empty();
 		css();
 		nav();
 		user_search();
@@ -108,6 +108,7 @@ auth =(()=>{
 			$('.modal-dialog').attr('class','modal-dialog');
 			$('.modal-dialog').attr('style','top:200px;')
 			$('.modal-content').attr('style','margin:auto; width: 65%; height: 600px;');
+			$('#modal_close_btn').attr('style','z-index:9000;');
 			$('.modal-title').text('검색결과');
 			$('.modal-footer').remove();
 			$('.modal-body').attr('style','height: 90%;');
@@ -121,19 +122,18 @@ auth =(()=>{
 			alert( $('#search_from').val());
 			let searchword = $('#search_from').val();
 			$.getJSON($.ctx()+'/search/follo/'+searchword+'/'+sessionStorage.getItem('userid'),d=>{
-				
+				$('#search_from').val('');
 				$.each(d.searclist,(i,j)=>{
-					search_item ='			<div class="item" style="display: -webkit-box; " value="'+j.folloid+'">'	
+					search_item ='			<div class="item" style="display: -webkit-box; " value="'+j.mid+'">'	
 						+'				        	<div class="list-group-item list-group-item-action" style="height: 58px; width: 80%; top: 11px; border: none; display: -webkit-box;"> '
 						+'							 <div> <img class="img-circle" alt="Cinque Terre" src="resources/img/aquagram/profilephoto/'+j.follpphoto+'" style="width: 50px; height: 50px; position: center"/></div> '
-						+'								<div style="left: 13px; text-align: left;"><h5 style="margin-bottom: 3px; font-weight: bold;">'+j.folloid+'</h5><p style="font-size: 7px;">'+j.name+'</p></div>'
-						+'								</div> '
-
+						+'								<div style="left: 13px; text-align: left;"><h5 style="margin-bottom: 3px; font-weight: bold;">'+j.mid+'</h5><p style="font-size: 7px;">'+j.name+'</p></div>'
+						+'								</div> ';
 					if(j.follostate=='0'){
-						search_item+=	'<button type="button" class="btn btn-primary" id="btn_follower" value="'+j.folloid+'" style="position: relative; top: 21px;">팔로우</button>'
+						search_item+=	'<button type="button" class="btn btn-primary" id="btn_follower" value="'+j.mid+'" style="position: relative; top: 21px;">팔로우</button>'
 						+'</div> ';
 					}else {
-						search_item+=	'<button type="button" class="btn btn-default" id="btn_folloing" value="'+j.folloid+'" style="position: relative; top: 21px;">팔로잉</button>'
+						search_item+=	'<button type="button" class="btn btn-default" id="btn_folloing" value="'+j.mid+'" style="position: relative; top: 21px;">팔로잉</button>'
 							+'</div> ';
 						
 					}
@@ -165,6 +165,7 @@ auth =(()=>{
 		$('.modal-dialog').attr('class','modal-dialog');
 		$('.modal-dialog').attr('style','top:200px;')
 		$('.modal-content').attr('style','margin:auto; width: 65%; height: 600px;');
+		$('#modal_close_btn').attr('style','z-index:9000;');
 		$('.modal-title').text('팔로워');
 		$('.modal-footer').remove();
 		$('.modal-body').attr('style','height: 90%;');
@@ -174,6 +175,7 @@ auth =(()=>{
 				+'					</div>'
 				+'				</li>'
 				+'		      </ul>');
+
 		$.ajax({
 			url: $.ctx()+'/serach/follower/'+mid,
 			type: 'get',
@@ -185,7 +187,7 @@ auth =(()=>{
 					follower_item ='			<div class="item" style="display: -webkit-box; " value="'+j.mid+'">'	
 						+'				        	<div class="list-group-item list-group-item-action" style="height: 58px; width: 80%; top: 11px; border: none; display: -webkit-box;"> '
 						+'							 <div> <img class="img-circle" alt="Cinque Terre" src="resources/img/aquagram/profilephoto/'+j.follpphoto+'" style="width: 50px; height: 50px; position: center"/></div> '
-						+'								<div style="left: 13px; text-align: left;"><h5 style="margin-bottom: 3px; font-weight: bold;">'+j.mid+'</h5><p style="font-size: 7px;">'+j.name+'</p></div>'
+						+'								<div style="left: 13px; text-align: left;"><h5 id="fwuser_'+j.mid+'_'+i+'" style="margin-bottom: 3px; font-weight: bold;" value="'+j.mid+'">'+j.mid+'</h5><p style="font-size: 7px;">'+j.name+'</p></div>'
 						+'								</div> '
 
 					if(j.follostate=='0'){
@@ -194,7 +196,7 @@ auth =(()=>{
 					}else {
 						follower_item+=	'<button type="button" class="btn btn-default" id="btn_folloing" value="'+j.mid+'" style="position: relative; top: 21px;">팔로잉</button>'
 							+'</div> ';
-						
+					
 					}
 					$(follower_item).appendTo('#follower_list').children('button').click(function(){
 						/*alert($(this).attr('value'));*/
@@ -210,8 +212,14 @@ auth =(()=>{
 						}
 						
 					});
+					$('#fwuser_'+j.mid+'_'+i).click(function(){
+						$('#myModal').modal('hide');
+						let scahid = $(this).attr('value');
+						fous.init(scahid);
+					});
+					
 				});
-				
+
 
 				
 			},error: e=>{
@@ -221,7 +229,7 @@ auth =(()=>{
 			
 			
 		});
-				
+
 	};
 	let folloings=(x)=>{
 		$.ajax({
@@ -256,6 +264,7 @@ auth =(()=>{
 			$('.modal-dialog').attr('class','modal-dialog');
 			$('.modal-dialog').attr('style','top:200px;')
 			$('.modal-content').attr('style','margin:auto; width: 65%; height: 600px;');
+			$('#modal_close_btn').attr('style','z-index:9000;');
 			$('.modal-title').text('팔로워');
 			$('.modal-footer').remove();
 			$('.modal-body').attr('style','height: 90%;');
@@ -273,29 +282,36 @@ auth =(()=>{
 				contentType: 'application/json; charset=UTF-8;',
 				success: d=>{
 					$.each(d.inglist,(i,j)=>{
-						folloing_item +='			<div class="item" style="display: -webkit-box;">'	
+						folloing_item ='			<div class="item" style="display: -webkit-box;">'	
 							+'				        	<div class="list-group-item list-group-item-action" style="height: 58px; width: 80%; top: 11px; border: none; display: -webkit-box;"> '
 							+'							 <div> <img class="img-circle" alt="Cinque Terre" src="resources/img/aquagram/profilephoto/'+j.follpphoto+'" style="width: 50px; height: 50px; position: center"/></div> '
-							+'								<div style="left: 13px; text-align: left;"><h5 style="margin-bottom: 3px; font-weight: bold;">'+j.mid+'</h5><p style="font-size: 7px;">'+j.name+'</p></div>'
+							+'								<div style="left: 13px; text-align: left;"><h5 id="fuser_'+j.mid+'_'+i+'" style="margin-bottom: 3px; font-weight: bold;" value="'+j.mid+'">'+j.mid+'</h5><p style="font-size: 7px;">'+j.name+'</p></div>'
 							+'								</div> '
 							+'								<button type="button" class="btn btn-default" value="'+j.mid+'" style="position: relative; top: 21px;">팔로잉</button>'
 							+'							</div> ';
+						
+						$(folloing_item).appendTo('#folloing_list').children('button').click(function(){
+							let data = {mid:sessionStorage.getItem('userid'), 
+									folloid:$(this).attr('value')};
+							if($(this).text()=='팔로우'){
+								/*alert('??'+$(this).attr('value'));*/
+								folloings(data);
+								$(this).attr('class','btn btn-default').text('팔로잉');
+							}else{
+								nufollower(data);
+								$(this).attr('class','btn btn-primary').text('팔로우');
+								
+							}
+							nufollower();
+						});
+						$('#fuser_'+j.mid+'_'+i).click(function(){
+							$('#myModal').modal('hide');
+							let scahid = $(this).attr('value');
+							fous.init(scahid);
+						});
 							
 					});
-					$(folloing_item).appendTo('#folloing_list').children('button').click(function(){
-						let data = {mid:'gigi123', 
-								folloid:$(this).attr('value')};
-						if($(this).text()=='팔로우'){
-							/*alert('??'+$(this).attr('value'));*/
-							folloings(data);
-							$(this).attr('class','btn btn-default').text('팔로잉');
-						}else{
-							nufollower(data);
-							$(this).attr('class','btn btn-primary').text('팔로우');
-							
-						}
-						nufollower();
-					});
+
 					
 				},error: e=>{
 					
@@ -308,6 +324,8 @@ auth =(()=>{
 	};
 	
 	let right_nav_lander=()=>{
+		$('#users_list').empty();
+		$('#new_users_list').empty();
 		let foitem = '';
 		let ffoitem = '';
 		let mid=sessionStorage.getItem('userid');
@@ -324,7 +342,7 @@ auth =(()=>{
 						+'							 <div> <img class="img-circle" alt="Cinque Terre" src="resources/img/aquagram/profilephoto/'+j.follpphoto+'" style="width: 50px; height: 50px; position: center"/></div> '
 						+'								<div style="left: 13px; text-align: left;"><h5 style="margin-bottom: 3px; font-weight: bold;">'+j.folloid+'</h5><p style="font-size: 7px;">'+j.name+'</p></div>'
 						+'								</div> '
-						+'								<div value="'+j.folloid+'" style="position: relative; top: 14px;"><h5>새로운소식</h5><h5>'+j.artdate+'</h5></div>'
+						+'								<div value="'+j.folloid+'" style="position: relative; top: 14px;"><h6>'+j.artdate+'</h6></div>'
 						+'							</div> '
 						+'							</div> ';
 
@@ -354,7 +372,7 @@ auth =(()=>{
 									+'							</div> ';
 
 								$(ffoitem).appendTo('#new_users_list').children('button').click(function(){
-									let data = {mid:'gigi123', 
+									let data = {mid:sessionStorage.getItem('userid'), 
 											folloid:$(this).attr('value')};
 									if($(this).text()=='팔로우'){
 										/*alert('??'+$(this).attr('value'));*/
@@ -365,9 +383,6 @@ auth =(()=>{
 										$(this).attr('class','btn btn-primary').text('팔로우');
 										
 									}
-									/*alert('??!!'+$(this).attr('value'));*/
-/*									let scahid = $(this).attr('value');
-									fous.init(scahid);*/
 
 								});
 							}
@@ -457,7 +472,6 @@ auth =(()=>{
 			success: d=>{
 				
 				  let length = d.ffeed.length;
-				  //alert(length);
                   if( length < 1 ){
                 	  isEnd = true;
 
@@ -498,7 +512,6 @@ auth =(()=>{
 		 $('#my_fv').attr('styel','text-align: center;').text(x[0].artcount);
 		 $('#followerid').attr('styel','text-align: center;').text(x[0].followerCount);
 		 $('#folloingid').attr('styel','text-align: center;').text(x[0].folloingCount);
-			//$('#userimg').attr('src','resources/img/aquagram/profilephoto/'+d.nav.profilephoto);
 		 $('#navmypage').html('<img id="userimg" class="img-circle" alt="Cinque Terre" src="resources/img/aquagram/profilephoto/'+x[0].userphoto+'" '
 					+'style="width: 50px; height: 50px; position: center;"/>'+x[0].userid+'</div></li>');
 		 $('#right_mynav').attr('src','resources/img/aquagram/profilephoto/'+x[0].userphoto);
@@ -524,7 +537,7 @@ auth =(()=>{
 					+'									<div class="media">'
 					+'									  <div class="media-body" style="text-align: left; padding-top: 15px; padding-bottom: 15px;">'
 					+'									   	<div> <h4 class="media-heading" style="margin-left: 5px">'+x.content+'<div id="tags_'+x.artnum+'"></div></h4></div>'
-					+'									   	<div> <h6 class="media-heading" style="margin-left: 5px">53 like</h6></div>'
+					+'									   	<div> <h6 class="media-heading" style="margin-left: 5px">'+x.artdate+'</h6></div>'
 					+'									  </div>'
 					+'									</div>'
 					+'						         </div>'
@@ -589,7 +602,7 @@ auth =(()=>{
 	  				$('#input-group_'+x.rownum).children('span').click(function(e){
 						e.preventDefault();
 						let com_data = {
-								comid : 'gigi123',
+								comid : sessionStorage.getItem('userid'),
 								comm : $('#upcomment_'+$(this).attr('value')).val(),
 								titleseq : $(this).attr('value')
 						};
@@ -621,17 +634,6 @@ auth =(()=>{
 					
 				});
 
-
-	/*			
-
-				+'     		<div id="com_item" style="top: 5px;">'
-				+'                  <div class="list-group-item list-group-item-action" id="comments_my" style="height: 58px; border: none; display: -webkit-box;"> '
-				+'                <img class="img-circle" alt="Cinque Terre" src="resources/img/aquagram/profilephoto/'+d.als.profilephoto+'" style="width: 40px; height: 40px; position: center"/>'
-				+'                 <div style="display: -webkit-box;"><h5 style="top:0px; left: 7px; font-weight:bold;">'+d.als.mid+'</h5><div><h6 id="contag" style="left: 15px; width: 90%;">'+d.als.content+'</h6></div></div>'
-				+'                   <div style="font-size: 5px; left: 105px; top: 8px;">'+d.als.artdate+'</div>'
-				+'                </div> '
-				+'              </div> '
-*/
 				
 };
 let nav =()=>{
