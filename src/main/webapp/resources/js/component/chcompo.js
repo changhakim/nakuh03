@@ -26,7 +26,7 @@ chcompo={
 	                        +'<p>예약관리</p>'
 	                    +'</a>'
 	                +'</li>'
-	                +'<li>'
+/*	                +'<li>'
 	                    +'<a href="#">'
 	                        +'<i class="quote"></i>'
 	                        +'<img src="/web/resources/img/admin/fish.png"'
@@ -39,7 +39,7 @@ chcompo={
 	                        +'<img src="/web/resources/img/admin/lank.png"'
 	                        +'<p>랭킹</p>'
 	                    +'</a>'
-	                +'</li>'
+	                +'</li>'*/
 /*	                +'<li>'
 	                    +'<a href="#">'
 	                        +'<i class="aa"></i>'
