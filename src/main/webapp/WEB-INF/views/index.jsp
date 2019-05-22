@@ -16,7 +16,6 @@
  <link id="aaadfa" href="/web/resources/css/home/notosans.css" rel="stylesheet">
  <link href="https://fonts.googleapis.com/css?family=Baloo+Bhai|Nanum+Gothic|Nanum+Myeongjo|Noto+Sans+KR&display=swap" rel="stylesheet">
  
-
 </head>
 <body>
  <!--  modal --->
