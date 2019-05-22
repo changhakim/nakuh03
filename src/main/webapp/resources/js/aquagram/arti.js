@@ -278,7 +278,11 @@ arti =(()=>{
 							+'								</div> '		
 							+'						</div> ';	
 							$('.comments_list_'+x.rownum).prepend(dincomm);
-
+							if(sessionStorage.getItem('userpo').match('http')){
+								$('#n_co_pho'+i).attr('src',sessionStorage.getItem('userpo'));
+							}else{
+								$('#n_co_pho'+i).attr('src','resources/img/aquagram/profilephoto/'+sessionStorage.getItem('userpo'));
+							}
 
 							
 						},error:e=>{}

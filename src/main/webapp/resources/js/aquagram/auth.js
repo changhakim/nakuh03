@@ -183,7 +183,7 @@ auth =(()=>{
 				if(j.password == null){
 					$('#new_pho'+i).attr('src',j.profilephoto);
 				}
-				$('#newf_'+j.mid+'_'+i).click(function(){
+				$('#newf_'+j.mid+'_'+i).attr('style','cursor:pointer').click(function(){
 					$('#myModal').modal('hide');
 					let scahid = $(this).attr('value');
 					fous.init(scahid);
@@ -316,7 +316,7 @@ auth =(()=>{
 					}else{
 						$('#folwer_pto'+i).attr('src','resources/img/aquagram/profilephoto/'+j.follpphoto);
 					}
-					$('#fwuser_'+j.mid+'_'+i).click(function(){
+					$('#fwuser_'+j.mid+'_'+i).attr('style','cursor:pointer').click(function(){
 						$('#myModal').modal('hide');
 						let scahid = $(this).attr('value');
 						fous.init(scahid);
@@ -413,7 +413,7 @@ auth =(()=>{
 						}else{
 							$('#foling_pto'+i).attr('src','resources/img/aquagram/profilephoto/'+j.follpphoto);
 						}
-						$('#fuser_'+j.mid+'_'+i).click(function(){
+						$('#fuser_'+j.mid+'_'+i).attr('style','cursor:pointer').click(function(){
 							$('#myModal').modal('hide');
 							let scahid = $(this).attr('value');
 							fous.init(scahid);
@@ -455,7 +455,7 @@ auth =(()=>{
 						+'							</div> '
 						+'							</div> ';
 
-					$(foitem).appendTo('#users_list').click(function(){
+					$(foitem).appendTo('#users_list').attr('style','cursor:pointer').click(function(){
 						/*alert('??!!'+$(this).attr('value'));*/
 						let scahid = $(this).attr('value');
 						fous.init(scahid);
