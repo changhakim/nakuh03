@@ -29,7 +29,7 @@ chcompo={
 /*	                +'<li>'
 	                    +'<a href="#">'
 	                        +'<i class="quote"></i>'
-	                        +'<img src="/web/resources/img/admin/fish.png"'
+	                        +'<img src="nav/web/resources/img/admin/fish.png"'
 	                        +'<p>시세&조과</p>'
 	                    +'</a>'
 	                +'</li>'

@@ -21,10 +21,9 @@ auth =(()=>{
                 $('<header id="homemainnav">'
                         +'        <section>'
                         +'            <a href="#" class="header_logo off active home">'
-                        +'                <img src="/web/resources/img/homeimg/main/nakuhlogo.jpg" style="height: 30px;">'
+                        +'                <img src="'+$.ctx()+'/resources/img/homeimg/main/nakuhlogo.jpg" style="height: 30px;">'
                         +'            </a>'
                         +'            <a class="location_setting pos_addr_text btn_geo_popup">서울특별시 마포구 대흥동 백범로 23</a>'
-
                         +'            <div class="header_menu" style="font-weight: bold;font-weight: bold;font-size: 14px;color: black;">'
                         +'                <a href="#" class="menu_txt pblock ocean">바다</a>'
                         +'                <a href="#" class="menu_txt pblock river">민물</a>'
@@ -33,7 +32,7 @@ auth =(()=>{
                         +'                <a href="#" class="menu_txt pblock mypage">마이페이지</a>'
                         +'				  <a href="#" class="menu_txt pblock logout">로그아웃</a>'
                         +'                <a class="menu_btn" id="adminbtn">'
-                        +'                    <img style="padding-top: 10px;"src="/web/resources/img/homeimg/main/admin_icon.png">'
+                        +'                    <img style="padding-top: 10px;"src="'+$.ctx()+'/resources/img/homeimg/main/admin_icon.png">'
                         +'                </a> '
                         +'            </div>'
                         +'        </section>'
@@ -775,6 +774,9 @@ let nav =()=>{
     e.preventDefault();
     $('.instacss').remove();
     $(rescss).appendTo('head');
+    $(window).data('ajaxready', false);
+    $(window).data('ajaxready2', false);
+    $(window).data('ajaxready3', false);
     $(window).data('resajaxready',"undefined");
     eunyeong.init('ocean')
     });
@@ -783,6 +785,9 @@ let nav =()=>{
     e.preventDefault();
     $('.instacss').remove();
     $(rescss).appendTo('head');
+    $(window).data('ajaxready', false);
+    $(window).data('ajaxready2', false);
+    $(window).data('ajaxready3', false);
     $(window).data('resajaxready',"undefined");
     eunyeong.init('river')
     });
@@ -791,6 +796,9 @@ let nav =()=>{
     e.preventDefault();
     $('.instacss').remove();
     $(rescss).appendTo('head');
+    $(window).data('ajaxready', false);
+    $(window).data('ajaxready2', false);
+    $(window).data('ajaxready3', false);
     $(window).data('resajaxready',"undefined");
     eunyeong.init('hotel')
     });
@@ -804,6 +812,9 @@ let nav =()=>{
     e.preventDefault();
     $('.instacss').remove();
     $(rescss).appendTo('head');
+    $(window).data('ajaxready', false);
+    $(window).data('ajaxready2', false);
+    $(window).data('ajaxready3', false);
     $(window).data('resajaxready',"undefined");
     eunyeong.init('mypage') 
         

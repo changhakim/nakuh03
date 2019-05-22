@@ -27,10 +27,9 @@ eunyeong = (()=>{
 			$('<header id="homemainnav">'
 					+'        <section>'
 					+'            <a href="#" class="header_logo off active home">'
-					+'                <img src="/web/resources/img/homeimg/main/nakuhlogo.jpg" style="height: 30px;">'
+					+'                <img src="'+$.ctx()+'/resources/img/homeimg/main/nakuhlogo.jpg" style="height: 30px;">'
 					+'            </a>'
 					+'            <a class="location_setting pos_addr_text btn_geo_popup">서울특별시 마포구 대흥동 백범로 23</a>'
-
 					+'            <div class="header_menu" style="font-weight: bold;">'
 					+'                <a href="#" class="menu_txt pblock ocean">바다</a>'
 					+'                <a href="#" class="menu_txt pblock river">민물</a>'
@@ -39,7 +38,7 @@ eunyeong = (()=>{
 					+'                <a href="#" class="menu_txt pblock mypage">마이페이지</a>'
 					+'				  <a href="#" class="menu_txt pblock logout">로그아웃</a>'
 					+'                <a class="menu_btn" id="adminbtn">'
-					+'                    <img style="padding-top: 10px;"src="/web/resources/img/homeimg/main/admin_icon.png">'
+					+'                    <img style="padding-top: 10px;"src="'+$.ctx()+'/resources/img/homeimg/main/admin_icon.png">'
 					+'                </a> '
 					+'            </div>'
 					+'        </section>'
@@ -146,7 +145,9 @@ eunyeong = (()=>{
         		$(window).data('resajaxready',false);
         		$('.list_section').empty();
             	$(eycompo.search_head()).appendTo('.list_section');
-        		pro_fetchList(searchlist);
+            	$("body").scrollTop(0);
+            	pro_fetchList(searchlist);
+        		
         	})
         })
         $.each(['지역','서울','경기','인천','전남','부산','전북','강원도','광주','충남','충북','제주'],(x,y)=>{
@@ -160,7 +161,9 @@ eunyeong = (()=>{
         		$(window).data('resajaxready',false);
         		$('.list_section').empty();
             	$(eycompo.search_head()).appendTo('.list_section');
-        		pro_fetchList(searchlist);
+            	$("body").scrollTop(0);
+            	pro_fetchList(searchlist);
+        		
         	})
         })
         $('.search_btn').click(()=>{
@@ -171,7 +174,9 @@ eunyeong = (()=>{
     		$(window).data('resajaxready',false);
     		$('.list_section').empty();
         	$(eycompo.search_head()).appendTo('.list_section');
-    		pro_fetchList(searchlist);
+        	$("body").scrollTop(0);
+        	pro_fetchList(searchlist);
+    		
         })
 
         
