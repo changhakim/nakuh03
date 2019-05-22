@@ -19,9 +19,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.nakuh.web.domain.Article;
 import com.nakuh.web.domain.Comment;
 import com.nakuh.web.domain.Dummy;
+import com.nakuh.web.domain.Member;
 import com.nakuh.web.domain.PostTag;
 import com.nakuh.web.mapper.ArticleMapper;
 import com.nakuh.web.mapper.CommentMapper;
+import com.nakuh.web.mapper.MemberMapper;
 import com.nakuh.web.mapper.PostTagMapper;
 import com.nakuh.web.service.ArticleServiceImpl;
 import com.nakuh.web.service.CommentServiceImpl;
@@ -44,8 +46,11 @@ public class ArticlesController {
 	@Autowired ArticleMapper artMap;
 	@Autowired CommentMapper comMap;
 	@Autowired PostTagMapper posMap;
+	@Autowired MemberMapper memMap;
+	@Autowired Member mem;
 	@Autowired Proxy pxy;
 	@Autowired Dummy dum;
+	@Autowired List<Article> ls1;
 	
 	@Autowired Map<String, Object> map;
 	
@@ -89,9 +94,19 @@ public class ArticlesController {
 		art.setStartRow(arts.getStartRow());
 		art.setPageSize(arts.getPageSize());
 		IFunction f2 = (Object o) -> artMap.selectAllArticlesList(art);
-		List<?> ffeed = (List<?>) f2.apply(art);
-		map.put("ffeed", ffeed);
-
+		List<?> list = (List<?>) f2.apply(art);
+		map.put("ffeed", list);
+		return map;
+	}
+	@GetMapping("/upnav/{mid}")
+	public Map<?, ?> upnav(@PathVariable String mid)throws Exception{
+		logger.info("=========upnav 진입======");
+		map.clear();
+		IFunction f1 = (Object o) -> artMap.countsnavArticle(mid);
+		System.out.println(f1.apply(mid));
+		System.out.println("참");
+		map.put("upnav", f1.apply(mid));
+		
 		
 		return map;
 	}
@@ -149,6 +164,16 @@ public class ArticlesController {
 
 		}
 		
+		
+		return map;
+	}
+	@GetMapping("/all/list/{mid}")
+	public Map<?,?> allmemberlist(@PathVariable String mid)throws Exception{
+		logger.info("============== allmemberlist() {}  =================", "ENTER");
+		map.clear();
+		ISupplier S = () -> memMap.selectAllMembersList(mid);
+		List<?> ls = (List<?>) S.get();
+		map.put("all", ls);
 		
 		return map;
 	}

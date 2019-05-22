@@ -5,6 +5,8 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Random;
 
+import javax.annotation.Resource;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,12 +23,14 @@ import com.nakuh.web.mapper.ArticleMapper;
 @Transactional
 public class Fileupload {
 	private static final Logger logger = LoggerFactory.getLogger(Fileupload.class);
-	public static final String SAVED_FILES = "C:\\Users\\1027\\nakuh_Project\\nakuh03_workspace\\nakuh03\\src\\main\\webapp\\resources\\img\\aquagram\\articles\\";
+	//public static final String SAVED_FILES = "C:\\Users\\1027\\nakuh_Project\\nakuh03_workspace\\nakuh03\\src\\main\\webapp\\resources\\img\\aquagram\\articles\\";
 	/*
 	 * C:\Users\1027\nakuh3\nakuh03\src\main\webapp\resources\img\aquagram\articles\//창하꺼
 	 * C:\Users\1027\nakuh_Project\nakuh03_workspace\nakuh03\src\main\webapp\resources\img\aquagram\articles\//형꺼
 	 * //Users//deep//nakuh_project//nakuh03_workspace//nakuh03//src//main//webapp//resources//img//aquagram//articles//  //맥북
 	 */	
+	@Resource(name = "uploadPath")
+	private String uploadPath;
 	
 	@Autowired Article art;
 	@Autowired ArticleMapper artMap;
@@ -53,17 +57,15 @@ public class Fileupload {
               for(int i=0; i<=9; i++) {
             	  ml += random.nextInt(10);
               }
-              System.out.println(ml);
               art.setArtphoto(filename.substring(0, filename.indexOf("."))+ml+(art.getMid().substring(3)));
               art.setExtension(filename.substring(filename.lastIndexOf(".")+1));
-              System.out.println("photo?::"+art);
               IPredicate p =(Object o)-> artMap.existsArticle(art);
               //int rs = 1;//artservice.registArticle(art); 
 			/* IPredicate p =(Object o)-> artMap.existsArticle(art); */
               // DB 에 파일 저장하는 서비스 메소드 연결. 여기서는 무조건 성공인 1로 처리
               if(p.test(art)==true){
                   logger.info("file upload insert: {}",  "success");
-                  File dest = new File(SAVED_FILES +  art.getArtphoto() +"."+ art.getExtension());
+                  File dest = new File(uploadPath +  art.getArtphoto() +"."+ art.getExtension());
                   file.transferTo(dest);
                   res = "등록 성공";
               }else{

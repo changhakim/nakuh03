@@ -38,7 +38,6 @@ public class AdminController {
 		pxy.carryOut(map);
 		map.clear();
 		map = tx.reservation(pxy);
-		System.out.println("다끝남");
 		
 		
 		return map;

@@ -198,7 +198,7 @@ let infinitemove =(x)=>{
 						+'          <div class="col-sm-4" style="background-color:#fff; height: 600px; ">'
 						+'              <div class="row" id="user_info" style="padding-bottom: 7px; border-bottom: 1px solid #ddd;">'
 						+'                    <div class="group-item" style="height: 58px; border: none; margin-top: 15px; margin-left: 0px; display: inline-flex;">'
-						+'                        <img class="img-circle" alt="Cinque Terre" src="resources/img/aquagram/profilephoto/'+d.als.profilephoto+'" style="width: 50px; height: 50px; position: center"/>'
+						+'                        <img id="ta_pto" class="img-circle" alt="Cinque Terre" src="resources/img/aquagram/profilephoto/'+d.als.profilephoto+'" style="width: 50px; height: 50px; position: center"/>'
 						+'                        <div style="margin-left: 11px;"><h5 style="top:-5px; left: -1px; font-weight:bold; margin-bottom: 0px;" >'+d.als.mid+'</h5><div style="font-size: 5px;">'+d.als.mname+'</div></div>'
 						+'                            <div style="top:-55px; left: 60px; font-size: 5px; display:-webkit-inline-box;"> </div>'
 						+'                              <div style="right: 0"><h5 style="top: 0px; left: -10px; font-weight:bold; margin-left: 135px;" ><i class="glyphicon glyphicon-option-horizontal"></i></h5></div>'
@@ -208,7 +208,7 @@ let infinitemove =(x)=>{
 						+'    <ul class="nav bs-docs-sidenav" style="-ms-overflow-style: none; overflow:scroll; width:100%; height:335px; border:1px solid #ddd; border-top: none;">'
 						+'     		<div id="item" style="top: 5px;">'
 						+'                  <div class="list-group-item list-group-item-action" id="comments_my" style="height: 58px; border: none; display: -webkit-box;"> '
-						+'                <img class="img-circle" alt="Cinque Terre" src="resources/img/aquagram/profilephoto/'+d.als.profilephoto+'" style="width: 40px; height: 40px; position: center"/>'
+						+'                <img id="ta_pto_down" class="img-circle" alt="Cinque Terre" src="resources/img/aquagram/profilephoto/'+d.als.profilephoto+'" style="width: 40px; height: 40px; position: center"/>'
 						+'                 <div style="display: -webkit-box;"><h5 style="top:0px; left: 7px; font-weight:bold;">'+d.als.mid+'</h5><div><h6 id="contag" style="left: 15px; width: 100%; text-align: left;">'+d.als.content+'<br></h6></div></div>'
 //						+'                   <div style="font-size: 5px; left: 105px; top: 8px;">'+d.als.artdate+'</div>'
 						+'                </div> '
@@ -230,22 +230,35 @@ let infinitemove =(x)=>{
 						+'    </div>'
 						+'  </div>'
 						+'</div>');
+				if(d.als.profilephoto.match('http')){
+					$('#ta_pto').attr('src',d.als.profilephoto);
+					$('#ta_pto_down').attr('src',d.als.profilephoto);
+				}else{
+					$('#ta_pto').attr('src','resources/img/aquagram/profilephoto/'+d.als.profilephoto);
+					$('#ta_pto_down').attr('src','resources/img/aquagram/profilephoto/'+d.als.profilephoto);
+				}
+				
 				$.each(d.tls,(i,j)=>{
 					$('#contag').append('&nbsp;<a>'+j.tagname+'</a>');
 				});
 				$.each(d.cls,(i,j)=>{
-					comlist +=					'			<div class="item" style="display: -webkit-box; " value="'+j.comid+'">'	
+					comlist =					'			<div class="item" style="display: -webkit-box; " value="'+j.comid+'">'	
 					+'				        	<div class="list-group-item list-group-item-action" style="height: 58px; width: 100%; top: 11px; border: none; display: -webkit-box;"> '
-					+'							 <div> <img class="img-circle" alt="Cinque Terre" src="resources/img/aquagram/profilephoto/'+j.comprophoto+'" style="width: 50px; height: 50px; position: center"/></div> '
+					+'							 <div> <img id="ta_pto_down'+i+'" class="img-circle" alt="Cinque Terre" src="resources/img/aquagram/profilephoto/'+j.comprophoto+'" style="width: 50px; height: 50px; position: center"/></div> '
 					+'								<div style="left: 13px; text-align: left;"><h5 style="margin-bottom: 3px; font-weight: bold;">'+j.comid+'</h5><p style="font-size: 7px;">'+j.cmname+'</p></div>'
 					+'							<div style="position: relative; left: 30px;"><h5>'+j.comm+'</h5></div>'
 					+'								</div> '		
 					+'						</div> ';
-					
-	
+					$(comlist).appendTo('#comments_list_'+x.artnum);
+					if(j.comprophoto.match('http')){
+						$('#ta_pto_down'+i).attr('src',j.comprophoto);
+					}else{
+						$('#ta_pto_down'+i).attr('src','resources/img/aquagram/profilephoto/'+j.comprophoto);
+					}
 					
 				});
-				$(comlist).appendTo('#comments_list_'+x.artnum);
+				
+				
 				$('#input-group_'+d.als.rownum).children('span').click(function(e){
 					
 					e.preventDefault();

@@ -115,6 +115,8 @@ app=(()=>{
                 		 alert('입력하신 아이디가 없습니다')
                 	 }else{
                 		 sessionStorage.setItem('userid',d.member.mid);
+                		 sessionStorage.setItem('userpo',d.member.profilephoto)
+                		
                 		 $('#id01').css('display','none');
                 		 logManager();
                 	 }
@@ -132,29 +134,29 @@ app=(()=>{
 	};
 	
 	let css = ()=>{
-		 homecss ='<link class="homecss" href="/web/resources/css/home/responsive.css" rel="stylesheet">'
+		 homecss ='<link class="homecss" href="'+$.ctx()+'/resources/css/home/responsive.css" rel="stylesheet">'
 			/*+'<link class="homecss" href="/web/resources/css/home/responsive_basic.css" rel="stylesheet">'*/
-			+'<link class="homecss" href="/web/resources/css/home/swiper.min.css" rel="stylesheet">'
-		 	+'<link class="homecss" rel="stylesheet" type="text/css" href="/web/resources/css/home/homemain.css" />';
+			+'<link class="homecss" href="'+$.ctx()+'/resources/css/home/swiper.min.css" rel="stylesheet">'
+		 	+'<link class="homecss" rel="stylesheet" type="text/css" href="'+$.ctx()+'/resources/css/home/homemain.css" />';
 		 
 		 
-		 admincss='<link class="admincss" href="/web/resources/css/admin/animate.min.css" rel="stylesheet"/>'
-			 +'<link class="admincss" href="/web/resources/css/admin/light-bootstrap-dashboard.css?v=1.4.0" rel="stylesheet"/>'
-			 +'<link class="admincss" href="/web/resources/css/admin/demo.css" rel="stylesheet" />'
-			 +'<link class="admincss" rel="stylesheet" href="/web/resources/css/admin/pe-icon-7-stroke.css">';
+		 admincss='<link class="admincss" href="'+$.ctx()+'/resources/css/admin/animate.min.css" rel="stylesheet"/>'
+			 +'<link class="admincss" href="'+$.ctx()+'/resources/css/admin/light-bootstrap-dashboard.css?v=1.4.0" rel="stylesheet"/>'
+			 +'<link class="admincss" href="'+$.ctx()+'/resources/css/admin/demo.css" rel="stylesheet" />'
+			 +'<link class="admincss" rel="stylesheet" href="'+$.ctx()+'/resources/css/admin/pe-icon-7-stroke.css">';
 			 
 	
-         rescss =  '<link class="homecss" href="/web/resources/css/home/responsive.css" rel="stylesheet">'
-        	 +'<link class="homecss" href="/web/resources/css/home/swiper.min.css" rel="stylesheet">'
-        	 +'<link class="rescss" rel="stylesheet" type="text/css" href="/web/resources/css/reservation/modal.css"> '
-        	 +'<link class="rescss" rel="stylesheet" href="/web/resources/css/reservation/prdpay.css">';
+         rescss =  '<link class="homecss" href="'+$.ctx()+'/resources/css/home/responsive.css" rel="stylesheet">'
+        	 +'<link class="homecss" href="'+$.ctx()+'/resources/css/home/swiper.min.css" rel="stylesheet">'
+        	 +'<link class="rescss" rel="stylesheet" type="text/css" href="'+$.ctx()+'/resources/css/reservation/modal.css"> '
+        	 +'<link class="rescss" rel="stylesheet" href="'+$.ctx()+'/resources/css/reservation/prdpay.css">';
 	 
-		 instacss ='  <link class="instacss" rel="stylesheet" type="text/css" href="/web/resources/css/aquagram/style.css">'
-			 +'  <link class="instacss" rel="stylesheet" type="text/css" href="/web/resources/css/aquagram/animate.css">'
-			 +'  <link class="instacss" rel="stylesheet" type="text/css" href="/web/resources/css/aquagram/structure.css">'
-			 +'  <link class="instacss" rel="stylesheet" type="text/css" href="/web/resources/css/aquagram/docs.min.css"> '
-			 +'  <link class="instacss" rel="stylesheet" type="text/css" href="/web/resources/css/aquagram/modal.css"> '
-			 +'  <link class="instacss" rel="stylesheet" type="text/css" href="/web/resources/css/aquagram/default_css.css">';
+		 instacss ='  <link class="instacss" rel="stylesheet" type="text/css" href="'+$.ctx()+'/resources/css/aquagram/style.css">'
+			 +'  <link class="instacss" rel="stylesheet" type="text/css" href="'+$.ctx()+'/resources/css/aquagram/animate.css">'
+			 +'  <link class="instacss" rel="stylesheet" type="text/css" href="'+$.ctx()+'/resources/css/aquagram/structure.css">'
+			 +'  <link class="instacss" rel="stylesheet" type="text/css" href="'+$.ctx()+'/resources/css/aquagram/docs.min.css"> '
+			 +'  <link class="instacss" rel="stylesheet" type="text/css" href="'+$.ctx()+'/resources/css/aquagram/modal.css"> '
+			 +'  <link class="instacss" rel="stylesheet" type="text/css" href="'+$.ctx()+'/resources/css/aquagram/default_css.css">';
 	}
 	
 	let crawl=()=>{

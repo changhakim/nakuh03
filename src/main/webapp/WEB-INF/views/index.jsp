@@ -8,11 +8,11 @@
  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
  <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
- <link rel="shortcut icon" href="/web/resources/favicon/favicon.ico">
+ <link rel="shortcut icon" href="${ctx}/resources/favicon/favicon.ico">
  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAY5vEXIghqf7_mEdWcG9kqcEeDOpaLixY&callback=initMap"></script>
  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
  <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
- <link id="aaadfa" href="/web/resources/css/home/responsive_basic.css" rel="stylesheet">
+ <link id="aaadfa" href="${ctx}/resources/css/home/responsive_basic.css" rel="stylesheet">
  <link href="https://fonts.googleapis.com/css?family=Baloo+Bhai|Nanum+Gothic|Nanum+Myeongjo|Noto+Sans+KR&display=swap" rel="stylesheet">
  
 

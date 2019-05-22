@@ -31,6 +31,13 @@
 		FROM MEMBERS
 		WHERE mid LIKE #{mid}
 </select>
+<select id="selectAllMembersList" resultType="com.nakuh.web.domain.Member"
+	parameterType="String">
+	SELECT * 
+	FROM MEMBERS 
+	WHERE MID NOT LIKE #{mid}
+</select>
+
 <select id="existMemberForKakao" resultType="boolean" 
 			parameterType="com.nakuh.web.domain.Member">
 	SELECT if(COUNT(*) > 0, 'false','true') 
@@ -44,7 +51,7 @@
 </select>
 <select id="existsMember" resultType="com.nakuh.web.domain.Member"
 						parameterType="com.nakuh.web.domain.Member">
-        SELECT mid
+        SELECT mid,profilephoto
         FROM MEMBERS
         WHERE MID LIKE #{mid} AND PASSWORD LIKE #{password}
 </select>

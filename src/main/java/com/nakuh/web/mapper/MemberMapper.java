@@ -10,7 +10,7 @@ import com.nakuh.web.domain.Member;
 public interface MemberMapper {
 	public void insertMember(Member mem);
 	
-	public List<Member> selectAllMembersList();
+	public List<Member> selectAllMembersList(String mid);
 	public List<Member> selectMembers();
 	public List<Member> selectMembers(String mid);
 	public Member selectMember(Member mem);

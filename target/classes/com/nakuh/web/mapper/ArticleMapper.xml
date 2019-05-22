@@ -77,6 +77,14 @@ SELECT  ROW_NUMBER() over(order by artnum desc) rownum, A.*
 						ON A.mid LIKE F.folloid ) R  
 			LIMIT #{startRow},#{pageSize}
 </select>
+<select id="countsnavArticle" resultType="com.nakuh.web.domain.Article"
+								parameterType="String">
+			SELECT A.MID MID,(SELECT COUNT(*) FROM ARTICLES WHERE MID LIKE #{value}) AS artcount,
+			 	  (SELECT COUNT(DISTINCT folloid) FROM FOLLOWERS WHERE MID LIKE #{value}) AS folloingCount,
+			 	(SELECT COUNT(DISTINCT mid) FROM FOLLOWERS WHERE folloid LIKE #{value})   AS followerCount
+			FROM MEMBERS A
+			WHERE MID LIKE #{value}; 
+</select>
 
 <select id="countnavArticle" resultType="com.nakuh.web.domain.Article"
 								parameterType="com.nakuh.web.domain.Article">

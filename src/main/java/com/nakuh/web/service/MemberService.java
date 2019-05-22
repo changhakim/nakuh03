@@ -10,7 +10,7 @@ import com.nakuh.web.domain.Member;
 public interface MemberService {
 	public void registMember(Member mem);
 	
-	public List<Member> bringAllMembersList();
+	public List<Member> bringAllMembersList(String mid);
 	public List<Member> retrieveMembers();
 	public List<Member> retrieveMembers(String mid);
 	public int countMembers();

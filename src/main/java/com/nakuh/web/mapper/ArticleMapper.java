@@ -15,6 +15,7 @@ public interface ArticleMapper {
 	public List<Article> selectArticles(Article art);
 	public Article selectArticlesDetail(String artnum);
 	public Article countnavArticle(Article art);
+	public Article countsnavArticle(String mid);
 	public Article selectArtnum(String artphoto);
 	public int countArticles(String mid);
 	public boolean existsArticle(Article art);

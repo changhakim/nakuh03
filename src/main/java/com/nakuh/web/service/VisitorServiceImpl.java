@@ -23,7 +23,6 @@ public class VisitorServiceImpl implements VisitorService{
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Date date = new Date();
 		String time = sdf.format(date);
-		System.out.println(time);
 		vs.setVisittime(time);
 		vsm.insertVisitor(vs);
 		
@@ -51,7 +50,6 @@ public class VisitorServiceImpl implements VisitorService{
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		String beforeten = sdf.format(c.getTime());
 		String today = sdf.format(date);
-		System.out.println(beforeten+"7일전");
 		vis.setBeforevisit(beforeten);
 		vis.setTodayvisit(today);
 		ls = vsm.tenbefore(vis);

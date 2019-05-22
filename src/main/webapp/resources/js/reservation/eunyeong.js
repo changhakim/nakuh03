@@ -738,20 +738,20 @@ eunyeong = (()=>{
     };
 
     let css = ()=>{
-         homecss ='<link class="homecss" rel="stylesheet" type="text/css" href="/web/resources/css/home/homemain.css">'
-        	+'<link class="homecss" href="/web/resources/css/home/style.css" rel="stylesheet">'
+         homecss ='<link class="homecss" rel="stylesheet" type="text/css" href="'+$.ctx()+'/resources/css/home/homemain.css">'
+        	+'<link class="homecss" href="'+$.ctx()+'/resources/css/home/style.css" rel="stylesheet">'
             +'<link class="homecss" href="https://fonts.googleapis.com/css?family=Raleway:300,400,600,600i,700" rel="stylesheet">'
-            +'<link class="homecss" href="/web/resources/css/home/style.css" rel="stylesheet">';
+            +'<link class="homecss" href="'+$.ctx()+'/resources/css/home/style.css" rel="stylesheet">';
          
-         rescss = '<link class="rescss" rel="stylesheet" type="text/css" href="/web/resources/css/reservation/modal.css"> '
-             +'<link class="rescss" rel="stylesheet" href="/web/resources/css/reservation/resdetail.css">'
-             +'<link class="rescss" rel="stylesheet" href="/web/resources/css/reservation/prdpay.css">';
+         rescss = '<link class="rescss" rel="stylesheet" type="text/css" href="'+$.ctx()+'/resources/css/reservation/modal.css"> '
+             +'<link class="rescss" rel="stylesheet" href="'+$.ctx()+'/resources/css/reservation/resdetail.css">'
+             +'<link class="rescss" rel="stylesheet" href="'+$.ctx()+'/resources/css/reservation/prdpay.css">';
          
-         instacss =' <link class="instacss" rel="stylesheet" type="text/css" href="/web/resources/css/aquagram/style.css">'
-             +' <link class="instacss" rel="stylesheet" type="text/css" href="/web/resources/css/aquagram/animate.css">'
-             +' <link class="instacss" rel="stylesheet" type="text/css" href="/web/resources/css/aquagram/structure.css">'
-             +' <link class="instacss" rel="stylesheet" type="text/css" href="/web/resources/css/aquagram/docs.min.css"> '
-             +' <link class="instacss" rel="stylesheet" type="text/css" href="/web/resources/css/aquagram/default_css.css">';
+         instacss =' <link class="instacss" rel="stylesheet" type="text/css" href="'+$.ctx()+'/resources/css/aquagram/style.css">'
+             +' <link class="instacss" rel="stylesheet" type="text/css" href="'+$.ctx()+'/resources/css/aquagram/animate.css">'
+             +' <link class="instacss" rel="stylesheet" type="text/css" href="'+$.ctx()+'/resources/css/aquagram/structure.css">'
+             +' <link class="instacss" rel="stylesheet" type="text/css" href="'+$.ctx()+'/resources/css/aquagram/docs.min.css"> '
+             +' <link class="instacss" rel="stylesheet" type="text/css" href="'+$.ctx()+'/resources/css/aquagram/default_css.css">';
              
     };
     return {init:init, ocean:ocean, river:river, hotel:hotel, detail:detail, prdres:prdres};

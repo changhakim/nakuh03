@@ -20,9 +20,9 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public List<Member> bringAllMembersList() {
+	public List<Member> bringAllMembersList(String mid) {
 		
-		return memMap.selectAllMembersList();
+		return memMap.selectAllMembersList(mid);
 	}
 
 	@Override

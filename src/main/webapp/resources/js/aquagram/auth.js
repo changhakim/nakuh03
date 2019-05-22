@@ -62,6 +62,7 @@ auth =(()=>{
 		$('#leftbar_content').empty();
 		css();
 		nav();
+		up_nav();
 		user_search();
 		arti.arti_img_upload();
 		
@@ -110,6 +111,96 @@ auth =(()=>{
 			
 	};
 	
+	let up_nav=()=>{
+		let mid = sessionStorage.getItem('userid');
+		$.getJSON($.ctx()+'/upnav/'+mid,d=>{
+			 $('#my_fv').attr('styel','text-align: center;').text(d.upnav.artCount);
+			 $('#followerid').attr('styel','text-align: center;').text(d.upnav.followerCount);
+			 $('#folloingid').attr('styel','text-align: center;').text(d.upnav.folloingCount);
+			
+			 $('#navmypage').html('<img id="userimg" class="img-circle" alt="Cinque Terre" src="'+sessionStorage.getItem('userpo')+'" '
+							+'style="width: 50px; height: 50px; position: center;"/>'+sessionStorage.getItem('userid')+'</div></li>');
+
+			 $('#right_mynav').attr('src',sessionStorage.getItem('userpo'));
+			 $('#right_mynavid').text(sessionStorage.getItem('userid'));
+			 
+				if(sessionStorage.getItem('userpo').match('http')){
+					$('#userimg').attr('src',sessionStorage.getItem('userpo'));
+					$('#right_mynav').attr('src',sessionStorage.getItem('userpo'));
+				}else{
+					$('#userimg').attr('src','resources/img/aquagram/profilephoto/'+sessionStorage.getItem('userpo'));
+					$('#right_mynav').attr('src','resources/img/aquagram/profilephoto/'+sessionStorage.getItem('userpo'));
+				}
+			if(d.upnav.folloingCount==0){
+				$('#myModal').modal('show');
+				allmemberlist();
+				
+			}
+			
+		});
+		
+	}
+	let allmemberlist =(x)=>{
+		let new_list ='';
+		$('#myModal').attr('style','display: block; z-index:99999;');
+		$('.modal-dialog').attr('class','modal-dialog');
+		$('.modal-dialog').attr('style','top:200px;')
+		$('.modal-content').attr('style','margin:auto; width: 65%; height: 600px;');
+		$('#modal_close_btn').attr('style','z-index:9000;');
+		$('.modal-title').text('새로운 친구들을 만나보세요');
+		$('.modal-footer').html('<button type="button" id="feed_start" class="btn btn-primary" style="position: relative; top: 21px; right: 130px; ">시작하기</button>');
+		$('.modal-body').attr('style','height: 90%;');
+		$('.modal-body').html('<ul class="nav bs-docs-sidenav" style="overflow:scroll; width:100%; height:100%; padding:10px; background-color: white; border-radius: 6px;  border:1px solid; border-color: #ddd;">'
+				+'				 <li>      '
+				+'				 	<div id="new_list">'
+				+'					</div>'
+				+'				</li>'
+				+'		      </ul>');
+		$.getJSON($.ctx()+'/all/list/'+sessionStorage.getItem('userid'),d=>{
+			$.each(d.all,(i,j)=>{
+				new_list ='			<div class="item" style="display: -webkit-box;">'	
+					+'				        	<div class="list-group-item list-group-item-action" style="height: 58px; width: 80%; top: 11px; border: none; display: -webkit-box;"> '
+					+'							 <div> <img class="img-circle" id="new_pho'+i+'" alt="Cinque Terre" src="resources/img/aquagram/profilephoto/'+j.profilephoto+'" style="width: 50px; height: 50px; position: center"/></div> '
+					+'								<div style="left: 13px; text-align: left;"><h5 id="newf_'+j.mid+'_'+i+'" style="margin-bottom: 3px; font-weight: bold;" value="'+j.mid+'">'+j.mid+'</h5><p style="font-size: 7px;">'+j.name+'</p></div>'
+					+'								</div> '
+					+'								<button type="button" class="btn btn-primary" value="'+j.mid+'" style="position: relative; top: 21px;">팔로우</button>'
+					+'							</div> ';
+
+				$(new_list).appendTo('#new_list').children('button').click(function(){
+					
+					let data = {mid:sessionStorage.getItem('userid'), 
+							folloid:$(this).attr('value')};
+					if($(this).text()=='팔로우'){
+						
+						folloings(data);
+						$(this).attr('class','btn btn-default').text('팔로잉');
+					}else{
+						nufollower(data);
+						$(this).attr('class','btn btn-primary').text('팔로우');
+						
+					}
+
+				});
+				if(j.password == null){
+					$('#new_pho'+i).attr('src',j.profilephoto);
+				}
+				$('#newf_'+j.mid+'_'+i).click(function(){
+					$('#myModal').modal('hide');
+					let scahid = $(this).attr('value');
+					fous.init(scahid);
+				});
+			});
+			
+			
+			
+		});
+		$('#feed_start').click(function(){
+			$('#myModal').modal('hide');
+			auth.init();
+		});
+		
+
+	};
 	let user_search=()=>{
 		$('#search_but').attr('style','cursor:pointer').attr('data-toggle','modal').attr('data-target','#myModal').click(function(e){
 			e.preventDefault();
@@ -195,7 +286,7 @@ auth =(()=>{
 				$.each(d.werlist,(i,j)=>{
 					follower_item ='			<div class="item" style="display: -webkit-box; " value="'+j.mid+'">'	
 						+'				        	<div class="list-group-item list-group-item-action" style="height: 58px; width: 80%; top: 11px; border: none; display: -webkit-box;"> '
-						+'							 <div> <img class="img-circle" alt="Cinque Terre" src="resources/img/aquagram/profilephoto/'+j.follpphoto+'" style="width: 50px; height: 50px; position: center"/></div> '
+						+'							 <div> <img id="folwer_pto'+i+'" class="img-circle" alt="Cinque Terre" src="resources/img/aquagram/profilephoto/'+j.follpphoto+'" style="width: 50px; height: 50px; position: center"/></div> '
 						+'								<div style="left: 13px; text-align: left;"><h5 id="fwuser_'+j.mid+'_'+i+'" style="margin-bottom: 3px; font-weight: bold;" value="'+j.mid+'">'+j.mid+'</h5><p style="font-size: 7px;">'+j.name+'</p></div>'
 						+'								</div> '
 
@@ -221,6 +312,11 @@ auth =(()=>{
 						}
 						
 					});
+					if(j.follpphoto.match('http')){
+						$('#folwer_pto'+i).attr('src',j.follpphoto);
+					}else{
+						$('#folwer_pto'+i).attr('src','resources/img/aquagram/profilephoto/'+j.follpphoto);
+					}
 					$('#fwuser_'+j.mid+'_'+i).click(function(){
 						$('#myModal').modal('hide');
 						let scahid = $(this).attr('value');
@@ -274,7 +370,7 @@ auth =(()=>{
 			$('.modal-dialog').attr('style','top:200px;')
 			$('.modal-content').attr('style','margin:auto; width: 65%; height: 600px;');
 			$('#modal_close_btn').attr('style','z-index:9000;');
-			$('.modal-title').text('팔로워');
+			$('.modal-title').text('팔로잉');
 			$('.modal-footer').remove();
 			$('.modal-body').attr('style','height: 90%;');
 			$('.modal-body').html('<ul class="nav bs-docs-sidenav" style="overflow:scroll; width:100%; height:100%; padding:10px; background-color: white; border-radius: 6px;  border:1px solid; border-color: #ddd;">'
@@ -293,7 +389,7 @@ auth =(()=>{
 					$.each(d.inglist,(i,j)=>{
 						folloing_item ='			<div class="item" style="display: -webkit-box;">'	
 							+'				        	<div class="list-group-item list-group-item-action" style="height: 58px; width: 80%; top: 11px; border: none; display: -webkit-box;"> '
-							+'							 <div> <img class="img-circle" alt="Cinque Terre" src="resources/img/aquagram/profilephoto/'+j.follpphoto+'" style="width: 50px; height: 50px; position: center"/></div> '
+							+'							 <div> <img id="foling_pto'+i+'" class="img-circle" alt="Cinque Terre" src="resources/img/aquagram/profilephoto/'+j.follpphoto+'" style="width: 50px; height: 50px; position: center"/></div> '
 							+'								<div style="left: 13px; text-align: left;"><h5 id="fuser_'+j.mid+'_'+i+'" style="margin-bottom: 3px; font-weight: bold;" value="'+j.mid+'">'+j.mid+'</h5><p style="font-size: 7px;">'+j.name+'</p></div>'
 							+'								</div> '
 							+'								<button type="button" class="btn btn-default" value="'+j.mid+'" style="position: relative; top: 21px;">팔로잉</button>'
@@ -313,6 +409,11 @@ auth =(()=>{
 							}
 							nufollower();
 						});
+						if(j.follpphoto.match('http')){
+							$('#foling_pto'+i).attr('src',j.follpphoto);
+						}else{
+							$('#foling_pto'+i).attr('src','resources/img/aquagram/profilephoto/'+j.follpphoto);
+						}
 						$('#fuser_'+j.mid+'_'+i).click(function(){
 							$('#myModal').modal('hide');
 							let scahid = $(this).attr('value');
@@ -348,7 +449,7 @@ auth =(()=>{
 				$.each(d.follist,(i,j)=>{
 					foitem = '			<div class="item" id="item_'+j.artnum+'" style="cursor:pointer; display: -webkit-box; height: 60px;" value="'+j.folloid+'">'	
 						+'				        	<div class="list-group-item list-group-item-action" style="height: 58px; width: 76%; top: 11px; border: none; display: -webkit-box;"> '
-						+'							 <div> <img class="img-circle" alt="Cinque Terre" src="resources/img/aquagram/profilephoto/'+j.follpphoto+'" style="width: 50px; height: 50px; position: center"/></div> '
+						+'							 <div> <img id="r_my_pto'+i+'" class="img-circle" alt="Cinque Terre" src="resources/img/aquagram/profilephoto/'+j.follpphoto+'" style="width: 50px; height: 50px; position: center"/></div> '
 						+'								<div style="left: 13px; text-align: left;"><h5 style="margin-bottom: 3px; font-weight: bold;">'+j.folloid+'</h5><p style="font-size: 7px;">'+j.name+'</p></div>'
 						+'								</div> '
 						+'								<div value="'+j.folloid+'" style="position: relative; top: 14px;"><h6>'+j.artdate+'</h6></div>'
@@ -361,6 +462,13 @@ auth =(()=>{
 						fous.init(scahid);
 						
 					});
+					if(j.follpphoto.match('http')){
+			
+						$('#r_my_pto'+i).attr('src',j.follpphoto);
+					}else{
+				
+						$('#r_my_pto'+i).attr('src','resources/img/aquagram/profilephoto/'+j.follpphoto);
+					}
 				});
 
 				$.ajax({
@@ -374,7 +482,7 @@ auth =(()=>{
 							if(j.follostate==0){
 								ffoitem = '			<div class="item" style="display: -webkit-box;">'	
 									+'				        	<div class="list-group-item list-group-item-action" style="height: 58px; width: 76%; top: 11px; border: none; display: -webkit-box;"> '
-									+'							 <div> <img class="img-circle" alt="Cinque Terre" src="resources/img/aquagram/profilephoto/'+j.follpphoto+'" style="width: 50px; height: 50px; position: center"/></div> '
+									+'							 <div> <img id="rdonw_my_pto'+i+'" class="img-circle" alt="Cinque Terre" src="resources/img/aquagram/profilephoto/'+j.follpphoto+'" style="width: 50px; height: 50px; position: center"/></div> '
 									+'								<div style="left: 13px; text-align: left;"><h5 style="margin-bottom: 3px; font-weight: bold;">'+j.mid+'</h5><p style="font-size: 7px;">'+j.name+'</p></div>'
 									+'								</div> '
 									+'								<button type="button" class="btn btn-primary" value="'+j.mid+'" style="position: relative; top: 21px;">팔로우</button>'
@@ -394,6 +502,13 @@ auth =(()=>{
 									}
 
 								});
+								if(j.follpphoto.match('http')){
+
+									$('#rdonw_my_pto'+i).attr('src',j.follpphoto);
+								}else{
+					
+									$('#rdonw_my_pto'+i).attr('src','resources/img/aquagram/profilephoto/'+j.follpphoto);
+								}
 							}
 
 						});
@@ -479,25 +594,15 @@ auth =(()=>{
 			dataType: 'json',
 			contentType: 'application/json; charset=UTF-8;',
 			success: d=>{
-				
-				  let length = d.ffeed.length;
-                  if( length < 1 ){
+				  let length = d.ffeed.length;          
+				  if( length < 1 ){
                 	  isEnd = true;
 
                   }
                   if(d){
-                	  $('div#loadmoreajaxloader').hide();
-                	
+                	  $('div#loadmoreajaxloader').hide();           
                 	  $.each(d.ffeed,(i, j)=>{
-                		  userd[i] = {userid: j.mid,
-                				  username:j.name,
-          				  		userphoto:j.userpo,
-          				  		artcount:j.artCount,
-          				  		followerCount:j.followerCount,
-          				  		folloingCount:j.folloingCount};
-	                	 if(j.mid !== ''){
-	                		 mynavd(userd);
-	                	 }
+                		  
                 		  feed_renderList(j,i); 
 
 	                  	});
@@ -507,6 +612,7 @@ auth =(()=>{
                 	  $('div#loadmoreajaxloader').html();
                   }
                   $(window).data('ajaxready', true);
+
                   
 			},
 			error: e=>{
@@ -516,16 +622,7 @@ auth =(()=>{
 		});
 
 	};
-	let mynavd =(x)=>{
-		
-		 $('#my_fv').attr('styel','text-align: center;').text(x[0].artcount);
-		 $('#followerid').attr('styel','text-align: center;').text(x[0].followerCount);
-		 $('#folloingid').attr('styel','text-align: center;').text(x[0].folloingCount);
-		 $('#navmypage').html('<img id="userimg" class="img-circle" alt="Cinque Terre" src="resources/img/aquagram/profilephoto/'+x[0].userphoto+'" '
-					+'style="width: 50px; height: 50px; position: center;"/>'+x[0].userid+'</div></li>');
-		 $('#right_mynav').attr('src','resources/img/aquagram/profilephoto/'+x[0].userphoto);
-		 $('#right_mynavid').text(x[0].userid);
-	};
+
 	let settags = (x)=>{
 			
 			
@@ -535,7 +632,7 @@ auth =(()=>{
 					+'					    <div class="panel panel-default">'
 					+'						        <div class="heading">'
 					+' 			<div class="item" id="'+x.artnum+'" style="height: 58px; border: none; margin: 8px;"> ' 
-					+'  	<img class="img-circle" alt="Cinque Terre" src="resources/img/aquagram/profilephoto/'+x.profilephoto+'" style="width: 50px; height: 50px; position: center"><div><h5 id="user_'+x.mname+'_'+x.rownum+'" style="top:-49px; left: 60px" value="'+x.mname+'">'+x.mname+'</h5></div>	'							  							
+					+'  	<img class="img-circle" id="feed_my_pto'+x.rownum+'" alt="Cinque Terre" src="resources/img/aquagram/profilephoto/'+x.profilephoto+'" style="width: 50px; height: 50px; position: center"><div><h5 id="user_'+x.mname+'_'+x.rownum+'" style="top:-49px; left: 60px" value="'+x.mname+'">'+x.mname+'</h5></div>	'							  							
 					+' 			</div>'
 					+'						        <div class="body">'
 					+'						         <img src="resources/img/aquagram/articles/'+x.artphoto+'" style="display: block; margin: 0px auto; width: 100%;">'
@@ -566,6 +663,16 @@ auth =(()=>{
 					+'						        </div>';
 				
 				$(feeditem).appendTo('#leftbar_content');
+			
+				if(x.profilephoto.match('http')){
+					
+					$('#feed_my_pto'+x.rownum).attr('src',x.profilephoto);
+				}else{
+					
+					$('#feed_my_pto'+x.rownum).attr('src','resources/img/aquagram/profilephoto/'+x.profilephoto);
+				}
+
+				
 				$('#user_'+x.mname+'_'+x.rownum).click(function(){
 					
 					let scahid = $(this).attr('value');
@@ -599,15 +706,22 @@ auth =(()=>{
   				$.getJSON($.ctx()+'/comments/list/'+x.artnum,d=>{
 					let comitem ='';
 					$.each(d.cls,(i,j)=>{
-						comitem +=	'			<div class="item" style="display: -webkit-box; " value="'+j.comid+'">'	
+						comitem =	'			<div class="item" style="display: -webkit-box; " value="'+j.comid+'">'	
 						+'				        	<div class="list-group-item list-group-item-action" style="height: 58px; width: 100%; top: 11px; border: none; display: -webkit-box;"> '
-						+'							 <div> <img class="img-circle" alt="Cinque Terre" src="resources/img/aquagram/profilephoto/'+j.comprophoto+'" style="width: 50px; height: 50px; position: center"/></div> '
+						+'							 <div> <img id="co_pto'+x.rownum+'_'+i+'" class="img-circle" alt="Cinque Terre" src="resources/img/aquagram/profilephoto/'+j.comprophoto+'" style="width: 50px; height: 50px; position: center"/></div> '
 						+'								<div style="left: 13px; text-align: left;"><h5 style="margin-bottom: 3px; font-weight: bold;">'+j.comid+'</h5><p style="font-size: 7px;">'+j.cmname+'</p></div>'
 						+'							<div style="position: relative; left: 30px;"><h5>'+j.comm+'</h5></div>'
 						+'								</div> '		
-						+'						</div> ';					
+						+'						</div> ';	
+						$(comitem).appendTo('.comlist_'+x.rownum);
+						if(j.comprophoto.match('http')){
+							$('#co_pto'+x.rownum+'_'+i).attr('src',j.comprophoto);
+						}else{
+							$('#co_pto'+x.rownum+'_'+i).attr('src','resources/img/aquagram/profilephoto/'+j.comprophoto);
+						}
 					});
-					$('.comlist_'+x.rownum).append(comitem);
+
+					
 	  				$('#input-group_'+x.rownum).children('span').click(function(e){
 						e.preventDefault();
 						let com_data = {
@@ -626,7 +740,7 @@ auth =(()=>{
 								$('#input-group_'+x.rownum).children('input').val('');
 								let incomm =	'			<div class="item" style="display: -webkit-box; " value="'+d.comlist.comid+'">'	
 								+'				        	<div class="list-group-item list-group-item-action" style="height: 58px; width: 100%; top: 11px; border: none; display: -webkit-box;"> '
-								+'							 <div> <img class="img-circle" alt="Cinque Terre" src="resources/img/aquagram/profilephoto/'+d.comlist.comprophoto+'" style="width: 50px; height: 50px; position: center"/></div> '
+								+'							 <div> <img class="img-circle" alt="Cinque Terre" src="'+sessionStorage.getItem('userpo')+'" style="width: 50px; height: 50px; position: center"/></div> '
 								+'								<div style="left: 13px; text-align: left;"><h5 style="margin-bottom: 3px; font-weight: bold;">'+d.comlist.comid+'</h5><p style="font-size: 7px;">'+d.comlist.cmname+'</p></div>'
 								+'							<div style="position: relative; left: 30px;"><h5>'+d.comlist.comm+'</h5></div>'
 								+'								</div> '		
@@ -705,17 +819,17 @@ let nav =()=>{
 }
 	let css = ()=>{
 		/* head css  */
-		 homecss = '<link class="homecss" rel="stylesheet" type="text/css" href="/web/resources/css/home/homemain.css" />'
+		 homecss = '<link class="homecss" rel="stylesheet" type="text/css" href="'+$.ctx()+'/resources/css/home/homemain.css" />'
 			+'<link class="homecss" href="https://fonts.googleapis.com/css?family=Raleway:300,400,600,600i,700" rel="stylesheet">'
-			+'<link class="homecss" href="/web/resources/css/home/style.css" rel="stylesheet">';
-		 rescss ='<link class="homecss" href="/web/resources/css/home/responsive.css" rel="stylesheet">'
-	            +'<link class="homecss" href="/web/resources/css/home/swiper.min.css" rel="stylesheet">'
-	            +'<link class="rescss" rel="stylesheet" type="text/css" href="/web/resources/css/reservation/modal.css"> ';
-		 instacss =' <link class="instacss" rel="stylesheet" type="text/css" href="/web/resources/css/aquagram/style.css">'
-			 +'  <link class="instacss" rel="stylesheet" type="text/css" href="/web/resources/css/aquagram/animate.css">'
-			 +'  <link class="instacss" rel="stylesheet" type="text/css" href="/web/resources/css/aquagram/structure.css">'
-			 +'  <link class="instacss" rel="stylesheet" type="text/css" href="/web/resources/css/aquagram/docs.min.css"> '
-			 +'  <link class="instacss" rel="stylesheet" type="text/css" href="/web/resources/css/aquagram/default_css.css">';
+			+'<link class="homecss" href="'+$.ctx()+'/resources/css/home/style.css" rel="stylesheet">';
+		 rescss ='<link class="homecss" href="'+$.ctx()+'/resources/css/home/responsive.css" rel="stylesheet">'
+	            +'<link class="homecss" href="'+$.ctx()+'/resources/css/home/swiper.min.css" rel="stylesheet">'
+	            +'<link class="rescss" rel="stylesheet" type="text/css" href="'+$.ctx()+'/resources/css/reservation/modal.css"> ';
+		 instacss =' <link class="instacss" rel="stylesheet" type="text/css" href="'+$.ctx()+'/resources/css/aquagram/style.css">'
+			 +'  <link class="instacss" rel="stylesheet" type="text/css" href="'+$.ctx()+'/resources/css/aquagram/animate.css">'
+			 +'  <link class="instacss" rel="stylesheet" type="text/css" href="'+$.ctx()+'/resources/css/aquagram/structure.css">'
+			 +'  <link class="instacss" rel="stylesheet" type="text/css" href="'+$.ctx()+'/resources/css/aquagram/docs.min.css"> '
+			 +'  <link class="instacss" rel="stylesheet" type="text/css" href="'+$.ctx()+'/resources/css/aquagram/default_css.css">';
 			 
 			 
 	}
